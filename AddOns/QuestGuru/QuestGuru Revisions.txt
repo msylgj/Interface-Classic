@@ -1,0 +1,15 @@
+QuestGuru_Classic ChangeLog
+===================
+
+Version 2.1.1
+--------------
+Changes made to convert "retail"
+Into Classic
+
+Version 2.1.2
+--------------
+Minor changes
+
+Version 2.1.3
+--------------
+Squashed bugs…
