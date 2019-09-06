@@ -1,9 +1,3 @@
--- Aurora Classic
-local F, C = nil, nil
-if _G["AuroraClassic"] then
-	F, C = unpack(_G["AuroraClassic"])
-end
-
 local function ShowUIPanel(panel)
 	panel:Show()
 end
@@ -11,52 +5,7 @@ end
 local function HideUIPanel(panel)
 	panel:Hide()
 end
-
 local cql = QuestGuru
-if F and F.ReskinPortraitFrame then
-	F.ReskinPortraitFrame(cql, 0, 0, 0, 0)
-	F.StripTextures(QuestGuruScrollFrame)
-	F.StripTextures(QuestGuruDetailScrollFrame)
-	F.StripTextures(QuestGuru.count)
-	F.StripTextures(QuestGuruScrollFrame.expandAll)
-	
-	local buttons = {
-		QuestGuru.abandon,
-		QuestGuru.push,
-		QuestGuru.track,
-		QuestGuru.close,
-	}
-	for _, questButton in next, buttons do
-		F.Reskin(questButton)
-	end
-	
-	F.Reskin(QuestGuru.mapButton)
-	QuestGuru.mapButton:SetSize(34*C.mult, 18*C.mult)
-	local mTex = QuestGuru.mapButton:CreateTexture(nil, "BACKGROUND")
-	mTex:SetPoint("TOPLEFT", QuestGuru.mapButton, C.mult, -C.mult)
-	mTex:SetPoint("BOTTOMRIGHT", QuestGuru.mapButton, -C.mult, C.mult)
-	mTex:SetTexture("Interface\\QuestFrame\\UI-QuestMap_Button")
-	mTex:SetTexCoord(0.25, 0.75, 0.125, 0.375)
-	
-	F.ReskinScroll(QuestGuruScrollFrameScrollBar)
-	F.ReskinScroll(QuestGuruDetailScrollFrameScrollBar)
-	
-	F.ReskinExpandOrCollapse(QuestGuruScrollFrame.expandAll)
-	
-	hooksecurefunc("QuestLog_Update", function()
-		local buttons = _G["QuestGuru"].scrollFrame.buttons
-		if buttons then
-			for i = 1, #buttons do
-				local bu = _G["QuestGuruScrollFrameButton"..i]
-				if not bu.styled then
-					F.ReskinExpandOrCollapse(bu)
-					bu.styled = true
-				end
-			end
-		end
-	end)
-end
-
 local IsClassic = select(4, GetBuildInfo()) < 20000
 QuestGuruSettings = {}
 QuestGuruCollapsedHeaders = {}
@@ -452,7 +401,10 @@ function cql:ListEntryOnClick()
       QuestGuruCollapsedHeaders[self.questTitle] = not QuestGuruCollapsedHeaders[self.questTitle] or nil
    else
       if IsModifiedClick("CHATLINK") and ChatEdit_GetActiveWindow() then
-        ChatEdit_InsertLink(gsub(self:GetText(), " *(.*)", "%1"));
+         local link = GetQuestLink(self.questID)
+         if link then
+            ChatEdit_InsertLink(link)
+         end
       elseif IsModifiedClick("QUESTWATCHTOGGLE") then
          cql:ToggleWatch(index)
       else
@@ -462,33 +414,19 @@ function cql:ListEntryOnClick()
    cql:UpdateLogList()
 end
 
-function cql:ToggleWatch(questIndex)
-   if not questIndex then
-      questIndex = GetQuestLogSelection()
+function cql:ToggleWatch(index)
+   if not index then
+      index = GetQuestLogSelection()
    end
-   if questIndex>0 then
-      if IsQuestWatched(questIndex) then -- already watched, remove from watch
-			local questID = GetQuestIDFromLogIndex(questIndex);
-			for index, value in ipairs(QUEST_WATCH_LIST) do
-				if ( value.id == questID ) then
-					tremove(QUEST_WATCH_LIST, index);
-				end
-			end
-			RemoveQuestWatch(questIndex);
-			QuestWatch_Update();
+   if index>0 then
+      if IsQuestWatched(index) then -- already watched, remove from watch
+         RemoveQuestWatch(index)
       else -- not watched, see if there's room to add, add if so
-			-- Set error if no objectives
-			if ( GetNumQuestLeaderBoards(questIndex) == 0 ) then
-				UIErrorsFrame:AddMessage(QUEST_WATCH_NO_OBJECTIVES, 1.0, 0.1, 0.1, 1.0);
-				return;
-			end
-			-- Set an error message if trying to show too many quests
-			if ( GetNumQuestWatches() >= MAX_WATCHABLE_QUESTS ) then
-				UIErrorsFrame:AddMessage(format(QUEST_WATCH_TOO_MANY, MAX_WATCHABLE_QUESTS), 1.0, 0.1, 0.1, 1.0);
-				return;
-			end
-			AutoQuestWatch_Insert(questIndex, QUEST_WATCH_NO_EXPIRE);
-			QuestWatch_Update();
+         if GetNumQuestWatches() >= MAX_WATCHABLE_QUESTS then
+            UIErrorsFrame:AddMessage(format(QUEST_WATCH_TOO_MANY,MAX_WATCHABLE_QUESTS),1,0.1,0.1,1)
+         else
+            AddQuestWatch(index)
+         end
       end
    end
 end
@@ -647,29 +585,17 @@ end
 --[[ map button ]]
 
 function cql:ShowMap()
-    cql:HideWindow() -- can't let map quest details fight with our details
-    local selectionIndex = GetQuestLogSelection()
-    if selectionIndex==0 then
-		ToggleWorldMap()
-    else
-		if not WorldMapFrame:IsVisible() then
-			ToggleWorldMap()
-		end
-		--QuestMapFrame_ShowQuestDetails(questID)
-		
-		if CodexQuest and CodexMap and CodexDatabase then
-			local title, _, _, header, _, complete = GetQuestLogTitle(selectionIndex)
-			if header then return end
-
-			local ids = CodexQuest.questLog[title].ids
-			local maps, meta = {}, {["addon"] = "CODEX", ["questLogId"] = selectionIndex}
-			for _, id in pairs(ids) do
-				maps = CodexDatabase:SearchQuestById(id, meta, maps)
-			end
-
-			CodexMap:ShowMapId(CodexDatabase:GetBestMap(maps))
-		end
-    end
+   cql:HideWindow() -- can't let map quest details fight with our details
+   local selectionIndex = GetQuestLogSelection()
+   if selectionIndex==0 then
+      ToggleWorldMap()
+   else
+      local questID = select(8,GetQuestLogTitle(selectionIndex))
+      if not WorldMapFrame:IsVisible() then
+         ToggleWorldMap()
+      end
+      QuestMapFrame_ShowQuestDetails(questID)
+   end
 end
 
 --[[ overrides ]]
