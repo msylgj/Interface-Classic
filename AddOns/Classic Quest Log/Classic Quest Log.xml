@@ -1,20 +1,19 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
-..\FrameXML\UI.xsd">
+<Ui>
 
-	<CheckButton name="QuestGuruCheckButtonTemplate" inherits="UICheckButtonTemplate" virtual="true">
+	<CheckButton name="ClassicQuestLogCheckButtonTemplate" inherits="UICheckButtonTemplate" virtual="true">
 		<Size x="24" y="24"/>
 		<Scripts>
 			<OnEnter>
-				QuestGuru.OptionOnEnter(self)
+				ClassicQuestLog.OptionOnEnter(self)
 			</OnEnter>
 			<OnLeave function="GameTooltip_Hide"/>
 			<OnClick>
-				QuestGuru.OptionOnClick(self)
+				ClassicQuestLog.OptionOnClick(self)
 			</OnClick>
 		</Scripts>
 	</CheckButton>
 
-	<Button name="QuestGuruListTemplate" virtual="true" text="Quest Title Example">
+	<Button name="ClassicQuestLogListTemplate" virtual="true" text="Quest Title Example">
 		<Size x="299" y="16"/>
 		<Layers>
 			<Layer level="BACKGROUND">
@@ -71,10 +70,10 @@
 				self.check:SetPoint("LEFT",self.normalText,"RIGHT")
 			</OnLoad>
 			<OnClick>
-				QuestGuru.ListEntryOnClick(self)
+				ClassicQuestLog.ListEntryOnClick(self)
 			</OnClick>
 			<OnEnter>
-				QuestGuru.ListEntryOnEnter(self)
+				ClassicQuestLog.ListEntryOnEnter(self)
 			</OnEnter>
 			<OnLeave>
 				GameTooltip:Hide()
@@ -82,7 +81,7 @@
 		</Scripts>
 	</Button>
 
-	<Frame name="QuestGuru" parent="UIParent" toplevel="true" clampedToScreen="true" enableMouse="true" movable="true" resizable="true" inherits="ButtonFrameTemplate" hidden="true">
+	<Frame name="ClassicQuestLog" parent="UIParent" toplevel="true" clampedToScreen="true" enableMouse="true" movable="true" resizable="true" inherits="ButtonFrameTemplate" hidden="true">
 		<Size x="667" y="496"/>
 		<Anchors>
 			<Anchor point="CENTER"/>
@@ -99,7 +98,7 @@
 			<Layer level="BACKGROUND">
 				<!-- temporary fix for lua error in QuestInfo.lua:45 (questFrame.SealMaterialBG is nil) -->
 				<Texture parentKey="SealMaterialBG" hidden="true"/>
-				<FontString parentKey="title" inherits="GameFontNormal" text="QuestGuru">
+				<FontString parentKey="title" inherits="GameFontNormal" text="Classic Quest Log">
 					<Anchors>
 						<Anchor point="TOP" x="0" y="-5"/>
 					</Anchors>
@@ -123,7 +122,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						QuestGuru:ToggleWindow()
+						ClassicQuestLog:ToggleWindow()
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -159,6 +158,7 @@
 				<Scripts>
 					<OnClick>
 						QuestLogPushQuest()
+						PlaySound(PlaySoundKitID and "igQuestLogOpen" or SOUNDKIT.IG_QUEST_LOG_OPEN)
 					</OnClick>
 					<OnEnter>
 						GameTooltip_AddNewbieTip(self, SHARE_QUEST, 1.0, 1.0, 1.0, NEWBIE_TOOLTIP_SHAREQUEST, 1)
@@ -173,7 +173,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						QuestGuru:ToggleWatch()
+						ClassicQuestLog:ToggleWatch()
 					</OnClick>
 					<OnEnter>
 						GameTooltip_AddNewbieTip(self, TRACK_QUEST, 1.0, 1.0, 1.0, NEWBIE_TOOLTIP_TRACKQUEST, 1)
@@ -181,7 +181,17 @@
 					<OnLeave function="GameTooltip_Hide"/>
 				</Scripts>
 			</Button>
-
+			<Button parentKey="options" inherits="MagicButtonTemplate" text="OPTIONS">
+				<Size x="110" y="22"/>
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.track" relativePoint="RIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ClassicQuestLog:ToggleOptions()
+					</OnClick>
+				</Scripts>
+			</Button>
 
 			<!-- frame with spiderwebs over left page, to show when quest log is empty -->
 			<Frame parentKey="emptyLog" hidden="true">
@@ -272,13 +282,13 @@
 				</HighlightTexture>
 				<Scripts>
 					<OnClick>
-						QuestGuru:ShowMap()
+						ClassicQuestLog:ShowMap()
 					</OnClick>
 				</Scripts>
 			</Button>
 			<!-- the actual log scrollFrame in left panel -->
-			<ScrollFrame parentKey="scrollFrame" name="QuestGuruScrollFrame" inherits="HybridScrollFrameTemplate">
-				<Size x="305" y="403"/> 
+			<ScrollFrame parentKey="scrollFrame" name="ClassicQuestLogScrollFrame" inherits="HybridScrollFrameTemplate">
+				<Size x="305" y="700"/> <!-- 403 is standard height; 700 is initial height to allow enough buttons created -->
 				<Anchors>
 					<Anchor point="TOPLEFT" x="6" y="-64"/>
 				</Anchors>
@@ -371,7 +381,7 @@
 						<DisabledFont style="GameFontHighlightLeft"/>
 						<Scripts>
 							<OnClick>
-								QuestGuru:ExpandAllOnClick()
+								ClassicQuestLog:ExpandAllOnClick()
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -409,7 +419,7 @@
 					</Frame>
 				</Frames>
 			</ScrollFrame>
-			<ScrollFrame parentKey="detail" name="QuestGuruDetailScrollFrame" inherits="QuestScrollFrameTemplate">
+			<ScrollFrame parentKey="detail" name="ClassicQuestLogDetailScrollFrame" inherits="QuestScrollFrameTemplate">
 				<Size x="298" y="403"/> <!-- was 403 -->
 				<Anchors>
 					<Anchor point="TOPRIGHT" x="-32" y="-63"/>
@@ -426,20 +436,128 @@
 					</Layer>
 				</Layers>
 				<ScrollChild>
-					<Frame name="QuestGuruDetailScrollChildFrame">
+					<Frame name="ClassicQuestLogDetailScrollChildFrame">
 						<Size x="298" y="403"/>
 					</Frame>
 				</ScrollChild>
 			</ScrollFrame>
-			</Frames>
+			<Button parentKey="resizeGrip">
+				<Size x="0" y="12"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="4" y="-1"/>
+					<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" x="-4" y="-1"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\Buttons\UI-Silver-Button-Up">
+							<Size x="12" y="12"/>
+							<Anchors>
+								<Anchor point="LEFT"/>
+							</Anchors>
+							<TexCoords left="0" right="0.09375" top="0.4375" bottom="0.8125"/>
+						</Texture>
+						<Texture file="Interface\Buttons\UI-Silver-Button-Up">
+							<Size x="12" y="12"/>
+							<Anchors>
+								<Anchor point="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.53125" right="0.625" top="0.4375" bottom="0.8125"/>
+						</Texture>
+						<Texture file="Interface\Buttons\UI-Silver-Button-Up">
+							<Size x="0" y="12"/>
+							<Anchors>
+								<Anchor point="LEFT" x="12" y="0"/>
+								<Anchor point="RIGHT" x="-12" y="0"/>
+							</Anchors>
+							<TexCoords left="0.09375" right="0.53125" top="0.4375" bottom="0.8125"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<NormalTexture>
+					<Size x="0" y="2"/>
+					<Anchors>
+						<Anchor point="LEFT" x="6" y="2"/>
+						<Anchor point="RIGHT" x="-6" y="2"/>
+					</Anchors>
+					<Color r="0.25" g="0.25" b="0.25"/>
+				</NormalTexture>
+				<HighlightTexture alphaMode="ADD">
+					<Size x="0" y="2"/>
+					<Anchors>
+						<Anchor point="LEFT" x="6" y="2"/>
+						<Anchor point="RIGHT" x="-6" y="2"/>
+					</Anchors>
+					<Color r="0.25" g="0.25" b="0.25"/>
+				</HighlightTexture>
+				<PushedTexture>
+					<Size x="0" y="2"/>
+					<Anchors>
+						<Anchor point="LEFT" x="6" y="2"/>
+						<Anchor point="RIGHT" x="-6" y="2"/>
+					</Anchors>
+					<Color r="0.5" g="0.5" b="0.5"/>
+				</PushedTexture>
+				<Scripts>
+					<OnMouseDown>
+						self:GetParent():StartSizing()
+					</OnMouseDown>
+					<OnMouseUp>
+						self:GetParent():StopMovingOrSizing()
+						self:GetParent():SetUserPlaced(true)
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+
+			<Frame parentKey="optionsFrame" enableMouse="true" inherits="BasicFrameTemplateWithInset" hidden="true">
+				<Size x="220" y="208"/>
+				<Anchors>
+					<Anchor point="BOTTOM" relativeKey="$parent.options" relativePoint="TOP" x="0" y="0"/>
+				</Anchors>
+				<Frames>
+					<CheckButton parentKey="UndockWindow" inherits="ClassicQuestLogCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" x="16" y="-32"/>
+						</Anchors>
+					</CheckButton>
+					<CheckButton parentKey="LockWindow" inherits="ClassicQuestLogCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.UndockWindow" relativePoint="BOTTOMLEFT" x="16" y="-4"/>
+						</Anchors>
+					</CheckButton>
+					<CheckButton parentKey="ShowResizeGrip" inherits="ClassicQuestLogCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.LockWindow" relativePoint="BOTTOMLEFT" x="-16" y="-4"/>
+						</Anchors>
+					</CheckButton>
+					<CheckButton parentKey="ShowLevels" inherits="ClassicQuestLogCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.ShowResizeGrip" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+						</Anchors>
+					</CheckButton>
+					<CheckButton parentKey="ShowTooltips" inherits="ClassicQuestLogCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.ShowLevels" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+						</Anchors>
+					</CheckButton>
+					<CheckButton parentKey="SolidBackground" inherits="ClassicQuestLogCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.ShowTooltips" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+						</Anchors>
+					</CheckButton>
+					<CheckButton parentKey="UseClassicSkin" inherits="ClassicQuestLogCheckButtonTemplate" hidden="true">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.SolidBackground" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+		</Frames>
 		<Scripts>
 			<OnLoad>
 				self:RegisterEvent("PLAYER_LOGIN")
-				self:RegisterEvent("UNIT_PORTRAIT_UPDATE")
-				self:RegisterEvent("UNIT_LEVEL")
 			</OnLoad>
 			<OnEvent>
-				self.OnEvent(self,event) <!-- changed from (self,event,...) -->
+				self.OnEvent(self,event)
 			</OnEvent>
 			<OnShow>
 				self.OnShow(self)
@@ -448,10 +566,14 @@
 				self.OnHide(self)
 			</OnHide>
 			<OnMouseDown>
-				self:StartMoving()
+				if ClassicQuestLogSettings.UndockWindow and (not ClassicQuestLogSettings.LockWindow or IsShiftKeyDown()) then
+					self:StartMoving()
+				end
 			</OnMouseDown>
 			<OnMouseUp>
-				self:StopMovingOrSizing()
+				if ClassicQuestLogSettings.UndockWindow and (not ClassicQuestLogSettings.LockWindow or IsShiftKeyDown()) then
+					self:StopMovingOrSizing()
+				end
 			</OnMouseUp>
 		</Scripts>
 	</Frame>

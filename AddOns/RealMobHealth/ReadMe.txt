@@ -17,6 +17,9 @@ Clears all recorded health data.
 
 ===============================================================================
 Versions:
+2.5	(2019-09-06)
+	-GameTooltip health text is now offloaded to the same on-use generation code that TargetFrame uses
+
 2.4	(2019-09-05)	APIVersion: 3.2
 	-Fixed TargetFrame text not checking options on creation
 	-Added health text to the GameTooltip's StatusBar

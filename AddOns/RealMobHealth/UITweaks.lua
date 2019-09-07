@@ -30,7 +30,8 @@ local math_floor=math.floor;
 local math_log10=math.log10;
 local math_max=math.max;
 local pairs=pairs;
-local tostring=tostring
+local select=select;
+local tostring=tostring;
 local UnitCanAttack=UnitCanAttack;
 local unpack=unpack;
 
@@ -56,30 +57,33 @@ local StatusBarTextAdditionsEnabled=AddOn.Options.ShowStatusBarTextAdditions;--	
 local StatusBarTextAdditions={};--	Holds FontStrings we created here
 
 local StatusBarTextSubTexts={
-	TextString={"CENTER",0,0};
-	LeftText={"LEFT",2,0};
-	RightText={"RIGHT",-2,0};
+--	Element		IsSide	Anchor
+	TextString=	{false	,{"CENTER",0,0}};
+	LeftText=	{true	,{"LEFT",2,0}};
+	RightText=	{true	,{"RIGHT",-2,0}};
 };
 
 local InitStatusBarsOnUse={--	Register these to be setup when called for
 --	TargetFrame doesn't have FontStrings for the health and mana bars
-	[TargetFrameHealthBar]=TargetFrameTextureFrame;
-	[TargetFrameManaBar]=TargetFrameTextureFrame;
+	[TargetFrameHealthBar]={TargetFrameTextureFrame,true};
+	[TargetFrameManaBar]={TargetFrameTextureFrame,true};
 };
 
-local function SetupStatusBarText(parent,bar)--	Create strings for TextStatusBars
+local function SetupStatusBarText(bar,parent,addsides,callback)--	Create strings for TextStatusBars
 	if StatusBarTextAdditions[bar] then return; end--	Already set up
 
 	local subtexts={};--	Store only SubTexts we've created (respect layout addons already creating these)
-	for key,anchor in pairs(StatusBarTextSubTexts) do
-		if not bar[key] then
+	for key,data in pairs(StatusBarTextSubTexts) do
+		if not bar[key] and (not data[1] or addsides) then
 			local text=parent:CreateFontString(nil,"OVERLAY","TextStatusBarText");
 			subtexts[key]=text;
-			if StatusBarTextAdditionsEnabled then bar[key]=text; end
-			text:SetPoint(anchor[1],bar,unpack(anchor));
+			if StatusBarTextAdditionsEnabled and not callback then bar[key]=text; end
+			text:SetPoint(data[2][1],bar,unpack(data[2]));
 		end
 	end
-	StatusBarTextAdditions[bar]=subtexts;
+
+	if callback then callback(bar,subtexts);
+	else StatusBarTextAdditions[bar]=subtexts; end
 end
 
 AddOn.RegisterAddOnEvent("OPTIONS_UPDATE",function(_,option,value)
@@ -106,25 +110,29 @@ end);
 --[[	HealthBar Tweaks	]]
 ----------------------------------
 local HookedHealthBars={};
+local HealthBarUnitOverrides={};
+
 hooksecurefunc("UnitFrameHealthBar_Update",function(self,unit)
 	if not HookedHealthBars[self] then
-		HookedHealthBars[self]=true;
+		HookedHealthBars[self]=true;--	Flag HealthBar
 		TextStatusBar_UpdateTextString(self);--	Runs our hook below
 	end
 end);
 
 --	Replace health text with our own values (We can secure hook, but if taint doesn't get too out of hand, this should have better performance)
 function TextStatusBar_UpdateTextString(self)--	Recreate Blizzard version with our modifications
-	if InitStatusBarsOnUse[self] then
-		SetupStatusBarText(InitStatusBarsOnUse[self],self);
+	local initsettings=InitStatusBarsOnUse[self];
+	if initsettings then
+		SetupStatusBarText(self,unpack(initsettings));
 		InitStatusBarsOnUse[self]=nil;
 	end
 
-	local text=self.TextString;
-	if text then
+	local text=self.TextString; if text then
+		local unit=HealthBarUnitOverrides[self] or self.unit;
 		local val,min,max;
-		if AddOn.Options.ModifyHealthBarText and HookedHealthBars[self] and self.unit and AddOn.IsUnitMob(self.unit) then--	Only modify HealthBars, can run on uninitialized ones
-			min,val,max=0,AddOn.GetUnitHealth(self.unit);
+
+		if AddOn.Options.ModifyHealthBarText and HookedHealthBars[self] and unit and AddOn.IsUnitMob(unit) then--	Only modify HealthBars, can run on uninitialized ones
+			min,val,max=0,AddOn.GetUnitHealth(unit);
 		else val,min,max=self:GetValue(),self:GetMinMaxValues(); end
 		TextStatusBar_UpdateTextStringWithValues(self,text,val,min,max);--	This needs to call from global to let layout addons work
 	end
@@ -133,24 +141,54 @@ end
 --	Event registration
 AddOn.RegisterAddOnEvent("HEALTH_UPDATE",function(_,creaturekey)
 	for bar in next,HookedHealthBars do
-		if bar.unit and (not creaturekey or creaturekey==AddOn.GetUnitCreatureKey(bar.unit)) then TextStatusBar_UpdateTextString(bar); end--	Re-run our hook
+		local unit=HealthBarUnitOverrides[bar] or bar.unit;
+		if unit and (not creaturekey or creaturekey==AddOn.GetUnitCreatureKey(unit)) then TextStatusBar_UpdateTextString(bar); end--	Re-run our hook
 	end
 end);
 
 AddOn.RegisterAddOnEvent("OPTIONS_UPDATE",function(_,option)
 	if option==nil or option=="ModifyHealthBarText" then
-		for bar in next,HookedHealthBars do TextStatusBar_UpdateTextString(bar); end
+		for bar in next,HookedHealthBars do TextStatusBar_UpdateTextString(bar); end--	Reformat health text
 	end
 end);
 
 ----------------------------------
 --[[	GameTooltip Tweaks	]]
 ----------------------------------
+local ShowTooltipHealthText=AddOn.Options.ShowTooltipHealthText;--	Cache for settings
+local GameTooltipStatusBar=GameTooltipStatusBar;
+local GameTooltipStatusBarText;
+
+--	Register InitOnUse
+InitStatusBarsOnUse[GameTooltipStatusBar]={GameTooltipStatusBar,false,function(self,texttbl)
+	local text=texttbl.TextString; if text then--	Will be nil if this wasn't created (leave alone if so)
+		GameTooltipStatusBarText=text;
+
+--		Hack:	Convert GameTooltipStatusBar into a TextStatusBar
+		GameTooltipStatusBar.cvar="statusText";
+		GameTooltipStatusBar.textLockable=1;
+		if ShowTooltipHealthText then self.TextString=text; end
+		TextStatusBar_Initialize(GameTooltipStatusBar);--	Setup variables TextStatusBar_UpdateTextString() wants to see
+		HookedHealthBars[GameTooltipStatusBar]=true;--	We never call UnitFrameHealthBar_Update() so manually flag this
+	else GameTooltipStatusBarText=false; end--	Flag a false value that isn't nil (prevents the loading code from trying to keep updating when it shouldn't)
+end};
+
+local LockedVisibilityCall; do--	LockedVisibilityCall(self,func,...)
+	local function NoOp() end
+	function LockedVisibilityCall(self,func,...)
+		self.SetShown,self.Show,self.Hide=NoOp,NoOp,NoOp;--	Lock visibility changes
+		func(...);
+		self.SetShown,self.Show,self.Hide=nil,nil,nil;--	Restore functions
+	end
+end
+
 GameTooltip:HookScript("OnTooltipSetUnit",function(self)
 	local _,unit=self:GetUnit();
 
-	GameTooltipStatusBar.unit=unit;--	Set unit for our hook
-	TextStatusBar_UpdateTextString(GameTooltipStatusBar);--	Update status bar text
+	if ShowTooltipHealthText and GameTooltipStatusBarText~=false then--	Only run if enabled and we haven't detected another addon modifying this
+		HealthBarUnitOverrides[GameTooltipStatusBar]=unit;--	Set unit for our hook
+		LockedVisibilityCall(GameTooltipStatusBar,TextStatusBar_UpdateTextString,GameTooltipStatusBar);--	Update status bar text
+	end
 
 	if AddOn.Options.ShowTooltipText and unit and UnitCanAttack("player",unit) and AddOn.IsUnitMob(unit) then
 		local creaturekey=AddOn.GetUnitCreatureKey(unit);
@@ -165,33 +203,28 @@ GameTooltip:HookScript("OnTooltipSetUnit",function(self)
 	end
 end);
 
-GameTooltip:HookScript("OnTooltipCleared",function() GameTooltipStatusBar.unit=nil; end);--	Clear unit when Tooltip cleared
+GameTooltip:HookScript("OnTooltipCleared",function() HealthBarUnitOverrides[GameTooltipStatusBar]=nil; end);--	Clear unit when Tooltip cleared
 
-local GameTooltipStatusBarText=GameTooltipStatusBar:CreateFontString(nil,"OVERLAY","TextStatusBarText");
-GameTooltipStatusBarText:SetPoint("CENTER");
-
---	Hack to convert GameTooltipStatusBar into a TextStatusBar
-GameTooltipStatusBar.cvar="statusText";
-GameTooltipStatusBar.textLockable=1;
-GameTooltipStatusBar.TextString=GameTooltipStatusBarText;
-TextStatusBar_Initialize(GameTooltipStatusBar);--	Setup variables TextStatusBar_UpdateTextString() wants to see
-HookedHealthBars[GameTooltipStatusBar]=true;--	We never call UnitFrameHealthBar_Update() so manually flag this
-
-GameTooltipStatusBar:HookScript("OnEvent",function(self,event,...)--	Play nice with TextStatusBar CVars
-	if self:IsShown() then TextStatusBar_OnEvent(self,event,...); end--	Only update if shown
+GameTooltipStatusBar:HookScript("OnEvent",function(self,...)--	Play nice with TextStatusBar CVars
+	if not GameTooltipStatusBarText then return; end--	Exit if we haven't created this
+	LockedVisibilityCall(self,TextStatusBar_OnEvent,self,...);
 end);
 
-GameTooltipStatusBar:HookScript("OnValueChanged",function(self,value)
-	local _; _,self.unit=GameTooltip:GetUnit();--	Set unit for our hook
-	TextStatusBar_OnValueChanged(self,value);--	Calls TextStatusBar_UpdateTextString()
+GameTooltipStatusBar:HookScript("OnValueChanged",function(self,...)
+	if ShowTooltipHealthText and GameTooltipStatusBarText~=false then--	Only run if enabled and we haven't detected another addon modifying this
+		local _; _,HealthBarUnitOverrides[self]=GameTooltip:GetUnit();--	Set unit for our hook
+		LockedVisibilityCall(self,TextStatusBar_OnValueChanged,self,...);---	Calls TextStatusBar_UpdateTextString()
+	end
 end);
 
 AddOn.RegisterAddOnEvent("OPTIONS_UPDATE",function(_,option,value)
 	if option==nil then option,value="ShowTooltipHealthText",AddOn.Options.ShowTooltipHealthText; end
 	if option=="ShowTooltipHealthText" then
+		ShowTooltipHealthText=value;
+		if not GameTooltipStatusBarText then return; end--	Stop here if we haven't created this
+
 		GameTooltipStatusBar.TextString=value and GameTooltipStatusBarText or nil;
-		if value then
-			if GameTooltipStatusBar:IsShown() then TextStatusBar_UpdateTextString(GameTooltipStatusBar); end
+		if value then LockedVisibilityCall(GameTooltipStatusBar,TextStatusBar_UpdateTextString,GameTooltipStatusBar);
 		else GameTooltipStatusBarText:Hide(); end
 	end
 end);
@@ -246,9 +279,8 @@ end);
 --[[	API Functions	]]
 --------------------------
 local function UITweaksSetEnabled(show)
---	show=show or false and nil;--	According to Lua documentation, this should be in LTR order, but "and" has higher precedence than "or"
-	show=show or false;--	Partial boolean cast, handles false
-	show=show and nil;--	Cast true to nil to restore user options
+--	Note:	Lua documentation says logic operators are LTR order, but apparently "and" has higher precedence than "or"
+	show=(show or false) and nil;--	Cast to boolean, cast true to nil to restore user settings
 
 	AddOn_API_OverrideOption("ShowStatusBarTextAdditions",show);
 	AddOn_API_OverrideOption("ModifyHealthBarText",show);

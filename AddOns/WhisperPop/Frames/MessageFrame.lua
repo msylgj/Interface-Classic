@@ -276,10 +276,15 @@ end)
 
 addon.templates.CreateFlash(endButton)
 
---[[list:SetScript("OnMessageScrollChanged", function(self)
-	if self:AtBottom() then
-		endButton:StopFlash()
-	else
-		endButton:StartFlash()
+list:SetScript("OnUpdate", function(self, elapsed)
+	self.elapsed = (self.elapsed or 0) + elapsed
+	if self.elapsed > 0.2 then
+		self.elapsed = 0
+
+		if self:AtBottom() then
+			endButton:StopFlash()
+		else
+			endButton:StartFlash()
+		end
 	end
-end)--]]
+end)

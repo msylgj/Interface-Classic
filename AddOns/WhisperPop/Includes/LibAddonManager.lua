@@ -38,7 +38,7 @@
 -- addon:Initialized() -- Returns whether the addon has been initialized
 -- addon:RegisterDB("dbName", hasCharDB) -- "hasCharDB" can be string, in which case char db will be the contents in toc field "SavedVariablesPerCharacter". Non-string type will treated as "name - realm" stored in db["profiles"]
 -- addon:VerifyDBVersion(version [, db]) -- Returns true only if value of [db].version is numeric and no smaller than the specified version value
--- addon:RegisterSlashCmd("command1" [, "command2"])
+-- addon:RegisterSlashCmd("command1" [, "command2" [, ...]]) -- Register slash commands, no limited numbers
 -- addon:RegisterBindingClick(button, "name", "text") -- Set an override binding click to a button, "name" is the binding name, "text" is what appears in the game's "Key Bindings" UI
 -- addon:GetCurProfileName() -- Return current profile name string, in format of "name - realm"
 -- addob:GetProfileNameList() -- Return a table stores list of profile names { "name1", "name2", ... }
@@ -142,7 +142,7 @@ local StaticPopup_Hide = StaticPopup_Hide
 local StaticPopupDialogs = StaticPopupDialogs
 local _G = _G
 
-local VERSION = 1.20
+local VERSION = 1.22
 
 local lib = _G.LibAddonManager
 if type(lib) == "table" then
@@ -267,26 +267,20 @@ local function Addon_DeleteProfile(self, profile)
 	end
 end
 
-local function Addon_RegisterSlashCmd(self, cmd1, cmd2)
-	if type(cmd1) ~= "string" then
-		cmd1 = nil
-	elseif strfind(cmd1, "/") ~= 1 then
-		cmd1 = "/"..cmd1
-	end
-
-	if type(cmd2) ~= "string" then
-		cmd2 = nil
-	elseif strfind(cmd2, "/") ~= 1 then
-		cmd2 = "/"..cmd2
-	end
-
-	if not cmd1 then
-		return
-	end
-
+local function Addon_RegisterSlashCmd(self, ...)
 	local UPPER_NAME = strupper(self.name)
-	_G["SLASH_"..UPPER_NAME..1] = cmd1
-	_G["SLASH_"..UPPER_NAME..2] = cmd2
+
+	local i
+	for i = 1, select("#", ...) do
+		local cmd = select(i, ...)
+		if type(cmd) == "string" then
+			if strfind(cmd, "/") ~= 1 then
+				cmd = "/"..cmd
+			end
+
+			_G["SLASH_"..UPPER_NAME..i] = cmd
+		end
+	end
 
 	SlashCmdList[UPPER_NAME] = function(text)
 		if type(self.OnSlashCmd) == "function" then
@@ -324,16 +318,16 @@ local function Addon_RegisterDB(self, dbName, hasCharDB)
 end
 
 local function Addon_RegisterBindingClick(self, button, name, text)
-	if type(name) ~= "string" or type(button) ~= "table" or type(text) ~= "string" then
+	if type(name) ~= "string" or type(button) ~= "table" then
 		return
 	end
 
-	local header = "BINDING_HEADER_"..strupper(self.name).."_TITLE"
-	if not _G[header] then
-		_G[header] = self.title
-	end
+	--local header = "BINDING_HEADER_"..strupper(self.name).."_TITLE"
+	--if not _G[header] then
+	--	_G[header] = self.title
+	--end
 
-	if not _G["BINDING_NAME_"..name] then
+	if type(text) == "string" then
 		_G["BINDING_NAME_"..name] = text
 	end
 

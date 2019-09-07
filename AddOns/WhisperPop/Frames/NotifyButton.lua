@@ -22,7 +22,7 @@ addon.frame:HookScript("OnHide", function()
 	button:SetChecked(false)
 end)
 
-button:SetPoint("BOTTOMRIGHT", -154, 171)
+button:SetPoint("CENTER", 0, 160)
 button:SetMovable(true)
 button:SetUserPlaced(true)
 button:SetDontSavePosition(false)
@@ -87,7 +87,7 @@ end)
 
 addon:RegisterEventCallback("OnResetFrames", function()
 	button:ClearAllPoints()
-	button:SetPoint("BOTTOMRIGHT", -154, 171)
+	button:SetPoint("CENTER", 0, 160)
 end)
 
 addon:RegisterOptionCallback("notifyButton", function(value)

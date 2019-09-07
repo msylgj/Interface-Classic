@@ -1,9 +1,9 @@
 ## Interface: 11302
 ## Title: WhisperPop
-## Version: 4.23
+## Version: 4.30
 ## Author: Abin
 ## X-Category: Chat/Communication
-## SavedVariablesPerCharacter: WhisperPopDB
+## SavedVariables: WhisperPopDB
 
 Locales\enUS.lua
 Locales\zhCN.lua
