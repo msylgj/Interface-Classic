@@ -36,7 +36,7 @@ C.defaults = {
 	["chatBubbles"] = true,
 	["bubbleColor"] = false,
 	["reskinFont"] = true,
-	["loot"] = true,
+	["loot"] = false,
 	["useCustomColour"] = false,
 	["customColour"] = {r = 1, g = 1, b = 1},
 	["tooltips"] = false,

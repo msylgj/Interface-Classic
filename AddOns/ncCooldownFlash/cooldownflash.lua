@@ -30,7 +30,7 @@ flash:SetScript("OnEvent", function()
 	local mult = 768/string.match(GetScreenModes(), "%d+x(%d+)")/GetCVar("uiScale")
 	local function scale(x) return mult*math.floor(x+.5) end
 	flash:SetPoint(unpack(point))
-	flash:SetSize(scale(80),scale(80))
+	flash:SetSize(scale(160),scale(160))
 	flash:SetBackdrop({
 	  bgFile = [[Interface\AddOns\ncCooldownFlash\solid]], 
 	  edgeFile = [[Interface\AddOns\ncCooldownFlash\solid]], 
