@@ -190,3 +190,14 @@ GameTooltip:SetScript("OnTooltipSetItem", function(self)
 		BattlePetTooltip:Hide()
 	end
 end)
+
+---------------- > 稍微处理一下输入框字体 
+local function CanSetFont(object) 
+   return (type(object)=="table" 
+	   and object.SetFont and object.IsObjectType 
+	      and not object:IsObjectType("SimpleHTML")); 
+end
+
+if (CanSetFont(ChatFontNormal)) then
+	ChatFontNormal:SetFont(STANDARD_TEXT_FONT, 15)
+end

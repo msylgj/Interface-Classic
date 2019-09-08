@@ -23,11 +23,11 @@ local UIConfig = core.UIConfig;
 local CSC_UIFrame = core.UIConfig;
 
 local statsDropdownList = {
-    "基础属性",
-    "近战",
-    "远程",
-    "法术",
-    "防御"
+    PLAYERSTAT_BASE_STATS,
+    PLAYERSTAT_MELEE_COMBAT,
+    PLAYERSTAT_RANGED_COMBAT,
+    PLAYERSTAT_SPELL_COMBAT,
+    PLAYERSTAT_DEFENSES
 }
 
 local NUM_STATS_TO_SHOW = 6;
@@ -47,12 +47,12 @@ end
 function UIConfig:InitializeStatsFrames(leftParentFrame, rightParentFrame)
     local offsetStepY = 15;
     local accumulatedOffsetY = 0;
-    
+
     for i = 1, NUM_STATS_TO_SHOW do
         accumulatedOffsetY = accumulatedOffsetY + offsetStepY;
         local actualOffset = accumulatedOffsetY;
-        
-        if i == 1 then 
+
+        if i == 1 then
             actualOffset = 32;
             accumulatedOffsetY = 32;
         end
@@ -74,10 +74,10 @@ function UIConfig:SetCharacterStats(statsTable, category)
     --print(characterFrameTab);
     CSC_ResetStatFrames(statsTable);
 
-    if category == "基础属性" then
+    if category == PLAYERSTAT_BASE_STATS then
         -- str, agility, stamina, intelect, spirit, armor
         CSC_PaperDollFrame_SetPrimaryStats(statsTable, "player");
-    elseif category == "防御" then
+    elseif category == PLAYERSTAT_DEFENSES then
         -- armor, defense, dodge, parry, block
         CSC_PaperDollFrame_SetArmor(statsTable[1], "player");
         CSC_PaperDollFrame_SetDefense(statsTable[2], "player");
@@ -85,7 +85,7 @@ function UIConfig:SetCharacterStats(statsTable, category)
         CSC_PaperDollFrame_SetParry(statsTable[4], "player");
         CSC_PaperDollFrame_SetBlock(statsTable[5], "player");
         --CSC_PaperDollFrame_SetStagger(statsTable[6], "player"); Is this useful?
-    elseif category == "近战" then
+    elseif category == PLAYERSTAT_MELEE_COMBAT then
         -- damage, Att Power, speed, hit raiting, crit chance
         CSC_PaperDollFrame_SetDamage(statsTable[1], "player", category);
         CSC_PaperDollFrame_SetMeleeAttackPower(statsTable[2], "player");
@@ -93,13 +93,13 @@ function UIConfig:SetCharacterStats(statsTable, category)
         CSC_PaperDollFrame_SetCritChance(statsTable[4], "player", category);
         CSC_PaperDollFrame_SetHitChance(statsTable[5], "player");
         --CSC_PaperDollFrame_SetHitChance(statsTable[6], "player");--test
-    elseif category == "远程" then
+    elseif category == PLAYERSTAT_RANGED_COMBAT then
         CSC_PaperDollFrame_SetDamage(statsTable[1], "player", category);
         CSC_PaperDollFrame_SetRangedAttackPower(statsTable[2], "player");
         CSC_PaperDollFrame_SetRangedAttackSpeed(statsTable[3], "player");
         CSC_PaperDollFrame_SetCritChance(statsTable[4], "player", category);
         CSC_PaperDollFrame_SetHitChance(statsTable[5], "player");
-    elseif category == "法术" then
+    elseif category == PLAYERSTAT_SPELL_COMBAT then
         -- bonus dmg, bonus healing, crit chance, mana regen
         CSC_PaperDollFrame_SetSpellPower(statsTable[1], "player");
         CSC_PaperDollFrame_SetHealing(statsTable[2], "player");
@@ -181,10 +181,10 @@ function UIConfig:SetupDropdown()
     UIDropDownMenu_JustifyText(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, "LEFT");
 
     -- Aurora Classic
-	if F and F.ReskinDropDown then
-		F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.leftStatsDropDown)
-		F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown)
-	end
+    if F and F.ReskinDropDown then
+        F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.leftStatsDropDown)
+        F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown)
+    end
 end
 
 -- Extend the functionality of the default CharacterFrameTab
@@ -237,7 +237,7 @@ function dbLoader:OnEvent(event, arg1)
         else
             UISettingsGlobal = CharacterStatsClassicDB;
         end
-        
+
         -- Character DB
         if (CharacterStatsClassicCharacterDB == nil) then
             CharacterStatsClassicCharacterDB = UISettingsCharacter;

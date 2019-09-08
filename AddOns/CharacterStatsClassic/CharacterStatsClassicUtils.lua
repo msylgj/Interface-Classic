@@ -15,9 +15,9 @@ local function CSC_GetAppropriateDamage(unit, category)
 		return UnitDamage(unit);
     end
 	]]
-	if category == "近战" then
+	if category == PLAYERSTAT_MELEE_COMBAT then
 		return UnitDamage(unit);
-	elseif category == "远程" then
+	elseif category == PLAYERSTAT_RANGED_COMBAT then
 		local attackTime, minDamage, maxDamage, bonusPos, bonusNeg, percent = UnitRangedDamage(unit);
 		return minDamage, maxDamage, nil, nil, 0, 0, percent;
 	end
@@ -25,7 +25,6 @@ end
 
 local function CSC_PaperDollFrame_SetLabelAndText(statFrame, label, text, isPercentage, numericValue)
 	if ( isPercentage ) then
-		text = format("%d%%", numericValue + 0.5);
 		statFrame.Value:SetText(format("%.1F%%", numericValue));
 	else
 		statFrame.Value:SetText(text);
@@ -212,7 +211,7 @@ function CSC_PaperDollFrame_SetDamage(statFrame, unit, category)
 	statFrame.melleAttack = attackWithModifier;
 
     -- If there's an offhand speed then add the offhand info to the tooltip
-	if ( offhandSpeed and category == "近战") then
+	if ( offhandSpeed and category == PLAYERSTAT_MELEE_COMBAT) then
 		minOffHandDamage = (minOffHandDamage / percent) - physicalBonusPos - physicalBonusNeg;
 		maxOffHandDamage = (maxOffHandDamage / percent) - physicalBonusPos - physicalBonusNeg;
 
@@ -311,16 +310,16 @@ function CSC_PaperDollFrame_SetCritChance(statFrame, unit, category)
     -- Warning: For some reason these return the same value on retail.... will have to check on Classic
     local critChance;
 
-    if category == "近战" then
+    if category == PLAYERSTAT_MELEE_COMBAT then
         critChance = GetCritChance();
-    elseif category == "远程" then
+    elseif category == PLAYERSTAT_RANGED_COMBAT then
         critChance = GetRangedCritChance();
-    elseif category == "法术" then
+    elseif category == PLAYERSTAT_SPELL_COMBAT then
         critChance = GetSpellCritChance();
     end
 
     CSC_PaperDollFrame_SetLabelAndText(statFrame, STAT_CRITICAL_STRIKE, critChance, true, critChance);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE..format(PAPERDOLLFRAME_TOOLTIP_FORMAT, STAT_CRITICAL_STRIKE).." "..format("%.2F%%", critChance)..FONT_COLOR_CODE_CLOSE;
+	statFrame.tooltip = format(PAPERDOLLFRAME_TOOLTIP_FORMAT, STAT_CRITICAL_STRIKE).." "..format("%.2F%%", critChance);
 	statFrame.tooltip2 = "";
     statFrame:Show();
 end
@@ -352,8 +351,9 @@ function CSC_PaperDollFrame_SetHitChance(statFrame, unit)
 	end
 
 	local hitChanceText = hitChance;
-	CSC_PaperDollFrame_SetLabelAndText(statFrame, "命中", hitChanceText, true, hitChance);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE.."提高攻击命中敌人的几率"..FONT_COLOR_CODE_CLOSE;
+	CSC_PaperDollFrame_SetLabelAndText(statFrame, STAT_HIT_CHANCE, hitChanceText, true, hitChance);
+	statFrame.tooltip = STAT_HIT_CHANCE.." "..hitChanceText;
+	statFrame.tooltip2 = format(CR_HIT_MELEE_TOOLTIP, UnitLevel(unit), hitChance);
 	statFrame:Show();
 end
 
@@ -365,8 +365,9 @@ function CSC_PaperDollFrame_SetSpellHitChance(statFrame, unit)
 	end
 
 	local hitChanceText = hitChance;
-	CSC_PaperDollFrame_SetLabelAndText(statFrame, "法术命中", hitChanceText, true, hitChance);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE.."提高法术命中敌人的几率"..FONT_COLOR_CODE_CLOSE;
+	CSC_PaperDollFrame_SetLabelAndText(statFrame, STAT_HIT_CHANCE, hitChanceText, true, hitChance);
+	statFrame.tooltip = STAT_HIT_CHANCE.." "..hitChanceText;
+	statFrame.tooltip2 = format(CR_HIT_SPELL_TOOLTIP, UnitLevel(unit), hitChance);
 	statFrame:Show();
 end
 
@@ -380,12 +381,11 @@ function CSC_PaperDollFrame_SetAttackSpeed(statFrame, unit)
 	end
 	if ( offhandSpeed ) then
 		displaySpeed =  displaySpeed.." / ".. offhandSpeed;
-		speedLabel = "攻击速度"; -- overlap fix until I find a better way of ding this
 	else
 		displaySpeed =  displaySpeed;
 	end
 	CSC_PaperDollFrame_SetLabelAndText(statFrame, speedLabel, displaySpeed, false, speed);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE..format(PAPERDOLLFRAME_TOOLTIP_FORMAT, ATTACK_SPEED).." "..displaySpeed..FONT_COLOR_CODE_CLOSE;
+	statFrame.tooltip = format(PAPERDOLLFRAME_TOOLTIP_FORMAT, ATTACK_SPEED).." "..displaySpeed;
 	statFrame:Show();
 end
 
@@ -394,7 +394,7 @@ function CSC_PaperDollFrame_SetRangedAttackSpeed(statFrame, unit)
 	local displaySpeed = format("%.2F", attackSpeed);
 
 	CSC_PaperDollFrame_SetLabelAndText(statFrame, WEAPON_SPEED, displaySpeed, false, attackSpeed);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE..format(PAPERDOLLFRAME_TOOLTIP_FORMAT, ATTACK_SPEED).." "..displaySpeed..FONT_COLOR_CODE_CLOSE;
+	statFrame.tooltip = format(PAPERDOLLFRAME_TOOLTIP_FORMAT, ATTACK_SPEED).." "..displaySpeed;
 	statFrame:Show();
 end
 
@@ -426,27 +426,50 @@ function CSC_PaperDollFrame_SetArmor(statFrame, unit)
 end
 
 function CSC_PaperDollFrame_SetDefense(statFrame, unit)
-	local base, modifier = UnitDefense(unit);
+
+	local numSkills = GetNumSkillLines();
+	local skillIndex = 0;
+
+	for i = 1, numSkills do
+		local skillName = select(1, GetSkillLineInfo(i));
+
+		if (skillName == DEFENSE) then
+			skillIndex = i;
+			break;
+		end
+	end
+
+	local skillRank, skillModifier;
+	if (skillIndex > 0) then
+		skillRank = select(4, GetSkillLineInfo(skillIndex));
+		skillModifier = select(6, GetSkillLineInfo(skillIndex));
+	else
+		-- Use this as a backup, just in case something goes wrong
+		skillRank, skillModifier = UnitDefense(unit); --Not working properly
+	end
 
 	local posBuff = 0;
 	local negBuff = 0;
-	if ( modifier > 0 ) then
-		posBuff = modifier;
-	elseif ( modifier < 0 ) then
-		negBuff = modifier;
+	if ( skillModifier > 0 ) then
+		posBuff = skillModifier;
+	elseif ( skillModifier < 0 ) then
+		negBuff = skillModifier;
 	end
-	local valueText, tooltipText = CSC_PaperDollFormatStat(DEFENSE_COLON, base, posBuff, negBuff);
-	local valueNum = max(0, base + posBuff + negBuff);
-	CSC_PaperDollFrame_SetLabelAndText(statFrame, "防御等级", valueText, false, valueNum);
+	local valueText, tooltipText = CSC_PaperDollFormatStat(DEFENSE_COLON, skillRank, posBuff, negBuff);
+	local valueNum = max(0, skillRank + posBuff + negBuff);
+	CSC_PaperDollFrame_SetLabelAndText(statFrame, DEFENSE, valueText, false, valueNum);
 	statFrame.tooltip = tooltipText;
-	statFrame.tooltip2 = "降低受到暴击的几率";
+	tooltipText = format(DEFAULT_STATDEFENSE_TOOLTIP, valueNum, 0, valueNum*0.04, valueNum*0.04);
+	tooltipText = tooltipText:gsub('.-\n', '', 1);
+	tooltipText = tooltipText:gsub('%b()', '');
+	statFrame.tooltip2 = tooltipText;
 	statFrame:Show();
 end
 
 function CSC_PaperDollFrame_SetDodge(statFrame, unit)
 	local chance = GetDodgeChance();
 	CSC_PaperDollFrame_SetLabelAndText(statFrame, STAT_DODGE, chance, true, chance);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE..format(PAPERDOLLFRAME_TOOLTIP_FORMAT, DODGE_CHANCE).." "..string.format("%.2F", chance).."%"..FONT_COLOR_CODE_CLOSE;
+	statFrame.tooltip = format(PAPERDOLLFRAME_TOOLTIP_FORMAT, DODGE_CHANCE).." "..string.format("%.2F", chance).."%";
 	--statFrame.tooltip2 = format(CR_DODGE_TOOLTIP, GetCombatRating(CR_DODGE), GetCombatRatingBonus(CR_DODGE));
 	statFrame:Show();
 end
@@ -454,7 +477,7 @@ end
 function CSC_PaperDollFrame_SetParry(statFrame, unit)
 	local chance = GetParryChance();
 	CSC_PaperDollFrame_SetLabelAndText(statFrame, STAT_PARRY, chance, true, chance);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE..format(PAPERDOLLFRAME_TOOLTIP_FORMAT, PARRY_CHANCE).." "..string.format("%.2F", chance).."%"..FONT_COLOR_CODE_CLOSE;
+	statFrame.tooltip = format(PAPERDOLLFRAME_TOOLTIP_FORMAT, PARRY_CHANCE).." "..string.format("%.2F", chance).."%";
 	--statFrame.tooltip2 = format(CR_PARRY_TOOLTIP, GetCombatRating(CR_PARRY), GetCombatRatingBonus(CR_PARRY));
 	statFrame:Show();
 end
@@ -473,7 +496,7 @@ end
 function CSC_PaperDollFrame_SetBlock(statFrame, unit)
 	local chance = GetBlockChance();
 	CSC_PaperDollFrame_SetLabelAndText(statFrame, STAT_BLOCK, chance, true, chance);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE..format(PAPERDOLLFRAME_TOOLTIP_FORMAT, BLOCK_CHANCE).." "..string.format("%.2F", chance).."%"..FONT_COLOR_CODE_CLOSE;
+	statFrame.tooltip = format(PAPERDOLLFRAME_TOOLTIP_FORMAT, BLOCK_CHANCE).." "..string.format("%.2F", chance).."%";
 	
 	--[[
 	local shieldBlockArmor = GetShieldBlock();
@@ -495,7 +518,7 @@ function CSC_PaperDollFrame_SetStagger(statFrame, unit)
 	local stagger, staggerAgainstTarget = C_PaperDollInfo.GetStaggerPercentage(unit);
 	CSC_PaperDollFrame_SetLabelAndText(statFrame, STAT_STAGGER, stagger, true, stagger);
 
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE..format(PAPERDOLLFRAME_TOOLTIP_FORMAT, STAGGER).." "..string.format("%.2F%%",stagger)..FONT_COLOR_CODE_CLOSE;
+	statFrame.tooltip = format(PAPERDOLLFRAME_TOOLTIP_FORMAT, STAGGER).." "..string.format("%.2F%%",stagger);
 	statFrame.tooltip2 = format(STAT_STAGGER_TOOLTIP, stagger);
 	if (staggerAgainstTarget) then
 		statFrame.tooltip3 = format(STAT_STAGGER_TARGET_TOOLTIP, staggerAgainstTarget);
@@ -544,6 +567,7 @@ function CSC_PaperDollFrame_SetManaRegen(statFrame, unit)
 	end
 
 	local base, combat = GetManaRegen();
+	
 	-- All mana regen stats are displayed as mana/5 sec.
 	base = floor(base * 5.0);
 	combat = floor(combat * 5.0);
@@ -551,7 +575,7 @@ function CSC_PaperDollFrame_SetManaRegen(statFrame, unit)
 	local combatText = BreakUpLargeNumbers(combat);
 	-- Combat mana regen is most important to the player, so we display it as the main value
 	CSC_PaperDollFrame_SetLabelAndText(statFrame, MANA_REGEN, combatText, false, combat);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE .. format(PAPERDOLLFRAME_TOOLTIP_FORMAT, MANA_REGEN) .. " " .. combatText .. FONT_COLOR_CODE_CLOSE;
+	statFrame.tooltip = format(PAPERDOLLFRAME_TOOLTIP_FORMAT, MANA_REGEN) .. " " .. combatText;
 	-- Base (out of combat) regen is displayed only in the subtext of the tooltip
 	statFrame.tooltip2 = format(MANA_REGEN_TOOLTIP, baseText);
 	statFrame:Show();
@@ -560,8 +584,9 @@ end
 function CSC_PaperDollFrame_SetHealing(statFrame, unit)
 	local healing = GetSpellBonusHealing();
 	local healingText = healing;
-	CSC_PaperDollFrame_SetLabelAndText(statFrame, "治疗加成", healingText, false, healing);
-	statFrame.tooltip = HIGHLIGHT_FONT_COLOR_CODE.."提高治疗效果"..FONT_COLOR_CODE_CLOSE;
+	CSC_PaperDollFrame_SetLabelAndText(statFrame, STAT_SPELLHEALING, healingText, false, healing);
+	statFrame.tooltip = STAT_SPELLHEALING.." "..healing;
+	statFrame.tooltip2 = STAT_SPELLHEALING_TOOLTIP;
 	statFrame:Show();
 end
 
@@ -589,25 +614,26 @@ function CSC_CharacterSpellDamageFrame_OnEnter(self)
 	GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
 	GameTooltip:SetText(STAT_SPELLPOWER, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 	GameTooltip:AddDoubleLine(STAT_SPELLPOWER_TOOLTIP);
+	GameTooltip:AddLine("Displays the highest type of spell damage");
 	GameTooltip:AddLine(" "); -- Blank line.
-	GameTooltip:AddDoubleLine("神圣伤害: ", format("%.2F", self.holyDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("火焰伤害: ", format("%.2F", self.fireDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("冰霜伤害: ", format("%.2F", self.frostDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("奥术伤害: ", format("%.2F", self.arcaneDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("暗影伤害: ", format("%.2F", self.shadowDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("自然伤害: ", format("%.2F", self.natureDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL1_CAP.." "..DAMAGE..": ", format("%.2F", self.holyDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL2_CAP.." "..DAMAGE..": ", format("%.2F", self.fireDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL4_CAP.." "..DAMAGE..": ", format("%.2F", self.frostDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL6_CAP.." "..DAMAGE..": ", format("%.2F", self.arcaneDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL5_CAP.." "..DAMAGE..": ", format("%.2F", self.shadowDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL3_CAP.." "..DAMAGE..": ", format("%.2F", self.natureDmg), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 	GameTooltip:Show();
 end
 
 function CSC_CharacterSpellCritFrame_OnEnter(self)
 	GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
 	GameTooltip:SetText(STAT_CRITICAL_STRIKE, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("神圣暴击: ", format("%.2F", self.holyCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("火焰暴击: ", format("%.2F", self.fireCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("冰霜暴击: ", format("%.2F", self.frostCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("奥术暴击: ", format("%.2F", self.arcaneCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("暗影暴击: ", format("%.2F", self.shadowCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	GameTooltip:AddDoubleLine("自然暴击: ", format("%.2F", self.natureCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL1_CAP.." "..CRIT_ABBR..": ", format("%.2F", self.holyCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL2_CAP.." "..CRIT_ABBR..": ", format("%.2F", self.fireCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL4_CAP.." "..CRIT_ABBR..": ", format("%.2F", self.frostCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL6_CAP.." "..CRIT_ABBR..": ", format("%.2F", self.arcaneCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL5_CAP.." "..CRIT_ABBR..": ", format("%.2F", self.shadowCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+	GameTooltip:AddDoubleLine(SPELL_SCHOOL3_CAP.." "..CRIT_ABBR..": ", format("%.2F", self.natureCrit).."%", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 	GameTooltip:Show();
 end
 -- OnEnter Tooltip functions END
