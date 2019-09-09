@@ -16,7 +16,7 @@
 |Details_TinyThreat|仇恨统计插件|面板上设置|
 |Doom_CooldownPulse|冷却中央提示|/dcp|
 |MonkeyBuddy/MonkeyLibrary/MonkeyQuest|猴子任务追踪|任务追踪栏数字那里右键|
-|NDui|NDui核心插件包|esc-NDui控制台  界面元素移动:/mm|
+|NDui|NDui核心插件包|esc-NDui控制台(界面元素移动:/mm)|
 |Questie|任务增强|esc-界面设置-插件|
 |RangeDisplay/RangeDisplay_Options|距离显示|esc-界面设置-插件|
 |Razgriz_BeautyLoot|拾取美化|/BTL|
