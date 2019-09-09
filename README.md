@@ -1,5 +1,5 @@
 # 简介
- Inerface-Classic Mod with NDuiClassic
+ Inerface-Classic Mod with NDuiClassic  
  根据个人口味增加各类单体并修改部分插件
 
 # 插件列表(不定期更新)
