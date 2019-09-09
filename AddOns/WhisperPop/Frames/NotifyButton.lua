@@ -28,6 +28,7 @@ button:SetUserPlaced(true)
 button:SetDontSavePosition(false)
 button:SetClampedToScreen(true)
 button.icon:SetDesaturated(true)
+button.icon:SetTexCoord(.1,.9,.1,.9)
 
 button.text = button:CreateFontString(button:GetName().."Text", "ARTWORK", "GameFontGreenSmall")
 button.text:SetPoint("LEFT", button, "RIGHT", 2, 0)

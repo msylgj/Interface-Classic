@@ -1,5 +1,4 @@
-﻿
----------------- > Some slash commands
+﻿---------------- > Some slash commands
 SlashCmdList['RELOADUI'] = function() ReloadUI() end
 SLASH_RELOADUI1 = '/rl'
 
@@ -104,7 +103,7 @@ local GroupDisband = function()
 	else
 		StaticPopup_Show("NOGROUP")
 	end
-	
+
 end
 StaticPopupDialogs["DISBAND_GROUP"] = {
 	text = "确认要解散当前队伍?",
@@ -143,7 +142,7 @@ local function SpellBookFrame_OnMouseWheel(self, value, scrollBar)
 	end
 end
 
----------------- > 装备比较 
+---------------- > 装备比较
 local ItemRefTooltip = ItemRefTooltip
 
 -- ItemRef.xml:45
@@ -160,7 +159,7 @@ ItemRefTooltip.UpdateTooltip = function(self)
 	end
 end
 
--- ItemRef.xml:60 
+-- ItemRef.xml:60
 ItemRefTooltip:SetScript("OnTooltipSetItem", function(self)
 	if (not IsModifiedClick("COMPAREITEMS") and self:IsMouseOver()) then
 		GameTooltip_ShowCompareItem(self)
@@ -171,13 +170,13 @@ end)
 ItemRefTooltip:SetScript("OnDragStop", function(self)
 	self:StopMovingOrSizing()
 	ValidateFramePosition(self)
-	if (not IsModifiedClick("COMPAREITEMS") ) then --We do this to choose where the comparison is shown 
+	if (not IsModifiedClick("COMPAREITEMS") ) then --We do this to choose where the comparison is shown
 		GameTooltip_ShowCompareItem(self)
 		self.comparing = true
 	end
 end)
 
--- GameTooltip.xml:25 
+-- GameTooltip.xml:25
 GameTooltip:SetScript("OnTooltipSetItem", function(self)
 	if ( not IsModifiedClick("COMPAREITEMS") and not self:IsEquippedItem() ) then
 		GameTooltip_ShowCompareItem(self)
@@ -191,11 +190,11 @@ GameTooltip:SetScript("OnTooltipSetItem", function(self)
 	end
 end)
 
----------------- > 稍微处理一下输入框字体 
-local function CanSetFont(object) 
-   return (type(object)=="table" 
-	   and object.SetFont and object.IsObjectType 
-	      and not object:IsObjectType("SimpleHTML")); 
+---------------- > 稍微处理一下输入框字体
+local function CanSetFont(object)
+   return (type(object)=="table"
+	   and object.SetFont and object.IsObjectType
+	      and not object:IsObjectType("SimpleHTML"));
 end
 
 if (CanSetFont(ChatFontNormal)) then

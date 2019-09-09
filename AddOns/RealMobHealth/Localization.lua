@@ -3,7 +3,10 @@
 	https://www.wowinterface.com/forums/member.php?u=34145	]]
 ------------------------------------------------------------------
 
-select(2,...).Localization=setmetatable({
+----------------------------------
+--[[	Localization Table	]]
+----------------------------------
+local Localization={
 	enUS={
 --		Commands
 		Command_NoUnitData="Unit not found.";
@@ -11,8 +14,8 @@ select(2,...).Localization=setmetatable({
 		Command_HealthWiped="Health data wiped.";
 
 --		Options Panel
-		Options_DynamicList={--	Buttom Text, Tooltip Title, Description
---					Tooltip Title = false to use Button Text
+		Options_DynamicList={--	Button Text,Tooltip Title,Description
+--					Tooltip Title=false to use Button Text
 			ShowStatusBarTextAdditions={"Show TargetFrame Text",false,"Creates text for TargetFrame's bars."};
 			ModifyHealthBarText={"Modify UnitFrame Health",false,"Shows real health values for mobs in default UnitFrames."};
 			ShowTooltipText={"Show Tooltip Feedback",false,"Displays if a mob's health is present in Health Cache."};
@@ -40,4 +43,46 @@ select(2,...).Localization=setmetatable({
 		UITweaksTooltip_HealthOverride="Health Data Overridden";
 		UITweaksTooltip_NoData="Missing Health Data";
 	};
-},{__index=function(t,k) return t.enUS; end})[GetLocale()];
+	frFR={--	Traduction By Pgmbru
+--		Commandes
+		Command_NoUnitData="Unité introuvable.";
+		Command_DeletedUnitFormat="Supprimé %2$s(%1$s)";-- format (CreatureKey,UnitName)
+		Command_HealthWiped="Données de santé effacées.";
+
+--		Panneau d'options
+		Options_DynamicList={--	Texte du bouton,titre de l'info-bulle,description
+--					Titre de l'info-bulle=false pour utiliser le texte du bouton
+			ShowStatusBarTextAdditions={"Afficher le texte dans le cadre cible",false,"Créer du texte pour les barres du cadre cible."};
+			ModifyHealthBarText={"Modifier l'état de santé du cadre",false,"Affiche les valeurs de santé réelles pour les mobs dans les cadres par défaut."};
+			ShowTooltipText={"Afficher les commentaires de l’info-bulle",false,"Indique si l’intégrité d’un groupe est présente dans le cache de santé."};
+			ShowTooltipHealthText={"Afficher la santé de l'info-bulle",false,"Affiche la santé sur la barre d'état de l'info-bulle du jeu"};
+			ShowNamePlateHealthText={"Afficher la santé de la plaquette de nom",false,"Affiche la santé sur le côté gauche de la plaquette de nom."};
+
+			EnablePeerCache={"Activer","Activer le cache entre homologues","Activer / DésActiver la réception des données de santé des autres. \n|cffffff00Note: Cet addon répondra toujours aux requêtes et aux mises à jour de la santé.|r"};
+		};
+
+--		Panneaux de cache d'options
+		Options_HealthCachePanel={"Cache de Santé","Stock des données de santé des mobs rencontrées."};
+		Options_PeerCachePanel={"Cache des Pairs","Stock des données de santé déclarées par d'autres."};
+		Options_CacheSizeLabel="Taille du cache:";
+
+--		Options Effacer les boutons du cache
+		Options_ClearCacheButtonText="Vider le cache";
+		Options_ClearHealthCacheTTText="Effacer le cache de santé";
+		Options_ClearPeerCacheTTText="Effacer le cache des pairs";
+		Options_ClearCacheWarning="|cffff0000Attention! Toutes les données de ce cache seront définitivement perdues!|r";
+
+--		Interface utilisateur Tooltip d'info-bulle
+		UITweaksTooltip_Blacklisted="Mob sur la liste noire";
+		UITweaksTooltip_HealthRecorded="Données de santé enregistrées";
+		UITweaksTooltip_HealthOverride="Données de santé annulées";
+		UITweaksTooltip_NoData="Données de santé manquantes";
+	};
+};
+
+----------------------------------
+--[[	Localization Loader	]]--	Nothing to localize below this line
+----------------------------------
+local DynamicOptionsMeta={__index=Localization.enUS.Options_DynamicList};
+for locale,tbl in pairs(Localization) do if locale~="enUS" then setmetatable(tbl.Options_DynamicList,DynamicOptionsMeta); end end
+select(2,...).Localization=setmetatable(Localization,{__index=function(t,k) return t.enUS; end})[GetLocale()];
