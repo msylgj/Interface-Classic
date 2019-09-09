@@ -1,9 +1,0 @@
-## Interface: 11302
-## Title: Razgriz_BeautyLoot
-## Author: ChrisHopeless
-## Version: 1.10 Alpha 2
-## Notes: Make your loot frame looks more beautiful
-## eMail: chris820313@yahoo.com.cn
-## DefaultState: Enabled
-## SavedVariables: BeautyLootDB
-main.lua

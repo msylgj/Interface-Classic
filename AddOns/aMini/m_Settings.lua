@@ -53,21 +53,21 @@ end
 SLASH_FRAME1 = "/gf"
 
 ---------------- > SetupUI
-SetCVar("scriptErrors", 0)
-SetCVar("profanityFilter", 0)
 SetCVar("autoLootDefault", 1)
 SetCVar("lootUnderMouse", 1)
 SetCVar("autoSelfCast", 1)
 SetCVar("ShowClassColorInNameplate", 1)
-SetCVar("chatClassColorOverride", 0)
 SetCVar("autoQuestWatch", 0)
 SetCVar("instantQuestText", 1)
-SetCVar("alwaysCompareItems", 1)
 SetCVar("floatingCombatTextCombatDamage", 0)
 SetCVar("floatingCombatTextReactives", 0)
 --每次进入后重载一次 才生效
 local setvalue = CreateFrame("Frame")
 function SetCValue()
+	SetCVar("scriptErrors", 0)
+	SetCVar("profanityFilter", 0)
+	SetCVar("chatClassColorOverride", 0)
+	SetCVar("alwaysCompareItems", 1)
 	SetCVar("nameplateMaxDistance", "4e1")
 	SetCVar("cameraDistanceMaxZoomFactor", "2.6")
 	setvalue:UnregisterEvent("PLAYER_ENTERING_WORLD")

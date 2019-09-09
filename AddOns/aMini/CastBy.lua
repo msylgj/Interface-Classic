@@ -6,7 +6,6 @@
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 ]]
-local _G = _G
 local cc = {}
 local CUSTOM_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
 do
