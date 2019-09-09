@@ -357,9 +357,9 @@ function MonkeyBuddy_OnEvent(self, event, ...)
         end
         
         -- print out a nice message letting the user know the addon loaded
-        -- if (DEFAULT_CHAT_FRAME) then
-        --     DEFAULT_CHAT_FRAME:AddMessage(MONKEYBUDDY_LOADED_MSG);
-        -- end
+        if (DEFAULT_CHAT_FRAME) then
+            DEFAULT_CHAT_FRAME:AddMessage(MONKEYBUDDY_LOADED_MSG);
+        end
 		MonkeyBuddyOptions()
     end
 end
@@ -478,6 +478,9 @@ function MonkeyBuddyQuestFrame_Refresh()
         	elseif (MonkeyQuestConfig[MonkeyQuest.m_global][value.strVar] == 2) then
 				string:SetText(key .. " (Blizzard)");
         	end
+			if (GetLocale() == "zhTW" or GetLocale() == "zhCN" or GetLocale() == "koKR") then
+				slider:SetShown(false)
+			end
         elseif (value.strVar == "m_iHighlightAlpha" or value.strVar == "m_iAlpha" or value.strVar == "m_iFrameAlpha") then
         	string:SetText(key .. " (" .. current*100 .. "%)");
         else

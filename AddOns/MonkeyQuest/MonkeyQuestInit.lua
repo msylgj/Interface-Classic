@@ -207,9 +207,9 @@
 	MonkeyQuestInit_ApplySettings();
 
 	-- Let the user know the mod is loaded
-	-- if (DEFAULT_CHAT_FRAME) then
-	-- 	DEFAULT_CHAT_FRAME:AddMessage(MONKEYQUEST_LOADED_MSG);
-	-- end
+	if (DEFAULT_CHAT_FRAME) then
+		DEFAULT_CHAT_FRAME:AddMessage(MONKEYQUEST_LOADED_MSG);
+	end
 end
 
 function MonkeyQuestInit_CleanQuestList()
@@ -391,7 +391,7 @@ function MonkeyQuestInit_Font(iFont)
 		-- Default look
 		
 		-- change the fonts
-		MonkeyQuestInit_SetButtonFonts("Interface\\AddOns\\MonkeyLibrary\\Fonts\\myriapsc.ttf", MonkeyQuestConfig[MonkeyQuest.m_global].m_iFontHeight);
+		MonkeyQuestInit_SetButtonFonts("Interface\\AddOns\\MonkeyLibrary\\Fonts\\framd.ttf", MonkeyQuestConfig[MonkeyQuest.m_global].m_iFontHeight);
 		--MonkeyQuestTitleText:SetFont("Fonts\\FRIZQT__.TTF", MonkeyQuestConfig[MonkeyQuest.m_global].m_iFontHeight + 2);
 
 	elseif ( iFont == 1 ) then 
