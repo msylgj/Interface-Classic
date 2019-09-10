@@ -1,6 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="AuctionPlus.lua"/>
 	<Script file="CastBy.lua"/>
+	<Script file="ClearFont.lua"/>
 	<Script file="LootAnnounce.lua"/>
 	<Script file="m_Settings.lua"/>
+	<Script file="oHWell.lua"/>
 </Ui>

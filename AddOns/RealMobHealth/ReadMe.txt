@@ -17,6 +17,9 @@ Clears all recorded health data.
 
 ===============================================================================
 Versions:
+2.8	(2019-09-09)
+	-Added zhCN and zhTW localizations (courtesy of EKE00372 and HopeASD)
+
 2.7	(2019-09-08)
 	-Fixed Localization loader not loading the default locale for some people
 

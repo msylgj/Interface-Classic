@@ -59,6 +59,7 @@ else
 end
 
   --newWhisp=true; -- Its a 'new whisperer'
+    local GetNumFriends = C_FriendList.GetNumFriends
 	if(friendsWhisp=="OFF") then -- if I want to not see friends whod
 	  for i = 1, GetNumFriends() do -- get friends names(friends 1-# of friends)
 		if GetFriendInfo(i) == name then -- They are on friends list
@@ -147,5 +148,3 @@ else
  end
 
 end--end function
-
-
