@@ -9,11 +9,12 @@
 | aMini|小插件合集|无|
 |AuroraClassic|透明美化|esc-界面设置-插件|
 |CharacterStatsClassic|人物面板属性增强|无|
-|Classic Quest Log|任务面板增强|任务面板下方|
+|QuestLogEx|任务面板增强|无|
 |dct/dct_damage/dct_options|战斗信息|/dct|
 |Details|伤害统计|esc-界面设置-插件|
 |Details_TinyThreat|仇恨统计插件|面板上设置|
 |Doom_CooldownPulse|冷却中央提示|/dcp|
+|Leatrix_Map|大地图增强|/ltm|
 |MonkeyBuddy/MonkeyLibrary/MonkeyQuest|猴子任务追踪|任务追踪栏数字那里右键|
 |NDui|NDui核心插件包|esc-NDui控制台(界面元素移动:/mm)|
 |Questie|任务增强|esc-界面设置-插件|
