@@ -2,7 +2,7 @@
 	<Script file="AuctionPlus.lua"/>
 	<Script file="CastBy.lua"/>
 	<Script file="ClearFont.lua"/>
+	<Script file="LetMeCast.lua"/>
 	<Script file="LootAnnounce.lua"/>
 	<Script file="m_Settings.lua"/>
-	<Script file="oHWell.lua"/>
 </Ui>

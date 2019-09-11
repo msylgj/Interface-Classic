@@ -17,6 +17,10 @@ Clears all recorded health data.
 
 ===============================================================================
 Versions:
+2.9	(2019-09-10)
+	-Added deDE localization (courtesy of Figlmueller)
+	-Fixed zhCN, zhTW, and koKR numeric abbreviations
+
 2.8	(2019-09-09)
 	-Added zhCN and zhTW localizations (courtesy of EKE00372 and HopeASD)
 

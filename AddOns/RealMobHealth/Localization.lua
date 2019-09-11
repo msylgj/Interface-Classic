@@ -42,6 +42,45 @@ local Localization={
 		UITweaksTooltip_HealthRecorded="Recorded Health Data";
 		UITweaksTooltip_HealthOverride="Health Data Overridden";
 		UITweaksTooltip_NoData="Missing Health Data";
+
+--		Numbers
+		NumberGroupingScale=3;--	Controls scale of FIRST_NUMBER_CAP and SECOND_NUMBER_CAP
+	};
+	deDE={--	Translation by Figlmueller
+--		Commands
+		Command_NoUnitData="Einheit nicht gefunden.";
+		Command_DeletedUnitFormat="%2$s(%1$s) gel�scht";--	format(CreatureKey,UnitName)
+		Command_HealthWiped="Gesundheitspunkte gel�scht.";
+
+--		Options Panel
+		Options_DynamicList={--	Button Text,Tooltip Title,Description
+--					Tooltip Title=false to use Button Text
+			ShowStatusBarTextAdditions={"Text im Fenster der Zielauswahl anzeigen",false,"Erstellt einen Text innerhalb der Statusleisten der Zielauswahl."};
+			ModifyHealthBarText={"Gesundheitspunkte des Einheitenfensters anpassen",false,"Zeigt errechnete Gesundheitspunkte f�r Mobs in normalen Einheitenfenstern."};
+			ShowTooltipText={"Feedback-Tooltip anzeigen",false,"Zeigt an, ob die Gesundheitspunkte eines Mobs im Health-Cache vorhanden sind."};
+			ShowTooltipHealthText={"Gesundheitspunkte-Tooltip anzeigen",false,"Zeigt die Gesundheitspunkte in der Statusleiste der Spieletooltips an."};
+			ShowNamePlateHealthText={"Gesundheitspunkte auf Namensplaketten anzeigen",false,"Gesundheitspunkte links von Namensplaketten anzeigen."};
+
+			EnablePeerCache={"Aktivieren","Peer-Cache aktivieren","Ausw�hlen um Gesundheitspunkte-Daten von anderen Spielern zu empfangen.\n|cffffff00Hinweis: Dieses Addon wird dennoch Anfragen anderer Spieler beantworten sowie Broadcasts an Spieler schicken.|r"};
+		};
+		Options_SetByAddOn="|cffff0000Diese Option wurde von einem anderen Addon �berschrieben.|r";
+
+--		Options Cache Panels
+		Options_HealthCachePanel={"Health-Cache","Speichert Gesundheitspunkte-Daten von begegneten Mobs."};
+		Options_PeerCachePanel={"Peer-Cache","Speichert Gesundheitspunkte-Daten, welche von anderen Spielern gemeldet wurden."};
+		Options_CacheSizeLabel="Cache-Gr��e:";
+
+--		Options Clear Cache Buttons
+		Options_ClearCacheButtonText="Cache leeren";
+		Options_ClearHealthCacheTTText="Health-Cache leeren";
+		Options_ClearPeerCacheTTText="Peer-Cache leeren";
+		Options_ClearCacheWarning="|cffff0000Achtung! Alle Daten in diesem Cache gehen endg�ltig verloren.|r";
+
+--		UITweaks Tooltip Lines
+		UITweaksTooltip_Blacklisted="Ignorierter Mob";
+		UITweaksTooltip_HealthRecorded="Gesundheitspunkte-Daten vorhanden";
+		UITweaksTooltip_HealthOverride="Gesundheitspunkte-Daten �berschrieben";
+		UITweaksTooltip_NoData="Fehlende Gesundheitspunkte-Daten";
 	};
 	frFR={--	Traduction by Pgmbru
 --		Commandes
@@ -78,6 +117,10 @@ local Localization={
 		UITweaksTooltip_HealthOverride="Données de santé annulées";
 		UITweaksTooltip_NoData="Données de santé manquantes";
 	};
+	koKR={
+--		Numbers
+		NumberGroupingScale=4;--	Controls scale of FIRST_NUMBER_CAP and SECOND_NUMBER_CAP
+	};
 	zhCN={--	Translation by HopeASD
 		Command_NoUnitData="单位未找到";
 		Command_DeletedUnitFormat="已删除 %2$s(%1$s)";--	format(CreatureKey,UnitName)
@@ -112,6 +155,9 @@ local Localization={
 		UITweaksTooltip_HealthRecorded="生命值数据 已记录";
 		UITweaksTooltip_HealthOverride="生命值数据 被覆盖";
 		UITweaksTooltip_NoData="生命值数据 不存在";
+
+--		Numbers
+		NumberGroupingScale=4;--	Controls scale of FIRST_NUMBER_CAP and SECOND_NUMBER_CAP
 	};
 	zhTW={--	Translation by EKE00372
 --		Commands
@@ -148,12 +194,19 @@ local Localization={
 		UITweaksTooltip_HealthRecorded="已取得真實血量";
 		UITweaksTooltip_HealthOverride="血量數值被覆寫";
 		UITweaksTooltip_NoData="尚未取得真實血量";
+
+--		Numbers
+		NumberGroupingScale=4;--	Controls scale of FIRST_NUMBER_CAP and SECOND_NUMBER_CAP
 	};
 };
 
 ----------------------------------
 --[[	Localization Loader	]]--	Nothing to localize below this line
 ----------------------------------
+local LocalizationMeta={__index=Localization.enUS};
 local DynamicOptionsMeta={__index=Localization.enUS.Options_DynamicList};
-for locale,tbl in pairs(Localization) do if locale~="enUS" then setmetatable(tbl.Options_DynamicList,DynamicOptionsMeta); end end
+for locale,tbl in pairs(Localization) do if locale~="enUS" then
+	setmetatable(tbl,LocalizationMeta);
+	if rawget(tbl,"Options_DynamicList") then setmetatable(tbl.Options_DynamicList,DynamicOptionsMeta); end
+end end
 select(2,...).Localization=setmetatable(Localization,{__index=function(t,k) return t.enUS; end})[GetLocale()];

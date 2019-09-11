@@ -139,18 +139,19 @@ end
 function module:CreateSortButton(name)
 	local bu = B.CreateButton(self, 24, 24, true, "Interface\\Icons\\ABILITY_SEAL")
 	bu:SetScript("OnClick", function()
+		if InCombatLockdown() then
+			UIErrorsFrame:AddMessage(DB.InfoColor..ERR_NOT_IN_COMBAT)
+			return
+		end
+
 		if name == "Bank" then
 			SortBankBags()
 		else
 			if NDuiDB["Bags"]["ReverseSort"] then
-				if InCombatLockdown() then
-					UIErrorsFrame:AddMessage(DB.InfoColor..ERR_NOT_IN_COMBAT)
-				else
-					SortBags()
-					wipe(sortCache)
-					NDui_Backpack.isSorting = true
-					C_Timer_After(.5, module.ReverseSort)
-				end
+				SortBags()
+				wipe(sortCache)
+				NDui_Backpack.isSorting = true
+				C_Timer_After(.5, module.ReverseSort)
 			else
 				SortBags()
 			end
@@ -201,8 +202,7 @@ function module:OnLogin()
 	local bankWidth = NDuiDB["Bags"]["BankWidth"]
 	local iconSize = NDuiDB["Bags"]["IconSize"]
 	local artifaceMark = NDuiDB["Bags"]["Artifact"]
-	--local showItemLevel = NDuiDB["Bags"]["BagsiLvl"]
-	local showItemLevel = false
+	local showItemLevel = NDuiDB["Bags"]["BagsiLvl"]
 	local deleteButton = NDuiDB["Bags"]["DeleteButton"]
 	local itemSetFilter = NDuiDB["Bags"]["ItemSetFilter"]
 
@@ -341,7 +341,8 @@ function module:OnLogin()
 
 		if showItemLevel then
 			if item.link and item.level and item.rarity > 1 and (item.classID == LE_ITEM_CLASS_WEAPON or item.classID == LE_ITEM_CLASS_ARMOR) then
-				local level = B.GetItemLevel(item.link, item.bagID, item.slotID) or item.level
+				--local level = B.GetItemLevel(item.link, item.bagID, item.slotID) or item.level
+				local level = item.level
 				local color = BAG_ITEM_QUALITY_COLORS[item.rarity]
 				self.iLvl:SetText(level)
 				self.iLvl:SetTextColor(color.r, color.g, color.b)

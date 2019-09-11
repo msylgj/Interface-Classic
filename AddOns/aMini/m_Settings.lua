@@ -126,22 +126,6 @@ SlashCmdList["GROUPDISBAND"] = function()
 end
 SLASH_GROUPDISBAND1 = '/rd'
 
----------------- > 法术书滚轮翻页
-local function SpellBookFrame_OnMouseWheel(self, value, scrollBar)
-
-	local currentPage, maxPages = SpellBook_GetCurrentPage()
-
-	if(value > 0) then
-		if(currentPage > 1) then
-			SpellBookPrevPageButton_OnClick()
-		end
-	else
-		if(currentPage < maxPages) then
-			SpellBookNextPageButton_OnClick()
-		end
-	end
-end
-
 ---------------- > 装备比较
 local ItemRefTooltip = ItemRefTooltip
 
