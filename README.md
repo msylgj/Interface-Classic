@@ -27,4 +27,4 @@
 
 [下载链接](https://github.com/msylgj/Interface-Classic/releases)
 
-[反XXIcons](https://github.com/msylgj/Interface-Classic/releases/download/1.4.1/Icons.7z "反和谐图标,放到Interface目录下")
+[配套反XXIcons](https://www.wowinterface.com/downloads/download25208-CleanIcons-Thin-Classic "美化&反和谐图标,放到Interface目录下")
