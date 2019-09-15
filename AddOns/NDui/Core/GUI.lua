@@ -40,11 +40,11 @@ local defaultSettings = {
 		BagsWidth = 12,
 		BankWidth = 14,
 		BagsiLvl = true,
-		Artifact = true,
 		ReverseSort = false,
 		ItemFilter = true,
 		ItemSetFilter = false,
 		DeleteButton = true,
+		FavouriteItems = {},
 	},
 	Auras = {
 		Reminder = true,
@@ -78,7 +78,7 @@ local defaultSettings = {
 		NumGroups = 6,
 		SimpleMode = false,
 		SimpleModeSortByRole = true,
-		InstanceAuras = true,
+		--InstanceAuras = true,
 		SpecRaidPos = false,
 		RaidClassColor = false,
 		HorizonRaid = false,
@@ -153,7 +153,7 @@ local defaultSettings = {
 		AuraSize = 22,
 		FriendlyCC = false,
 		HostileCC = true,
-		--TankMode = false,
+		TankMode = false,
 		TargetIndicator = 5,
 		InsideView = true,
 		Distance = 42,
@@ -169,7 +169,7 @@ local defaultSettings = {
 		PPPHeight = 5,
 		PPPowerText = false,
 		FullHealth = false,
-		--SecureColor = {r=1, g=0, b=1},
+		SecureColor = {r=1, g=0, b=1},
 		--TransColor = {r=1, g=.8, b=0},
 		--InsecureColor = {r=1, g=0, b=0},
 		--OffTankColor = {r=.2, g=.7, b=.5},
@@ -222,6 +222,7 @@ local defaultSettings = {
 		Mail = true,
 		ItemLevel = true,
 		GemNEnchant = true,
+		ShowItemLevel = true,
 		HideErrors = true,
 		ExpRep = true,
 		Interrupt = false,
@@ -445,6 +446,10 @@ local function updateErrorBlocker()
 	B:GetModule("Misc"):UpdateErrorBlocker()
 end
 
+local function updateReminder()
+	B:GetModule("Auras"):InitReminder()
+end
+
 -- Config
 local tabList = {
 	L["Actionbar"],
@@ -486,9 +491,8 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "Bags", "ItemSetFilter", L["Use ItemSetFilter"], true},
 		{},--blank
 		{1, "Bags", "BagsiLvl", L["Bags Itemlevel"]},
-		{1, "Bags", "Artifact", L["Bags Artifact"], true},
-		{1, "Bags", "DeleteButton", L["Bags DeleteButton"]},
-		{1, "Bags", "ReverseSort", L["Bags ReverseSort"].."*", true, nil, updateBagSortOrder},
+		{1, "Bags", "DeleteButton", L["Bags DeleteButton"], true},
+		{1, "Bags", "ReverseSort", L["Bags ReverseSort"].."*", nil, nil, updateBagSortOrder},
 		{},--blank
 		{3, "Bags", "BagsScale", L["Bags Scale"], false, {.5, 1.5, 1}},
 		{3, "Bags", "IconSize", L["Bags IconSize"], true, {30, 42, 0}},
@@ -527,10 +531,10 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{3, "UFs", "PartyHeight", L["PartyFrame Height"].."*(32)", true, {25, 60, 0}, updatePartySize},
 		{},--blank
 		{1, "UFs", "RaidBuffIndicator", "|cff00cc4c"..L["RaidBuffIndicator"], nil, setupBuffIndicator},
+		{1, "UFs", "RaidClickSets", "|cff00cc4c"..L["Enable ClickSets"], true, setupClickCast},
 		{3, "UFs", "BI_IconSize", L["BI_IconSize"], nil, {10, 18, 0}},
 		{4, "UFs", "BuffIndicatorType", L["BuffIndicatorType"], true, {L["BI_Blocks"], L["BI_Icons"], L["BI_Numbers"]}},
-		{1, "UFs", "InstanceAuras", "|cff00cc4c"..L["Instance Auras"], nil, setupRaidDebuffs},
-		{1, "UFs", "RaidClickSets", "|cff00cc4c"..L["Enable ClickSets"], true, setupClickCast},
+		--{1, "UFs", "InstanceAuras", "|cff00cc4c"..L["Instance Auras"], nil, setupRaidDebuffs},
 		{1, "UFs", "AurasClickThrough", L["RaidAuras ClickThrough"]},
 		{1, "UFs", "AutoRes", L["UFs AutoRes"], true},
 		{},--blank
@@ -563,9 +567,9 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{5, "Nameplate", "CustomColor", L["Custom Color"].."*", 2},
 		{2, "Nameplate", "UnitList", L["UnitColor List"].."*", nil, nil, updateCustomUnitList},
 		{2, "Nameplate", "ShowPowerList", L["ShowPowerList"].."*", true, nil, updatePowerUnitList},
-		--{1, "Nameplate", "TankMode", "|cff00cc4c"..L["Tank Mode"].."*"},
+		{1, "Nameplate", "TankMode", "|cff00cc4c"..L["Tank Mode"].."*"},
+		{5, "Nameplate", "SecureColor", L["Secure Color"].."*", 2},
 		--{1, "Nameplate", "DPSRevertThreat", L["DPS Revert Threat"].."*", true},
-		--{5, "Nameplate", "SecureColor", L["Secure Color"].."*"},
 		--{5, "Nameplate", "TransColor", L["Trans Color"].."*", 1},
 		--{5, "Nameplate", "InsecureColor", L["Insecure Color"].."*", 2},
 		--{5, "Nameplate", "OffTankColor", L["OffTank Color"].."*", 3},
@@ -597,7 +601,7 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{3, "Nameplate", "PPHeight", L["PlayerPlate HPHeight"].."*", false, {5, 15, 0}, updatePlayerPlate},
 		{3, "Nameplate", "PPPHeight", L["PlayerPlate MPHeight"].."*", true, {5, 15, 0}, updatePlayerPlate},
 		{},--blank
-		{1, "Auras", "Reminder", L["Enable Reminder"]},
+		{1, "Auras", "Reminder", L["Enable Reminder"].."*", nil, nil, updateReminder},
 		{},--blank
 		{1, "Auras", "ReverseBuffs", L["ReverseBuffs"]},
 		{1, "Auras", "ReverseDebuffs", L["ReverseDebuffs"], true},
@@ -675,7 +679,7 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "Skins", "TMW", L["TMW Skin"], true},
 		{1, "Skins", "WeakAuras", L["WeakAuras Skin"]},
 		{1, "Skins", "Details", L["Details Skin"], true},
-		{1, "Skins", "QuestLogEx", L["QuestLogEx Skin"]},
+		{1, "Skins", "QuestLogEx", L["QuestLogEx Skin"], nil, nil, nil, L["ExtendedQuestLogAddons"]},
 	},
 	[11] = {
 		{1, "Tooltip", "CombatHide", L["Hide Tooltip"].."*"},
@@ -694,6 +698,7 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 	[12] = {
 		{1, "Misc", "ItemLevel", "|cff00cc4c"..L["Show ItemLevel"]},
 		{1, "Misc", "GemNEnchant", L["Show GemNEnchant"].."*", true},
+		{1, "Misc", "ShowItemLevel", L["Show ItemLevel"].."*"},
 		{},--blank
 		{1, "Misc", "Mail", L["Mail Tool"]},
 		{1, "ACCOUNT", "AutoBubbles", L["AutoBubbles"], true},
@@ -770,22 +775,6 @@ local function NDUI_VARIABLE(key, value, newValue)
 	end
 end
 
-local function editBoxOnEnter(self)
-	GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-	GameTooltip:ClearLines()
-	GameTooltip:AddLine(L["Tips"])
-	GameTooltip:AddLine(L["EdieBox Tip"], .6,.8,1)
-	GameTooltip:Show()
-end
-
-local function optionOnEnter(self)
-	GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-	GameTooltip:ClearLines()
-	GameTooltip:AddLine(L["Tips"])
-	GameTooltip:AddLine(self.tips, .6,.8,1, 1)
-	GameTooltip:Show()
-end
-
 local function CreateOption(i)
 	local parent, offset = guiPage[i].child, 20
 
@@ -813,9 +802,8 @@ local function CreateOption(i)
 				bu:SetScript("OnClick", data)
 			end
 			if tooltip then
-				cb.tips = tooltip
-				cb:HookScript("OnEnter", optionOnEnter)
-				cb:HookScript("OnLeave", B.HideTooltip)
+				cb.title = L["Tips"]
+				B.AddTooltip(cb, "ANCHOR_RIGHT", tooltip, "info")
 			end
 		-- Editbox
 		elseif optType == 2 then
@@ -835,8 +823,8 @@ local function CreateOption(i)
 				NDUI_VARIABLE(key, value, eb:GetText())
 				if callback then callback() end
 			end)
-			eb:SetScript("OnEnter", editBoxOnEnter)
-			eb:SetScript("OnLeave", B.HideTooltip)
+			eb.title = L["Tips"]
+			B.AddTooltip(eb, "ANCHOR_RIGHT", L["EdieBox Tip"], "info")
 
 			B.CreateFS(eb, 14, name, "system", "CENTER", 0, 25)
 		-- Slider
@@ -971,6 +959,11 @@ local function exportData()
 						for _, v in ipairs(value) do
 							text = text..":"..tostring(v)
 						end
+					elseif key == "FavouriteItems" then
+						text = text..";"..KEY..":"..key
+						for itemID in pairs(value) do
+							text = text..":"..tostring(itemID)
+						end
 					end
 				else
 					if NDuiDB[KEY][key] ~= defaultSettings[KEY][key] then
@@ -1062,6 +1055,11 @@ local function importData()
 				flash = toBoolean(flash)
 				if not NDuiDB[key][value] then NDuiDB[key][value] = {} end
 				NDuiDB[key][value][arg1] = {idType, spellID, unit, caster, stack, amount, timeless, combat, text, flash}
+			end
+		elseif value == "FavouriteItems" then
+			local items = {select(3, strsplit(":", option))}
+			for _, itemID in next, items do
+				NDuiDB[key][value][itemID] = true
 			end
 		elseif key == "Mover" then
 			local relFrom, parent, relTo, x, y = select(3, strsplit(":", option))

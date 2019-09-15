@@ -41,7 +41,7 @@ local L = addon.L
 addon:RegisterDB("WhisperPopDB")
 addon:RegisterSlashCmd("whisperpop", "wp") -- Type /whisperpop or /wp to toggle the frame
 
-addon.ICON_FILE = "Interface\\Icons\\INV_Letter_05"
+addon.ICON_FILE = "Interface\\Icons\\ABILITY_HUNTER_PATHFINDING"
 addon.SOUND_FILE = "Interface\\AddOns\\WhisperPop\\Sounds\\Notify.ogg"
 addon.BACKGROUND = "Interface\\DialogFrame\\UI-DialogBox-Background"
 addon.BORDER = "Interface\\Tooltips\\UI-Tooltip-Border"

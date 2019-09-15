@@ -1,9 +1,8 @@
--- Aurora Classic
-local F, C = nil, nil
-if _G["AuroraClassic"] then
-	F, C = unpack(_G["AuroraClassic"])
+-- AuroraClassic
+local F, C = nil,nil
+if IsAddOnLoaded("AuroraClassic") then
+    F, C = unpack(AuroraClassic)
 end
-
 -- Namespaces
 -- core - table (namespace) shared between every lua file
 local addonName, core = ...;
@@ -177,7 +176,7 @@ function UIConfig:SetupDropdown()
     UIDropDownMenu_SetWidth(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, 99);
     UIDropDownMenu_JustifyText(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, "LEFT");
 
-    -- Aurora Classic
+    --AuroraClassic
     if F and F.ReskinDropDown then
         F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.leftStatsDropDown)
         F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown)
@@ -188,6 +187,7 @@ end
 function ToggleCharacter(tab, onlyShow)
     if ( tab == "PaperDollFrame") then
         CSC_UIFrame.CharacterStatsPanel:Show();
+        CSC_UIFrame:UpdateStats();
     else
         CSC_UIFrame.CharacterStatsPanel:Hide();
     end

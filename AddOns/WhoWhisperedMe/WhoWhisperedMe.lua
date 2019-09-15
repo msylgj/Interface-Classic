@@ -80,7 +80,7 @@ end
  if(newWhisp==true) then
 	if(toggled=="ON") then
 		if(not lastplayers[name]) then
-			SendWho(name);
+			C_FriendList.SendWho(name);
 			lastplayers[name] = true;
 		end
 	end --end if toggled
