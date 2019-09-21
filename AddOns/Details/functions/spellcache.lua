@@ -94,43 +94,43 @@ do
 			
 			[94472] = {name = GetSpellInfo (94472) .. " (" .. Loc ["STRING_CRITICAL_ONLY"] .. ")"}, --> Atonement critical hit (priest)
 			
-			[33778] = {name = GetSpellInfo (33778) .. " (Bloom)"}, --lifebloom (bloom)
+		[33778] = {name = GetSpellInfo (33778) .. " (绽放)"}, --lifebloom (bloom)
 			
-			[121414] = {name = GetSpellInfo (121414) .. " (Glaive #1)"}, --> glaive toss (hunter)
-			[120761] = {name = GetSpellInfo (120761) .. " (Glaive #2)"}, --> glaive toss (hunter)
+		[121414] = {name = GetSpellInfo (121414) .. " (剑 #1)"}, --> glaive toss (hunter)
+		[120761] = {name = GetSpellInfo (120761) .. " (剑 #2)"}, --> glaive toss (hunter)
 			
-			[212739] = {name = GetSpellInfo (212739) .. " (Main Target)"}, --DK Epidemic
+		[212739] = {name = GetSpellInfo (212739) .. " (主要目标)"}, --DK Epidemic
 			[215969] = {name = GetSpellInfo (215969) .. " (AoE)"}, --DK Epidemic
 			
-			[70890] = {name = GetSpellInfo (70890) .. " (Shadow)"}, --DK Scourge Strike
-			[55090] = {name = GetSpellInfo (55090) .. " (Physical)"}, --DK Scourge Strike
+		[70890] = {name = GetSpellInfo (70890) .. " (暗影)"}, --DK Scourge Strike
+		[55090] = {name = GetSpellInfo (55090) .. " (物理)"}, --DK Scourge Strike
 			
-			[49184] = {name = GetSpellInfo (49184) .. " (Main Target)"}, --DK Howling Blast
+		[49184] = {name = GetSpellInfo (49184) .. " (主要目标)"}, --DK Howling Blast
 			[237680] = {name = GetSpellInfo (237680) .. " (AoE)"}, --DK Howling Blast
 			
-			[228649] = {name = GetSpellInfo (228649) .. " (Passive)"}, --Monk Mistweaver Blackout kick - Passive Teachings of the Monastery
+		[228649] = {name = GetSpellInfo (228649) .. " (被动)"}, --Monk Mistweaver Blackout kick - Passive Teachings of the Monastery
 			
 			--> bfa trinkets
-			[278155] = {name = GetSpellInfo (278155) .. " (Trinket)"}, --[Twitching Tentacle of Xalzaix]
-			[279664] = {name = GetSpellInfo (279664) .. " (Trinket)"}, --[Vanquished Tendril of G'huun]
-			[278227] = {name = GetSpellInfo (278227) .. " (Trinket)"}, --[T'zane's Barkspines]
-			[278383] = {name = GetSpellInfo (278383) .. " (Trinket)"}, --[Azurethos' Singed Plumage]
-			[278862] = {name = GetSpellInfo (278862) .. " (Trinket)"}, --[Drust-Runed Icicle]
-			[278359] = {name = GetSpellInfo (278359) .. " (Trinket)"}, --[Doom's Hatred]
-			[278812] = {name = GetSpellInfo (278812) .. " (Trinket)"}, --[Lion's Grace]
-			[270827] = {name = GetSpellInfo (270827) .. " (Trinket)"}, --[Vessel of Skittering Shadows]
-			[271071] = {name = GetSpellInfo (271071) .. " (Trinket)"}, --[Conch of Dark Whispers]
-			[270925] = {name = GetSpellInfo (270925) .. " (Trinket)"}, --[Hadal's Nautilus]
-			[271115] = {name = GetSpellInfo (271115) .. " (Trinket)"}, --[Ignition Mage's Fuse]
-			[271462] = {name = GetSpellInfo (271462) .. " (Trinket)"}, --[Rotcrusted Voodoo Doll]
-			[271465] = {name = GetSpellInfo (271465) .. " (Trinket)"}, --[Rotcrusted Voodoo Doll]
-			[268998] = {name = GetSpellInfo (268998) .. " (Trinket)"}, --[Balefire Branch]
-			[271671] = {name = GetSpellInfo (271671) .. " (Trinket)"}, --[Lady Waycrest's Music Box]
-			[277179] = {name = GetSpellInfo (277179) .. " (Trinket)"}, --[Dread Gladiator's Medallion]
-			[277187] = {name = GetSpellInfo (277187) .. " (Trinket)"}, --[Dread Gladiator's Emblem]
-			[277181] = {name = GetSpellInfo (277181) .. " (Trinket)"}, --[Dread Gladiator's Insignia]
-			[277185] = {name = GetSpellInfo (277185) .. " (Trinket)"}, --[Dread Gladiator's Badge]
-			[278057] = {name = GetSpellInfo (278057) .. " (Trinket)"}, --[Vigilant's Bloodshaper]
+		[278155] = {name = GetSpellInfo (278155) .. " (饰品)"}, --[Twitching Tentacle of Xalzaix]
+		[279664] = {name = GetSpellInfo (279664) .. " (饰品)"}, --[Vanquished Tendril of G'huun]
+		[278227] = {name = GetSpellInfo (278227) .. " (饰品)"}, --[T'zane's Barkspines]
+		[278383] = {name = GetSpellInfo (278383) .. " (饰品)"}, --[Azurethos' Singed Plumage]
+		[278862] = {name = GetSpellInfo (278862) .. " (饰品)"}, --[Drust-Runed Icicle]
+		[278359] = {name = GetSpellInfo (278359) .. " (饰品)"}, --[Doom's Hatred]
+		[278812] = {name = GetSpellInfo (278812) .. " (饰品)"}, --[Lion's Grace]
+		[270827] = {name = GetSpellInfo (270827) .. " (饰品)"}, --[Vessel of Skittering Shadows]
+		[271071] = {name = GetSpellInfo (271071) .. " (饰品)"}, --[Conch of Dark Whispers]
+		[270925] = {name = GetSpellInfo (270925) .. " (饰品)"}, --[Hadal's Nautilus]
+		[271115] = {name = GetSpellInfo (271115) .. " (饰品)"}, --[Ignition Mage's Fuse]
+		[271462] = {name = GetSpellInfo (271462) .. " (饰品)"}, --[Rotcrusted Voodoo Doll]
+		[271465] = {name = GetSpellInfo (271465) .. " (饰品)"}, --[Rotcrusted Voodoo Doll]
+		[268998] = {name = GetSpellInfo (268998) .. " (饰品)"}, --[Balefire Branch]
+		[271671] = {name = GetSpellInfo (271671) .. " (饰品)"}, --[Lady Waycrest's Music Box]
+		[277179] = {name = GetSpellInfo (277179) .. " (饰品)"}, --[Dread Gladiator's Medallion]
+		[277187] = {name = GetSpellInfo (277187) .. " (饰品)"}, --[Dread Gladiator's Emblem]
+		[277181] = {name = GetSpellInfo (277181) .. " (饰品)"}, --[Dread Gladiator's Insignia]
+		[277185] = {name = GetSpellInfo (277185) .. " (饰品)"}, --[Dread Gladiator's Badge]
+		[278057] = {name = GetSpellInfo (278057) .. " (饰品)"}, --[Vigilant's Bloodshaper]
 			
 		}
 	end
@@ -182,7 +182,7 @@ do
 		
 			if (not already_have) then
 				local name, _, icon = GetSpellInfo (spellid)
-				_detalhes:UserCustomSpellAdd (spellid, t.name or name or "Unknown", t.icon or icon or [[Interface\InventoryItems\WoWUnknownItem01]])	
+				_detalhes:UserCustomSpellAdd (spellid, t.name or name or "未知", t.icon or icon or [[Interface\InventoryItems\WoWUnknownItem01]])	
 			end
 			
 		end
@@ -240,7 +240,7 @@ do
 		if (spellName) then
 			_rawset (_detalhes.spellcache, spellid, {spellName .. Loc ["STRING_DOT"], rank, spellIcon})
 		else
-			_rawset (_detalhes.spellcache, spellid, {"Unknown DoT Spell? " .. Loc ["STRING_DOT"], rank, [[Interface\InventoryItems\WoWUnknownItem01]]})
+			_rawset (_detalhes.spellcache, spellid, {"未知DOT法术? " .. Loc ["STRING_DOT"], rank, [[Interface\InventoryItems\WoWUnknownItem01]]})
 		end
 	end
 
@@ -262,9 +262,9 @@ do
 			load_frame:SetFrameStrata ("DIALOG")
 			
 			local progress_label = load_frame:CreateFontString ("DetailsLoadSpellCacheProgress", "overlay", "GameFontHighlightSmall")
-			progress_label:SetText ("Loading Spells: 0%")
+			progress_label:SetText ("加载法术: 0%")
 			function _detalhes:BuildSpellListSlowTick()
-				progress_label:SetText ("Loading Spells: " .. load_frame:GetProgress() .. "%")
+				progress_label:SetText ("加载法术: " .. load_frame:GetProgress() .. "%")
 			end
 			load_frame.tick = _detalhes:ScheduleRepeatingTimer ("BuildSpellListSlowTick", 1)
 			

@@ -2034,7 +2034,7 @@ local barra_scripts_onmouseup = function (self, button)
 						if (func) then
 							local successful, errortext = pcall (func, self, self.minha_tabela, self._instance)
 							if (not successful) then
-								_detalhes:Msg ("error occurred custom script shift+click:", errortext)
+								_detalhes:Msg ("自定义脚本发生错误shift+click:", errortext)
 							end
 							return
 						end
@@ -2051,7 +2051,7 @@ local barra_scripts_onmouseup = function (self, button)
 			--print (self.minha_tabela)
 			-- /dump DetailsBarra_1_1.minha_tabela
 			if (not self.minha_tabela) then
-				return _detalhes:Msg ("this bar is waiting update.")
+				return _detalhes:Msg ("这个计量条正在等待更新.")
 			end
 			
 			self._instance:AbreJanelaInfo (self.minha_tabela, nil, nil, is_shift_down, is_control_down)
@@ -3139,7 +3139,7 @@ local alert_on_click = function (self, button)
 	if (self.func) then
 		local okey, errortext = pcall (self.func, unpack (self.func_param))
 		if (not okey) then
-			_detalhes:Msg ("error on alert function:", errortext)
+			_detalhes:Msg ("警报功能错误:", errortext)
 		end
 	end
 	self:GetParent():Hide()
@@ -3664,7 +3664,7 @@ function gump:CriaJanelaPrincipal (ID, instancia, criando)
 		instancia._version = baseframe:CreateFontString (nil, "overlay", "GameFontHighlightSmall")
 			--instancia._version:SetPoint ("left", backgrounddisplay, "left", 20, 0)
 			instancia._version:SetTextColor (1, 1, 1)
-			instancia._version:SetText ("this is a alpha version of Details\nyou can help us sending bug reports\nuse the blue button.")
+			instancia._version:SetText ("这是Details的alpha版本\n你可以帮助我们发送错误报告\n使用蓝色按钮.")
 			if (not _detalhes.initializing) then
 				
 			end
@@ -6710,7 +6710,7 @@ local build_segment_list = function (self, elapsed)
 				end
 
 				CoolTip:AddLine (Loc ["STRING_SEGMENT_START"] .. ":", _detalhes.tabela_vigente.data_inicio, 2, "white", "white")
-				CoolTip:AddLine (Loc ["STRING_SEGMENT_END"] .. ":", _detalhes.tabela_vigente.data_fim or "in progress", 2, "white", "white") 
+				CoolTip:AddLine (Loc ["STRING_SEGMENT_END"] .. ":", _detalhes.tabela_vigente.data_fim or "进行中", 2, "white", "white") 
 			end
 			
 			--> fill � a quantidade de menu que esta sendo mostrada

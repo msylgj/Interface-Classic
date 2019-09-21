@@ -910,7 +910,7 @@ local window_openned_at = time()
 			if (window_openned_at+10 > time()) then
 				pleasewait:Show()
 				forward:Disable()
-				pleasewait:SetText ("wait... " .. window_openned_at + 10 - time())
+				pleasewait:SetText ("等... " .. window_openned_at + 10 - time())
 			else
 				pleasewait:Hide()
 				pleasewait:SetText ("")

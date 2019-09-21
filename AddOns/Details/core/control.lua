@@ -815,7 +815,7 @@
 					if (lower_instance) then
 						lower_instance = _detalhes:GetInstance (lower_instance)
 						if (lower_instance) then
-							lower_instance:InstanceAlert ("combat ignored: less than 5 seconds.", {[[Interface\BUTTONS\UI-GROUPLOOT-PASS-DOWN]], 18, 18, false, 0, 1, 0, 1}, 20, {function() Details:Msg ("combat ignored: elapsed time less than 5 seconds."); Details:Msg ("add '|cFFFFFF00Details.minimum_combat_time = 2;|r' on Auto Run Code to change the minimum time.") end})
+							lower_instance:InstanceAlert ("战斗忽略：不到5秒.", {[[Interface\BUTTONS\UI-GROUPLOOT-PASS-DOWN]], 18, 18, false, 0, 1, 0, 1}, 20, {function() Details:Msg ("战斗忽略：经过时间不到5秒."); Details:Msg ("加 '|cFFFFFF00Details.minimum_combat_time = 2;|r' 在自动运行代码上更改最短时间.") end})
 							_detalhes:SetTutorialCVar ("MIN_COMBAT_TIME", true)
 						end
 					end
@@ -997,11 +997,11 @@
 			end
 		
 			--> registra os gr�ficos
-			_detalhes:TimeDataRegister ("Your Team Damage", string_arena_myteam_damage, nil, "Details!", "v1.0", [[Interface\ICONS\Ability_DualWield]], true, true)
-			_detalhes:TimeDataRegister ("Enemy Team Damage", string_arena_enemyteam_damage, nil, "Details!", "v1.0", [[Interface\ICONS\Ability_DualWield]], true, true)
+			_detalhes:TimeDataRegister ("你团队伤害", string_arena_myteam_damage, nil, "Details!", "v1.0", [[Interface\ICONS\Ability_DualWield]], true, true)
+			_detalhes:TimeDataRegister ("敌对团队伤害", string_arena_enemyteam_damage, nil, "Details!", "v1.0", [[Interface\ICONS\Ability_DualWield]], true, true)
 		
-			_detalhes:TimeDataRegister ("Your Team Healing", string_arena_myteam_heal, nil, "Details!", "v1.0", [[Interface\ICONS\Ability_DualWield]], true, true)
-			_detalhes:TimeDataRegister ("Enemy Team Healing", string_arena_enemyteam_heal, nil, "Details!", "v1.0", [[Interface\ICONS\Ability_DualWield]], true, true)
+			_detalhes:TimeDataRegister ("你团队治疗", string_arena_myteam_heal, nil, "Details!", "v1.0", [[Interface\ICONS\Ability_DualWield]], true, true)
+			_detalhes:TimeDataRegister ("敌对团队治疗", string_arena_enemyteam_heal, nil, "Details!", "v1.0", [[Interface\ICONS\Ability_DualWield]], true, true)
 		
 			--> inicia um novo combate
 			_detalhes:EntrarEmCombate()
@@ -1051,11 +1051,11 @@
 				_detalhes:CancelTimer (_detalhes.start_arena, true)
 			end
 			
-			_detalhes:TimeDataUnregister ("Your Team Damage")
-			_detalhes:TimeDataUnregister ("Enemy Team Damage")
+			_detalhes:TimeDataUnregister ("你团队伤害")
+			_detalhes:TimeDataUnregister ("敌对团队伤害")
 			
-			_detalhes:TimeDataUnregister ("Your Team Healing")
-			_detalhes:TimeDataUnregister ("Enemy Team Healing")
+			_detalhes:TimeDataUnregister ("你团队治疗")
+			_detalhes:TimeDataUnregister ("敌对团队治疗")
 			
 			_detalhes:SendEvent ("COMBAT_ARENA_END")
 		end

@@ -327,7 +327,7 @@
 		end
 		_detalhes.LastPullMsg = time()
 
-		local hitLine = self.HitBy or "|cFFFFBB00First Hit|r: *?*"
+		local hitLine = self.HitBy or "|cFFFFBB00开怪|r: *?*"
 		local targetLine = ""
 		
 		for i = 1, 5 do
@@ -335,7 +335,7 @@
 			if (boss) then
 				local target = UnitName ("boss" .. i .. "target")
 				if (target and type (target) == "string") then
-					targetLine = " |cFFFFBB00Boss First Target|r: " .. target
+					targetLine = " |cFFFFBB00BOSS第一个目标|r: " .. target
 					break
 				end
 			end
@@ -391,10 +391,10 @@
 				end
 			end
 			
-			_detalhes:Msg ("|cFFFFBB00Your Best Score|r:", _detalhes:ToK2 ((value) / combatTime) .. " [|cFFFFFF00Guild Rank: " .. rank .. "|r]") --> localize-me
+			_detalhes:Msg ("|cFFFFBB00你的最好成绩|r:", _detalhes:ToK2 ((value) / combatTime) .. " [|cFFFFFF00公会等级: " .. rank .. "|r]") --> localize-me
 			
 			if ((not combatTime or combatTime == 0) and not _detalhes.SyncWarning) then
-				_detalhes:Msg ("|cFFFF3300you may need sync the rank within the guild, type '|cFFFFFF00/details rank|r'|r") --> localize-me
+				_detalhes:Msg ("|cFFFF3300你可能需要在公会中同步等级，输入 '|cFFFFFF00/details rank|r'|r") --> localize-me
 				_detalhes.SyncWarning = true
 			end
 		end
@@ -422,6 +422,8 @@
 
 	------------------------------------------------------------------------------------------------
 	--> early checks and fixes
+
+		--9/20 18:55:03.683  SPELL_EXTRA_ATTACKS,Player-4701-0091E2F3,"Gravel-Mograine",0x511,0x0,Player-4701-0091E2F3,"Gravel-Mograine",0x511,0x0,16459,"Sword Specialization",0x1,1
 
 		spellid = spellname
 
@@ -495,7 +497,7 @@
 						_detalhes.WhoAggroTimer:Cancel()
 					end
 					_detalhes.WhoAggroTimer = C_Timer.NewTimer (0.5, who_aggro)
-					_detalhes.WhoAggroTimer.HitBy = "|cFFFFFF00First Hit|r: " .. (link or "") .. " from " .. (who_name or "Unknown")
+					_detalhes.WhoAggroTimer.HitBy = "|cFFFFFF00开怪|r: " .. (link or "") .. " 从 " .. (who_name or "未知")
 				end
 				_detalhes:EntrarEmCombate (who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags)
 			else
@@ -686,7 +688,7 @@
 			local this_event = t [i]
 			
 			if (not this_event) then
-				return print ("Parser Event Error -> Set to 16 DeathLogs and /reload", i, _death_event_amt)
+				return print ("分析器事件错误 -> 设置16死亡记录然后/reload", i, _death_event_amt)
 			end
 			
 			this_event [1] = true --> true if this is a damage || false for healing
@@ -957,7 +959,7 @@
 			local this_event = t [i]
 			
 			if (not this_event) then
-				return print ("Parser Event Error -> Set to 16 DeathLogs and /reload", i, _death_event_amt)
+				return print ("分析器事件错误 -> 设置16死亡记录然后/reload", i, _death_event_amt)
 			end
 			
 			this_event [1] = true --> true if this is a damage || false for healing
@@ -1053,7 +1055,7 @@
 		local this_event = t [i]
 		
 		if (not this_event) then
-			return print ("Parser Event Error -> Set to 16 DeathLogs and /reload", i, _death_event_amt)
+			return print ("分析器事件错误 -> 设置16死亡记录然后/reload", i, _death_event_amt)
 		end
 		
 		this_event [1] = true --> true if this is a damage || false for healing
@@ -1174,7 +1176,7 @@
 		local this_event = t [i]
 		
 		if (not this_event) then
-			return print ("Parser Event Error -> Set to 16 DeathLogs and /reload", i, _death_event_amt)
+			return print ("分析器事件错误 -> 设置16死亡记录然后/reload", i, _death_event_amt)
 		end
 		
 		this_event [1] = true --> true if this is a damage || false for healing
@@ -1433,7 +1435,7 @@
 				--print ("ERROR:", token, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, alvo_flags2, spellidAbsorb, spellnameAbsorb, spellschoolAbsorb, serialHealer, nameHealer, flagsHealer, flags2Healer, spellidHeal, spellnameHeal, typeHeal, amountDenied)
 			end
 			--who_name = "[*] "..spellname
-			who_name = "[*] " .. (spellname or "--unknown spell--")
+			who_name = "[*] " .. (spellname or "--未知法术--")
 		end
 		
 		--> no target, just ignore
@@ -1829,7 +1831,7 @@
 
 	--> not yet well know about unnamed buff casters
 		if (not alvo_name) then
-			alvo_name = "[*] Unknown shield target"
+			alvo_name = "[*] 未知的盾护盾目标"
 		elseif (not who_name) then 
 			--> no actor name, use spell name instead
 			who_name = "[*] " .. spellname
@@ -2388,7 +2390,7 @@
 					local this_event = t [i]
 					
 					if (not this_event) then
-						return print ("Parser Event Error -> Set to 16 DeathLogs and /reload", i, _death_event_amt)
+						return print ("分析器事件错误 - >设置16死亡记录然后/reload", i, _death_event_amt)
 					end
 					
 					--print ("DebuffIN", ">", "Added to the DeathLog")
@@ -2439,7 +2441,7 @@
 						local this_event = t [i]
 						
 						if (not this_event) then
-							return print ("Parser Event Error -> Set to 16 DeathLogs and /reload", i, _death_event_amt)
+							return print ("分析器事件错误 - >设置16死亡记录然后/reload", i, _death_event_amt)
 						end
 						
 						--print ("DebuffRefresh", ">", "Added to the DeathLog", stack_amount)
@@ -3547,7 +3549,7 @@ local SPELL_POWER_PAIN = SPELL_POWER_PAIN or (PowerEnum and PowerEnum.Pain) or 1
 						local new_death_table = table_deepcopy (esta_morte)
 						local successful, errortext = pcall (func, nil, token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, new_death_table, este_jogador.last_cooldown, death_at, max_health)
 						if (not successful) then
-							_detalhes:Msg ("error occurred on a death hook function:", errortext)
+							_detalhes:Msg ("死亡钩子函数出错:", errortext)
 						end
 						--func (nil, token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, new_death_table, este_jogador.last_cooldown, death_at, max_health)
 					end
@@ -3893,7 +3895,7 @@ local SPELL_POWER_PAIN = SPELL_POWER_PAIN or (PowerEnum and PowerEnum.Pain) or 1
 			end
 			parser:RefreshFunctions()
 		else
-			return _detalhes:Msg ("Invalid Token for SetParserFunction.")
+			return _detalhes:Msg ("SetParserFunction的令牌无效.")
 		end
 	end
 	
@@ -4403,7 +4405,7 @@ local SPELL_POWER_PAIN = SPELL_POWER_PAIN or (PowerEnum and PowerEnum.Pain) or 1
 				--_detalhes.StoreEncounter()
 				local successful, errortext = pcall (_detalhes.StoreEncounter)
 				if (not successful) then
-					_detalhes:Msg ("error occurred on StoreEncounter():", errortext)
+					_detalhes:Msg ("StoreEncounter()发生错误:", errortext)
 				end
 			end
 			_detalhes.schedule_store_boss_encounter = nil
@@ -4792,7 +4794,7 @@ local SPELL_POWER_PAIN = SPELL_POWER_PAIN or (PowerEnum and PowerEnum.Pain) or 1
 			if (not _detalhes.instance_load_failed) then
 				_detalhes:CreatePanicWarning()
 			end
-			_detalhes.instance_load_failed.text:SetText ("Framework for Details! isn't loaded.\nIf you just updated the addon, please reboot the game client.\nWe apologize for the inconvenience and thank you for your comprehension.")
+				_detalhes.instance_load_failed.text:SetText ("Details!框架没有加载.\n如果刚刚更新了插件，请重新启动游戏客户端.\n对于给你带来的不便，我们深表歉意，并感谢你的理解.")
 			
 			return
 		end
@@ -4912,13 +4914,13 @@ local SPELL_POWER_PAIN = SPELL_POWER_PAIN or (PowerEnum and PowerEnum.Pain) or 1
 	
 		--> close info window
 			if (_detalhes.FechaJanelaInfo) then
-				tinsert (_detalhes_global.exit_log, "1 - Closing Janela Info.")
+				tinsert (_detalhes_global.exit_log, "1 - 关闭Janela信息.")
 				xpcall (_detalhes.FechaJanelaInfo, saver_error)
 			end
 			
 		--> do not save window pos
 			if (_detalhes.tabela_instancias) then
-				tinsert (_detalhes_global.exit_log, "2 - Clearing user place from instances.")
+				tinsert (_detalhes_global.exit_log, "2 - 从实例中清除用户位置.")
 				for id, instance in _detalhes:ListInstances() do
 					if (instance.baseframe) then
 						instance.baseframe:SetUserPlaced (false)
@@ -4929,31 +4931,31 @@ local SPELL_POWER_PAIN = SPELL_POWER_PAIN or (PowerEnum and PowerEnum.Pain) or 1
 
 		--> leave combat start save tables
 			if (_detalhes.in_combat and _detalhes.tabela_vigente) then 
-				tinsert (_detalhes_global.exit_log, "3 - Leaving current combat.")
+				tinsert (_detalhes_global.exit_log, "3 - 离开现在的战斗.")
 				xpcall (_detalhes.SairDoCombate, saver_error)
 				_detalhes.can_panic_mode = true
 			end
 			
 			if (_detalhes.CheckSwitchOnLogon and _detalhes.tabela_instancias[1] and _detalhes.tabela_instancias and getmetatable (_detalhes.tabela_instancias[1])) then
-				tinsert (_detalhes_global.exit_log, "4 - Reversing switches.")
+				tinsert (_detalhes_global.exit_log, "4 - 翻转开关.")
 				xpcall (_detalhes.CheckSwitchOnLogon, saver_error)
 			end
 			
 			if (_detalhes.wipe_full_config) then
-				tinsert (_detalhes_global.exit_log, "5 - Is a full config wipe.")
+				tinsert (_detalhes_global.exit_log, "5 - 是完全配置删除.")
 				_detalhes_global = nil
 				_detalhes_database = nil
 				return
 			end
 		
 		--> save the config
-			tinsert (_detalhes_global.exit_log, "6 - Saving Config.")
+			tinsert (_detalhes_global.exit_log, "6 - 保存配置.")
 			xpcall (_detalhes.SaveConfig, saver_error)
-			tinsert (_detalhes_global.exit_log, "7 - Saving Profiles.")
+			tinsert (_detalhes_global.exit_log, "7 - 保存配置文件.")
 			xpcall (_detalhes.SaveProfile, saver_error)
 
 		--> save the nicktag cache
-			tinsert (_detalhes_global.exit_log, "8 - Saving nicktag cache.")
+			tinsert (_detalhes_global.exit_log, "8 - 保存nicktag缓存.")
 			_detalhes_database.nick_tag_cache = table_deepcopy (_detalhes_database.nick_tag_cache)
 	end)
 	
@@ -4988,39 +4990,39 @@ local SPELL_POWER_PAIN = SPELL_POWER_PAIN or (PowerEnum and PowerEnum.Pain) or 1
 		for n, nn in pairs (damage_cache) do 
 			amount = amount + 1
 		end
-		print ("parser damage_cache", amount)
+		print ("解析器 damage_cache", amount)
 		
 		amount = 0
 		for n, nn in pairs (damage_cache_pets) do 
 			amount = amount + 1
 		end
-		print ("parser damage_cache_pets", amount)
+		print ("解析器 damage_cache_pets", amount)
 		
 		amount = 0
 		for n, nn in pairs (damage_cache_petsOwners) do 
 			amount = amount + 1
 		end
-		print ("parser damage_cache_petsOwners", amount)
+		print ("解析器 damage_cache_petsOwners", amount)
 		
 		amount = 0
 		for n, nn in pairs (healing_cache) do 
 			amount = amount + 1
 		end
-		print ("parser healing_cache", amount)
+		print ("解析器 healing_cache", amount)
 		
 		amount = 0
 		for n, nn in pairs (energy_cache) do 
 			amount = amount + 1
 		end
-		print ("parser energy_cache", amount)
+		print ("解析器 energy_cache", amount)
 
 		amount = 0
 		for n, nn in pairs (misc_cache) do 
 			amount = amount + 1
 		end
-		print ("parser misc_cache", amount)
-		print ("group damage", #_detalhes.cache_damage_group)
-		print ("group damage", #_detalhes.cache_healing_group)
+		print ("解析器 misc_cache", amount)
+		print ("团体伤害", #_detalhes.cache_damage_group)
+		print ("团体伤害", #_detalhes.cache_healing_group)
 	end
 
 	function _detalhes:GetActorsOnDamageCache()

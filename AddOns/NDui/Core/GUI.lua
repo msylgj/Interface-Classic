@@ -45,6 +45,7 @@ local defaultSettings = {
 		ItemSetFilter = false,
 		DeleteButton = true,
 		FavouriteItems = {},
+		GatherEmpty = false,
 	},
 	Auras = {
 		Reminder = true,
@@ -237,6 +238,7 @@ local defaultSettings = {
 		ExplosiveCache = {},
 		PlacedItemAlert = false,
 		EnhancedMenu = false,
+		AutoDismount = true,
 	},
 	Tutorial = {
 		Complete = false,
@@ -268,7 +270,8 @@ local accountSettings = {
 	TexStyle = 2,
 	KeystoneInfo = {},
 	AutoBubbles = false,
-	SystemInfoType = 1,
+	SystemInfoType = 0,
+	DisableInfobars = false,
 }
 
 -- Initial settings
@@ -493,6 +496,7 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "Bags", "BagsiLvl", L["Bags Itemlevel"]},
 		{1, "Bags", "DeleteButton", L["Bags DeleteButton"], true},
 		{1, "Bags", "ReverseSort", L["Bags ReverseSort"].."*", nil, nil, updateBagSortOrder},
+		{1, "Bags", "GatherEmpty", "|cff00cc4c"..L["Bags GatherEmpty"], true},
 		{},--blank
 		{3, "Bags", "BagsScale", L["Bags Scale"], false, {.5, 1.5, 1}},
 		{3, "Bags", "IconSize", L["Bags IconSize"], true, {30, 42, 0}},
@@ -705,9 +709,11 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "Misc", "FasterLoot", L["Faster Loot"].."*", nil, nil, updateFasterLoot},
 		{1, "Misc", "HideErrors", L["Hide Error"].."*", true, nil, updateErrorBlocker},
 		{1, "Misc", "EnhancedMenu", L["TargetEnhancedMenu"], nil, nil, nil, L["MenuEnhancedTaints"]},
+		{1, "Misc", "AutoDismount", L["AutoDismount"], true},
 	},
 	[13] = {
 		{1, "ACCOUNT", "VersionCheck", L["Version Check"]},
+		{1, "ACCOUNT", "DisableInfobars", L["DisableInfobars"]},
 		{},--blank
 		{3, "ACCOUNT", "UIScale", L["Setup UIScale"], false, {.4, 1.15, 2}},
 		{1, "ACCOUNT", "LockUIScale", "|cff00cc4c"..L["Lock UIScale"], true},
@@ -1059,7 +1065,7 @@ local function importData()
 		elseif value == "FavouriteItems" then
 			local items = {select(3, strsplit(":", option))}
 			for _, itemID in next, items do
-				NDuiDB[key][value][itemID] = true
+				NDuiDB[key][value][tonumber(itemID)] = true
 			end
 		elseif key == "Mover" then
 			local relFrom, parent, relTo, x, y = select(3, strsplit(":", option))

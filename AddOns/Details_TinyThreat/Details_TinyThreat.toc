@@ -5,6 +5,6 @@
 ## OptionalDeps: Ace3
 
 enUS.lua
-ptBR.lua
+zhCN.lua
 
 Details_TinyThreat.lua

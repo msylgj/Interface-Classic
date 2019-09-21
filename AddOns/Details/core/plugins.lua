@@ -111,11 +111,11 @@
 
 		if (MinVersion and MinVersion > _detalhes.realversion) then
 			print (PluginName, Loc ["STRING_TOOOLD"])
-			return _detalhes:NewError ("Details version is out of date.")
+			return _detalhes:NewError ("Details版本已过期.")
 		end
 		
 		if (_detalhes.FILEBROKEN) then
-			return _detalhes:NewError ("Game client needs to be restarted in order to finish Details! update.")
+			return _detalhes:NewError ("需要重新启动游戏客户端才能完成Details!更新.")
 		end
 		
 		if (PluginType == "TANK") then
@@ -123,19 +123,19 @@
 		end
 	
 		if (not PluginType) then
-			return _detalhes:NewError ("InstallPlugin parameter 1 (plugin type) not especified")
+			return _detalhes:NewError ("InstallPlugin参数1（插件类型）")
 		elseif (not PluginName) then
-			return _detalhes:NewError ("InstallPlugin parameter 2 (plugin name) can't be nil")
+			return _detalhes:NewError ("InstallPlugin参数2（插件名称）不能为空")
 		elseif (not PluginIcon) then
-			return _detalhes:NewError ("InstallPlugin parameter 3 (plugin icon) can't be nil")
+			return _detalhes:NewError ("InstallPlugin参数3（插件图标）不能为空")
 		elseif (not PluginObject) then
-			return _detalhes:NewError ("InstallPlugin parameter 4 (plugin object) can't be nil")
+			return _detalhes:NewError ("InstallPlugin参数4（插件对象）不能为空")
 		elseif (not PluginAbsoluteName) then
-			return _detalhes:NewError ("InstallPlugin parameter 5 (plugin absolut name) can't be nil")
+			return _detalhes:NewError ("InstallPlugin参数5（插件绝对名称）不能为空")
 		end
 		
 		if (_G [PluginAbsoluteName]) then
-			print (Loc ["STRING_PLUGIN_NAMEALREADYTAKEN"] .. ": " .. PluginName .. " name: " .. PluginAbsoluteName)
+			print (Loc ["STRING_PLUGIN_NAMEALREADYTAKEN"] .. ": " .. PluginName .. " 名字: " .. PluginAbsoluteName)
 			return
 		else
 			_G [PluginAbsoluteName] = PluginObject
@@ -170,7 +170,7 @@
 		
 		if (PluginType == "SOLO") then
 			if (not PluginObject.Frame) then
-				return _detalhes:NewError ("plugin doesn't have a Frame, please check case-sensitive member name: Frame")
+				return _detalhes:NewError ("插件没有Frame，请检查区分大小写的成员名称：Frame")
 			end
 			
 			--> Install Plugin
@@ -263,12 +263,12 @@
 	
 	local temp_event_function = function()
 		print ("=====================")
-		print ("Hello There plugin developer!")
-		print ("Please make sure you are declaring")
-		print ("A member called 'OnDetailsEvent' on your plugin object")
-		print ("With a function to receive the events like bellow:")
+		print ("你好插件开发者!")
+		print ("请确保你正在申报")
+		print ("插件对象上名为“OnDetailsEvent”的成员")
+		print ("具有接收如下事件的函数:")
 		print ("function PluginObject:OnDetailsEvent (event, ...) end")
-		print ("Thank You Sir!===================")
+		print ("谢谢!===================")
 	end
 
 	local register_event_func = function (self, event)
@@ -466,7 +466,7 @@
 			statusBar:SetAlpha (1)
 			_detalhes.gump:BuildStatusbarAuthorInfo (statusBar)
 			--
-			local right_click_to_back = _detalhes.gump:CreateLabel (statusBar, "right click to close", 10, "gray")
+			local right_click_to_back = _detalhes.gump:CreateLabel (statusBar, "右键单击关闭", 10, "gray")
 			right_click_to_back:SetPoint ("bottomright", statusBar, "bottomright", -1, 5)
 			right_click_to_back:SetAlpha (.4)
 
@@ -496,7 +496,7 @@
 			titlebar_plugins:SetBackdropColor (.5, .5, .5, 1)
 			titlebar_plugins:SetBackdropBorderColor (0, 0, 0, 1)
 			--> title
-			local titleLabel = _detalhes.gump:NewLabel (titlebar_plugins, titlebar_plugins, nil, "titulo", "Plugins", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
+			local titleLabel = _detalhes.gump:NewLabel (titlebar_plugins, titlebar_plugins, nil, "titulo", "插件", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
 			DFPixelUtil.SetPoint (titleLabel, "center", titlebar_plugins , "center", 0, 0)
 			DFPixelUtil.SetPoint (titleLabel, "top", titlebar_plugins , "top", 0, -5)
 			
@@ -507,7 +507,7 @@
 			titlebar_tools:SetBackdropColor (.5, .5, .5, 1)
 			titlebar_tools:SetBackdropBorderColor (0, 0, 0, 1)
 			--> title
-			local titleLabel = _detalhes.gump:NewLabel (titlebar_tools, titlebar_tools, nil, "titulo", "Tools", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
+			local titleLabel = _detalhes.gump:NewLabel (titlebar_tools, titlebar_tools, nil, "titulo", "工具", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
 			DFPixelUtil.SetPoint (titleLabel, "center", titlebar_tools , "center", 0, 0)
 			DFPixelUtil.SetPoint (titleLabel, "top", titlebar_tools , "top", 0, -5)
 		
@@ -520,7 +520,7 @@
 						f:ClearAllPoints()
 						f:SetPoint ("center", UIParent, "center", 0, 0)
 						LibWindow.SavePosition (f)
-						_detalhes:Msg ("detected options panel out of screen, position has reset")
+						_detalhes:Msg ("检测到选项面板超出屏幕，位置已重置")
 					end
 				end)
 			end)

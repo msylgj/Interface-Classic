@@ -1,4 +1,4 @@
--- damage object
+﻿-- damage object
 --2672
 
 	local _detalhes = 		_G._detalhes
@@ -3116,7 +3116,7 @@ function atributo_damage:ToolTip_DamageDone (instancia, numero, barra, keydown)
 				
 				--_detalhes:AddTooltipSpellHeaderText ("Phases", headerColor, 1, [[Interface\Garrison\MobileAppIcons]], 2*130/1024, 3*130/1024, 5*130/1024, 6*130/1024)
 				--_detalhes:AddTooltipSpellHeaderText ("Phases", headerColor, 1, [[Interface\Garrison\orderhall-missions-mechanic10]], 0, 1, 0, 1)
-				_detalhes:AddTooltipSpellHeaderText ("Damage by Encounter Phase", headerColor, 1, [[Interface\Garrison\orderhall-missions-mechanic8]], 11/64, 53/64, 11/64, 53/64) --localize-me
+				_detalhes:AddTooltipSpellHeaderText ("战斗片段的伤害", headerColor, 1, [[Interface\Garrison\orderhall-missions-mechanic8]], 11/64, 53/64, 11/64, 53/64) --localize-me
 				--GameCooltip:AddIcon ([[Interface\AddOns\Details\images\key_shift]], 1, 2, _detalhes.tooltip_key_size_width, _detalhes.tooltip_key_size_height, 0, 1, 0, 0.640625, _detalhes.tooltip_key_overlay1)
 				_detalhes:AddTooltipHeaderStatusbar (r, g, b, barAlha)
 				
@@ -3147,7 +3147,7 @@ function atributo_damage:ToolTip_DamageDone (instancia, numero, barra, keydown)
 				
 				for i = 1, #playerPhases do
 					--[1] Phase Number [2] Amount Done [3] Rank [4] Percent
-					GameCooltip:AddLine ("|cFFF0F0F0Phase|r " .. playerPhases [i][1], FormatTooltipNumber (_, playerPhases [i][2]) .. " (|cFFFFFF00#" .. playerPhases [i][3] ..  "|r, " .. _cstr ("%.1f", playerPhases [i][4]) .. "%)")
+					GameCooltip:AddLine ("|cFFF0F0F0片段|r " .. playerPhases [i][1], FormatTooltipNumber (_, playerPhases [i][2]) .. " (|cFFFFFF00#" .. playerPhases [i][3] ..  "|r, " .. _cstr ("%.1f", playerPhases [i][4]) .. "%)")
 					GameCooltip:AddIcon ([[Interface\Garrison\orderhall-missions-mechanic9]], 1, 1, 14, 14, 11/64, 53/64, 11/64, 53/64)
 					_detalhes:AddTooltipBackgroundStatusbar()
 				end
@@ -3193,7 +3193,7 @@ function atributo_damage:ReportEnemyDamageTaken (actor, instance, ShiftKeyDown, 
 			icon = [[Interface\ICONS\Pet_Type_Undead]],
 			attribute = "damagedone",
 			author = _detalhes.playername,
-			desc = inimigo .. " Damage Taken",
+			desc = inimigo .. " 承受伤害",
 			source = "[raid]",
 			target = inimigo,
 			script = false,
@@ -4000,7 +4000,7 @@ function atributo_damage:MontaInfoDamageDone()
 			if (bestRank) then
 				--> discover which are the player position in the guild rank
 				local playerTable, onEncounter, rankPosition = _detalhes.storage:GetPlayerGuildRank (diff, combat:GetBossInfo().id, "damage", self.nome, true)
-				local text1 = self.nome .. " Guild Rank on " .. (combat:GetBossInfo().name or "") .. ": |cFFFFFF00" .. (rankPosition or "x") .. "|r Best Dps: |cFFFFFF00" .. _detalhes:ToK2 ((bestRank[1] or 0) / encounterTable.elapsed) .. "|r (" .. encounterTable.date:gsub (".*%s", "") .. ")"
+				local text1 = self.nome .. " 在会阶 " .. (combat:GetBossInfo().name or "") .. ": |cFFFFFF00" .. (rankPosition or "x") .. "|r DPS最佳: |cFFFFFF00" .. _detalhes:ToK2 ((bestRank[1] or 0) / encounterTable.elapsed) .. "|r (" .. encounterTable.date:gsub (".*%s", "") .. ")"
 				info:SetStatusbarText (text1, 10, "gray")
 			else
 				info:SetStatusbarText()
@@ -5147,10 +5147,7 @@ end
 			if (not no_refresh) then
 				_detalhes.refresh:r_atributo_damage (actor, shadow)
 			end
-			
-			--a refer�ncia do .owner pode ter sido apagada?
-			--os 2 segmentos foram juntados por�m a refer�ncia do owner de um pet criado ali em cima deve ser nula?
-			--teria que analisar se o novo objecto � de um pet e colocar a refer�ncia do owner no pet novamente, ou pelo menos verificar se a refer�ncia � valida
+
 			
 			--> tempo decorrido (captura de dados)
 				local end_time = actor.end_time

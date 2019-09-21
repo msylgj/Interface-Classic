@@ -26,7 +26,7 @@
 	function _detalhes:InstallHook (hook_type, func)
 	
 		if (not _detalhes.hooks [hook_type]) then
-			return false, "Invalid hook type."
+			return false, "无效的钩子类型."
 		end
 		
 		for _, this_func in ipairs (_detalhes.hooks [hook_type]) do
@@ -47,7 +47,7 @@
 	function _detalhes:UnInstallHook (hook_type, func)
 	
 		if (not _detalhes.hooks [hook_type]) then
-			return false, "Invalid hook type."
+			return false, "无效的钩子类型."
 		end
 		
 		for index, this_func in ipairs (_detalhes.hooks [hook_type]) do 

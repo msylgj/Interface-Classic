@@ -257,6 +257,6 @@
 	end
 
 	function _detalhes:PrintTimeMachineIndexes()
-		print ("timemachine damage", #timeMachine.tabelas [1])
-		print ("timemachine heal", #timeMachine.tabelas [2])
+		print ("时间机器伤害", #timeMachine.tabelas [1])
+		print ("时间机器治疗", #timeMachine.tabelas [2])
 	end

@@ -47,7 +47,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "This was the first skin made for Details!, inspired in the standard wow interface", 
+		desc = "这是为Detail！制作的第一款皮肤，灵感来自标准的界面", 
 		
 		can_change_alpha_head = false, 
 		icon_anchor_main = {-1, 1}, 
@@ -281,7 +281,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "Simple skin with soft gray color and half transparent frames.", --\n
+		desc = "简洁的皮肤，柔和的灰色和半透明的框架.", --\n
 		
 		--micro frames
 		micro_frames = {
@@ -493,7 +493,7 @@ local _
 		end,
 		
 		skin_options = {
-			{spacement = true, type = "button", name = "Shadowy Title Bar", func = Minimalistic_Shadow, desc = "Adds shadow on title bar components."},
+			{spacement = true, type = "button", name = "阴影标题栏", func = Minimalistic_Shadow, desc = "在标题栏组件上添加阴影."},
 			{type = "button", name = Loc ["STRING_OPTIONS_SKIN_RESET_TOOLTIP"], func = reset_tooltip, desc = Loc ["STRING_OPTIONS_SKIN_RESET_TOOLTIP_DESC"]},
 			{type = "button", name = Loc ["STRING_OPTIONS_SKIN_ELVUI_BUTTON3"], func = set_tooltip_elvui2, desc = Loc ["STRING_OPTIONS_SKIN_ELVUI_BUTTON3_DESC"]},
 		}
@@ -505,7 +505,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "Same as the first Minimalistic, but this one is more darker and less transparent.", 
+		desc = "与第一个Minimalistic相同，但是这个更暗，更不透明.", 
 		
 		--micro frames
 		micro_frames = {
@@ -725,7 +725,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "Light blue, this skin fits on almost all interfaces.\n\nFor ElvUI interfaces, change the window color to black to get an compatible visual.", 
+		desc = "浅蓝色，这款皮肤几乎适合所有界面.\n\n对于ElvUI接口，将窗口颜色更改为黑色以获得兼容的视觉效果.", 
 		
 		--micro frames
 		micro_frames = {
@@ -967,7 +967,7 @@ local _
 	local align_right_chat = function()
 	
 		if (not RightChatPanel or not RightChatPanel:IsShown()) then
-			_detalhes:Msg ("Right Chat Panel isn't shown.")
+			_detalhes:Msg ("右侧聊天面板未显示.")
 			return
 		end
 		
@@ -1043,7 +1043,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "Very clean skin without textures and only with a black contour.", 
+		desc = "非常干净的皮肤没有纹理，只有黑色轮廓.", 
 		
 		--general
 		can_change_alpha_head = true, 
@@ -1126,7 +1126,7 @@ local _
 				-27,
 				1,
 			},
-			["name"] = "new simple gray 2",
+			["name"] = "新的简单灰色 2",
 			["attribute_text"] = {
 				["enabled"] = true,
 				["shadow"] = true,
@@ -1678,7 +1678,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "This skin is based on ElvUI's addons, relying with black and transparent frames.", 
+		desc = "这款皮肤基于ElvUI的插件，依靠黑色和透明镜架.", 
 		
 		--general
 		can_change_alpha_head = true, 
@@ -1927,7 +1927,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "based on AddonSkins for ElvUI, this skin has opaque title bar and background.", 
+		desc = "基于AddonSkins for ElvUI，这个皮肤有不透明的标题栏和背景.", 
 		
 		--general
 		can_change_alpha_head = true, 
@@ -2110,7 +2110,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "Simple skin with soft gray color and half transparent frames.", --\n
+		desc = "简洁的皮肤，柔和的灰色和半透明的框架.", --\n
 		
 		--micro frames
 		micro_frames = {
@@ -2360,7 +2360,7 @@ local _
 		end,
 		
 		skin_options = {
-			{spacement = true, type = "button", name = "Shadowy Title Bar", func = Minimalistic_Shadow, desc = "Adds shadow on title bar components."},
+			{spacement = true, type = "button", name = "阴影标题栏", func = Minimalistic_Shadow, desc = "在标题栏组件上添加阴影."},
 			{type = "button", name = Loc ["STRING_OPTIONS_SKIN_RESET_TOOLTIP"], func = reset_tooltip, desc = Loc ["STRING_OPTIONS_SKIN_RESET_TOOLTIP_DESC"]},
 			{type = "button", name = Loc ["STRING_OPTIONS_SKIN_ELVUI_BUTTON3"], func = set_tooltip_elvui2, desc = Loc ["STRING_OPTIONS_SKIN_ELVUI_BUTTON3_DESC"]},
 		}
@@ -2372,7 +2372,7 @@ local _
 		author = "Details!", 
 		version = "1.0", 
 		site = "unknown", 
-		desc = "Simple skin with soft gray color and half transparent frames.", --\n
+		desc = "简洁的皮肤，柔和的灰色和半透明的框架.", --\n
 		
 		--micro frames
 		micro_frames = {
@@ -2646,7 +2646,7 @@ local _
 		end,
 		
 		skin_options = {
-			{spacement = true, type = "button", name = "Shadowy Title Bar", func = Minimalistic_Shadow, desc = "Adds shadow on title bar components."},
+			{spacement = true, type = "button", name = "阴影标题栏", func = Minimalistic_Shadow, desc = "在标题栏组件上添加阴影."},
 			{type = "button", name = Loc ["STRING_OPTIONS_SKIN_RESET_TOOLTIP"], func = reset_tooltip, desc = Loc ["STRING_OPTIONS_SKIN_RESET_TOOLTIP_DESC"]},
 			{type = "button", name = Loc ["STRING_OPTIONS_SKIN_ELVUI_BUTTON3"], func = set_tooltip_elvui2, desc = Loc ["STRING_OPTIONS_SKIN_ELVUI_BUTTON3_DESC"]},
 		}

@@ -194,7 +194,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 			
 			Details:Dump (state)
 		else
-			Details:Msg ("Window 1 not found.")
+			Details:Msg ("窗口1没有找到.")
 		end
 	
 	elseif (command == "spells") then
@@ -209,7 +209,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 		
 			local profile = _detalhes:GetProfile (rest)
 			if (not profile) then
-				return _detalhes:Msg ("Profile Not Found.")
+				return _detalhes:Msg ("未找到配置文件.")
 			end
 			
 			if (not _detalhes:ApplyProfile (rest)) then
@@ -233,17 +233,17 @@ function SlashCmdList.DETAILS (msg, editbox)
 		local exitlog = _detalhes_global.exit_log
 		local exiterrors = _detalhes_global.exit_errors
 		
-		print ("EXIT LOG:")
+		print ("退出日志:")
 		for index, text in ipairs (exitlog) do
 			print (text)
 		end
-		print ("ERRORS:")
+		print ("错误:")
 		if (exiterrors) then
 			for index, text in ipairs (exiterrors) do
 				print (text)
 			end
 		else
-			print ("|cFF00FF00No error occured!|r")
+			print ("|cFF00FF00没有错误发生!|r")
 		end
 	
 	elseif (msg == "tr") then
@@ -404,11 +404,11 @@ function SlashCmdList.DETAILS (msg, editbox)
 			_detalhes.tabela_vigente.saved_pets [k] = {v[1], v[2], v[3]}
 		end
 		
-		_detalhes:Msg ("pet table has been saved on current combat.")
+		_detalhes:Msg ("宠物配置已在当前战斗中保存.")
 
 	elseif (msg == "move") then
 	
-		print ("moving...")
+		print ("移动...")
 		
 		local instance = _detalhes.tabela_instancias [1]
 		instance.baseframe:ClearAllPoints()
@@ -495,10 +495,10 @@ function SlashCmdList.DETAILS (msg, editbox)
 	
 	elseif (msg == "captures") then
 		for k, v in pairs (_detalhes.capture_real) do 
-			print ("real -",k,":",v)
+			print ("真实 -",k,":",v)
 		end
 		for k, v in pairs (_detalhes.capture_current) do 
-			print ("current -",k,":",v)
+			print ("当前 -",k,":",v)
 		end
 	
 	elseif (msg == "slider") then
@@ -541,7 +541,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 		--_detalhes.ResetButton:SetHighlightTexture (t)
 		_detalhes.ResetButton:SetNormalTexture (t)
 		
-		print ("backdrop", _detalhes.ResetButton:GetBackdrop())
+		print ("背景", _detalhes.ResetButton:GetBackdrop())
 		
 		_detalhes.ResetButton:SetBackdropColor (0, 0, 1, 1)
 		
@@ -600,15 +600,15 @@ function SlashCmdList.DETAILS (msg, editbox)
 			if (segment and segment ~= 0) then
 				local c = _detalhes:GetCombat (segment)
 				playerActor = c (4, playername)
-				print ("using segment", segment, c, "player actor:", playerActor)
+				print ("使用分段", segment, c, "玩家:", playerActor)
 			else
 				playerActor = c (4, playername)
 			end
 			
-			print ("actor table: ", playerActor)
+			print ("玩家列表: ", playerActor)
 			
 			if (not playerActor) then
-				print ("actor table not found")
+				print ("玩家列表没有找到")
 				return
 			end
 			
@@ -631,11 +631,11 @@ function SlashCmdList.DETAILS (msg, editbox)
 			test_plugin = TESTPLUGIN
 			
 			function test_plugin:ReceiveAA (a, b, c, d, e, f, g)
-				print ("working 1", a, b, c, d, e, f, g)
+				print ("工作 1", a, b, c, d, e, f, g)
 			end
 			
 			function test_plugin:ReceiveAB (a, b, c, d, e, f, g)
-				print ("working 2", a, b, c, d, e, f, g)
+				print ("工作 2", a, b, c, d, e, f, g)
 			end
 			
 			test_plugin:RegisterPluginComm ("PTAA", "ReceiveAA")
@@ -657,8 +657,8 @@ function SlashCmdList.DETAILS (msg, editbox)
 		
 		local callback = function (width, height, overlayColor, alpha, texCoords)
 			print (width, height, alpha)
-			print ("overlay: ", unpack (overlayColor))
-			print ("crop: ", unpack (texCoords))
+			print ("覆盖: ", unpack (overlayColor))
+			print ("剪切: ", unpack (texCoords))
 		end
 		
 		_detalhes.gump:ImageEditor (callback, "Interface\\TALENTFRAME\\bg-paladin-holy", nil, {1, 1, 1, 1}) -- {0.25, 0.25, 0.25, 0.25}
@@ -685,7 +685,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 		}
 		_detalhes.capture_current = _detalhes.capture_real
 		_detalhes:CaptureRefresh()
-		print (Loc ["STRING_DETAILS1"] .. "capture has been reseted.")
+		print (Loc ["STRING_DETAILS1"] .. "捕获已被重置.")
 
 	--> debug
 	elseif (command == "barra") then 
@@ -701,7 +701,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 		end
 	
 	elseif (msg == "opened") then 
-		print ("Instances opened: " .. _detalhes.opened_windows)
+		print ("实例已打开: " .. _detalhes.opened_windows)
 	
 	--> debug, get a guid of something
 	elseif (command == "backdrop") then --> localize-me
@@ -711,8 +711,8 @@ function SlashCmdList.DETAILS (msg, editbox)
 		vardump (backdrop)
 		vardump (backdrop.insets)
 		
-		print ("bgcolor:",f:GetBackdropColor())
-		print ("bordercolor",f:GetBackdropBorderColor())
+		print ("背景颜色:",f:GetBackdropColor())
+		print ("边框颜色",f:GetBackdropBorderColor())
 	
 	elseif (command == "myguid") then --> localize-me
 	
@@ -821,7 +821,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 	
 		local profile = rest:match("^(%S*)%s*(.-)$")
 		
-		print ("Force apply profile: ", profile)
+		print ("强制应用配置: ", profile)
 		
 		_detalhes:ApplyProfile (profile, false)
 	
@@ -834,7 +834,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 	elseif (command == "showusers") then
 		local users = _detalhes.users
 		if (not users) then
-			return _detalhes:Msg ("there is no users.")
+			return _detalhes:Msg ("没有用户.")
 		end
 		
 		local f = _detalhes.ListPanel
@@ -848,7 +848,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 			f:add (t [1] .. " | " .. t [2] .. " | " .. t [3] , i)
 		end
 		
-		print (i, "users found.")
+		print (i, "个用户被发现.")
 	
 		f:Show()
 	
@@ -873,7 +873,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 			f:add (name, i)
 		end
 		
-		print (i, "names found.")
+		print (i, "个名称被找到.")
 	
 		f:Show()
 		
@@ -901,7 +901,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 	
 	--> debug
 	elseif (msg == "save") then
-		print ("running... this is a debug command, details wont work until next /reload.")
+		print ("正在运行...这是一个调试命令，details不会工作直到输入/reload.")
 		_detalhes:PrepareTablesForSave()
 	
 	elseif (msg == "buffs") then
@@ -926,21 +926,21 @@ function SlashCmdList.DETAILS (msg, editbox)
 	elseif (command == "debug") then
 		if (_detalhes.debug) then
 			_detalhes.debug = false
-			print (Loc ["STRING_DETAILS1"] .. "diagnostic mode has been turned off.")
+			print (Loc ["STRING_DETAILS1"] .. "诊断模式已关闭.")
 			return
 		else
 			_detalhes.debug = true
-			print (Loc ["STRING_DETAILS1"] .. "diagnostic mode has been turned on.")
+			print (Loc ["STRING_DETAILS1"] .. "诊断模式已开启.")
 			
 			if (rest and rest ~= "") then
 				if (rest == "-clear") then
 					_detalhes_global.debug_chr_log = ""
-					print (Loc ["STRING_DETAILS1"] .. "log for characters has been wiped.")
+					print (Loc ["STRING_DETAILS1"] .. "记录角色已被擦除.")
 					return
 				end
 				_detalhes.debug_chr = rest
 				_detalhes_global.debug_chr_log = _detalhes_global.debug_chr_log or ""
-				print (Loc ["STRING_DETAILS1"] .. "diagnostic for character " .. rest .. " turned on.")
+				print (Loc ["STRING_DETAILS1"] .. "对角色的诊断 " .. rest .. " 开启.")
 				return
 			end
 			
@@ -987,20 +987,20 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 			text = text:gsub ([[@CORE]], _detalhes.realversion)
 
 			text = text:gsub ([[@TICKRATE]], _detalhes.update_speed)
-			text = text:gsub ([[@TICKHEALTH]], _detalhes:TimeLeft (_detalhes.atualizador) ~= 0 and "|cFF22FF22good|r" or "|cFFFF2222bad|r")
-			text = text:gsub ([[@TICKLAST]], _detalhes.LastUpdateTick .. " (" .. _detalhes._tempo - _detalhes.LastUpdateTick .. " seconds ago)")
+			text = text:gsub ([[@TICKHEALTH]], _detalhes:TimeLeft (_detalhes.atualizador) ~= 0 and "|cFF22FF22好|r" or "|cFFFF2222坏|r")
+			text = text:gsub ([[@TICKLAST]], _detalhes.LastUpdateTick .. " (" .. _detalhes._tempo - _detalhes.LastUpdateTick .. " 秒前)")
 			text = text:gsub ([[@TICKNEXT]], _detalhes:TimeLeft (_detalhes.atualizador))
 			
 			text = text:gsub ([[@COMBATID]], _detalhes.combat_id)
-			text = text:gsub ([[@COMBATCONTAINERS]], _detalhes.tabela_vigente[1] and _detalhes.tabela_vigente[2] and _detalhes.tabela_vigente[3] and _detalhes.tabela_vigente[4] and "|cFF22FF22good|r" or "|cFFFF2222bad|r")
+			text = text:gsub ([[@COMBATCONTAINERS]], _detalhes.tabela_vigente[1] and _detalhes.tabela_vigente[2] and _detalhes.tabela_vigente[3] and _detalhes.tabela_vigente[4] and "|cFF22FF22好|r" or "|cFFFF2222坏|r")
 			text = text:gsub ([[@COMBATDAMAGEACTORS]], #_detalhes.tabela_vigente[1] and _detalhes.tabela_vigente[1]._ActorTable and #_detalhes.tabela_vigente[1]._ActorTable)
 			
-			text = text:gsub ([[@PARSERHEALTH]], _detalhes.parser_frame:GetScript ("OnEvent") == _detalhes.OnParserEvent and "|cFF22FF22good|r" or "|cFFFF2222bad|r")
+			text = text:gsub ([[@PARSERHEALTH]], _detalhes.parser_frame:GetScript ("OnEvent") == _detalhes.OnParserEvent and "|cFF22FF22好|r" or "|cFFFF2222坏|r")
 			
 			local captureStr = ""
 			for _ , captureName in ipairs (_detalhes.capture_types) do
 				if (_detalhes.capture_current [captureName]) then
-					captureStr = captureStr .. " " .. captureName .. ": |cFF22FF22okay|r"
+					captureStr = captureStr .. " " .. captureName .. ": |cFF22FF22确定|r"
 				else
 					captureStr = captureStr .. " " .. captureName .. ": |cFFFF2222X|r"
 				end
@@ -1014,18 +1014,18 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 			
 			if (instance) then
 				if (instance:IsEnabled()) then
-					text = text:gsub ([[@INSTANCESHOWN]], "|cFF22FF22good|r")
+					text = text:gsub ([[@INSTANCESHOWN]], "|cFF22FF22好|r")
 				else
-					text = text:gsub ([[@INSTANCESHOWN]], "|cFFFFFF22not visible|r")
+					text = text:gsub ([[@INSTANCESHOWN]], "|cFFFFFF22不可见|r")
 				end
 				
-				text = text:gsub ([[@INSTANCESEGMENT]], (instance.showing == _detalhes.tabela_vigente and "|cFF22FF22good|r" or "|cFFFFFF22isn't the current combat object|r") .. (" window segment: " .. instance:GetSegment()))
+				text = text:gsub ([[@INSTANCESEGMENT]], (instance.showing == _detalhes.tabela_vigente and "|cFF22FF22好|r" or "|cFFFFFF22不是当前的战斗对象|r") .. (" 窗口分段: " .. instance:GetSegment()))
 				
-				text = text:gsub ([[@INSTANCEDAMAGESTATUS]], (_detalhes._tempo - (_detalhes.LastFullDamageUpdate or 0)) < 3 and "|cFF22FF22good|r" or "|cFFFF2222last update registered is > than 3 seconds, is there actors to show?|r")
+				text = text:gsub ([[@INSTANCEDAMAGESTATUS]], (_detalhes._tempo - (_detalhes.LastFullDamageUpdate or 0)) < 3 and "|cFF22FF22好|r" or "|cFFFF2222最后更新注册时间超过3秒，是否有成员提示?|r")
 			else
-				text = text:gsub ([[@INSTANCESHOWN]], "|cFFFFFF22not found|r")
-				text = text:gsub ([[@INSTANCESEGMENT]], "|cFFFFFF22not found|r")
-				text = text:gsub ([[@INSTANCEDAMAGESTATUS]], "|cFFFFFF22not found|r")
+				text = text:gsub ([[@INSTANCESHOWN]], "|cFFFFFF22没找到|r")
+				text = text:gsub ([[@INSTANCESEGMENT]], "|cFFFFFF22没找到|r")
+				text = text:gsub ([[@INSTANCEDAMAGESTATUS]], "|cFFFFFF22没找到|r")
 				
 			end
 
@@ -1038,11 +1038,11 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 	elseif (msg == "combatlog") then
 		if (_detalhes.isLoggingCombat) then
 			LoggingCombat (false)
-			print ("Wow combatlog record turned OFF.")
+			print ("Wow战斗记录关闭了.")
 			_detalhes.isLoggingCombat = nil
 		else
 			LoggingCombat (true)
-			print ("Wow combatlog record turned ON.")
+			print ("Wow战斗记录开启了.")
 			_detalhes.isLoggingCombat = true
 		end
 		
@@ -1068,7 +1068,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 		BigWigs.RegisterMessage(addon, "BigWigs_Message")
 		function addon:BigWigs_Message(event, module, key, text)
 		  if module.journalId  == 1197 and text:match("^Phase %d$") then -- 1197 = Margok
-		   print ("Phase Changed!", event, module, key, text)
+		   print ("片段改变!", event, module, key, text)
 		  end
 		end
 	
@@ -1125,7 +1125,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 					local itemName, itemLink, itemRarity, itemLevel, _, itemType, itemSubType = GetItemInfo (itemLink)
 					if (itemType == "Armor" or itemType == "Weapon") then --a weapon or armor
 						if (itemLevel < 460) then
-							print ("Selling", itemName, itemType)
+							print ("出售", itemName, itemType)
 							UseContainerItem (b, s)
 						end
 					end
@@ -1181,7 +1181,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 			end
 		end	
 	
-		print ("total loot", total)
+		print ("总共拾取", total)
 		_detalhes_global.ALOOT  = r
 	
 	elseif (msg == "ilvl" or msg == "itemlevel" or msg == "ilevel") then
@@ -1198,7 +1198,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 		
 		local ItemUpgradeInfo = LibStub ("LibItemUpgradeInfo-1.0")
 		
-		_detalhes:Msg ("======== Item Level Debug ========")
+		_detalhes:Msg ("======== 装备等级调试 ========")
 		
 		for equip_id = 1, 17 do
 			if (equip_id ~= 4) then --shirt slot
@@ -1232,7 +1232,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 		end
 		
 		local average = item_level / item_amount
-		_detalhes:Msg ("gear score: " .. item_level, "| item amount:", item_amount, "| ilvl:", average)
+		_detalhes:Msg ("装备得分: " .. item_level, "| 装备数量:", item_amount, "| 等级:", average)
 
 		_detalhes.ilevel:CalcItemLevel ("player", UnitGUID("player"), true)
 		
@@ -1338,7 +1338,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 			local instance = _detalhes:GetInstance (lower_instance)
 			if (instance) then
 				local func = {_detalhes.OpenRaidHistoryWindow, _detalhes, "Hellfire Citadel", 1800, 15, "DAMAGER", "Rock Lobster", 2, "Keyspell"}
-				instance:InstanceAlert ("Boss Defeated, Open History! ", {[[Interface\AddOns\Details\images\icons]], 16, 16, false, 434/512, 466/512, 243/512, 273/512}, 40, func, true)
+				instance:InstanceAlert ("BOSS击败，打开历史! ", {[[Interface\AddOns\Details\images\icons]], 16, 16, false, 434/512, 466/512, 243/512, 273/512}, 40, func, true)
 			end
 		end
 
@@ -1356,7 +1356,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 		local lower_instance = _detalhes:GetLowerInstanceNumber()
 		local instance = _detalhes:GetInstance (lower_instance)
 		
-		instance:InstanceAlert ("Boss Defeated! Show Ranking", icon, 10, func, true)
+		instance:InstanceAlert ("Boss击败!显示排名", icon, 10, func, true)
 	
 	elseif (msg == "scroll" or msg == "scrolldamage" or msg == "scrolling") then
 		Details:ScrollDamage()
@@ -1367,14 +1367,14 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 	if (spec) then
 		local specID = DetailsFramework.GetSpecializationInfo (spec)
 		if (specID and specID ~= 0) then
-			print ("Current SpecID: ", specID)
+			print ("当前的SpecID: ", specID)
 		end
 	end
 		
 	
 	elseif (msg == "senditemlevel") then
 		_detalhes:SendCharacterData()
-		print ("Item level dispatched.")
+		print ("发送物品等级.")
 	
 	elseif (msg == "talents") then
 		local talents = {}
@@ -1397,7 +1397,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 		
 		--> at this point, details! should not be in combat
 		if (_detalhes.in_combat) then
-			_detalhes:Msg ("already in combat, closing current segment.")
+			_detalhes:Msg ("已经在战斗中，关闭当前部分.")
 			_detalhes:SairDoCombate()
 		end
 		
@@ -1432,7 +1432,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 		end
 		
 		newCombat.is_trash = false
-		_detalhes:Msg ("done merging, segments: " .. segmentsAdded .. ", total time: " .. DetailsFramework:IntegerToTimer (totalTime))
+		_detalhes:Msg ("合并完成，片段段: " .. segmentsAdded .. ", 总计用时: " .. DetailsFramework:IntegerToTimer (totalTime))
 
 		--[[ --mythic+ debug
 		--> tag the segment as mythic overall segment
@@ -1628,31 +1628,31 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 						rest = tonumber (rest)
 						if (rest) then
 							_detalhes [command] = rest
-							print (Loc ["STRING_DETAILS1"] .. "config '" .. command .. "' set to " .. rest)
+							print (Loc ["STRING_DETAILS1"] .. "配置 '" .. command .. "' 设置为 " .. rest)
 						else
-							print (Loc ["STRING_DETAILS1"] .. "config '" .. command .. "' expects a number")
+							print (Loc ["STRING_DETAILS1"] .. "配置 '" .. command .. "' 需要数字")
 						end
 						
 					elseif (whichType == "string") then
 						rest = tostring (rest)
 						if (rest) then
 							_detalhes [command] = rest
-							print (Loc ["STRING_DETAILS1"] .. "config '" .. command .. "' set to " .. rest)
+							print (Loc ["STRING_DETAILS1"] .. "配置 '" .. command .. "' 设置为 " .. rest)
 						else
-							print (Loc ["STRING_DETAILS1"] .. "config '" .. command .. "' expects a string")
+							print (Loc ["STRING_DETAILS1"] .. "配置 '" .. command .. "' 需要字符串")
 						end
 						
 					elseif (whichType == "boolean") then
 						if (rest == "true") then
 							_detalhes [command] = true
-							print (Loc ["STRING_DETAILS1"] .. "config '" .. command .. "' set to true")
+							print (Loc ["STRING_DETAILS1"] .. "配置 '" .. command .. "' 设置为true")
 							
 						elseif (rest == "false") then
 							_detalhes [command] = false
-							print (Loc ["STRING_DETAILS1"] .. "config '" .. command .. "' set to false")
+							print (Loc ["STRING_DETAILS1"] .. "配置 '" .. command .. "' 设置为false")
 							
 						else
-							print (Loc ["STRING_DETAILS1"] .. "config '" .. command .. "' expects true or false")
+							print (Loc ["STRING_DETAILS1"] .. "配置 '" .. command .. "' 需要true或false")
 						end
 					end
 				
@@ -1661,7 +1661,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 					if (type (value) == "boolean") then
 						value = value and "true" or "false"
 					end
-					print (Loc ["STRING_DETAILS1"] .. "config '" .. command .. "' current value is: " .. value)
+					print (Loc ["STRING_DETAILS1"] .. "配置 '" .. command .. "' 当前值为: " .. value)
 				end
 				
 				return
@@ -1670,9 +1670,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 		end
 		
 		print (" ")
-		local v = _detalhes.game_version .. "." .. (_detalhes.build_counter >= _detalhes.alpha_build_counter and _detalhes.build_counter or _detalhes.alpha_build_counter)
-		print (Loc ["STRING_DETAILS1"] .. "" .. v .. " [|cFFFFFF00CORE: " .. _detalhes.realversion .. "|r] " ..  Loc ["STRING_COMMAND_LIST"] .. ":")
-		
+	
 		print ("|cffffaeae/details|r |cffffff33" .. Loc ["STRING_SLASH_NEW"] .. "|r: " .. Loc ["STRING_SLASH_NEW_DESC"])
 		print ("|cffffaeae/details|r |cffffff33" .. Loc ["STRING_SLASH_SHOW"] .. " " .. Loc ["STRING_SLASH_HIDE"] .. " " .. Loc ["STRING_SLASH_TOGGLE"] .. "|r|cfffcffb0 <" .. Loc ["STRING_WINDOW_NUMBER"] .. ">|r: " .. Loc ["STRING_SLASH_SHOWHIDETOGGLE_DESC"])
 		print ("|cffffaeae/details|r |cffffff33" .. Loc ["STRING_SLASH_ENABLE"] .. " " .. Loc ["STRING_SLASH_DISABLE"] .. "|r: " .. Loc ["STRING_SLASH_CAPTURE_DESC"])
@@ -1684,6 +1682,10 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 		
 		--print ("|cffffaeae/details " .. Loc ["STRING_SLASH_WORLDBOSS"] .. "|r: " .. Loc ["STRING_SLASH_WORLDBOSS_DESC"])
 		print (" ")
+
+		local v = _detalhes.game_version .. "." .. (_detalhes.build_counter >= _detalhes.alpha_build_counter and _detalhes.build_counter or _detalhes.alpha_build_counter)
+		print (Loc ["STRING_DETAILS1"] .. "|cFFFFFF00DETAILS! VERSION|r: |cFFFFAA00C" .. (_detalhes.build_counter >= _detalhes.alpha_build_counter and _detalhes.build_counter or _detalhes.alpha_build_counter))
+		print (Loc ["STRING_DETAILS1"] .. "|cFFFFFF00GAME VERSION|r: |cFFFFAA00" .. _detalhes.game_version)
 
 	end
 end

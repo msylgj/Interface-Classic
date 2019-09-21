@@ -185,7 +185,7 @@
 				if (lower_instance) then
 					lower_instance = _detalhes:GetInstance (lower_instance)
 					if (lower_instance) then
-						lower_instance:InstanceAlert ("Update Available!", {[[Interface\GossipFrame\AvailableQuestIcon]], 16, 16, false}, _detalhes.update_warning_timeout, {_detalhes.OpenUpdateWindow})
+						lower_instance:InstanceAlert ("可用更新!", {[[Interface\GossipFrame\AvailableQuestIcon]], 16, 16, false}, _detalhes.update_warning_timeout, {_detalhes.OpenUpdateWindow})
 					end
 				end
 				_detalhes:Msg (Loc ["STRING_VERSION_AVAILABLE"])
@@ -462,7 +462,7 @@
 		core_version = tonumber (core_version) or 0
 		if (core_version ~= _detalhes.realversion) then
 			if (core_version > _detalhes.realversion) then
-				_detalhes:Msg ("your Details! is out dated and cannot communicate with other players.")
+				_detalhes:Msg ("你的Details!已过期，无法与其他玩家沟通.")
 			end
 			return
 		end

@@ -89,7 +89,7 @@ function _detalhes:InitializeOptionsWindow()
 	local f = DetailsOptionsWindow.frame
 	
 	f.Frame = f
-	f.__name = "Options"
+	f.__name = "设置"
 	f.real_name = "DETAILS_OPTIONS"
 	f.__icon = [[Interface\Scenarios\ScenarioIcon-Interact]]
 	DetailsPluginContainerWindow.EmbedPlugin (f, f, true)
@@ -366,7 +366,7 @@ function _detalhes:OpenOptionsWindow (instance, no_reopen, section)
 						if (SoloInfo) then
 							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " " .. SoloInfo [1], onclick = onSelectInstance, icon = SoloInfo [2]}
 						else
-							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " unknown", onclick = onSelectInstance, icon = ""}
+							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " 未知", onclick = onSelectInstance, icon = ""}
 						end
 						
 					elseif (modo == 4) then --raid
@@ -376,10 +376,10 @@ function _detalhes:OpenOptionsWindow (instance, no_reopen, section)
 							if (plugin_object) then
 								InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " " .. plugin_object.__name, onclick = onSelectInstance, icon = plugin_object.__icon}
 							else
-								InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " unknown", onclick = onSelectInstance, icon = ""}
+								InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " 未知", onclick = onSelectInstance, icon = ""}
 							end
 						else
-							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " unknown", onclick = onSelectInstance, icon = ""}
+							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " 未知", onclick = onSelectInstance, icon = ""}
 						end
 					else
 						InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " " .. _detalhes.atributos.lista [atributo] .. " - " .. _detalhes.sub_atributos [atributo].lista [sub_atributo], onclick = onSelectInstance, icon = _detalhes.sub_atributos [atributo].icones[sub_atributo] [1], texcoord = _detalhes.sub_atributos [atributo].icones[sub_atributo] [2]}
@@ -413,7 +413,7 @@ function _detalhes:OpenOptionsWindow (instance, no_reopen, section)
 		group_editing:ClearAllPoints()
 		DetailsOptionsWindowGroupEditingText:ClearAllPoints()
 		group_editing:SetPoint ("right", DetailsOptionsWindowGroupEditingText, "left", -1, 0)
-		DetailsOptionsWindowGroupEditingText:SetText ("Editing Group")
+		DetailsOptionsWindowGroupEditingText:SetText ("编辑组")
 		DetailsOptionsWindowGroupEditingText:SetPoint ("right", instances_string.widget, "left", -20, 0)
 		DetailsOptionsWindowGroupEditingText:SetTextColor (1, 0.8, 0)
 		group_editing.tooltip = Loc ["STRING_MINITUTORIAL_OPTIONS_PANEL2"]
@@ -479,7 +479,7 @@ function _detalhes:OpenOptionsWindow (instance, no_reopen, section)
 		c:SetAlpha (.6)
 		local tt = f:CreateFontString (nil, "artwork", "GameFontHighlightSmall")
 		tt:SetPoint ("center", f, "center", 0, -5)
-		tt:SetText ("Character\nPosition")
+		tt:SetText ("角色\n位置")
 		
 		local hide_3d_world = CreateFrame ("CheckButton", "DetailsOptionsWindowDisable3D", window.widget, "ChatConfigCheckButtonTemplate")
 		hide_3d_world:SetPoint ("bottomleft", window.widget, "bottomleft", 28, 7)
@@ -487,7 +487,7 @@ function _detalhes:OpenOptionsWindow (instance, no_reopen, section)
 		DetailsOptionsWindowDisable3DText:ClearAllPoints()
 		DetailsOptionsWindowDisable3DText:SetPoint ("left", hide_3d_world, "right", -2, 1)
 		DetailsOptionsWindowDisable3DText:SetTextColor (1, 0.8, 0)
-		hide_3d_world.tooltip = "Goodbye Cruel World :("
+		hide_3d_world.tooltip = "再见残忍的世界 :("
 		hide_3d_world:SetHitRectInsets (0, -105, 0, 0)
 		
 		hide_3d_world:SetScript ("OnClick", function()
@@ -641,7 +641,7 @@ local menus = { --labels nos menus
 		Loc ["STRING_OPTIONSMENU_AUTOMATIC"],
 		Loc ["STRING_OPTIONSMENU_WALLPAPER"], 
 		
-		"Streamer Settings", --Loc ["STRING_OPTIONSMENU_MISC"]
+		"主播插件设置", --Loc ["STRING_OPTIONSMENU_MISC"]
 	},
 	
 	{	
@@ -671,7 +671,7 @@ local menus2 = {
 		Loc ["STRING_OPTIONSMENU_SPELLS"], --15
 		Loc ["STRING_OPTIONSMENU_DATACHART"], --16
 		Loc ["STRING_OPTIONSMENU_AUTOMATIC"], --17
-		"Streamer Settings", --18
+		"主播插件设置", --18
 		Loc ["STRING_OPTIONSMENU_DATAFEED"], --19
 		Loc ["STRING_OPTIONSMENU_TOOLTIP"], --20
 	}
@@ -1656,14 +1656,14 @@ function window:CreateFrame20()
 		local iconsize = {14, 14}
 		
 		local abbreviationOptions = {
-			{value = 1, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_NONE"], desc = "Example: 305.500 -> 305500", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
-			{value = 2, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK"], desc = "Example: 305.500 -> 305.5K", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
-			{value = 3, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK2"], desc = "Example: 305.500 -> 305K", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
-			{value = 4, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK0"], desc = "Example: 25.305.500 -> 25M", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
-			{value = 5, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOKMIN"], desc = "Example: 305.500 -> 305.5k", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
-			{value = 6, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK2MIN"], desc = "Example: 305.500 -> 305k", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
-			{value = 7, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK0MIN"], desc = "Example: 25.305.500 -> 25m", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
-			{value = 8, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_COMMA"], desc = "Example: 25305500 -> 25.305.500", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize} --, desc = ""
+			{value = 1, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_NONE"], desc = "例如: 305.500 -> 305500", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
+			{value = 2, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK"], desc = "例如: 305.500 -> 305.5K", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
+			{value = 3, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK2"], desc = "例如: 305.500 -> 305K", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
+			{value = 4, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK0"], desc = "例如: 25.305.500 -> 25M", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
+			{value = 5, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOKMIN"], desc = "例如: 305.500 -> 305.5k", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
+			{value = 6, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK2MIN"], desc = "例如: 305.500 -> 305k", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
+			{value = 7, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_TOK0MIN"], desc = "例如: 25.305.500 -> 25m", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize}, --, desc = ""
+			{value = 8, label = Loc ["STRING_OPTIONS_PS_ABBREVIATE_COMMA"], desc = "例如: 25305500 -> 25.305.500", onclick = onSelectTimeAbbreviation, icon = icon, iconcolor = iconcolor, iconsize = iconsize} --, desc = ""
 		}
 		local buildAbbreviationMenu = function()
 			return abbreviationOptions
@@ -2233,8 +2233,8 @@ function window:CreateFrame18()
 		--> 
 		local button_width = 180
 		
-		local titleFrame18 = g:NewLabel (frame18, _, "$parentTitleText", "TitleTextLabel", "Streamer Settings", "GameFontNormal", 16)
-		local titleFrame18Desc = g:NewLabel (frame18, _, "$parentTitleDescText", "TitleDescTextLabel", "Set of tools for streamers, youtubers and broadcasters in general", "GameFontNormal", 10, "white")
+		local titleFrame18 = g:NewLabel (frame18, _, "$parentTitleText", "TitleTextLabel", "主播插件设置", "GameFontNormal", 16)
+		local titleFrame18Desc = g:NewLabel (frame18, _, "$parentTitleDescText", "TitleDescTextLabel", "一般用于主播，youtubers和广播公司的工具集", "GameFontNormal", 10, "white")
 		titleFrame18Desc:SetSize (450, 20)
 		
 		--fazer os headers com espa�o para images
@@ -2242,8 +2242,8 @@ function window:CreateFrame18()
 		
 		--> streamer plugin - a.k.a. player spell tracker 
 			--> title anchor
-			g:NewLabel (frame18, _, "$parentStreamerPluginAnchor", "streamerPluginAnchor", "Streamer Plugin: Action Tracker", "GameFontNormal")
-			local streamerTitleDesc = g:NewLabel (frame18, _, "$parentStreamerTitleDescText", "StreamerTitleDescTextLabel", "Show the spells you are casting, allowing the viewer to follow your decision making and learn your rotation.", "GameFontNormal", 10, "white")
+			g:NewLabel (frame18, _, "$parentStreamerPluginAnchor", "streamerPluginAnchor", "主播插件: 动作追踪器", "GameFontNormal")
+			local streamerTitleDesc = g:NewLabel (frame18, _, "$parentStreamerTitleDescText", "StreamerTitleDescTextLabel", "显示正在施放的法术，允许观察者遵循你的决策并学习你的循环.", "GameFontNormal", 10, "white")
 			streamerTitleDesc:SetSize (270, 40)
 			streamerTitleDesc:SetJustifyV ("top")
 			streamerTitleDesc:SetPoint ("topleft", frame18.streamerPluginAnchor, "bottomleft", 0, -4)
@@ -2267,12 +2267,12 @@ function window:CreateFrame18()
 								window:Hide()
 							end)
 						end
-						local configurePluginButton = g:NewButton (frame18, _, "$parentConfigureStreamerPluginButton", "configureStreamerPlugin", 100, 20, configure_streamer_plugin, nil, nil, nil, "Action Tracker Options", nil, options_button_template)
+						local configurePluginButton = g:NewButton (frame18, _, "$parentConfigureStreamerPluginButton", "configureStreamerPlugin", 100, 20, configure_streamer_plugin, nil, nil, nil, "动作追踪器选项", nil, options_button_template)
 						configurePluginButton:SetWidth (button_width)
 						configurePluginButton:SetPoint ("topleft", streamerTitleImage, "bottomleft", 0, -7)
 						
 						--> text telling how to disable
-						local pluginAlreadyEnabled = g:NewLabel (frame18, _, "$parentStreamerAlreadyEnabledText", "StreamerAlreadyEnabledTextLabel", "Plugin is enabled. You may disable it on Plugin Management section.", "GameFontNormal", 10, "white")
+						local pluginAlreadyEnabled = g:NewLabel (frame18, _, "$parentStreamerAlreadyEnabledText", "StreamerAlreadyEnabledTextLabel", "插件已启用。 可以在插件管理部分禁用它.", "GameFontNormal", 10, "white")
 						pluginAlreadyEnabled:SetJustifyV ("top")
 						pluginAlreadyEnabled:SetSize (270, 40)
 						pluginAlreadyEnabled:SetPoint ("topleft", configurePluginButton, "bottomleft", 0, -7)
@@ -2289,33 +2289,33 @@ function window:CreateFrame18()
 							local configure_streamer_plugin = function()
 								StreamerPlugin.OpenOptionsPanel()
 							end
-							local configurePluginButton = g:NewButton (frame18, _, "$parentConfigureStreamerPluginButton", "configureStreamerPlugin", 100, 20, configure_streamer_plugin, nil, nil, nil, "Action Tracker Options", nil, options_button_template)
+							local configurePluginButton = g:NewButton (frame18, _, "$parentConfigureStreamerPluginButton", "configureStreamerPlugin", 100, 20, configure_streamer_plugin, nil, nil, nil, "动作追踪器选项", nil, options_button_template)
 							configurePluginButton:SetWidth (button_width)
 							configurePluginButton:SetPoint ("topleft", streamerTitleImage, "bottomleft", 0, -7)
 							
 							--> text telling how to disable
-							local pluginAlreadyEnabled = g:NewLabel (frame18, _, "$parentStreamerAlreadyEnabledText", "StreamerAlreadyEnabledTextLabel", "Plugin is enabled. You may disable it on Plugin Management section.", "GameFontNormal", 10, "white")
+							local pluginAlreadyEnabled = g:NewLabel (frame18, _, "$parentStreamerAlreadyEnabledText", "StreamerAlreadyEnabledTextLabel", "插件已启用。 可以在插件管理部分禁用它.", "GameFontNormal", 10, "white")
 							pluginAlreadyEnabled:SetJustifyV ("top")
 							pluginAlreadyEnabled:SetSize (270, 40)
 							pluginAlreadyEnabled:SetPoint ("topleft", configurePluginButton, "bottomleft", 0, -7)
 						end
 						
-						local enablePluginButton = g:NewButton (frame18, _, "$parentEnableStreamerPluginButton", "enableStreamerPluginButton", 100, 20, enable_streamer_plugin, nil, nil, nil, "Enable Plugin", nil, options_button_template)
+						local enablePluginButton = g:NewButton (frame18, _, "$parentEnableStreamerPluginButton", "enableStreamerPluginButton", 100, 20, enable_streamer_plugin, nil, nil, nil, "启用插件", nil, options_button_template)
 						enablePluginButton:SetWidth (button_width)
 						enablePluginButton:SetPoint ("topleft", streamerTitleImage, "bottomleft", 0, -5)
 					end
 				end
 			else
 				--> plugin is disabled at the addon control panel
-				local pluginDisabled = g:NewLabel (frame18, _, "$parentStreamerDisabledText", "StreamerDisabledTextLabel", "Details!: Streamer Plugin is disabled on the AddOns Control Panel.", "GameFontNormal", 10, "red")
+				local pluginDisabled = g:NewLabel (frame18, _, "$parentStreamerDisabledText", "StreamerDisabledTextLabel", "Details!: AddOns控制面板上禁用Streamer插件.", "GameFontNormal", 10, "red")
 				pluginDisabled:SetSize (270, 40)
 				pluginDisabled:SetPoint ("topleft", streamerTitleImage, "bottomleft", 0, -2)
 			end
 		
 		
 		--> event tracker
-			g:NewLabel (frame18, _, "$parentEventTrackerAnchor", "eventTrackerAnchor", "Event Tracker", "GameFontNormal")
-			local eventTrackerTitleDesc = g:NewLabel (frame18, _, "$parentEventTrackerTitleDescText", "EventTrackerTitleDescTextLabel", "Show what's happening near you so the viewer can follow what's going on. Show cooldowns, CC, spell interruption. Useful on any group content.", "GameFontNormal", 10, "white")
+			g:NewLabel (frame18, _, "$parentEventTrackerAnchor", "eventTrackerAnchor", "事件追踪", "GameFontNormal")
+			local eventTrackerTitleDesc = g:NewLabel (frame18, _, "$parentEventTrackerTitleDescText", "EventTrackerTitleDescTextLabel", "显示附近发生的事情，以便观众可以关注正在发生的事情。 显示冷却时间，群体控制，打断。 适用于任何群组内容.", "GameFontNormal", 10, "white")
 			eventTrackerTitleDesc:SetJustifyV ("top")
 			eventTrackerTitleDesc:SetSize (270, 40)
 			eventTrackerTitleDesc:SetPoint ("topleft", frame18.eventTrackerAnchor, "bottomleft", 0, -4)
@@ -2324,7 +2324,7 @@ function window:CreateFrame18()
 			eventTrackerTitleImage:SetPoint ("topleft", frame18.eventTrackerAnchor, "bottomleft", 0, -40)
 			
 			--> enable feature checkbox
-				g:NewLabel (frame18, _, "$parentEnableEventTrackerLabel", "EventTrackerLabel", "Enable Event Tracker", "GameFontHighlightLeft")
+				g:NewLabel (frame18, _, "$parentEnableEventTrackerLabel", "EventTrackerLabel", "启用事件跟踪器", "GameFontHighlightLeft")
 				g:NewSwitch (frame18, _, "$parentEventTrackerSlider", "EventTrackerSlider", 60, 20, _, _, _detalhes.event_tracker.enabled, nil, nil, nil, nil, options_switch_template)
 
 				frame18.EventTrackerSlider:SetPoint ("left", frame18.EventTrackerLabel, "right", 2)
@@ -2335,7 +2335,7 @@ function window:CreateFrame18()
 					_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 				end
 				
-				window:CreateLineBackground2 (frame18, "EventTrackerSlider", "EventTrackerLabel", "Enable Event Tracker")
+				window:CreateLineBackground2 (frame18, "EventTrackerSlider", "EventTrackerLabel", "启用事件跟踪器")
 				
 				frame18.EventTrackerLabel:SetPoint ("topleft", eventTrackerTitleImage, "bottomleft", 0, -10)
 				frame18.EventTrackerSlider:SetPoint ("left", frame18.EventTrackerLabel, "right", 2, 0)
@@ -2347,14 +2347,14 @@ function window:CreateFrame18()
 						window:Hide()
 					end)
 				end
-				local configureEventTrackerButton = g:NewButton (frame18, _, "$parentConfigureEventTrackerButton", "configureEventTracker", 100, 20, configure_event_tracker, nil, nil, nil, "Event Tracker Options", nil, options_button_template)
+				local configureEventTrackerButton = g:NewButton (frame18, _, "$parentConfigureEventTrackerButton", "configureEventTracker", 100, 20, configure_event_tracker, nil, nil, nil, "启用事件跟踪器", nil, options_button_template)
 				configureEventTrackerButton:SetWidth (button_width)
 				configureEventTrackerButton:SetPoint ("topleft", frame18.EventTrackerLabel, "bottomleft", 0, -7)
 
 
 		--> current dps
-			g:NewLabel (frame18, _, "$parentCurrentDPSAnchor", "currentDPSAnchor", "The Real Current DPS", "GameFontNormal")
-			local currentDPSTitleDesc = g:NewLabel (frame18, _, "$parentCurrentDPSTitleDescText", "CurrentDPSTitleDescTextLabel", "Show a frame with DPS done only in the last 5 seconds. Useful for arena matches and mythic dungeons.", "GameFontNormal", 10, "white")
+			g:NewLabel (frame18, _, "$parentCurrentDPSAnchor", "currentDPSAnchor", "实时当前DPS", "GameFontNormal")
+			local currentDPSTitleDesc = g:NewLabel (frame18, _, "$parentCurrentDPSTitleDescText", "CurrentDPSTitleDescTextLabel", "仅在DPS框架内显示最近5秒。 适用于竞技场和史诗地下城.", "GameFontNormal", 10, "white")
 			currentDPSTitleDesc:SetJustifyV ("top")
 			currentDPSTitleDesc:SetSize (270, 40)
 			currentDPSTitleDesc:SetPoint ("topleft", frame18.currentDPSAnchor, "bottomleft", 0, -4)
@@ -2363,7 +2363,7 @@ function window:CreateFrame18()
 			currentDPSTitleImage:SetPoint ("topleft", frame18.currentDPSAnchor, "bottomleft", 0, -40)
 			
 			--> enable feature checkbox
-				g:NewLabel (frame18, _, "$parentEnableCurrentDPSLabel", "CurrentDPSLabel", "Enable The Real Current Dps", "GameFontHighlightLeft")
+				g:NewLabel (frame18, _, "$parentEnableCurrentDPSLabel", "CurrentDPSLabel", "启用实际当前Dps", "GameFontHighlightLeft")
 				g:NewSwitch (frame18, _, "$parentCurrentDPSSlider", "CurrentDPSSlider", 60, 20, _, _, _detalhes.current_dps_meter.enabled, nil, nil, nil, nil, options_switch_template)
 
 				frame18.CurrentDPSSlider:SetPoint ("left", frame18.CurrentDPSLabel, "right", 2)
@@ -2374,7 +2374,7 @@ function window:CreateFrame18()
 					_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 				end
 				
-				window:CreateLineBackground2 (frame18, "CurrentDPSSlider", "CurrentDPSLabel", "Enable The Real Current Dps")
+				window:CreateLineBackground2 (frame18, "CurrentDPSSlider", "CurrentDPSLabel", "启用实际当前Dps")
 				
 				frame18.CurrentDPSLabel:SetPoint ("topleft", currentDPSTitleImage, "bottomleft", 0, -10)
 				frame18.CurrentDPSSlider:SetPoint ("left", frame18.CurrentDPSLabel, "right", 2, 0)
@@ -2386,18 +2386,18 @@ function window:CreateFrame18()
 						window:Hide()
 					end)
 				end
-				local configureCurrentDPSButton = g:NewButton (frame18, _, "$parentConfigureCurrentDPSButton", "configureCurrentDPS", 100, 20, configure_current_dps, nil, nil, nil, "Current Real DPS Options", nil, options_button_template)
+				local configureCurrentDPSButton = g:NewButton (frame18, _, "$parentConfigureCurrentDPSButton", "configureCurrentDPS", 100, 20, configure_current_dps, nil, nil, nil, "实际当前DPS选项", nil, options_button_template)
 				configureCurrentDPSButton:SetWidth (button_width)
 				configureCurrentDPSButton:SetPoint ("topleft", frame18.CurrentDPSLabel, "bottomleft", 0, -7)
 
 		
 		--> suppress alerts and tutorial popups
-			g:NewLabel (frame18, _, "$parentAlertsAndPopupsAnchor", "alertsAndPopupsAnchor", "Other Settings:", "GameFontNormal")
+			g:NewLabel (frame18, _, "$parentAlertsAndPopupsAnchor", "alertsAndPopupsAnchor", "其他设置:", "GameFontNormal")
 			
 
 		
 			--> no alerts
-				g:NewLabel (frame18, _, "$parentNoAlertsLabel", "NoAlertsLabel", "No Window Alerts", "GameFontHighlightLeft")
+				g:NewLabel (frame18, _, "$parentNoAlertsLabel", "NoAlertsLabel", "没有窗口警报", "GameFontHighlightLeft")
 				g:NewSwitch (frame18, _, "$parentNoAlertsSlider", "NoAlertsSlider", 60, 20, _, _, _detalhes.streamer_config.no_alerts, nil, nil, nil, nil, options_switch_template)
 
 				frame18.NoAlertsSlider:SetPoint ("left", frame18.NoAlertsLabel, "right", 2)
@@ -2407,10 +2407,10 @@ function window:CreateFrame18()
 					_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 				end
 				
-				window:CreateLineBackground2 (frame18, "NoAlertsSlider", "NoAlertsLabel", "Don't show alerts in the bottom of the window and avoid show tutorial popups.")
+				window:CreateLineBackground2 (frame18, "NoAlertsSlider", "NoAlertsLabel", "不要在窗口底部显示警报，并避免显示教程弹出窗口.")
 				
 			--> faster updates
-				g:NewLabel (frame18, _, "$parentFasterUpdatesLabel", "FasterUpdatesLabel", "60 Updates Per Second", "GameFontHighlightLeft")
+				g:NewLabel (frame18, _, "$parentFasterUpdatesLabel", "FasterUpdatesLabel", "每秒60次更新", "GameFontHighlightLeft")
 				g:NewSwitch (frame18, _, "$parentFasterUpdatesSlider", "FasterUpdatesSlider", 60, 20, _, _, _detalhes.streamer_config.faster_updates, nil, nil, nil, nil, options_switch_template)
 
 				frame18.FasterUpdatesSlider:SetPoint ("left", frame18.FasterUpdatesLabel, "right", 2)
@@ -2421,10 +2421,10 @@ function window:CreateFrame18()
 					_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 				end
 				
-				window:CreateLineBackground2 (frame18, "FasterUpdatesSlider", "FasterUpdatesLabel", "Increase the refresh rate to 60 times per second.")
+				window:CreateLineBackground2 (frame18, "FasterUpdatesSlider", "FasterUpdatesLabel", "将刷新率提高到每秒60次.")
 			
 			--> quick detection
-				g:NewLabel (frame18, _, "$parentQuickDetectionLabel", "QuickDetectionLabel", "Quick Player Info", "GameFontHighlightLeft")
+				g:NewLabel (frame18, _, "$parentQuickDetectionLabel", "QuickDetectionLabel", "快速玩家信息", "GameFontHighlightLeft")
 				g:NewSwitch (frame18, _, "$parentQuickDetectionSlider", "QuickDetectionSlider", 60, 20, _, _, _detalhes.streamer_config.quick_detection, nil, nil, nil, nil, options_switch_template)
 
 				frame18.QuickDetectionSlider:SetPoint ("left", frame18.QuickDetectionLabel, "right", 2)
@@ -2434,10 +2434,10 @@ function window:CreateFrame18()
 					_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 				end
 				
-				window:CreateLineBackground2 (frame18, "QuickDetectionSlider", "QuickDetectionLabel", "Attempt to acquire player information such as class, spec or item level faster.")
+				window:CreateLineBackground2 (frame18, "QuickDetectionSlider", "QuickDetectionLabel", "尝试更快地获取诸如职业，专精或装备等级的玩家信息.")
 			
 			--> disable mythic dungeon
-				g:NewLabel (frame18, _, "$parentDisableMythicDungeonLabel", "DisableMythicDungeonLabel", "No Mythic Dungeon Shenanigans", "GameFontHighlightLeft")
+				g:NewLabel (frame18, _, "$parentDisableMythicDungeonLabel", "DisableMythicDungeonLabel", "没有史诗地下城小怪", "GameFontHighlightLeft")
 				g:NewSwitch (frame18, _, "$parentDisableMythicDungeonSlider", "DisableMythicDungeonSlider", 60, 20, _, _, _detalhes.streamer_config.disable_mythic_dungeon, nil, nil, nil, nil, options_switch_template)
 
 				frame18.DisableMythicDungeonSlider:SetPoint ("left", frame18.DisableMythicDungeonLabel, "right", 2)
@@ -2447,10 +2447,10 @@ function window:CreateFrame18()
 					_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 				end
 				
-				window:CreateLineBackground2 (frame18, "DisableMythicDungeonSlider", "DisableMythicDungeonLabel", "Threat mythic dungeon segments as common segments: no trash merge, no mythic run overall, segments wraps on entering and leaving combat.")
+				window:CreateLineBackground2 (frame18, "DisableMythicDungeonSlider", "DisableMythicDungeonLabel", "受威胁的史诗地下城部分作为常规部分：没有小怪合入，没有史诗整体运行，清除进入和离开战斗分段.")
 				
 			--> disable chart at the end of a mythic dungeon
-				g:NewLabel (frame18, _, "$parentDisableMythicDungeonChartLabel", "DisableMythicDungeonChartLabel", "Show Mythic Dungeon Damage Graphic", "GameFontHighlightLeft")
+				g:NewLabel (frame18, _, "$parentDisableMythicDungeonChartLabel", "DisableMythicDungeonChartLabel", "显示史诗地下城伤害图形", "GameFontHighlightLeft")
 				g:NewSwitch (frame18, _, "$parentDisableMythicDungeonChartSlider", "DisableMythicDungeonChartSlider", 60, 20, _, _, _detalhes.mythic_plus.show_damage_graphic, nil, nil, nil, nil, options_switch_template)
 
 				frame18.DisableMythicDungeonChartSlider:SetPoint ("left", frame18.DisableMythicDungeonChartLabel, "right", 2)
@@ -2460,10 +2460,10 @@ function window:CreateFrame18()
 					_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 				end
 				
-				window:CreateLineBackground2 (frame18, "DisableMythicDungeonChartSlider", "DisableMythicDungeonChartLabel", "At the end of a mythic dungeon run, show a graphic with the DPS of each player.")
+				window:CreateLineBackground2 (frame18, "DisableMythicDungeonChartSlider", "DisableMythicDungeonChartLabel", "在史诗地下城结束时，显示每个玩家的DPS图.")
 				
 			--> clear cache
-				g:NewLabel (frame18, _, "$parentClearCacheLabel", "ClearCacheLabel", "Clear Cache on New Event", "GameFontHighlightLeft")
+				g:NewLabel (frame18, _, "$parentClearCacheLabel", "ClearCacheLabel", "清除新事件的缓存", "GameFontHighlightLeft")
 				g:NewSwitch (frame18, _, "$parentClearCacheSlider", "ClearCacheSlider", 60, 20, _, _, _detalhes.streamer_config.reset_spec_cache, nil, nil, nil, nil, options_switch_template)
 
 				frame18.ClearCacheSlider:SetPoint ("left", frame18.ClearCacheLabel, "right", 2)
@@ -2473,7 +2473,7 @@ function window:CreateFrame18()
 					_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 				end
 				
-				window:CreateLineBackground2 (frame18, "ClearCacheSlider", "ClearCacheLabel", "Reduces the chance of getting a serial number overlap when working with multiple realms.")
+				window:CreateLineBackground2 (frame18, "ClearCacheSlider", "ClearCacheLabel", "在处理多个服务器时，减少序列号重叠的可能性.")
 				
 			--> advanced animations
 			--[[
@@ -2716,7 +2716,7 @@ function window:CreateFrame17()
 		local BuildSwitchMenu = function()
 		
 			window.lastSwitchList = {}
-			local t = {{value = 0, label = "do not switch", color = {.7, .7, .7, 1}, onclick = Current_Switch_Func, icon = [[Interface\Glues\LOGIN\Glues-CheckBox-Check]]}}
+			local t = {{value = 0, label = "不要切换", color = {.7, .7, .7, 1}, onclick = Current_Switch_Func, icon = [[Interface\Glues\LOGIN\Glues-CheckBox-Check]]}}
 			
 			local attributes = _detalhes.sub_atributos
 			local i = 1
@@ -4045,7 +4045,7 @@ function window:CreateFrame1()
 		if (not frame1.IgnoreNicknamesSlider.SetAsCheckBox) then
 			print ("================")
 			print ("================")
-			print ("Details!: |cFFFFFF00A very old Framework version is installed by another addon, please update (if you have any of these installed): |cFFFFFFFFIskarAssist|r, |cFFFFFFFFSalvageYardSeller|r, |cFFFFFFFFHansgar&Franzok Assist|r and |cFFFFFFFFFlashTaskbar|r.|r")
+			print ("Details!: |cFFFFFF00一个非常旧的Framework版本由另一个插件安装，请更新（如果您安装了这些版本）: |cFFFFFFFFIskarAssist|r, |cFFFFFFFFSalvageYardSeller|r, |cFFFFFFFFHansgar&Franzok Assist|r and |cFFFFFFFFFlashTaskbar|r.|r")
 			print ("================")
 			print ("================")
 		end
@@ -4311,7 +4311,7 @@ function window:CreateFrame1()
 			g:NewButton (frame1, _, "$parentSetWindowColorButton", "SetWindowColorButton", window.buttons_width, window.buttons_height, change_color, nil, nil, nil, Loc ["STRING_OPTIONS_CHANGECOLOR"], 1, options_button_template)
 			--frame1.SetWindowColorButton:InstallCustomTexture (nil, nil, nil, nil, nil, true)
 			
-			window:CreateLineBackground2 (frame1, "SetWindowColorButton", "SetWindowColorButton", "Shortcut to modify the window color.\nFor more options check out |cFFFFFF00Window Settings|r section.", nil, {1, 0.8, 0}, button_color_rgb)
+			window:CreateLineBackground2 (frame1, "SetWindowColorButton", "SetWindowColorButton", "修改窗口颜色的快捷方式.\n有关更多选项，请查看|cFFFFFF00“窗口设置”|r部分.", nil, {1, 0.8, 0}, button_color_rgb)
 			
 			frame1.SetWindowColorButton:SetIcon ([[Interface\AddOns\Details\images\icons]], 10, 10, nil, {0.640625, 0.6875, 0.630859375, 0.677734375}, nil, nil, 4)
 			frame1.SetWindowColorButton:SetTextColor (button_color_rgb)
@@ -4359,7 +4359,7 @@ function window:CreateFrame1()
 		--click through ~clickthrough
 			
 			--in combat only
-			g:NewLabel (frame1, _, "$parentclickThroughInCombatLabel", "clickThroughInCombatLabel", "In Combat Only", "GameFontHighlightLeft")
+			g:NewLabel (frame1, _, "$parentclickThroughInCombatLabel", "clickThroughInCombatLabel", "仅在战斗中", "GameFontHighlightLeft")
 			
 			g:NewSwitch (frame1, _, "$parentclickThroughInCombatSlider", "clickThroughInCombatSlider", 60, 20, _, _, _G.DetailsOptionsWindow.instance.clickthrough_incombatonly, nil, nil, nil, nil, options_switch_template)
 			frame1.clickThroughInCombatSlider:SetAsCheckBox()
@@ -4377,10 +4377,10 @@ function window:CreateFrame1()
 				end
 			end
 			
-			window:CreateLineBackground2 (frame1, "clickThroughInCombatSlider", "clickThroughInCombatLabel", "Only apply click through when in combat.")
+			window:CreateLineBackground2 (frame1, "clickThroughInCombatSlider", "clickThroughInCombatLabel", "仅在战斗中应用点击.")
 			
 			--window
-			g:NewLabel (frame1, _, "$parentclickThroughWindowLabel", "clickThroughWindowLabel", "Affect Window", "GameFontHighlightLeft")
+			g:NewLabel (frame1, _, "$parentclickThroughWindowLabel", "clickThroughWindowLabel", "作用窗口", "GameFontHighlightLeft")
 			
 			g:NewSwitch (frame1, _, "$parentclickThroughWindowSlider", "clickThroughWindowSlider", 60, 20, _, _, _G.DetailsOptionsWindow.instance.clickthrough_window, nil, nil, nil, nil, options_switch_template)
 			frame1.clickThroughWindowSlider:SetAsCheckBox()
@@ -4398,10 +4398,10 @@ function window:CreateFrame1()
 				end
 			end
 			
-			window:CreateLineBackground2 (frame1, "clickThroughWindowSlider", "clickThroughWindowLabel", "The window will be click through.")
+			window:CreateLineBackground2 (frame1, "clickThroughWindowSlider", "clickThroughWindowLabel", "该窗口将被点击.")
 			
 			--bars
-			g:NewLabel (frame1, _, "$parentclickThroughBarsLabel", "clickThroughBarsLabel", "Affect Bars", "GameFontHighlightLeft")
+			g:NewLabel (frame1, _, "$parentclickThroughBarsLabel", "clickThroughBarsLabel", "作用技能条", "GameFontHighlightLeft")
 			
 			g:NewSwitch (frame1, _, "$parentclickThroughBarsSlider", "clickThroughBarsSlider", 60, 20, _, _, _G.DetailsOptionsWindow.instance.clickthrough_rows, nil, nil, nil, nil, options_switch_template)
 			frame1.clickThroughBarsSlider:SetAsCheckBox()
@@ -4419,7 +4419,7 @@ function window:CreateFrame1()
 				end
 			end
 			
-			window:CreateLineBackground2 (frame1, "clickThroughBarsSlider", "clickThroughBarsLabel", "Player bars will be click through, won't show tooltips when hover hover them.")
+			window:CreateLineBackground2 (frame1, "clickThroughBarsSlider", "clickThroughBarsLabel", "玩家技能条将被点击，当悬停时它们不会显示鼠标提示.")
 			
 		
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -4435,8 +4435,8 @@ function window:CreateFrame1()
 		end
 		local timetypeOptions = {
 			--localize-me
-			{value = 1, label = "Activity Time", onclick = onSelectTimeType, icon = "Interface\\Icons\\Achievement_Quests_Completed_Daily_08", iconcolor = {1, .9, .9}, texcoord = {0.078125, 0.921875, 0.078125, 0.921875}}, --, desc = ""
-			{value = 2, label = "Effective Time", onclick = onSelectTimeType, icon = "Interface\\Icons\\Achievement_Quests_Completed_08"} --, desc = ""
+			{value = 1, label = "活动时间", onclick = onSelectTimeType, icon = "Interface\\Icons\\Achievement_Quests_Completed_Daily_08", iconcolor = {1, .9, .9}, texcoord = {0.078125, 0.921875, 0.078125, 0.921875}}, --, desc = ""
+			{value = 2, label = "有效时间", onclick = onSelectTimeType, icon = "Interface\\Icons\\Achievement_Quests_Completed_08"} --, desc = ""
 		}
 		local buildTimeTypeMenu = function()
 			return timetypeOptions
@@ -4461,7 +4461,7 @@ function window:CreateFrame1()
 		g:NewLabel (frame1, _, "$parentWindowControlsAnchor", "WindowControlsLabel", Loc ["STRING_OPTIONS_WC_ANCHOR"], "GameFontNormal")
 		g:NewLabel (frame1, _, "$parentToolsAnchor", "ToolsLabel", Loc ["STRING_OPTIONS_TOOLS_ANCHOR"], "GameFontNormal")
 		
-		g:NewLabel (frame1, _, "$parentClickThroughAnchor", "clickThroughLabel", "Click Through", "GameFontNormal")
+		g:NewLabel (frame1, _, "$parentClickThroughAnchor", "clickThroughLabel", "穿透点击", "GameFontNormal")
 
 		local w_start = 10
 		
@@ -4575,9 +4575,9 @@ function window:CreateFrame2()
 			_detalhes:SetDeathLogLimit (limit_amount)
 		end
 		local DeathLogLimitOptions = {
-			{value = 16, label = "16 Records", onclick = onSelectDeathLogLimit, icon = [[Interface\WorldStateFrame\ColumnIcon-GraveyardDefend0]]},
-			{value = 32, label = "32 Records", onclick = onSelectDeathLogLimit, icon = [[Interface\WorldStateFrame\ColumnIcon-GraveyardDefend0]]},
-			{value = 45, label = "45 Records", onclick = onSelectDeathLogLimit, icon = [[Interface\WorldStateFrame\ColumnIcon-GraveyardDefend0]]},
+			{value = 16, label = "16 记录", onclick = onSelectDeathLogLimit, icon = [[Interface\WorldStateFrame\ColumnIcon-GraveyardDefend0]]},
+			{value = 32, label = "32 记录", onclick = onSelectDeathLogLimit, icon = [[Interface\WorldStateFrame\ColumnIcon-GraveyardDefend0]]},
+			{value = 45, label = "45 记录", onclick = onSelectDeathLogLimit, icon = [[Interface\WorldStateFrame\ColumnIcon-GraveyardDefend0]]},
 		}
 		local buildDeathLogLimitMenu = function()
 			return DeathLogLimitOptions
@@ -4957,9 +4957,9 @@ function window:CreateFrame13()
 		end
 	
 		local select_alwaysuseprofile_dropdown = g:NewDropDown (frame13, _, "$parentSelectAlwaysuseprofileDropdown", "SelectAlwaysuseprofileDropdown", 160, dropdown_height, build_profile_menu, _detalhes.always_use_profile_name, options_dropdown_template)
-		select_alwaysuseprofile_dropdown:SetEmptyTextAndIcon ("Select Profile")
+		select_alwaysuseprofile_dropdown:SetEmptyTextAndIcon ("选择配置")
 
-		local select_alwaysuseprofile_label = g:NewLabel (frame13, _, "$parentSelectAlwaysuseprofileLabel", "SelectAlwaysuseprofileLabel", "Select Profile", "GameFontHighlightLeft")
+		local select_alwaysuseprofile_label = g:NewLabel (frame13, _, "$parentSelectAlwaysuseprofileLabel", "SelectAlwaysuseprofileLabel", "选择配置", "GameFontHighlightLeft")
 		select_alwaysuseprofile_dropdown:SetPoint ("left", select_alwaysuseprofile_label, "right", 2, 0)
 		
 		window:CreateLineBackground2 (frame13, select_alwaysuseprofile_dropdown,  select_alwaysuseprofile_label, Loc ["STRING_OPTIONS_PROFILE_GLOBAL"])
@@ -5147,7 +5147,7 @@ function window:CreateFrame13()
 		local export_profile = function()
 			local str = Details:ExportCurrentProfile()
 			if (str) then
-				_detalhes:ShowImportWindow (str, nil, "Details! Export Profile")
+				_detalhes:ShowImportWindow (str, nil, "Details! 导出配置")
 				
 				--[=[ debug
 				local uncompress = Details:DecompressData (str, "print")
@@ -5168,31 +5168,31 @@ function window:CreateFrame13()
 				end
 				
 				--prompt text panel returns what the user inserted in the text field in the first argument
-				DetailsFramework:ShowTextPromptPanel ("Insert a Name for the New Profile:", function (newProfileName)
+				DetailsFramework:ShowTextPromptPanel ("插入新配置文件的名称:", function (newProfileName)
 					Details:ImportProfile (profileString, newProfileName)
 				end)
-			end, "Details! Import Profile (paste string)")
+			end, "Details! 导入配置文件（粘贴字符串）")
 		end	
 		
 	--> import profile
-		local profileImportButton = g:NewButton (frame13, _, "$parentProfileImportButton", "profileImportButton", window.buttons_width, 18, import_profile, nil, nil, nil, "Import Profile", nil, options_button_template) --> localize-me
+		local profileImportButton = g:NewButton (frame13, _, "$parentProfileImportButton", "profileImportButton", window.buttons_width, 18, import_profile, nil, nil, nil, "导入配置", nil, options_button_template) --> localize-me
 		frame13.profileImportButton:SetIcon ([[Interface\BUTTONS\UI-GuildButton-OfficerNote-Up]], 14, 14, nil, {0, 1, 0, 1}, nil, 4, 2)
 		frame13.profileImportButton:SetTextColor (button_color_rgb)
 		
 		local hiddenlabel = g:NewLabel (frame13, _, "$parentProfileImportButtonLabel", "profileImportButtonLabel", "", "GameFontHighlightLeft")
 		hiddenlabel:SetPoint ("left", profileImportButton, "left")
 		
-		window:CreateLineBackground2 (frame13, "profileImportButton", "profileImportButton", "Import current profile", nil, {1, 0.8, 0}, button_color_rgb)
+		window:CreateLineBackground2 (frame13, "profileImportButton", "profileImportButton", "导入当前配置文件", nil, {1, 0.8, 0}, button_color_rgb)
 		
 	-->  export profile
-		local profileExportButton = g:NewButton (frame13, _, "$parentProfileExportButton", "profileExportButton", window.buttons_width, 18, export_profile, nil, nil, nil, "Export Current Profile", nil, options_button_template) --> localize-me
+		local profileExportButton = g:NewButton (frame13, _, "$parentProfileExportButton", "profileExportButton", window.buttons_width, 18, export_profile, nil, nil, nil, "导出当前配置文件", nil, options_button_template) --> localize-me
 		frame13.profileExportButton:SetIcon ([[Interface\Buttons\UI-GuildButton-MOTD-Up]], 14, 14, nil, {1, 0, 0, 1}, nil, 4, 2)
 		frame13.profileExportButton:SetTextColor (button_color_rgb)
 		
 		local hiddenlabel = g:NewLabel (frame13, _, "$parentProfileExportButtonLabel", "profileExportButtonLabel", "", "GameFontHighlightLeft")
 		hiddenlabel:SetPoint ("left", profileExportButton, "left")
 		
-		window:CreateLineBackground2 (frame13, "profileExportButton", "profileExportButton", "Export current profile", nil, {1, 0.8, 0}, button_color_rgb)
+		window:CreateLineBackground2 (frame13, "profileExportButton", "profileExportButton", "导出当前配置文件", nil, {1, 0.8, 0}, button_color_rgb)
 		
 	--> save window position within profile
 	
@@ -5291,7 +5291,7 @@ function window:CreateFrame3()
 	custom_texture_cancel:SetNormalTexture ([[Interface\Buttons\UI-GroupLoot-Pass-Down]])
 	custom_texture_cancel:SetPushedTexture ([[Interface\Buttons\UI-GroupLoot-Pass-Up]])
 	custom_texture_cancel:GetNormalTexture():SetDesaturated (true)
-	custom_texture_cancel.tooltip = "Stop using the custom texture"
+	custom_texture_cancel.tooltip = "停止使用自定义纹理"
 	custom_texture_cancel:SetHook ("OnEnter", function (self, capsule)
 		self:GetNormalTexture():SetBlendMode("ADD")
 	end)
@@ -5395,7 +5395,7 @@ function window:CreateFrame3()
 			local skinOptions = {}
 			for skin_name, skin_table in pairs (_detalhes.skins) do
 				local file = skin_table.file:gsub ([[Interface\AddOns\Details\images\skins\]], "")
-				local desc = "Author: |cFFFFFFFF" .. skin_table.author .. "|r\nVersion: |cFFFFFFFF" .. skin_table.version .. "|r\nSite: |cFFFFFFFF" .. skin_table.site .. "|r\n\nDesc: |cFFFFFFFF" .. skin_table.desc .. "|r\n\nFile: |cFFFFFFFF" .. file .. ".tga|r"
+				local desc = "作者: |cFFFFFFFF" .. skin_table.author .. "|r\n版本: |cFFFFFFFF" .. skin_table.version .. "|r\n位置: |cFFFFFFFF" .. skin_table.site .. "|r\n\描述: |cFFFFFFFF" .. skin_table.desc .. "|r\n\n文件: |cFFFFFFFF" .. file .. ".tga|r"
 				skinOptions [#skinOptions+1] = {value = skin_name, label = skin_name, onclick = onSelectSkin, icon = "Interface\\GossipFrame\\TabardGossipIcon", desc = desc}
 			end
 			return skinOptions
@@ -5624,7 +5624,7 @@ function window:CreateFrame3()
 			if (compressedData) then
 				_detalhes:ShowImportWindow (compressedData, nil, "Details! Export Skin")
 			else
-				Details:Msg ("failed to export skin.") --localize-me
+				Details:Msg ("导出外观失败.") --localize-me
 			end
 			_G.DetailsOptionsWindow3CustomSkinExportDropdown.MyObject:Select (false)
 		end
@@ -5670,7 +5670,7 @@ function window:CreateFrame3()
 					Details:Msg (Loc ["STRING_CUSTOM_IMPORT_ERROR"])
 				end
 			
-			end, "Details! Import Skin (paste string)") --localize-me
+			end, "Details! 导入外观（粘贴字符串）") --localize-me
 			
 		end
 	
@@ -5696,7 +5696,7 @@ function window:CreateFrame3()
 		local buildPDWSkinMenu = function()
 			local skinOptions = {}
 			for skin_name, skin_table in pairs (_detalhes.playerdetailwindow_skins) do
-				local desc = "Author: |cFFFFFFFF" .. skin_table.author .. "|r\nVersion: |cFFFFFFFF" .. skin_table.version .. "|r\n\nDesc: |cFFFFFFFF" .. skin_table.desc .. "|r"
+				local desc = "作者: |cFFFFFFFF" .. skin_table.author .. "|r\n版本: |cFFFFFFFF" .. skin_table.version .. "|r\n\n描述: |cFFFFFFFF" .. skin_table.desc .. "|r"
 				skinOptions [#skinOptions+1] = {value = skin_name, label = skin_name, onclick = onSelectPDWSkin, icon = "Interface\\GossipFrame\\TabardGossipIcon", desc = desc}
 			end
 			return skinOptions
@@ -5751,7 +5751,7 @@ function window:CreateFrame3()
 		window:CreateLineBackground2 (frame3, "ChatTabEmbed2WindowsSlider", "ChatTabEmbed2WindowsLabel", Loc ["STRING_OPTIONS_TABEMB_SINGLE_DESC"])
 		
 		--> size correction - width
-			g:NewLabel (frame3, _, "$parentChatTabEmbedSizeCorrectionLabel", "ChatTabEmbedSizeCorrectionLabel", "Width Offset", "GameFontHighlightLeft")
+			g:NewLabel (frame3, _, "$parentChatTabEmbedSizeCorrectionLabel", "ChatTabEmbedSizeCorrectionLabel", "宽度偏移", "GameFontHighlightLeft")
 			local s = g:NewSlider (frame3, _, "$parentChatTabEmbedSizeCorrectionSlider", "ChatTabEmbedSizeCorrectionSlider", SLIDER_WIDTH, SLIDER_HEIGHT, -100, 100, 1, tonumber (_detalhes.chat_tab_embed.x_offset), nil, nil, nil, options_slider_template)
 
 			frame3.ChatTabEmbedSizeCorrectionSlider:SetPoint ("left", frame3.ChatTabEmbedSizeCorrectionLabel, "right", 2)
@@ -5764,10 +5764,10 @@ function window:CreateFrame3()
 				
 				_detalhes:SendOptionsModifiedEvent (instance)
 			end)	
-			window:CreateLineBackground2 (frame3, "ChatTabEmbedSizeCorrectionSlider", "ChatTabEmbedSizeCorrectionLabel", "Fine tune the size of the window while embeded in the chat.")
+			window:CreateLineBackground2 (frame3, "ChatTabEmbedSizeCorrectionSlider", "ChatTabEmbedSizeCorrectionLabel", "嵌入聊天时微调窗口的大小.")
 		---------
 		--> size correction - height
-			g:NewLabel (frame3, _, "$parentChatTabEmbedSizeCorrection2Label", "ChatTabEmbedSizeCorrection2Label", "Height Offset", "GameFontHighlightLeft")
+			g:NewLabel (frame3, _, "$parentChatTabEmbedSizeCorrection2Label", "ChatTabEmbedSizeCorrection2Label", "高度偏移", "GameFontHighlightLeft")
 			local s = g:NewSlider (frame3, _, "$parentChatTabEmbedSizeCorrection2Slider", "ChatTabEmbedSizeCorrection2Slider", SLIDER_WIDTH, SLIDER_HEIGHT, -100, 100, 1, tonumber (_detalhes.chat_tab_embed.y_offset), nil, nil, nil, options_slider_template)
 
 			frame3.ChatTabEmbedSizeCorrection2Slider:SetPoint ("left", frame3.ChatTabEmbedSizeCorrection2Label, "right", 2)
@@ -5780,7 +5780,7 @@ function window:CreateFrame3()
 				
 				_detalhes:SendOptionsModifiedEvent (instance)
 			end)	
-			window:CreateLineBackground2 (frame3, "ChatTabEmbedSizeCorrection2Slider", "ChatTabEmbedSizeCorrection2Label", "Fine tune the size of the window while embeded in the chat.")
+			window:CreateLineBackground2 (frame3, "ChatTabEmbedSizeCorrection2Slider", "ChatTabEmbedSizeCorrection2Label", "嵌入聊天时微调窗口的大小.")
 		--------
 	
 	--> extra Options -~-extra
@@ -6070,7 +6070,7 @@ function window:CreateFrame4()
 		custom_texture_cancel:SetNormalTexture ([[Interface\Buttons\UI-GroupLoot-Pass-Down]])
 		custom_texture_cancel:SetPushedTexture ([[Interface\Buttons\UI-GroupLoot-Pass-Up]])
 		custom_texture_cancel:GetNormalTexture():SetDesaturated (true)
-		custom_texture_cancel.tooltip = "Stop using the custom texture"
+		custom_texture_cancel.tooltip = "停止使用自定义纹理"
 		custom_texture_cancel:SetHook ("OnEnter", function (self, capsule)
 			self:GetNormalTexture():SetBlendMode("ADD")
 		end)
@@ -6263,8 +6263,8 @@ function window:CreateFrame4()
 		local list = {
 			{value = [[]], label = Loc ["STRING_OPTIONS_BAR_ICONFILE1"], onclick = OnSelectIconFile, icon = icontexture, texcoord = iconcoords, iconsize = iconsize, iconcolor = {1, 1, 1, .3}},
 			{value = [[Interface\AddOns\Details\images\classes_small]], label = Loc ["STRING_OPTIONS_BAR_ICONFILE2"], onclick = OnSelectIconFile, icon = icontexture, texcoord = iconcoords, iconsize = iconsize},
-			{value = [[Interface\AddOns\Details\images\spec_icons_normal]], label = "Specialization", onclick = OnSelectIconFileSpec, icon = [[Interface\AddOns\Details\images\icons]], texcoord = {2/512, 32/512, 480/512, 510/512}, iconsize = iconsize},
-			{value = [[Interface\AddOns\Details\images\spec_icons_normal_alpha]], label = "Specialization Alpha", onclick = OnSelectIconFileSpec, icon = [[Interface\AddOns\Details\images\icons]], texcoord = {2/512, 32/512, 480/512, 510/512}, iconsize = iconsize},
+			{value = [[Interface\AddOns\Details\images\spec_icons_normal]], label = "专业化", onclick = OnSelectIconFileSpec, icon = [[Interface\AddOns\Details\images\icons]], texcoord = {2/512, 32/512, 480/512, 510/512}, iconsize = iconsize},
+			{value = [[Interface\AddOns\Details\images\spec_icons_normal_alpha]], label = "专业化 Alpha", onclick = OnSelectIconFileSpec, icon = [[Interface\AddOns\Details\images\icons]], texcoord = {2/512, 32/512, 480/512, 510/512}, iconsize = iconsize},
 			{value = [[Interface\AddOns\Details\images\classes_small_bw]], label = Loc ["STRING_OPTIONS_BAR_ICONFILE3"], onclick = OnSelectIconFile, icon = icontexture, texcoord = iconcoords, iconsize = iconsize},
 			{value = [[Interface\AddOns\Details\images\classes_small_alpha]], label = Loc ["STRING_OPTIONS_BAR_ICONFILE4"], onclick = OnSelectIconFile, icon = icontexture, texcoord = iconcoords, iconsize = iconsize},
 			{value = [[Interface\AddOns\Details\images\classes_small_alpha_bw]], label = Loc ["STRING_OPTIONS_BAR_ICONFILE6"], onclick = OnSelectIconFile, icon = icontexture, texcoord = iconcoords, iconsize = iconsize},
@@ -6290,7 +6290,7 @@ function window:CreateFrame4()
 		frame4.iconFileEntry:SetPoint ("topleft", frame4.iconFileLabel, "bottomleft", 0, -3)
 		--frame4.iconFileEntry:SetPoint ("topright", frame4.IconSelectDropdown, "bottomright", 0, 0)
 
-		frame4.iconFileEntry.tooltip = "- Press escape to restore default value.\n- Leave empty to hide icons."
+		frame4.iconFileEntry.tooltip = "- 按escape键恢复默认值.\n- 留空以隐藏图标."
 		frame4.iconFileEntry:SetHook ("OnEnterPressed", function()
 		
 			local instance = _G.DetailsOptionsWindow.instance
@@ -6360,7 +6360,7 @@ function window:CreateFrame4()
 		frame4.noIconButton:SetHighlightTexture ([[Interface\Glues\LOGIN\Glues-CheckBox-Check]] or [[Interface\Buttons\UI-GROUPLOOT-PASS-HIGHLIGHT]])
 		frame4.noIconButton:SetPushedTexture ([[Interface\Glues\LOGIN\Glues-CheckBox-Check]] or [[Interface\Buttons\UI-GroupLoot-Pass-Up]])
 		frame4.noIconButton:GetNormalTexture():SetDesaturated (true)
-		frame4.noIconButton.tooltip = "Clear icon file / Restore default"
+		frame4.noIconButton.tooltip = "清除图标文件/恢复默认值"
 
 	--> bar start at
 		g:NewSwitch (frame4, _, "$parentBarStartSlider", "barStartSlider", 60, 20, nil, nil, instance.row_info.start_after_icon, nil, nil, nil, nil, options_switch_template)
@@ -6725,7 +6725,7 @@ function window:CreateFrame5()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end
 		
-		window:CreateLineBackground2 (frame5, "textLeftOutlineSmallSlider", "textLeftOutlineSmallLabel", "Text Outline")
+		window:CreateLineBackground2 (frame5, "textLeftOutlineSmallSlider", "textLeftOutlineSmallLabel", "文字轮廓")
 		
 	--> left outline small color
 		local left_outline_small_callback = function (button, r, g, b, a)
@@ -6743,10 +6743,10 @@ function window:CreateFrame5()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end
 		g:NewColorPickButton (frame5, "$parentOutlineSmallColorLeft", "OutlineSmallColorLeft", left_outline_small_callback, false, options_button_template)
-		local OutlineSmallColorTextLeft = g:NewLabel (frame5, _, "$parentOutlineSmallLabelLeft", "OutlineSmallColorLabelLeft", "Outline Color", "GameFontHighlightLeft")
+		local OutlineSmallColorTextLeft = g:NewLabel (frame5, _, "$parentOutlineSmallLabelLeft", "OutlineSmallColorLabelLeft", "轮廓颜色", "GameFontHighlightLeft")
 		frame5.OutlineSmallColorLeft:SetPoint ("left", OutlineSmallColorTextLeft, "right", 2, 0)
 
-		window:CreateLineBackground2 (frame5, "OutlineSmallColorLeft", "OutlineSmallColorLabelLeft", "Outline Color")
+		window:CreateLineBackground2 (frame5, "OutlineSmallColorLeft", "OutlineSmallColorLabelLeft", "轮廓颜色")
 
 	--> left show positio number
 		g:NewSwitch (frame5, _, "$parentPositionNumberSlider", "PositionNumberSlider", 60, 20, _, _, instance.row_info.textL_show_number, nil, nil, nil, nil, options_switch_template)
@@ -6815,7 +6815,7 @@ function window:CreateFrame5()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end
 		
-		window:CreateLineBackground2 (frame5, "textRightOutlineSmallSlider", "textRightOutlineSmallLabel", "Text Outline")
+		window:CreateLineBackground2 (frame5, "textRightOutlineSmallSlider", "textRightOutlineSmallLabel", "文字轮廓")
 		
 	--> right outline small color
 		local right_outline_small_callback = function (button, r, g, b, a)
@@ -6833,10 +6833,10 @@ function window:CreateFrame5()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end
 		g:NewColorPickButton (frame5, "$parentOutlineSmallColorRight", "OutlineSmallColorRight", right_outline_small_callback, false, options_button_template)
-		local OutlineSmallColorTextRight = g:NewLabel (frame5, _, "$parentOutlineSmallLabelRight", "OutlineSmallColorLabelRight", "Outline Color", "GameFontHighlightRight")
+		local OutlineSmallColorTextRight = g:NewLabel (frame5, _, "$parentOutlineSmallLabelRight", "OutlineSmallColorLabelRight", "轮廓颜色", "GameFontHighlightRight")
 		frame5.OutlineSmallColorRight:SetPoint ("left", OutlineSmallColorTextRight, "right", 2, 0)
 
-		window:CreateLineBackground2 (frame5, "OutlineSmallColorRight", "OutlineSmallColorLabelRight", "Outline Color")	
+		window:CreateLineBackground2 (frame5, "OutlineSmallColorRight", "OutlineSmallColorLabelRight", "轮廓颜色")	
 	
 	--> percent type
 		local onSelectPercent = function (_, instance, percentType)
@@ -6855,8 +6855,8 @@ function window:CreateFrame5()
 		
 		local buildPercentMenu = function() 
 			local percentTable = {
-				{value = 1, label = "Relative to Total", onclick = onSelectPercent, icon = [[Interface\GROUPFRAME\UI-GROUP-MAINTANKICON]]},
-				{value = 2, label = "Relative to Top Player", onclick = onSelectPercent, icon = [[Interface\GROUPFRAME\UI-Group-LeaderIcon]]}
+				{value = 1, label = "相对于总计", onclick = onSelectPercent, icon = [[Interface\GROUPFRAME\UI-GROUP-MAINTANKICON]]},
+				{value = 2, label = "相对于顶级玩家", onclick = onSelectPercent, icon = [[Interface\GROUPFRAME\UI-Group-LeaderIcon]]}
 			}
 			return percentTable 
 		end
@@ -6934,7 +6934,7 @@ function window:CreateFrame5()
 		frame5.cutomRightTextEntry:SetHook ("OnChar", function()
 			if (frame5.cutomRightTextEntry.text:find ("{func")) then
 				GameCooltip:Reset()
-				GameCooltip:AddLine ("'func' keyword found, auto update disabled.")
+				GameCooltip:AddLine ("'func' 找到关键字，禁用自动更新.")
 				GameCooltip:Show (frame5.cutomRightTextEntry.widget)
 			end
 		end)
@@ -7059,7 +7059,7 @@ function window:CreateFrame5()
 		frame5.cutomLeftTextEntry:SetHook ("OnChar", function()
 			if (frame5.cutomLeftTextEntry.text:find ("{func")) then
 				GameCooltip:Reset()
-				GameCooltip:AddLine ("'func' keyword found, auto update disabled.")
+				GameCooltip:AddLine ("'func' 找到关键字，禁用自动更新.")
 				GameCooltip:Show (frame5.cutomLeftTextEntry.widget)
 			end
 		end)
@@ -7205,7 +7205,7 @@ function window:CreateFrame5()
 			{value = "{", label = "{", onclick = onSelectBracket, icon = ""},
 			{value = "[", label = "[", onclick = onSelectBracket, icon = ""},
 			{value = "<", label = "<", onclick = onSelectBracket, icon = ""},
-			{value = "NONE", label = "no bracket", onclick = onSelectBracket, icon = [[Interface\Glues\LOGIN\Glues-CheckBox-Check]]},
+			{value = "NONE", label = "没有括号", onclick = onSelectBracket, icon = [[Interface\Glues\LOGIN\Glues-CheckBox-Check]]},
 		}
 		local buildBracketMenu = function() 
 			return BracketTable 
@@ -7242,7 +7242,7 @@ function window:CreateFrame5()
 			{value = "/", label = "/", onclick = onSelectSeparator, icon = ""},
 			{value = "\\", label = "\\", onclick = onSelectSeparator, icon = ""},
 			{value = "~", label = "~", onclick = onSelectSeparator, icon = ""},
-			{value = "NONE", label = "no separator", onclick = onSelectSeparator, icon = [[Interface\Glues\LOGIN\Glues-CheckBox-Check]]},
+			{value = "NONE", label = "没有分隔符", onclick = onSelectSeparator, icon = [[Interface\Glues\LOGIN\Glues-CheckBox-Check]]},
 		}
 		local buildSeparatorMenu = function() 
 			return SeparatorTable 
@@ -7812,11 +7812,11 @@ function window:CreateFrame6()
 				_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 			end
 			local strataTable = {
-				{value = "BACKGROUND", label = "Background", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Green]], iconcolor = {0, .5, 0, .8}, texcoord = nil}, --Interface\Buttons\UI-MicroStream-Green UI-MicroStream-Red UI-MicroStream-Yellow
-				{value = "LOW", label = "Low", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Green]] , texcoord = nil}, --Interface\Buttons\UI-MicroStream-Green UI-MicroStream-Red UI-MicroStream-Yellow
-				{value = "MEDIUM", label = "Medium", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Yellow]] , texcoord = nil}, --Interface\Buttons\UI-MicroStream-Green UI-MicroStream-Red UI-MicroStream-Yellow
-				{value = "HIGH", label = "High", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Yellow]] , iconcolor = {1, .7, 0, 1}, texcoord = nil}, --Interface\Buttons\UI-MicroStream-Green UI-MicroStream-Red UI-MicroStream-Yellow
-				{value = "DIALOG", label = "Dialog", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Red]] , iconcolor = {1, 0, 0, 1},  texcoord = nil}, --Interface\Buttons\UI-MicroStream-Green UI-MicroStream-Red UI-MicroStream-Yellow
+				{value = "BACKGROUND", label = "背景", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Green]], iconcolor = {0, .5, 0, .8}, texcoord = nil}, 
+				{value = "LOW", label = "低", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Green]] , texcoord = nil}, --Interface\Buttons\UI-MicroStream-Green UI-MicroStream-Red UI-MicroStream-Yellow
+				{value = "MEDIUM", label = "中", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Yellow]] , texcoord = nil}, 
+				{value = "HIGH", label = "高", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Yellow]] , iconcolor = {1, .7, 0, 1}, texcoord = nil}, 
+				{value = "DIALOG", label = "顶端", onclick = onStrataSelect, icon = [[Interface\Buttons\UI-MicroStream-Red]] , iconcolor = {1, 0, 0, 1},  texcoord = nil}, 
 			}
 			local buildStrataMenu = function() return strataTable end
 			
@@ -7965,7 +7965,7 @@ function window:CreateFrame6()
 					if (CustomObject) then
 						InstanceList [#InstanceList+1] = {value = index, label = _detalhes.atributos.lista [atributo] .. " - " .. CustomObject.name, onclick = onSelectDeleteInstance, icon = CustomObject.icon}
 					else
-						InstanceList [#InstanceList+1] = {value = index, label = "unknown" .. " - " .. " invalid custom", onclick = onSelectDeleteInstance, icon = [[Interface\COMMON\VOICECHAT-MUTED]]}
+						InstanceList [#InstanceList+1] = {value = index, label = "未知" .. " - " .. " 位置自定义", onclick = onSelectDeleteInstance, icon = [[Interface\COMMON\VOICECHAT-MUTED]]}
 					end
 					
 				else
@@ -7977,7 +7977,7 @@ function window:CreateFrame6()
 						if (SoloInfo) then
 							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " " .. SoloInfo [1], onclick = onSelectDeleteInstance, icon = SoloInfo [2]}
 						else
-							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " unknown", onclick = onSelectDeleteInstance, icon = ""}
+							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " 未知", onclick = onSelectDeleteInstance, icon = ""}
 						end
 						
 					elseif (modo == 4) then --raid
@@ -7986,7 +7986,7 @@ function window:CreateFrame6()
 						if (RaidInfo) then
 							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " " .. RaidInfo [1], onclick = onSelectDeleteInstance, icon = RaidInfo [2]}
 						else
-							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " unknown", onclick = onSelectDeleteInstance, icon = ""}
+							InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " 未知", onclick = onSelectDeleteInstance, icon = ""}
 						end
 					else
 						InstanceList [#InstanceList+1] = {value = index, label = "#".. index .. " " .. _detalhes.atributos.lista [atributo] .. " - " .. _detalhes.sub_atributos [atributo].lista [sub_atributo], onclick = onSelectDeleteInstance, icon = _detalhes.sub_atributos [atributo].icones[sub_atributo] [1], texcoord = _detalhes.sub_atributos [atributo].icones[sub_atributo] [2]}
@@ -8710,7 +8710,7 @@ function window:CreateFrame8()
 					if (not IsAddOnLoaded ("Details_3DModelsPaths")) then
 						local loaded, reason = LoadAddOn ("Details_3DModelsPaths")
 						if (not loaded) then
-							return _detalhes:Msg ("Failed to load Details_3DModelsPaths addon.")
+							return _detalhes:Msg ("Details_3DModelsPaths addon加载失败.")
 						end
 						_G.Lib3DModelList:Embed (_detalhes)
 					end
@@ -9083,14 +9083,14 @@ function window:CreateFrame9()
 				_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 			end
 			local anchorMenu = {
-				{value = "all", label = "Fill", onclick = onSelectAnchor},
-				{value = "center", label = "Center", onclick = onSelectAnchor},
-				{value = "stretchLR", label = "Stretch Left-Right", onclick = onSelectAnchor},
-				{value = "stretchTB", label = "Stretch Top-Bottom", onclick = onSelectAnchor},
-				{value = "topleft", label = "Top Left", onclick = onSelectAnchor},
-				{value = "bottomleft", label = "Bottom Left", onclick = onSelectAnchor},
-				{value = "topright", label = "Top Right", onclick = onSelectAnchor},
-				{value = "bottomright", label = "Bottom Right", onclick = onSelectAnchor},
+				{value = "all", label = "填满", onclick = onSelectAnchor},
+				{value = "center", label = "中间", onclick = onSelectAnchor},
+				{value = "stretchLR", label = "左右伸展", onclick = onSelectAnchor},
+				{value = "stretchTB", label = "上下伸展", onclick = onSelectAnchor},
+				{value = "topleft", label = "左上", onclick = onSelectAnchor},
+				{value = "bottomleft", label = "左下", onclick = onSelectAnchor},
+				{value = "topright", label = "右上", onclick = onSelectAnchor},
+				{value = "bottomright", label = "右下", onclick = onSelectAnchor},
 			}
 			local buildAnchorMenu = function()
 				return anchorMenu
@@ -10477,7 +10477,7 @@ function window:CreateFrame11()
 		test_custom_text:SetHighlightTexture ([[Interface\CHATFRAME\ChatFrameExpandArrow]])
 		test_custom_text:SetPushedTexture ([[Interface\CHATFRAME\ChatFrameExpandArrow]])
 		test_custom_text:GetNormalTexture():SetDesaturated (true)
-		test_custom_text.tooltip = "Click to test!"
+		test_custom_text.tooltip = "点击测试!"
 		
 	--cooldowns
 	
@@ -10735,7 +10735,7 @@ function window:CreateFrame11()
 
 	--> death recap
 		--enabled?
-		g:NewLabel (frame11, _, "$parentEnableDeathRecapLabel", "EnableDeathRecapLabel", "Enabled", "GameFontHighlightLeft")
+		g:NewLabel (frame11, _, "$parentEnableDeathRecapLabel", "EnableDeathRecapLabel", "启用", "GameFontHighlightLeft")
 		g:NewSwitch (frame11, _, "$parentEnableDeathRecapSlider", "EnableDeathRecapSlider", 60, 20, _, _, _detalhes.death_recap.enabled, nil, nil, nil, nil, options_switch_template)
 
 		frame11.EnableDeathRecapSlider:SetPoint ("left", frame11.EnableDeathRecapLabel, "right", 2)
@@ -10745,10 +10745,10 @@ function window:CreateFrame11()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end
 		
-		window:CreateLineBackground2 (frame11, "EnableDeathRecapSlider", "EnableDeathRecapLabel", "Modify the Blizzard's Death Recap screen.")
+		window:CreateLineBackground2 (frame11, "EnableDeathRecapSlider", "EnableDeathRecapLabel", "修改暴雪的死亡回顾画面.")
 		
 		--time relevance
-		g:NewLabel (frame11, _, "$parentDeathRecapRelevanceLabel", "DeathRecapRelevanceLabel", "Relevance Time", "GameFontHighlightLeft")
+		g:NewLabel (frame11, _, "$parentDeathRecapRelevanceLabel", "DeathRecapRelevanceLabel", "相关时间", "GameFontHighlightLeft")
 		g:NewSlider (frame11, _, "$parentDeathRecapRelevanceSlider", "DeathRecapRelevanceSlider", SLIDER_WIDTH, SLIDER_HEIGHT, 1, 12, 1, _detalhes.death_recap.relevance_time, nil, nil, nil, options_slider_template)
 
 		frame11.DeathRecapRelevanceSlider:SetPoint ("left", frame11.DeathRecapRelevanceLabel, "right", 2)
@@ -10757,10 +10757,10 @@ function window:CreateFrame11()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end)
 		
-		window:CreateLineBackground2 (frame11, "DeathRecapRelevanceSlider", "DeathRecapRelevanceLabel", "Attempt to fill the Death Recap with high damage (discart low hits) in the relevant time before death.")
+		window:CreateLineBackground2 (frame11, "DeathRecapRelevanceSlider", "DeathRecapRelevanceLabel", "试图在死亡前的相关时间内用高伤害（低命中）填充死亡重演.")
 		
 		--show life
-		g:NewLabel (frame11, _, "$parentEnableDeathRecapLifePercentLabel", "EnableDeathRecapLifePercentLabel", "Life Percent", "GameFontHighlightLeft")
+		g:NewLabel (frame11, _, "$parentEnableDeathRecapLifePercentLabel", "EnableDeathRecapLifePercentLabel", "生命百分比", "GameFontHighlightLeft")
 		g:NewSwitch (frame11, _, "$parentEnableDeathRecapLifePercentSlider", "EnableDeathRecapLifePercentSlider", 60, 20, _, _, _detalhes.death_recap.show_life_percent, nil, nil, nil, nil, options_switch_template)
 
 		frame11.EnableDeathRecapLifePercentSlider:SetPoint ("left", frame11.EnableDeathRecapLifePercentLabel, "right", 2)
@@ -10770,10 +10770,10 @@ function window:CreateFrame11()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end
 		
-		window:CreateLineBackground2 (frame11, "EnableDeathRecapLifePercentSlider", "EnableDeathRecapLifePercentLabel", "Show the percent of life the player had when received the hit.")
+		window:CreateLineBackground2 (frame11, "EnableDeathRecapLifePercentSlider", "EnableDeathRecapLifePercentLabel", "显示玩家获得击中时的生命百分比.")
 		
 		--show segments
-		g:NewLabel (frame11, _, "$parentEnableDeathRecapSegmentsLabel", "EnableDeathRecapSegmentsLabel", "Segment List", "GameFontHighlightLeft")
+		g:NewLabel (frame11, _, "$parentEnableDeathRecapSegmentsLabel", "EnableDeathRecapSegmentsLabel", "分段列表", "GameFontHighlightLeft")
 		g:NewSwitch (frame11, _, "$parentEnableDeathRecapSegmentsSlider", "EnableDeathRecapSegmentsSlider", 60, 20, _, _, _detalhes.death_recap.show_segments, nil, nil, nil, nil, options_switch_template)
 
 		frame11.EnableDeathRecapSegmentsSlider:SetPoint ("left", frame11.EnableDeathRecapSegmentsLabel, "right", 2)
@@ -10783,7 +10783,7 @@ function window:CreateFrame11()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end
 		
-		window:CreateLineBackground2 (frame11, "EnableDeathRecapSegmentsSlider", "EnableDeathRecapSegmentsLabel", "Show a list of the latest segments in case you want to see recaps from previous fights.")
+		window:CreateLineBackground2 (frame11, "EnableDeathRecapSegmentsSlider", "EnableDeathRecapSegmentsLabel", "显示最新分段的列表，以便查看之前战斗的回顾.")
 		
 		
 	--> general tools
@@ -10814,7 +10814,7 @@ function window:CreateFrame11()
 		window:CreateLineBackground2 (frame11, "EnabledFirstHitSlider", "EnabledFirstHitLabel", Loc ["STRING_OPTIONS_RT_FIRST_HIT_DESC"])
 		
 		--> death menu
-		g:NewLabel (frame11, _, "$parentShowDeathMenuLabel", "ShowDeathMenuLabel", "Show Death Menu", "GameFontHighlightLeft") --localize-me
+		g:NewLabel (frame11, _, "$parentShowDeathMenuLabel", "ShowDeathMenuLabel", "显示死亡菜单", "GameFontHighlightLeft") --localize-me
 		g:NewSwitch (frame11, _, "$parentShowDeathMenuSlider", "ShowDeathMenuSlider", 60, 20, _, _, _detalhes.on_death_menu, nil, nil, nil, nil, options_switch_template)
 
 		frame11.ShowDeathMenuSlider:SetPoint ("left", frame11.ShowDeathMenuLabel, "right", 2)
@@ -10824,7 +10824,7 @@ function window:CreateFrame11()
 			_detalhes:SendOptionsModifiedEvent (DetailsOptionsWindow.instance)
 		end
 		
-		window:CreateLineBackground2 (frame11, "ShowDeathMenuSlider", "ShowDeathMenuLabel", "Show a panel below the Release / Death Recap panel with some shortcuts for Raid Leaders.") --localize-me
+		window:CreateLineBackground2 (frame11, "ShowDeathMenuSlider", "ShowDeathMenuLabel", "在释放/死亡回顾面板下方显示一个面板，其中包含一些用于团长的快捷方式.") --localize-me
 		
 	--> anchors
 	
@@ -10832,7 +10832,7 @@ function window:CreateFrame11()
 		g:NewLabel (frame11, _, "$parentAnnouncersAnchorInterrupt", "AnnouncersInterrupt", Loc ["STRING_OPTIONS_RT_INTERRUPT_ANCHOR"], "GameFontNormal")
 		g:NewLabel (frame11, _, "$parentAnnouncersAnchorCooldowns", "AnnouncersCooldowns", Loc ["STRING_OPTIONS_RT_COOLDOWNS_ANCHOR"], "GameFontNormal")
 		g:NewLabel (frame11, _, "$parentAnnouncersAnchorDeaths", "AnnouncersDeaths", Loc ["STRING_OPTIONS_RT_DEATHS_ANCHOR"], "GameFontNormal")
-		g:NewLabel (frame11, _, "$parentAnnouncersAnchorDeathRecap", "AnnouncersDeathRecap", "Death Recap:", "GameFontNormal")
+		g:NewLabel (frame11, _, "$parentAnnouncersAnchorDeathRecap", "AnnouncersDeathRecap", "死亡回顾:", "GameFontNormal")
 		g:NewLabel (frame11, _, "$parentAnnouncersAnchorOther", "AnnouncersOther", Loc ["STRING_OPTIONS_RT_OTHER_ANCHOR"], "GameFontNormal")
 		
 		local x = window.left_start_at
@@ -11204,8 +11204,8 @@ end
 			_detalhes.gump:ApplyStandardBackdrop (_detalhes.LoadingOptionsPanelFrame)
 			_detalhes.LoadingOptionsPanelFrame:SetBackdropBorderColor (1, 0.8, 0.1)
 			
-			_detalhes.LoadingOptionsPanelFrame.IsLoadingLabel1 = _detalhes.gump:CreateLabel (_detalhes.LoadingOptionsPanelFrame, "Details! is Safe Loading the Options Panel During Combat")
-			_detalhes.LoadingOptionsPanelFrame.IsLoadingLabel2 = _detalhes.gump:CreateLabel (_detalhes.LoadingOptionsPanelFrame, "This may take only a few seconds")
+			_detalhes.LoadingOptionsPanelFrame.IsLoadingLabel1 = _detalhes.gump:CreateLabel (_detalhes.LoadingOptionsPanelFrame, "Details! 在战斗期间加载选项面板是安全的")
+			_detalhes.LoadingOptionsPanelFrame.IsLoadingLabel2 = _detalhes.gump:CreateLabel (_detalhes.LoadingOptionsPanelFrame, "这可能只需要几秒钟")
 			_detalhes.LoadingOptionsPanelFrame.IsLoadingImage1 = _detalhes.gump:CreateImage (_detalhes.LoadingOptionsPanelFrame, [[Interface\DialogFrame\UI-Dialog-Icon-AlertOther]], 32, 32)
 			_detalhes.LoadingOptionsPanelFrame.IsLoadingLabel1.align = "center"
 			_detalhes.LoadingOptionsPanelFrame.IsLoadingLabel2.align = "center"
@@ -11219,7 +11219,7 @@ end
 		end
 	
 		local panel_index = 1
-		local percent_string = g:NewLabel (window, nil, nil, "percent_string", "loading: 0%", "GameFontNormal", 12)
+		local percent_string = g:NewLabel (window, nil, nil, "percent_string", "加载: 0%", "GameFontNormal", 12)
 		percent_string.textcolor = "white"
 		percent_string:SetPoint ("bottomleft", window, "bottomleft", 340, 12)
 		local step = 5 -- 100/quantidade de menus

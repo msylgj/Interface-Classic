@@ -542,7 +542,7 @@
 			self.posicao[self.mostrando].h = pre_defined.altura
 			
 		elseif (pre_defined and not pre_defined.x) then
-			_detalhes:Msg ("invalid pre_defined table for resize, please rezise the window manually.")
+			_detalhes:Msg ("调整大小的预定义表无效，请手动调整窗口大小.")
 		end
 
 		self.baseframe:SetWidth (self.posicao[self.mostrando].w)
@@ -1220,7 +1220,7 @@
 				insets = {left = 0, right = 0, top = 0, bottom = 0}, edgeFile = [[Interface\Buttons\WHITE8X8]], edgeSize=1})
 				tutorialFrame:SetBackdropColor (0, 0, 0, 1)
 				
-				tutorialFrame.Title = _detalhes.gump:CreateLabel (tutorialFrame, "Statistics" , 12, "orange") --curse localization isn't adding new strings (and I deleted the old one)
+				tutorialFrame.Title = _detalhes.gump:CreateLabel (tutorialFrame, "统计" , 12, "orange") --curse localization isn't adding new strings (and I deleted the old one)
 				tutorialFrame.Title:SetPoint ("top", tutorialFrame, "top", 0, -5)
 				
 				tutorialFrame.Desc = _detalhes.gump:CreateLabel (tutorialFrame, Loc ["STRING_GUILDDAMAGERANK_TUTORIAL_DESC"], 12)
@@ -1393,7 +1393,7 @@
 							f.DownloadedSize = f.DownloadedSize + length
 							local downloadSpeed = f.DownloadedSize / (time() - f.SyncStartTime) 
 							
-							f.SyncText:SetText ("working [downloading " .. f.DownloadedAmount .. "/" .. f.RequestedAmount .. ", " .. format ("%.2f", downloadSpeed/1024) .. "Kbps]")
+							f.SyncText:SetText ("工作 [下载 " .. f.DownloadedAmount .. "/" .. f.RequestedAmount .. ", " .. format ("%.2f", downloadSpeed/1024) .. "Kbps]")
 						end
 					end
 				end
@@ -1407,7 +1407,7 @@
 						--requested to download a selected list of encounter tables
 						elseif (guildSyncID == "G") then
 							f.RequestedAmount = f.RequestedAmount + #missingIDs
-							f.SyncText:SetText ("working [downloading " .. f.DownloadedAmount .. "/" .. f.RequestedAmount .. "]")
+							f.SyncText:SetText ("工作 [下载 " .. f.DownloadedAmount .. "/" .. f.RequestedAmount .. "]")
 						end
 					end
 				end
@@ -1422,7 +1422,7 @@
 						local bossDiff = f.select_diff.label:GetText()
 						local guildName = f.select_guild.label:GetText()
 						
-						local reportTable = {"Details!: DPS Rank for: " .. (bossDiff or "") .. " " .. (bossName or "--x--x--") .. " <" .. (guildName or "") .. ">"}
+						local reportTable = {"Details!: DPS等级: " .. (bossDiff or "") .. " " .. (bossName or "--x--x--") .. " <" .. (guildName or "") .. ">"}
 						local result = {}
 						
 						for i = 1, AmtLines do
@@ -1555,8 +1555,8 @@
 			end
 			local build_role_list = function()
 				return {
-					{value = "damage", label = "Damager", icon = icon, onclick = on_role_select},
-					{value = "healing", label = "Healer", icon = icon, onclick = on_role_select}
+					{value = "damage", label = "DPS", icon = icon, onclick = on_role_select},
+					{value = "healing", label = "治疗者", icon = icon, onclick = on_role_select}
 				}
 			end
 			local role_dropdown = gump:CreateDropDown (f, build_role_list, 1, dropdown_size, 20, "select_role")
@@ -1649,7 +1649,7 @@
 								end
 							end
 							if (not alreadyHave) then
-								tinsert (diff_list, 1, {value = 15, label = "Heroic", icon = icon, onclick = on_diff_select})
+								tinsert (diff_list, 1, {value = 15, label = "英雄", icon = icon, onclick = on_diff_select})
 							end
 						elseif (difficulty == 16) then
 							local alreadyHave = false
@@ -1659,7 +1659,7 @@
 								end
 							end
 							if (not alreadyHave) then
-								tinsert (diff_list, {value = 16, label = "Mythic", icon = icon, onclick = on_diff_select})
+								tinsert (diff_list, {value = 16, label = "史诗", icon = icon, onclick = on_diff_select})
 							end
 						end
 
@@ -1745,7 +1745,7 @@
 								end
 							end
 							if (not alreadyHave) then
-								tinsert (diff_list, 1, {value = 15, label = "Heroic", icon = icon, onclick = on_diff_select})
+								tinsert (diff_list, 1, {value = 15, label = "英雄", icon = icon, onclick = on_diff_select})
 							end
 						elseif (difficulty == 16) then
 							local alreadyHave = false
@@ -1755,7 +1755,7 @@
 								end
 							end
 							if (not alreadyHave) then
-								tinsert (diff_list, {value = 16, label = "Mythic", icon = icon, onclick = on_diff_select})
+								tinsert (diff_list, {value = 16, label = "史诗", icon = icon, onclick = on_diff_select})
 							end
 						end
 
@@ -1850,10 +1850,10 @@
 							GameCooltip:SetType ("tooltip")
 							GameCooltip:Preset (2)
 
-							GameCooltip:AddLine ("Total Done:", _detalhes:ToK2 (self.data.value), 1, "white")
+							GameCooltip:AddLine ("总数:", _detalhes:ToK2 (self.data.value), 1, "white")
 							GameCooltip:AddLine ("Dps:", _detalhes:ToK2 (self.data.value / self.data.elapsed), 1, "white")
-							GameCooltip:AddLine ("Item Level:", floor (self.data.data [2]), 1, "white")
-							GameCooltip:AddLine ("Date:", self.data.fulldate:gsub (".*%s", ""), 1, "white")
+							GameCooltip:AddLine ("装等:", floor (self.data.data [2]), 1, "white")
+							GameCooltip:AddLine ("日期:", self.data.fulldate:gsub (".*%s", ""), 1, "white")
 
 							GameCooltip:SetOwner (self.ball.tooltip_anchor)
 							GameCooltip:Show()
@@ -1877,7 +1877,7 @@
 			
 			function f:BuildGuildRankTable (encounterTable, guild, role)
 				
-				local header = {{name = "Player Name", type = "text"}, {name = "Per Second", type = "text"}, {name = "Total", type = "text"}, {name = "Length", type = "text"}, {name = "Item Level", type = "text"}, {name = "Date", type = "text"}}
+				local header = {{name = "玩家名字", type = "text"}, {name = "每秒", type = "text"}, {name = "总共", type = "text"}, {name = "时长", type = "text"}, {name = "装等", type = "text"}, {name = "日期", type = "text"}}
 				local players = {}
 				local players_index = {}
 				
@@ -1965,7 +1965,7 @@
 					return
 				end
 				
-				local header = {{name = "Player Name", type = "text"}} -- , width = 90
+				local header = {{name = "玩家名字", type = "text"}} -- , width = 90
 				local players = {}
 				local players_index = {}
 				local player_class = {}
@@ -2349,7 +2349,7 @@
 				local bg_texture = gump:CreateImage (panel, [[Interface\AddOns\Details\images\bar_skyline]], 135, 30, "artwork")
 				bg_texture:SetPoint ("left", icon, "right", -32, 0)
 				
-				local button = gump:CreateButton (panel, set_color, 135, 30, "set color", class_name, index)
+				local button = gump:CreateButton (panel, set_color, 135, 30, "设置颜色", class_name, index)
 				button:SetPoint ("left", icon, "right", -32, 0)
 				button:InstallCustomTexture (nil, nil, nil, nil, true)
 				button:SetFrameLevel (panel:GetFrameLevel()+1)
@@ -2671,10 +2671,10 @@
 		feedback_frame:SetSize (512, 200)
 		feedback_frame.portrait:SetTexture ([[Interface\CHARACTERFRAME\TEMPORARYPORTRAIT-FEMALE-GNOME]])
 		
-		feedback_frame.TitleText:SetText ("Help Details! to Improve!")
+		feedback_frame.TitleText:SetText ("帮助 Details! 提升!")
 		
 		feedback_frame.uppertext = feedback_frame:CreateFontString (nil, "artwork", "GameFontNormal")
-		feedback_frame.uppertext:SetText ("Tell us about your experience using Details!, what you liked most, where we could improve, what things you want to see in the future?")
+		feedback_frame.uppertext:SetText ("告诉我们你使用Details!的体验, 最喜欢的内容，我们可以改进的地方，以及希望将来看到的内容")
 		feedback_frame.uppertext:SetPoint ("topleft", feedback_frame, "topleft", 60, -32)
 		local font, _, flags = feedback_frame.uppertext:GetFont()
 		feedback_frame.uppertext:SetFont (font, 10, flags)
@@ -2700,7 +2700,7 @@
 		
 		
 		feedback_frame.midtext = feedback_frame:CreateFontString (nil, "artwork", "GameFontNormal")
-		feedback_frame.midtext:SetText ("visit the link above and let's make Details! stronger!")
+		feedback_frame.midtext:SetText ("访问上面的链接，让我们一起使Details!强大")
 		feedback_frame.midtext:SetPoint ("center", editbox.widget, "center")
 		feedback_frame.midtext:SetPoint ("top", editbox.widget, "bottom", 0, -2)
 		feedback_frame.midtext:SetJustifyH ("center")
@@ -2718,7 +2718,7 @@
 
 		feedback_frame.close = CreateFrame ("Button", "DetailsFeedbackWindowCloseButton", feedback_frame, "OptionsButtonTemplate")
 		feedback_frame.close:SetPoint ("bottomleft", feedback_frame, "bottomleft", 8, 4)
-		feedback_frame.close:SetText ("Close")
+		feedback_frame.close:SetText ("关闭")
 		feedback_frame.close:SetScript ("OnClick", function (self)
 			editbox:ClearFocus()
 			feedback_frame:Hide()
@@ -2726,7 +2726,7 @@
 		
 		feedback_frame.postpone = CreateFrame ("Button", "DetailsFeedbackWindowPostPoneButton", feedback_frame, "OptionsButtonTemplate")
 		feedback_frame.postpone:SetPoint ("bottomright", feedback_frame, "bottomright", -10, 4)
-		feedback_frame.postpone:SetText ("Remind-me Later")
+		feedback_frame.postpone:SetText ("稍后提醒我")
 		feedback_frame.postpone:SetScript ("OnClick", function (self)
 			editbox:ClearFocus()
 			feedback_frame:Hide()
@@ -2776,7 +2776,7 @@
 					if (instance1) then
 						return _detalhes:OpenOptionsWindow (instance1)
 					else
-						_detalhes:Msg ("couldn't open options panel: no window available.")
+						_detalhes:Msg ("无法打开选项面板：没有可用的窗口.")
 					end
 				end
 			end
@@ -3040,7 +3040,7 @@
 	panel:Hide()
 	panel:SetFrameStrata ("FULLSCREEN")
 	Details.gump:ApplyStandardBackdrop (panel)
-	Details.gump:CreateTitleBar (panel, "Details! Custom Line Text Editor")
+	Details.gump:CreateTitleBar (panel, "Details! 自定义行文本编辑器")
 	
 	function panel:Open (text, callback, host, default)
 		if (host) then
@@ -3231,10 +3231,10 @@
 			updatewindow_frame:SetSize (512, 200)
 			updatewindow_frame.portrait:SetTexture ([[Interface\CHARACTERFRAME\TEMPORARYPORTRAIT-FEMALE-GNOME]])
 			
-			updatewindow_frame.TitleText:SetText ("A New Version Is Available!")
+			updatewindow_frame.TitleText:SetText ("新版本可用!")
 
 			updatewindow_frame.midtext = updatewindow_frame:CreateFontString (nil, "artwork", "GameFontNormal")
-			updatewindow_frame.midtext:SetText ("Good news everyone!\nA new version has been forged and is waiting to be looted.")
+			updatewindow_frame.midtext:SetText ("好消息!\n新版本已经完成，正在等待被下载.")
 			updatewindow_frame.midtext:SetPoint ("topleft", updatewindow_frame, "topleft", 10, -90)
 			updatewindow_frame.midtext:SetJustifyH ("center")
 			updatewindow_frame.midtext:SetWidth (370)
@@ -3264,7 +3264,7 @@
 			
 			updatewindow_frame.close = CreateFrame ("Button", "DetailsUpdateDialogCloseButton", updatewindow_frame, "OptionsButtonTemplate")
 			updatewindow_frame.close:SetPoint ("bottomleft", updatewindow_frame, "bottomleft", 8, 4)
-			updatewindow_frame.close:SetText ("Close")
+			updatewindow_frame.close:SetText ("关闭")
 			
 			updatewindow_frame.close:SetScript ("OnClick", function (self)
 				DetailsUpdateDialog:Hide()
@@ -3497,7 +3497,7 @@
 						tooltip:AddLine (Loc ["STRING_MINIMAP_TOOLTIP12"])
 					end
 					tooltip:AddLine (Loc ["STRING_MINIMAP_TOOLTIP2"])
-					tooltip:AddLine ("|cFFCFCFCFctrl + left click|r: show/hide windows")
+					tooltip:AddLine ("|cFFCFCFCFctrl + left click|r: 显示/隐藏窗口")
 				end,
 			})
 			
@@ -3546,10 +3546,10 @@
 		local tooltip_hotcorner = function()
 			GameTooltip:AddLine ("Details!", 1, 1, 1, 1)
 			if (_detalhes.hotcorner_topleft.onclick_what_todo == 1) then
-				GameTooltip:AddLine ("|cFF00FF00Left Click:|r open options panel.", 1, 1, 1, 1)
+				GameTooltip:AddLine ("|cFF00FF00左键单击:|r 开启选项面板.", 1, 1, 1, 1)
 				
 			elseif (_detalhes.hotcorner_topleft.onclick_what_todo == 2) then
-				GameTooltip:AddLine ("|cFF00FF00Left Click:|r clear all segments.", 1, 1, 1, 1)
+				GameTooltip:AddLine ("|cFF00FF00左键单击:|r 清除所有分段.", 1, 1, 1, 1)
 				
 			end
 		end
@@ -3574,8 +3574,8 @@
 				nil, 
 				--> quick click
 				{
-					{func = quickclick_func1, name = "Details! - Reset Data"}, 
-					{func = quickclick_func2, name = "Details! - Open Options"}
+					{func = quickclick_func1, name = "Details! - 重置数据"}, 
+					{func = quickclick_func2, name = "Details! - 打开选项"}
 				},
 				--> onenter
 				nil,
@@ -3896,9 +3896,9 @@
 -- ~macros
 
 	function _detalhes:InitializeMacrosWindow()
-		local DetailsMacrosPanel = gump:CreateSimplePanel (UIParent, 700, 480, "Details! Useful Macros", "DetailsMacrosPanel")
+		local DetailsMacrosPanel = gump:CreateSimplePanel (UIParent, 700, 480, "Details! 有用的宏", "DetailsMacrosPanel")
 		DetailsMacrosPanel.Frame = DetailsMacrosPanel
-		DetailsMacrosPanel.__name = "Macros"
+		DetailsMacrosPanel.__name = "宏"
 		DetailsMacrosPanel.real_name = "DETAILS_MACROSWINDOW"
 		DetailsMacrosPanel.__icon = [[Interface\MacroFrame\MacroFrame-Icon]]
 		DetailsMacrosPanel.__iconcoords = {0, 1, 0, 1}
@@ -3918,7 +3918,7 @@
 			local DF = DetailsFramework
 			
 			DetailsMacrosPanel.Initialized = true
-			local f = DetailsMacrosPanel or gump:CreateSimplePanel (UIParent, 700, 480, "Details! Useful Macros", "DetailsMacrosPanel")
+			local f = DetailsMacrosPanel or gump:CreateSimplePanel (UIParent, 700, 480, "Details! 有用的宏", "DetailsMacrosPanel")
 			
 			local scrollbox_line_backdrop_color = {0, 0, 0, 0.2}
 			local scrollbox_line_backdrop_color_onenter = {.3, .3, .3, 0.5}
@@ -4043,7 +4043,7 @@
 -- ~plater
 
 	function _detalhes:InitializePlaterIntegrationWindow()
-		local DetailsPlaterIntegrationPanel = gump:CreateSimplePanel (UIParent, 700, 480, "Details! Plater Nameplates Integration", "DetailsPlaterIntegrationPanel")
+		local DetailsPlaterIntegrationPanel = gump:CreateSimplePanel (UIParent, 700, 480, "Details! Plater Nameplates集成", "DetailsPlaterIntegrationPanel")
 		DetailsPlaterIntegrationPanel.Frame = DetailsPlaterIntegrationPanel
 		DetailsPlaterIntegrationPanel.__name = "Plater Nameplates"
 		DetailsPlaterIntegrationPanel.real_name = "DETAILS_PLATERWINDOW"
@@ -4065,7 +4065,7 @@
 			
 			DetailsPlaterIntegrationPanel.Initialized = true
 			
-			local f = DetailsPlaterIntegrationPanel or gump:CreateSimplePanel (UIParent, 700, 480, "Details! Plater Nameplates Integration", "DetailsPlaterIntegrationPanel")
+			local f = DetailsPlaterIntegrationPanel or gump:CreateSimplePanel (UIParent, 700, 480, "Details! Plater Nameplates集成", "DetailsPlaterIntegrationPanel")
 			
 			--background
 			f.bg1 = f:CreateTexture (nil, "background")
@@ -4081,7 +4081,7 @@
 			f:SetBackdropBorderColor (0, 0, 0, 1)
 
 			--> anchor text function
-			local anchor_names = {"Top Left", "Left", "Bottom Left", "Bottom", "Bottom Right", "Right", "Top Right", "Top", "Center", "Inner Left", "Inner Right", "Inner Top", "Inner Bottom"}
+			local anchor_names = {"左上", "左", "左下", "下", "右下", "右", "右上", "上", "中间", "左内", "右内", "上内", "下内"}
 			local build_anchor_side_table = function (member)
 				local t = {}
 				for i = 1, 13 do
@@ -4101,7 +4101,7 @@
 			
 			local menu_table = {
 			
-				{type = "label", get = function() return "Add Real Time DPS Info in the Nameplate:" end, text_template = Details.gump:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+				{type = "label", get = function() return "在姓名条中添加实时DPS信息:" end, text_template = Details.gump:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 			
 				--> real time dps from all sources
 				{
@@ -4113,15 +4113,15 @@
 						Details:RefreshPlaterIntegration()
 						
 						if (not value) then
-							Details:Msg ("a /reload might be needed to disable this setting.")
+							Details:Msg ("禁用此设置可能需要/reload.")
 						else
 							if (Plater) then
 								Plater.RefreshDBUpvalues()
 							end
 						end
 					end,
-					name = "Show Real Time Dps",
-					desc = "Show Real Time DPS on the nameplate.\n\nReal time DPS is how much damage has been inflicted to the unit in the last 5 seconds.",
+					name = "显示实时Dps",
+					desc = "在姓名条上显示实时DPS.\n\n实时DPS是指在过去5秒内造成的伤害.",
 				},
 					--> text size
 					{
@@ -4136,8 +4136,8 @@
 						min = 6,
 						max = 32,
 						step = 1,
-						name = "Text Size",
-						desc = "Text Size",
+						name = "文字大小",
+						desc = "文字大小",
 					},
 					--> text color
 					{
@@ -4153,8 +4153,8 @@
 								Plater.UpdateAllPlates()
 							end
 						end,
-						desc = "Text Color",
-						name = "Text Color",
+						desc = "文字颜色",
+						name = "文字颜色",
 						text_template = options_text_template,
 					},
 					--> text shadow
@@ -4167,8 +4167,8 @@
 								Plater.UpdateAllPlates()
 							end
 						end,
-						name = "Text Shadow",
-						desc = "Text Shadow",
+						name = "文字阴影",
+						desc = "文字阴影",
 					},
 					--> text anchor
 						--anchor location
@@ -4176,8 +4176,8 @@
 							type = "select",
 							get = function() return Details.plater.realtime_dps_anchor.side end,
 							values = function() return build_anchor_side_table ("realtime_dps_anchor") end,
-							name = "Anchor Point",
-							desc = "Which side of the nameplate the text is attach to.",
+							name = "锚点",
+							desc = "文本附加到姓名条的哪一侧.",
 						},
 						--anchor x offset
 						{
@@ -4192,8 +4192,8 @@
 							min = -20,
 							max = 20,
 							step = 1,
-							name = "Anchor X Offset",
-							desc = "Slightly move the text horizontally.",
+							name = "锚点 X 偏移",
+							desc = "稍微水平移动文本.",
 						},
 						--anchor x offset
 						{
@@ -4208,12 +4208,12 @@
 							min = -20,
 							max = 20,
 							step = 1,
-							name = "Anchor Y Offset",
-							desc = "Slightly move the text vertically.",
+							name = "锚点 Y 偏移",
+							desc = "稍微垂直移动文本.",
 						},	
 				
 				{type = "breakline"},
-				{type = "label", get = function() return "Add Real Time DPS Info Only From You in the Nameplate:" end, text_template = Details.gump:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+				{type = "label", get = function() return "在姓名条中仅添加你的实时DPS信息:" end, text_template = Details.gump:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 				
 				--> real time dps from the player only
 				{
@@ -4225,15 +4225,15 @@
 						Details:RefreshPlaterIntegration()
 						
 						if (not value) then
-							Details:Msg ("a /reload might be needed to disable this setting.")
+							Details:Msg ("禁用此设置可能需要/reload.")
 						else
 							if (Plater) then
 								Plater.RefreshDBUpvalues()
 							end
 						end
 					end,
-					name = "Show Real Time Dps (From You)",
-					desc = "Show Real Time DPS you are currently applying in the unit.\n\nReal time DPS is how much damage has been inflicted to the unit in the last 5 seconds.",
+					name = "显示实时Dps（来自你）",
+					desc = "显示你当前实时DPS.\n\n实时DPS是指在过去5秒内造成的伤害.",
 				},
 					--> text size
 					{
@@ -4248,8 +4248,8 @@
 						min = 6,
 						max = 32,
 						step = 1,
-						name = "Text Size",
-						desc = "Text Size",
+						name = "文字大小",
+						desc = "文字大小",
 					},
 					--> text color
 					{
@@ -4265,8 +4265,8 @@
 								Plater.UpdateAllPlates()
 							end
 						end,
-						desc = "Text Color",
-						name = "Text Color",
+						desc = "文字颜色",
+						name = "文字颜色",
 						text_template = options_text_template,
 					},
 					--> text shadow
@@ -4279,8 +4279,8 @@
 								Plater.UpdateAllPlates()
 							end
 						end,
-						name = "Text Shadow",
-						desc = "Text Shadow",
+						name = "文字阴影",
+						desc = "文字阴影",
 					},
 					--> text anchor
 						--anchor location
@@ -4288,8 +4288,8 @@
 							type = "select",
 							get = function() return Details.plater.realtime_dps_player_anchor.side end,
 							values = function() return build_anchor_side_table ("realtime_dps_player_anchor") end,
-							name = "Anchor Point",
-							desc = "Which side of the nameplate the text is attach to.",
+							name = "锚点",
+							desc = "文本附加到姓名条的哪一侧.",
 						},
 						--anchor x offset
 						{
@@ -4304,8 +4304,8 @@
 							min = -20,
 							max = 20,
 							step = 1,
-							name = "Anchor X Offset",
-							desc = "Slightly move the text horizontally.",
+							name = "锚点 X 偏移",
+							desc = "稍微水平移动文本.",
 						},
 						--anchor x offset
 						{
@@ -4320,12 +4320,12 @@
 							min = -20,
 							max = 20,
 							step = 1,
-							name = "Anchor Y Offset",
-							desc = "Slightly move the text vertically.",
+							name = "锚点 Y 偏移",
+							desc = "稍微垂直移动文本.",
 						},	
 				
 				{type = "breakline"},
-				{type = "label", get = function() return "Add Total Damage Taken in the Nameplate:" end, text_template = Details.gump:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+				{type = "label", get = function() return "添加姓名条上的总伤害:" end, text_template = Details.gump:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 				
 				--> total damage taken from all sources
 				{
@@ -4337,15 +4337,15 @@
 						Details:RefreshPlaterIntegration()
 						
 						if (not value) then
-							Details:Msg ("a /reload might be needed to disable this setting.")
+							Details:Msg ("禁用此设置可能需要/reload.")
 						else
 							if (Plater) then
 								Plater.RefreshDBUpvalues()
 							end
 						end
 					end,
-					name = "Show Total Damage Taken",
-					desc = "Show the total damage taken by the unit",
+					name = "显示受到的总伤害",
+					desc = "显示受到的总伤害",
 				},
 					--> text size
 					{
@@ -4360,8 +4360,8 @@
 						min = 6,
 						max = 32,
 						step = 1,
-						name = "Text Size",
-						desc = "Text Size",
+						name = "文字大小",
+						desc = "文字大小",
 					},
 					--> text color
 					{
@@ -4377,8 +4377,8 @@
 								Plater.UpdateAllPlates()
 							end
 						end,
-						desc = "Text Color",
-						name = "Text Color",
+						desc = "文字颜色",
+						name = "文字颜色",
 						text_template = options_text_template,
 					},
 					--> text shadow
@@ -4391,8 +4391,8 @@
 								Plater.UpdateAllPlates()
 							end
 						end,
-						name = "Text Shadow",
-						desc = "Text Shadow",
+						name = "文字阴影",
+						desc = "文字阴影",
 					},
 					--> text anchor
 						--anchor location
@@ -4400,8 +4400,8 @@
 							type = "select",
 							get = function() return Details.plater.damage_taken_anchor.side end,
 							values = function() return build_anchor_side_table ("damage_taken_anchor") end,
-							name = "Anchor Point",
-							desc = "Which side of the nameplate the text is attach to.",
+							name = "锚点",
+							desc = "文本附加到姓名条的哪一侧.",
 						},
 						--anchor x offset
 						{
@@ -4416,8 +4416,8 @@
 							min = -20,
 							max = 20,
 							step = 1,
-							name = "Anchor X Offset",
-							desc = "Slightly move the text horizontally.",
+							name = "锚点 X 偏移",
+							desc = "稍微水平移动文本.",
 						},
 						--anchor x offset
 						{
@@ -4432,8 +4432,8 @@
 							min = -20,
 							max = 20,
 							step = 1,
-							name = "Anchor Y Offset",
-							desc = "Slightly move the text vertically.",
+							name = "锚点 Y 偏移",
+							desc = "稍微垂直移动文本.",
 						},
 			}
 			
@@ -4461,9 +4461,9 @@
 			titleBackground:SetBackdropColor (.5, .5, .5, .7)
 			titleBackground:SetBackdropBorderColor (0, 0, 0, 1)
 			
-			local platerTitle = Details.gump:CreateLabel (titleBackground, "Plater Nameplates Integration", 16, "white")
-			local platerDesc1 = Details.gump:CreateLabel (titleBackground, "Add DPS and Damage information directly into the nameplate", 11, "silver")
-			local platerDesc2 = Details.gump:CreateLabel (titleBackground, "See how much damage the enemy is taking in real time!", 11, "silver")
+			local platerTitle = Details.gump:CreateLabel (titleBackground, "Plater Nameplates集成", 16, "white")
+			local platerDesc1 = Details.gump:CreateLabel (titleBackground, "将DPS信息直接添加到姓名条中", 11, "silver")
+			local platerDesc2 = Details.gump:CreateLabel (titleBackground, "了解敌人实时受到的伤害!", 11, "silver")
 			local platerImage = Details.gump:CreateImage (titleBackground, "Interface\\AddOns\\Details\\images\\plater_image")
 			platerImage:SetSize (256, 64)
 			
@@ -4481,7 +4481,7 @@
 					end
 				end
 				
-				local PlaterDisabled1 = Details.gump:CreateLabel (f, "Plater isn't installed! you may download it from the Twitch app.", 16, "red")
+				local PlaterDisabled1 = Details.gump:CreateLabel (f, "Plater没有安装! 你可以从Twitch应用程序下载它.", 16, "red")
 				PlaterDisabled1:SetPoint (10, -330)
 			end
 			
@@ -4494,9 +4494,9 @@
 -- ~run ~runcode
 
 	function _detalhes:InitializeRunCodeWindow()
-		local DetailsRunCodePanel = gump:CreateSimplePanel (UIParent, 700, 480, "Details! Run Code", "DetailsRunCodePanel")
+		local DetailsRunCodePanel = gump:CreateSimplePanel (UIParent, 700, 480, "Details! 运行代码", "DetailsRunCodePanel")
 		DetailsRunCodePanel.Frame = DetailsRunCodePanel
-		DetailsRunCodePanel.__name = "Auto Run Code"
+		DetailsRunCodePanel.__name = "自动运行代码"
 		DetailsRunCodePanel.real_name = "DETAILS_RUNCODEWINDOW"
 		--DetailsRunCodePanel.__icon = [[Interface\AddOns\Details\images\lua_logo]]
 		DetailsRunCodePanel.__icon = [[Interface\AddOns\Details\images\run_code]]
@@ -4518,7 +4518,7 @@
 		
 			DetailsRunCodePanel.Initialized = true
 			
-			local f = DetailsRunCodePanel or gump:CreateSimplePanel (UIParent, 700, 480, "Details! Run Code", "DetailsRunCodePanel")
+			local f = DetailsRunCodePanel or gump:CreateSimplePanel (UIParent, 700, 480, "Details! 运行代码", "DetailsRunCodePanel")
 	
 			--> lua editor
 			local code_editor = gump:NewSpecialLuaEditorEntry (f, 885, 510, "text", "$parentCodeEditorWindow")
@@ -4606,7 +4606,7 @@
 				return t
 			end
 			
-			local code_type_label = gump:CreateLabel (f, "Event:", gump:GetTemplate ("font", "ORANGE_FONT_TEMPLATE"))
+			local code_type_label = gump:CreateLabel (f, "事件:", gump:GetTemplate ("font", "ORANGE_FONT_TEMPLATE"))
 			local code_type_dropdown = gump:CreateDropDown (f, build_CodeType_dropdown_options, 1, 160, 20, "CodeTypeDropdown", _, gump:GetTemplate ("dropdown", "OPTIONS_DROPDOWN_TEMPLATE"))
 			code_type_dropdown:SetPoint ("left", code_type_label, "right", 2, 0)
 			code_type_dropdown:SetFrameLevel (code_editor:GetFrameLevel() + 10)
@@ -4620,28 +4620,28 @@
 				if (func) then
 					_detalhes.run_code [f.EditingCodeKey] = code
 					_detalhes:RecompileAutoRunCode()
-					_detalhes:Msg ("Code saved!")
+					_detalhes:Msg ("代码已保存!")
 					code_editor:ClearFocus()
 				else
 					errortext_frame:Flash (0.2, 0.2, 0.4, true, nil, nil, "NONE")
-					_detalhes:Msg ("Can't save the code: it has errors.")
+					_detalhes:Msg ("无法保存代码：它有错误.")
 				end
 			end
 			
 			local button_y = -6
 			
-			local save_script_button = gump:CreateButton (f, save_script, 120, 20, "Save", -1, nil, nil, nil, nil, nil, gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), gump:GetTemplate ("font", "PLATER_BUTTON"))
+			local save_script_button = gump:CreateButton (f, save_script, 120, 20, "保存", -1, nil, nil, nil, nil, nil, gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), gump:GetTemplate ("font", "PLATER_BUTTON"))
 			save_script_button:SetIcon ([[Interface\BUTTONS\UI-Panel-ExpandButton-Up]], 20, 20, "overlay", {0.1, .9, 0.1, .9})
 			save_script_button:SetPoint ("topright", code_editor, "bottomright", 0, button_y)
 			
 			--> create cancel button
 			local cancel_script = function()
 				code_editor:SetText (_detalhes.run_code [f.EditingCodeKey])
-				_detalhes:Msg ("Code cancelled!")
+				_detalhes:Msg ("代码已取消!")
 				code_editor:ClearFocus()
 			end
 			
-			local cancel_script_button = gump:CreateButton (f, cancel_script, 120, 20, "Cancel", -1, nil, nil, nil, nil, nil, gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), gump:GetTemplate ("font", "PLATER_BUTTON"))
+			local cancel_script_button = gump:CreateButton (f, cancel_script, 120, 20, "取消", -1, nil, nil, nil, nil, nil, gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), gump:GetTemplate ("font", "PLATER_BUTTON"))
 			cancel_script_button:SetIcon ([[Interface\BUTTONS\UI-Panel-MinimizeButton-Up]], 20, 20, "overlay", {0.1, .9, 0.1, .9})
 			cancel_script_button:SetPoint ("topleft", code_editor, "bottomleft", 0, button_y)
 			
@@ -4708,7 +4708,7 @@
 				end
 			end
 			
-			local run_script_button = gump:CreateButton (f, execute_script, 120, 20, "Test Code", -1, nil, nil, nil, nil, nil, gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), gump:GetTemplate ("font", "PLATER_BUTTON"))
+			local run_script_button = gump:CreateButton (f, execute_script, 120, 20, "测试代码", -1, nil, nil, nil, nil, nil, gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), gump:GetTemplate ("font", "PLATER_BUTTON"))
 			run_script_button:SetIcon ([[Interface\BUTTONS\UI-SpellbookIcon-NextPage-Up]], 20, 20, "overlay", {0.05, 0.95, 0.05, 0.95})
 			run_script_button:SetPoint ("bottomright", code_editor, "topright", 0, 3)
 			
@@ -5209,7 +5209,7 @@ function Details.OpenDpsBenchmark()
 		f.Title = f.TitleBar:CreateFontString ("$parentTitle", "overlay", "GameFontNormal")
 		f.Title:SetPoint ("center", f.TitleBar, "center")
 		f.Title:SetTextColor (.8, .8, .8, 1)
-		f.Title:SetText ("Details! Benchmark")
+		f.Title:SetText ("Details! 标准")
 		
 		DF:InstallTemplate ("font", "DETAILS_BENCHMARK_NORMAL", {color = "white", size = 10, font = "Friz Quadrata TT"})
 		
@@ -5286,21 +5286,21 @@ function Details.OpenDpsBenchmark()
 		--time to test string and dropdown
 			local build_time_list = function()
 				local t = {
-					{value = 40, label = "40 seconds"},
-					{value = 60, label = "60 seconds"},
-					{value = 90, label = "90 seconds"},
-					{value = 120, label = "2 minutes"},
-					{value = 180, label = "3 minutes"},
-					{value = 300, label = "5 minutes"},
+					{value = 40, label = "40 秒"},
+					{value = 60, label = "60 秒"},
+					{value = 90, label = "90 秒"},
+					{value = 120, label = "2 分"},
+					{value = 180, label = "3 分"},
+					{value = 300, label = "5 分"},
 				}
 				return t
 			end
 			
-			summaryFrame.TimeToTestLabel = DF:CreateLabel (summaryFrame, "Amount of Time", normal_text_template)
+			summaryFrame.TimeToTestLabel = DF:CreateLabel (summaryFrame, "多少时间", normal_text_template)
 			summaryFrame.TimeToTestDropdown = DF:CreateDropDown (summaryFrame, build_time_list, default, 150, 20, _, _, options_dropdown_template)
 			
 		--description string and text entry
-			summaryFrame.DescriptionLabel = DF:CreateLabel (summaryFrame, "Description", normal_text_template)
+			summaryFrame.DescriptionLabel = DF:CreateLabel (summaryFrame, "描述", normal_text_template)
 			summaryFrame.DescriptionEntry = DF:CreateTextEntry (summaryFrame, function()end, 120, 20, nil, _, nil, options_dropdown_template)
 			
 		--DPS Amount string
@@ -5316,7 +5316,7 @@ function Details.OpenDpsBenchmark()
 				}
 				return t
 			end
-			summaryFrame.BossSimulationLabel = DF:CreateLabel (summaryFrame, "Boss Simulation", normal_text_template)
+			summaryFrame.BossSimulationLabel = DF:CreateLabel (summaryFrame, "BOSS模拟", normal_text_template)
 			summaryFrame.BossSimulationDropdown = DF:CreateDropDown (summaryFrame, build_bosssimulation_list, default, 150, 20, _, _, options_dropdown_template)
 			
 		--boss records line with a tooltip importing data from the storage
@@ -5586,7 +5586,7 @@ local CreateCurrentDpsFrame = function (parent, name)
 	--> title bar
 		local TitleString = f:CreateFontString (nil, "overlay", "GameFontNormal")
 		TitleString:SetPoint ("top", f, "top", 0, -1)
-		TitleString:SetText ("Dps on Last 5 Seconds")
+		TitleString:SetText ("最近5秒的Dps")
 		DF:SetFontSize (TitleString, 9)
 		local TitleBackground = f:CreateTexture (nil, "artwork")
 		TitleBackground:SetTexture ([[Interface\Tooltips\UI-Tooltip-Background]])
@@ -5598,8 +5598,8 @@ local CreateCurrentDpsFrame = function (parent, name)
 	--> labels for arena
 		local labelPlayerTeam = f:CreateFontString (nil, "overlay", "GameFontNormal")
 		local labelYellowTeam = f:CreateFontString (nil, "overlay", "GameFontNormal")
-		labelPlayerTeam:SetText ("Player Team")
-		labelYellowTeam:SetText ("Enemy Team")
+		labelPlayerTeam:SetText ("玩家队伍")
+		labelYellowTeam:SetText ("敌方队伍")
 		DF:SetFontSize (labelPlayerTeam, 14)
 		DF:SetFontSize (labelYellowTeam, 14)
 		DF:SetFontOutline (labelPlayerTeam, "NONE")
@@ -5644,7 +5644,7 @@ local CreateCurrentDpsFrame = function (parent, name)
 
 	--> labels for mythic dungeon / group party
 		local labelGroupDamage = f:CreateFontString (nil, "overlay", "GameFontNormal")
-		labelGroupDamage:SetText ("Real Time Group DPS")
+		labelGroupDamage:SetText ("实时队伍DPS")
 		DF:SetFontSize (labelGroupDamage, 14)
 		DF:SetFontOutline (labelGroupDamage, "NONE")
 		
@@ -6344,7 +6344,7 @@ local CreateEventTrackerFrame = function (parent, name)
 							targetName = add_role_and_class_color (targetName, targetSerial)
 						end
 						
-						line.RightText:SetText (targetName or "unknown target")
+						line.RightText:SetText (targetName or "未知目标")
 						
 						line.ActionIcon:SetTexture ([[Interface\AddOns\Details\images\event_tracker_icons]])
 						line.ActionIcon:SetTexCoord (0.376, 0.5, 0, 1)
@@ -6364,7 +6364,7 @@ local CreateEventTrackerFrame = function (parent, name)
 		--title text
 		local TitleString = f:CreateFontString (nil, "overlay", "GameFontNormal")
 		TitleString:SetPoint ("top", f, "top", 0, -3)
-		TitleString:SetText ("Details!: Event Tracker")
+		TitleString:SetText ("Details!: 事件追踪")
 		local TitleBackground = f:CreateTexture (nil, "artwork")
 		TitleBackground:SetTexture ([[Interface\Tooltips\UI-Tooltip-Background]])
 		TitleBackground:SetVertexColor (.1, .1, .1, .9)
@@ -6620,7 +6620,7 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 	
 		local DF = _detalhes.gump
 	
-		local f = DF:CreateSimplePanel (UIParent, 700, 400, "Details! The Current Real DPS Options", "DetailsCurrentRealDPSOptions")
+		local f = DF:CreateSimplePanel (UIParent, 700, 400, "Details! 当前实时DPS设置", "DetailsCurrentRealDPSOptions")
 		f:SetPoint ("center", UIParent, "center")
 		f:SetScript ("OnMouseDown", nil)
 		f:SetScript ("OnMouseUp", nil)
@@ -6643,11 +6643,11 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 				Details:UpdateTheRealCurrentDPSFrame (testUsing)
 			end
 			local strataTable = {}
-			strataTable [1] = {value = "BACKGROUND", label = "BACKGROUND", onclick = set_frame_strata}
-			strataTable [2] = {value = "LOW", label = "LOW", onclick = set_frame_strata}
-			strataTable [3] = {value = "MEDIUM", label = "MEDIUM", onclick = set_frame_strata}
-			strataTable [4] = {value = "HIGH", label = "HIGH", onclick = set_frame_strata}
-			strataTable [5] = {value = "DIALOG", label = "DIALOG", onclick = set_frame_strata}
+			strataTable [1] = {value = "BACKGROUND", label = "背景", onclick = set_frame_strata}
+			strataTable [2] = {value = "LOW", label = "低", onclick = set_frame_strata}
+			strataTable [3] = {value = "MEDIUM", label = "中", onclick = set_frame_strata}
+			strataTable [4] = {value = "HIGH", label = "高", onclick = set_frame_strata}
+			strataTable [5] = {value = "DIALOG", label = "顶层", onclick = set_frame_strata}
 			
 		--> font options
 			local set_font_shadow= function (_, _, shadow)
@@ -6655,9 +6655,9 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 				Details:UpdateTheRealCurrentDPSFrame (testUsing)
 			end
 			local fontShadowTable = {}
-			fontShadowTable [1] = {value = "NONE", label = "None", onclick = set_font_shadow}
-			fontShadowTable [2] = {value = "OUTLINE", label = "Outline", onclick = set_font_shadow}
-			fontShadowTable [3] = {value = "THICKOUTLINE", label = "Thick Outline", onclick = set_font_shadow}
+			fontShadowTable [1] = {value = "NONE", label = "无", onclick = set_font_shadow}
+			fontShadowTable [2] = {value = "OUTLINE", label = "轮廓", onclick = set_font_shadow}
+			fontShadowTable [3] = {value = "THICKOUTLINE", label = "加粗轮廓", onclick = set_font_shadow}
 			
 			local on_select_text_font = function (self, fixed_value, value)
 				Details.current_dps_meter.font_face = value
@@ -6667,7 +6667,7 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 		--> options table
 		local options = {
 		
-			{type = "label", get = function() return "Frame Settings:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+			{type = "label", get = function() return "框架设置:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 			--enabled
 			{
 				type = "toggle",
@@ -6676,8 +6676,8 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 					Details.current_dps_meter.enabled = not Details.current_dps_meter.enabled
 					Details:LoadFramesForBroadcastTools()
 				end,
-				desc = "Enabled",
-				name = "Enabled",
+				desc = "启用",
+				name = "启用",
 				text_template = options_text_template,
 			},
 			--locked
@@ -6688,8 +6688,8 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 					Details.current_dps_meter.frame.locked = not Details.current_dps_meter.frame.locked
 					Details:UpdateTheRealCurrentDPSFrame (testUsing)
 				end,
-				desc = "Locked",
-				name = "Locked",
+				desc = "锁定",
+				name = "锁定",
 				text_template = options_text_template,
 			},
 			--showtitle
@@ -6700,8 +6700,8 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 					Details.current_dps_meter.frame.show_title = not Details.current_dps_meter.frame.show_title
 					Details:UpdateTheRealCurrentDPSFrame (testUsing)
 				end,
-				desc = "Show Title",
-				name = "Show Title",
+				desc = "显示标题",
+				name = "显示标题",
 				text_template = options_text_template,
 			},
 			--backdrop color
@@ -6715,8 +6715,8 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 					color[1], color[2], color[3], color[4] = r, g, b, a
 					Details:UpdateTheRealCurrentDPSFrame (testUsing)
 				end,
-				desc = "Backdrop Color",
-				name = "Backdrop Color",
+				desc = "背景颜色",
+				name = "背景颜色",
 				text_template = options_text_template,
 			},
 			--statra
@@ -6724,7 +6724,7 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 				type = "select",
 				get = function() return Details.current_dps_meter.frame.strata end,
 				values = function() return strataTable end,
-				name = "Frame Strata"
+				name = "框架地层"
 			},
 			--width
 			{
@@ -6737,7 +6737,7 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 				min = 1,
 				max = 300,
 				step = 1,
-				name = "Width",
+				name = "宽度",
 				text_template = options_text_template,
 			},			
 			--height
@@ -6751,12 +6751,12 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 				min = 1,
 				max = 300,
 				step = 1,
-				name = "Height",
+				name = "高度",
 				text_template = options_text_template,
 			},			
 			
 			{type = "breakline"},
-			{type = "label", get = function() return "Enabled On:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+			{type = "label", get = function() return "启用:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 			--arenas
 			{
 				type = "toggle",
@@ -6765,7 +6765,7 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 					Details.current_dps_meter.arena_enabled = not Details.current_dps_meter.arena_enabled
 					Details:LoadFramesForBroadcastTools()
 				end,
-				name = "Arena Matches",
+				name = "竞技场比赛",
 				text_template = options_text_template,
 			},
 			--mythic dungeon
@@ -6776,12 +6776,12 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 					Details.current_dps_meter.mythic_dungeon_enabled = not Details.current_dps_meter.mythic_dungeon_enabled
 					Details:LoadFramesForBroadcastTools()
 				end,
-				name = "Mythic Dungeons",
+				name = "史诗地下城",
 				text_template = options_text_template,
 			},
 			
 			{type = "breakline"},
-			{type = "label", get = function() return "Text Settings:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+			{type = "label", get = function() return "文字设置:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 			--font size
 			{
 				type = "range",
@@ -6793,7 +6793,7 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 				min = 4,
 				max = 32,
 				step = 1,
-				name = "Font Size",
+				name = "字体大小",
 				text_template = options_text_template,
 			},
 			--font color
@@ -6807,8 +6807,8 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 					color[1], color[2], color[3], color[4] = r, g, b, a
 					Details:UpdateTheRealCurrentDPSFrame (testUsing)
 				end,
-				desc = "Font Color",
-				name = "Font Color",
+				desc = "字体颜色",
+				name = "字体颜色",
 				text_template = options_text_template,
 			},
 			--font shadow
@@ -6816,14 +6816,14 @@ function Details:OpenCurrentRealDPSOptions (from_options_panel)
 				type = "select",
 				get = function() return Details.current_dps_meter.font_shadow end,
 				values = function() return fontShadowTable end,
-				name = "Font Shadow"
+				name = "字体阴影"
 			},
 			--font face
 			{
 				type = "select",
 				get = function() return Details.current_dps_meter.font_face end,
 				values = function() return DF:BuildDropDownFontList (on_select_text_font) end,
-				name = "Font Face",
+				name = "字体导入",
 				text_template = options_text_template,
 			},
 			
@@ -6873,7 +6873,7 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 	
 		local DF = _detalhes.gump
 	
-		local f = DF:CreateSimplePanel (UIParent, 700, 400, "Details! Event Tracker Options", "DetailsEventTrackerOptions")
+		local f = DF:CreateSimplePanel (UIParent, 700, 400, "Details! 事件跟踪器选项", "DetailsEventTrackerOptions")
 		f:SetPoint ("center", UIParent, "center")
 		f:SetScript ("OnMouseDown", nil)
 		f:SetScript ("OnMouseUp", nil)
@@ -6894,11 +6894,11 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 				Details:UpdateEventTrackerFrame()
 			end
 			local strataTable = {}
-			strataTable [1] = {value = "BACKGROUND", label = "BACKGROUND", onclick = set_frame_strata}
-			strataTable [2] = {value = "LOW", label = "LOW", onclick = set_frame_strata}
-			strataTable [3] = {value = "MEDIUM", label = "MEDIUM", onclick = set_frame_strata}
-			strataTable [4] = {value = "HIGH", label = "HIGH", onclick = set_frame_strata}
-			strataTable [5] = {value = "DIALOG", label = "DIALOG", onclick = set_frame_strata}
+			strataTable [1] = {value = "BACKGROUND", label = "背景", onclick = set_frame_strata}
+			strataTable [2] = {value = "LOW", label = "低", onclick = set_frame_strata}
+			strataTable [3] = {value = "MEDIUM", label = "中", onclick = set_frame_strata}
+			strataTable [4] = {value = "HIGH", label = "高", onclick = set_frame_strata}
+			strataTable [5] = {value = "DIALOG", label = "顶部", onclick = set_frame_strata}
 		
 		--> font options
 			local set_font_shadow= function (_, _, shadow)
@@ -6906,9 +6906,9 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 				Details:UpdateEventTrackerFrame()
 			end
 			local fontShadowTable = {}
-			fontShadowTable [1] = {value = "NONE", label = "None", onclick = set_font_shadow}
-			fontShadowTable [2] = {value = "OUTLINE", label = "Outline", onclick = set_font_shadow}
-			fontShadowTable [3] = {value = "THICKOUTLINE", label = "Thick Outline", onclick = set_font_shadow}
+			fontShadowTable [1] = {value = "NONE", label = "无", onclick = set_font_shadow}
+			fontShadowTable [2] = {value = "OUTLINE", label = "轮廓", onclick = set_font_shadow}
+			fontShadowTable [3] = {value = "THICKOUTLINE", label = "加粗轮廓", onclick = set_font_shadow}
 			
 			local on_select_text_font = function (self, fixed_value, value)
 				Details.event_tracker.font_face = value
@@ -6932,7 +6932,7 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 		--> options table
 		local options = {
 		
-			{type = "label", get = function() return "Frame Settings:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+			{type = "label", get = function() return "框架设置:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 			--enabled
 			{
 				type = "toggle",
@@ -6941,8 +6941,8 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 					Details.event_tracker.enabled = not Details.event_tracker.enabled
 					Details:LoadFramesForBroadcastTools()
 				end,
-				desc = "Enabled",
-				name = "Enabled",
+				desc = "启用",
+				name = "启用",
 				text_template = options_text_template,
 			},
 			--locked
@@ -6953,8 +6953,8 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 					Details.event_tracker.frame.locked = not Details.event_tracker.frame.locked
 					Details:UpdateEventTrackerFrame()
 				end,
-				desc = "Locked",
-				name = "Locked",
+				desc = "锁定",
+				name = "锁定",
 				text_template = options_text_template,
 			},
 			--showtitle
@@ -6965,8 +6965,8 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 					Details.event_tracker.frame.show_title = not Details.event_tracker.frame.show_title
 					Details:UpdateEventTrackerFrame()
 				end,
-				desc = "Show Title",
-				name = "Show Title",
+				desc = "显示标题",
+				name = "显示标题",
 				text_template = options_text_template,
 			},
 			--backdrop color
@@ -6980,8 +6980,8 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 					color[1], color[2], color[3], color[4] = r, g, b, a
 					Details:UpdateEventTrackerFrame()
 				end,
-				desc = "Backdrop Color",
-				name = "Backdrop Color",
+				desc = "背景颜色",
+				name = "背景颜色",
 				text_template = options_text_template,
 			},
 			--statra
@@ -6989,10 +6989,10 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 				type = "select",
 				get = function() return Details.event_tracker.frame.strata end,
 				values = function() return strataTable end,
-				name = "Frame Strata"
+				name = "框架地层"
 			},
 			{type = "breakline"},
-			{type = "label", get = function() return "Line Settings:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+			{type = "label", get = function() return "线条设置:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 			--line height
 			{
 				type = "range",
@@ -7004,7 +7004,7 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 				min = 4,
 				max = 32,
 				step = 1,
-				name = "Line Height",
+				name = "线条高度",
 				text_template = options_text_template,
 			},
 			--line texture
@@ -7012,7 +7012,7 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 				type = "select",
 				get = function() return Details.event_tracker.line_texture end,
 				values = function() return texTable end,
-				name = "Line Texture",
+				name = "线条纹理",
 			},
 			--line color
 			{
@@ -7025,8 +7025,8 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 					color[1], color[2], color[3], color[4] = r, g, b, a
 					Details:UpdateEventTrackerFrame()
 				end,
-				desc = "Line Color",
-				name = "Line Color",
+				desc = "线条颜色",
+				name = "线条颜色",
 				text_template = options_text_template,
 			},
 			--font size
@@ -7040,7 +7040,7 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 				min = 4,
 				max = 32,
 				step = 1,
-				name = "Font Size",
+				name = "字体大小",
 				text_template = options_text_template,
 			},
 			--font color
@@ -7054,8 +7054,8 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 					color[1], color[2], color[3], color[4] = r, g, b, a
 					Details:UpdateEventTrackerFrame()
 				end,
-				desc = "Font Color",
-				name = "Font Color",
+				desc = "字体颜色",
+				name = "字体颜色",
 				text_template = options_text_template,
 			},
 			--font shadow
@@ -7063,14 +7063,14 @@ function Details:OpenEventTrackerOptions (from_options_panel)
 				type = "select",
 				get = function() return Details.event_tracker.font_shadow end,
 				values = function() return fontShadowTable end,
-				name = "Font Shadow"
+				name = "字体阴影"
 			},
 			--font face
 			{
 				type = "select",
 				get = function() return Details.event_tracker.font_face end,
 				values = function() return DF:BuildDropDownFontList (on_select_text_font) end,
-				name = "Font Face",
+				name = "字体导入",
 				text_template = options_text_template,
 			},
 		}
@@ -7133,7 +7133,7 @@ function Details:Dump (t)
 	if (not DetailsDumpFrame) then
 		DetailsDumpFrame = DetailsFramework:CreateSimplePanel (UIParent)
 		DetailsDumpFrame:SetSize (700, 600)
-		DetailsDumpFrame:SetTitle ("Details! Dump Table [|cFFFF3333Ready Only|r]")
+		DetailsDumpFrame:SetTitle ("Details! 转储表 [|cFFFF3333Ready Only|r]")
 		
 		local text_editor = DetailsFramework:NewSpecialLuaEditorEntry (DetailsDumpFrame, 680, 560, "Editbox", "$parentEntry", true)
 		text_editor:SetPoint ("topleft", DetailsDumpFrame, "topleft", 10, -30)
@@ -7174,7 +7174,7 @@ function Details:ScrollDamage()
 		local DF = DetailsFramework
 		DetailsScrollDamage = DetailsFramework:CreateSimplePanel (UIParent)
 		DetailsScrollDamage:SetSize (707, 505)
-		DetailsScrollDamage:SetTitle ("Details! Scroll Damage")
+		DetailsScrollDamage:SetTitle ("Details! 滚动伤害")
 		DetailsScrollDamage.Data = {}
 		DetailsScrollDamage:ClearAllPoints()
 		DetailsScrollDamage:SetPoint ("left", UIParent, "left", 10, 0)
@@ -7196,14 +7196,14 @@ function Details:ScrollDamage()
 	
 		--header
 		local headerTable = {
-			{text = "Icon", width = 32},
-			{text = "Spell Name", width = 180},
-			{text = "Amount", width = 80},
+			{text = "图标", width = 32},
+			{text = "法术名称", width = 180},
+			{text = "数量", width = 80},
 			
-			{text = "Time", width = 80},
-			{text = "Token", width = 130},
-			{text = "Spell ID", width = 80},
-			{text = "School", width = 80},
+			{text = "时间", width = 80},
+			{text = "造成伤害", width = 130},
+			{text = "法术 ID", width = 80},
+			{text = "类型", width = 80},
 		}
 		local headerOptions = {
 			padding = 2,
@@ -7436,12 +7436,12 @@ function _detalhes:ShowImportWindow (defaultText, confirmFunc, titleText)
 			end
 			importWindow:Hide()
 		end
-		local okayButton = DetailsFramework:CreateButton (importTextEditor, onClickImportButton, 120, 20, "Okay", -1, nil, nil, nil, nil, nil, _detalhes.gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), _detalhes.gump:GetTemplate ("font", "OPTIONS_FONT_TEMPLATE")) --> localize-me
+		local okayButton = DetailsFramework:CreateButton (importTextEditor, onClickImportButton, 120, 20, "确定", -1, nil, nil, nil, nil, nil, _detalhes.gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), _detalhes.gump:GetTemplate ("font", "OPTIONS_FONT_TEMPLATE")) --> localize-me
 		okayButton:SetIcon ([[Interface\BUTTONS\UI-Panel-BiggerButton-Up]], 20, 20, "overlay", {0.1, .9, 0.1, .9})
 		importTextEditor.OkayButton = okayButton
 	
 		--cancel button
-		local cancelButton = DetailsFramework:CreateButton (importTextEditor, function() importWindow:Hide() end, 120, 20, "Cancel", -1, nil, nil, nil, nil, nil, _detalhes.gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), _detalhes.gump:GetTemplate ("font", "OPTIONS_FONT_TEMPLATE")) --> localize-me
+		local cancelButton = DetailsFramework:CreateButton (importTextEditor, function() importWindow:Hide() end, 120, 20, "取消", -1, nil, nil, nil, nil, nil, _detalhes.gump:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), _detalhes.gump:GetTemplate ("font", "OPTIONS_FONT_TEMPLATE")) --> localize-me
 		cancelButton:SetIcon ([[Interface\BUTTONS\UI-Panel-MinimizeButton-Up]], 20, 20, "overlay", {0.1, .9, 0.1, .9})
 
 		okayButton:SetPoint ("topright", importTextEditor, "bottomright", 0, -10)
@@ -7453,7 +7453,7 @@ function _detalhes:ShowImportWindow (defaultText, confirmFunc, titleText)
 	DetailsExportWindow.ImportEditor:SetText (defaultText or "")
 	DetailsExportWindow:Show()
 	
-	titleText = titleText or "Details! Dump String"
+	titleText = titleText or "Details! 转储字符串"
 	DetailsExportWindow.Title:SetText (titleText)
 	
 	C_Timer.After (.2, function()

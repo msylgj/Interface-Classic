@@ -55,7 +55,7 @@
 		end
 		
 		if (this_capture.do_not_save) then
-			return _detalhes:Msg ("This capture belongs to a plugin and cannot be edited.")
+			return _detalhes:Msg ("此捕获属于插件，无法编辑.")
 		end
 		
 		this_capture [INDEX_NAME] = name or this_capture [INDEX_NAME]
@@ -84,19 +84,19 @@
 	
 		--> check name
 		if (not name) then
-			return "Couldn't register the time capture, name was nil."
+			return "无法注册时间捕获，名称为空."
 		end
 		
 		--> check if the name already exists
 		for index, t in ipairs (_detalhes.savedTimeCaptures) do
 			if (t [INDEX_NAME] == name) then
-				return "Couldn't register the time capture, name already registred."
+				return "无法注册时间捕获，已注册的名称."
 			end
 		end
 		
 		--> check function
 		if (not func) then
-			return "Couldn't register the time capture, invalid function."
+			return "无法注册时间捕获，无效功能."
 		end
 		
 		local no_save = nil
@@ -117,10 +117,10 @@
 		
 		--> check matrix
 		if (not matrix or type (matrix) ~= "table") then
-			return "Couldn't register the time capture, matrix was invalid."
+			return "无法注册时间捕获，矩阵无效."
 		end
 		
-		author = author or "Unknown"
+		author = author or "未知"
 		version = version or "v1.0"
 		icon = icon or [[Interface\InventoryItems\WoWUnknownItem01]]
 		
@@ -267,7 +267,7 @@
 		
 		local okey, result = _pcall (func, attributes)
 		if (not okey) then
-			_detalhes:Msg ("|cFFFF9900error on chart script function|r:", result)
+			_detalhes:Msg ("|cFFFF9900图表脚本功能错误|r:", result)
 			result = 0
 		end
 		

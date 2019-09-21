@@ -206,14 +206,14 @@ do
 			local all_switch_titlebar_help = CreateFrame ("frame", "DetailsSwitchAllPopUp1", fake_window, "DetailsHelpBoxTemplate")
 			all_switch_titlebar_help.ArrowUP:Show()
 			all_switch_titlebar_help.ArrowGlowUP:Show()
-			all_switch_titlebar_help.Text:SetText ("Right click on Title Bar to open all displays menu.")
+			all_switch_titlebar_help.Text:SetText ("右键单击标题栏以打开所有显示菜单.")
 			all_switch_titlebar_help:SetPoint ("bottom", fake_window.TitleBar, "top", 0, 30)
 			all_switch_titlebar_help:Show()
 			
 			local all_switch_titlebar2_help = CreateFrame ("frame", "DetailsSwitchAllPopUp1", fake_window, "DetailsHelpBoxTemplate")
 			all_switch_titlebar2_help.ArrowLEFT:Show()
 			all_switch_titlebar2_help.ArrowGlowLEFT:Show()
-			all_switch_titlebar2_help.Text:SetText ("Right clicking anywhere else opens your Bookmarks.")
+			all_switch_titlebar2_help.Text:SetText ("右键单击任何其他位置即可打开书签.")
 			all_switch_titlebar2_help:SetPoint ("right", fake_window, "left", -30, 0)
 			all_switch_titlebar2_help:Show()
 			
@@ -225,7 +225,7 @@ do
 			close:SetSize (100, 20)
 			local t = close:CreateFontString (nil, "overlay", "GameFontNormal")
 			t:SetPoint ("center", 0, 0)
-			t:SetText ("CLOSE")
+			t:SetText ("关闭")
 		end
 	--]=]
 	
@@ -539,7 +539,7 @@ do
 		GameCooltip:Reset()
 		_detalhes:CooltipPreset (1)
 		GameCooltip:SetBackdrop (1, _detalhes.tooltip_backdrop, backgroundColor, _detalhes.tooltip_border_color)
-		GameCooltip:AddLine ("Open History Panel")
+		GameCooltip:AddLine ("打开历史面板")
 		GameCooltip:SetOwner (window_color.widget)
 		GameCooltip:SetType ("tooltip")
 		GameCooltip:Show()
@@ -1120,7 +1120,7 @@ function _detalhes:FastSwitch (button, bookmark, bookmark_number, select_new)
 		elseif (_detalhes.SoloTables.NameTable [bookmark.sub_atributo]) then
 			_detalhes.SoloTables:EnableSoloMode (_detalhes.switch.current_instancia, bookmark.sub_atributo)
 		else
-			_detalhes:Msg ("Plugin not found.")
+			_detalhes:Msg ("找不到插件.")
 		end
 	else
 		_detalhes.switch.current_instancia:TrocaTabela (_detalhes.switch.current_instancia, true, bookmark.atributo, bookmark.sub_atributo)
@@ -1483,7 +1483,7 @@ local oniconenter = function (self)
 
 	GameCooltip:Reset()
 	_detalhes:CooltipPreset (1)
-	GameCooltip:AddLine ("select bookmark")
+	GameCooltip:AddLine ("选择书签")
 	GameCooltip:AddIcon ([[Interface\TUTORIALFRAME\UI-TUTORIAL-FRAME]], 1, 1, 12, 14, 0.0019531, 0.1484375, 0.6269531, 0.8222656)
 	
 	GameCooltip:SetOwner (self)

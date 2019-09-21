@@ -1,21 +1,21 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("Details", "zhTW") 
 if not L then return end 
 
-L["ABILITY_ID"] = "技能 ID"
+L["ABILITY_ID"] = "技能id"
 --[[Translation missing --]]
 --[[ L["STRING_"] = ""--]] 
 L["STRING_ABSORBED"] = "吸收"
-L["STRING_ACTORFRAME_NOTHING"] = "沒有資料可供報告 :("
-L["STRING_ACTORFRAME_REPORTAT"] = "於"
-L["STRING_ACTORFRAME_REPORTOF"] = "來自"
-L["STRING_ACTORFRAME_REPORTTARGETS"] = "報告目標來自"
+L["STRING_ACTORFRAME_NOTHING"] = "沒有資料可報告 :("
+L["STRING_ACTORFRAME_REPORTAT"] = "在"
+L["STRING_ACTORFRAME_REPORTOF"] = "的"
+L["STRING_ACTORFRAME_REPORTTARGETS"] = "報告的對象"
 L["STRING_ACTORFRAME_REPORTTO"] = "報告給"
-L["STRING_ACTORFRAME_SPELLDETAILS"] = "法術詳細內容"
-L["STRING_ACTORFRAME_SPELLSOF"] = "法術來自"
+L["STRING_ACTORFRAME_SPELLDETAILS"] = "法術細節"
+L["STRING_ACTORFRAME_SPELLSOF"] = "技能的"
 L["STRING_ACTORFRAME_SPELLUSED"] = "所有使用的法術"
-L["STRING_AGAINST"] = "反向"
+L["STRING_AGAINST"] = "相反"
 L["STRING_ALIVE"] = "存活"
-L["STRING_ALPHA"] = "透明度"
+L["STRING_ALPHA"] = "Alpha"
 L["STRING_ANCHOR_BOTTOM"] = "下"
 L["STRING_ANCHOR_BOTTOMLEFT"] = "左下"
 L["STRING_ANCHOR_BOTTOMRIGHT"] = "右下"
@@ -25,289 +25,284 @@ L["STRING_ANCHOR_TOP"] = "上"
 L["STRING_ANCHOR_TOPLEFT"] = "左上"
 L["STRING_ANCHOR_TOPRIGHT"] = "右上"
 L["STRING_ASCENDING"] = "遞增"
-L["STRING_ATACH_DESC"] = "視窗 #%d 和視窗 #%d 組成群組。"
+L["STRING_ATACH_DESC"] = "視窗#%d與視窗#%d成為群組。"
 L["STRING_ATTRIBUTE_CUSTOM"] = "自訂"
 L["STRING_ATTRIBUTE_DAMAGE"] = "傷害"
-L["STRING_ATTRIBUTE_DAMAGE_BYSPELL"] = "承受的法術傷害"
-L["STRING_ATTRIBUTE_DAMAGE_DEBUFFS"] = "光環 & 虛無區域"
-L["STRING_ATTRIBUTE_DAMAGE_DEBUFFS_REPORT"] = "減益傷害和持續時間"
-L["STRING_ATTRIBUTE_DAMAGE_DONE"] = "輸出傷害"
-L["STRING_ATTRIBUTE_DAMAGE_DPS"] = "每秒傷害 (DPS)"
+L["STRING_ATTRIBUTE_DAMAGE_BYSPELL"] = "承受到的技能傷害"
+L["STRING_ATTRIBUTE_DAMAGE_DEBUFFS"] = "光環 & 虛空領域"
+L["STRING_ATTRIBUTE_DAMAGE_DEBUFFS_REPORT"] = "減益傷害與持續時間"
+L["STRING_ATTRIBUTE_DAMAGE_DONE"] = "造成傷害"
+L["STRING_ATTRIBUTE_DAMAGE_DPS"] = "每秒傷害"
 L["STRING_ATTRIBUTE_DAMAGE_ENEMIES"] = "敵方承受傷害"
-L["STRING_ATTRIBUTE_DAMAGE_ENEMIES_DONE"] = "敵方輸出傷害"
-L["STRING_ATTRIBUTE_DAMAGE_FRAGS"] = "輸出傷害目標"
+L["STRING_ATTRIBUTE_DAMAGE_ENEMIES_DONE"] = "敵方造成傷害"
+L["STRING_ATTRIBUTE_DAMAGE_FRAGS"] = "擊殺"
 L["STRING_ATTRIBUTE_DAMAGE_FRIENDLYFIRE"] = "隊友誤傷"
 L["STRING_ATTRIBUTE_DAMAGE_TAKEN"] = "承受傷害"
 L["STRING_ATTRIBUTE_ENERGY"] = "能量"
-L["STRING_ATTRIBUTE_ENERGY_ALTERNATEPOWER"] = "首領戰特殊能量"
+L["STRING_ATTRIBUTE_ENERGY_ALTERNATEPOWER"] = "次要能量"
 L["STRING_ATTRIBUTE_ENERGY_ENERGY"] = "能量生成"
 L["STRING_ATTRIBUTE_ENERGY_MANA"] = "法力恢復"
 L["STRING_ATTRIBUTE_ENERGY_RAGE"] = "怒氣生成"
-L["STRING_ATTRIBUTE_ENERGY_RESOURCES"] = "其他能量"
+L["STRING_ATTRIBUTE_ENERGY_RESOURCES"] = "其他資源"
 L["STRING_ATTRIBUTE_ENERGY_RUNEPOWER"] = "符能生成"
 L["STRING_ATTRIBUTE_HEAL"] = "治療"
-L["STRING_ATTRIBUTE_HEAL_ABSORBED"] = "吸收治療"
+L["STRING_ATTRIBUTE_HEAL_ABSORBED"] = "吸收的治療"
 L["STRING_ATTRIBUTE_HEAL_DONE"] = "造成治療"
 L["STRING_ATTRIBUTE_HEAL_ENEMY"] = "敵方造成治療"
-L["STRING_ATTRIBUTE_HEAL_HPS"] = "每秒治療 (HPS)"
+L["STRING_ATTRIBUTE_HEAL_HPS"] = "每秒治療"
 L["STRING_ATTRIBUTE_HEAL_OVERHEAL"] = "過量治療"
-L["STRING_ATTRIBUTE_HEAL_PREVENT"] = "減免傷害"
+L["STRING_ATTRIBUTE_HEAL_PREVENT"] = "傷害預防"
 L["STRING_ATTRIBUTE_HEAL_TAKEN"] = "承受治療"
-L["STRING_ATTRIBUTE_MISC"] = "其他"
+L["STRING_ATTRIBUTE_MISC"] = "雜項"
 L["STRING_ATTRIBUTE_MISC_BUFF_UPTIME"] = "增益覆蓋時間"
 L["STRING_ATTRIBUTE_MISC_CCBREAK"] = "控場破除"
 L["STRING_ATTRIBUTE_MISC_DEAD"] = "死亡"
 L["STRING_ATTRIBUTE_MISC_DEBUFF_UPTIME"] = "減益覆蓋時間"
 L["STRING_ATTRIBUTE_MISC_DEFENSIVE_COOLDOWNS"] = "冷卻"
 L["STRING_ATTRIBUTE_MISC_DISPELL"] = "驅散"
-L["STRING_ATTRIBUTE_MISC_INTERRUPT"] = "斷法"
+L["STRING_ATTRIBUTE_MISC_INTERRUPT"] = "打斷"
 L["STRING_ATTRIBUTE_MISC_RESS"] = "復活"
 L["STRING_AUTO"] = "自動"
 L["STRING_AUTOSHOT"] = "自動射擊"
 L["STRING_AVERAGE"] = "平均"
 L["STRING_BLOCKED"] = "格檔"
-L["STRING_BOTTOM"] = "下"
-L["STRING_BOTTOM_TO_TOP"] = "由下到上"
-L["STRING_CAST"] = "施法"
-L["STRING_CAUGHT"] = "抓到"
-L["STRING_CCBROKE"] = "移除控場"
-L["STRING_CENTER"] = "中"
-L["STRING_CENTER_UPPER"] = "中"
-L["STRING_CHANGED_TO_CURRENT"] = "分段已切換成: |cFFFFFF00目前|r"
-L["STRING_CHANNEL_PRINT"] = "觀察"
+L["STRING_BOTTOM"] = "底部"
+L["STRING_BOTTOM_TO_TOP"] = "底部到頂部"
+L["STRING_CAST"] = "施放"
+L["STRING_CAUGHT"] = "捕捉"
+L["STRING_CCBROKE"] = "控場移除"
+L["STRING_CENTER"] = "中央"
+L["STRING_CENTER_UPPER"] = "中間"
+L["STRING_CHANGED_TO_CURRENT"] = "片段已改變:  |cFFFFFF00目前|r"
+L["STRING_CHANNEL_PRINT"] = "觀察者"
 L["STRING_CHANNEL_RAID"] = "團隊"
 L["STRING_CHANNEL_SAY"] = "說"
 L["STRING_CHANNEL_WHISPER"] = "密語"
 L["STRING_CHANNEL_WHISPER_TARGET_COOLDOWN"] = "密語冷卻目標"
 L["STRING_CHANNEL_YELL"] = "大喊"
-L["STRING_CLICK_REPORT_LINE1"] = "|cFFFFCC22左鍵|r: |cFFFFEE00報告|r"
-L["STRING_CLICK_REPORT_LINE2"] = "|cFFFFCC22Shift+左鍵|r: |cFFFFEE00視窗模式|r"
-L["STRING_CLOSEALL"] = "所有視窗都已關閉，可以輸入 '/details show' 重新開啟視窗。"
+L["STRING_CLICK_REPORT_LINE1"] = "|cFFFFCC22點擊|r: |cFFFFEE00報告|r"
+L["STRING_CLICK_REPORT_LINE2"] = "|cFFFFCC22Shift+點擊|r: |cFFFFEE00視窗模式|r"
+L["STRING_CLOSEALL"] = "所有視窗已關閉，你可以輸入'/details show'重新開啟。"
 L["STRING_COLOR"] = "顏色"
 L["STRING_COMMAND_LIST"] = "指令列表"
-L["STRING_COOLTIP_NOOPTIONS"] = "沒有選項"
-L["STRING_CREATEAURA"] = "建立提醒效果"
+L["STRING_COOLTIP_NOOPTIONS"] = "無選項"
+L["STRING_CREATEAURA"] = "創建光環"
 L["STRING_CRITICAL_HITS"] = "致命一擊"
 L["STRING_CRITICAL_ONLY"] = "致命"
-L["STRING_CURRENT"] = "目前"
+L["STRING_CURRENT"] = "當前"
 L["STRING_CURRENTFIGHT"] = "當前片段"
 L["STRING_CUSTOM_ACTIVITY_ALL"] = "活躍時間"
-L["STRING_CUSTOM_ACTIVITY_ALL_DESC"] = "顯示團隊中每個玩家的活躍度報告。"
-L["STRING_CUSTOM_ACTIVITY_DPS"] = "傷害活躍時間"
-L["STRING_CUSTOM_ACTIVITY_DPS_DESC"] = "報告每個角色花了多少時間在輸出傷害。"
-L["STRING_CUSTOM_ACTIVITY_HPS"] = "治療活躍時間"
-L["STRING_CUSTOM_ACTIVITY_HPS_DESC"] = "報告每個角色花了多少時間在補血。"
+L["STRING_CUSTOM_ACTIVITY_ALL_DESC"] = "顯示此團隊中每個玩家的活躍度報告。"
+L["STRING_CUSTOM_ACTIVITY_DPS"] = "傷害活耀時間"
+L["STRING_CUSTOM_ACTIVITY_DPS_DESC"] = "報告每個腳色花了多少時間造成傷害。"
+L["STRING_CUSTOM_ACTIVITY_HPS"] = "治療活耀時間"
+L["STRING_CUSTOM_ACTIVITY_HPS_DESC"] = "報告每個腳色花了多少時間製造治療。"
 L["STRING_CUSTOM_ATTRIBUTE_DAMAGE"] = "傷害"
 L["STRING_CUSTOM_ATTRIBUTE_HEAL"] = "治療"
-L["STRING_CUSTOM_ATTRIBUTE_SCRIPT"] = "自訂程式碼"
+L["STRING_CUSTOM_ATTRIBUTE_SCRIPT"] = "自訂腳本"
 L["STRING_CUSTOM_AUTHOR"] = "作者:"
-L["STRING_CUSTOM_AUTHOR_DESC"] = "誰建立了這個視窗。"
+L["STRING_CUSTOM_AUTHOR_DESC"] = "是誰創造此展列。"
 L["STRING_CUSTOM_CANCEL"] = "取消"
-L["STRING_CUSTOM_CC_DONE"] = "施放控場"
-L["STRING_CUSTOM_CC_RECEIVED"] = "受到控場"
+L["STRING_CUSTOM_CC_DONE"] = "控場完成"
+L["STRING_CUSTOM_CC_RECEIVED"] = "接收到的控場"
 L["STRING_CUSTOM_CREATE"] = "建立"
-L["STRING_CUSTOM_CREATED"] = "已建立新視窗。"
-L["STRING_CUSTOM_DAMAGEONANYMARKEDTARGET"] = "對其他標記目標的傷害"
-L["STRING_CUSTOM_DAMAGEONANYMARKEDTARGET_DESC"] = "顯示對其他任何被標記的目標所輸出的傷害。"
-L["STRING_CUSTOM_DAMAGEONSHIELDS"] = "對護盾的傷害"
-L["STRING_CUSTOM_DAMAGEONSKULL"] = "對骷髏標記目標的傷害"
-L["STRING_CUSTOM_DAMAGEONSKULL_DESC"] = "顯示對被標記骷髏的目標所輸出的傷害。"
+L["STRING_CUSTOM_CREATED"] = "新視窗已建立"
+L["STRING_CUSTOM_DAMAGEONANYMARKEDTARGET"] = "被其他標記的目標的傷害"
+L["STRING_CUSTOM_DAMAGEONANYMARKEDTARGET_DESC"] = "顯示被其他標記的目標的傷害量。"
+L["STRING_CUSTOM_DAMAGEONSHIELDS"] = "護盾的傷害"
+L["STRING_CUSTOM_DAMAGEONSKULL"] = "被骷髏標記的目標的傷害"
+L["STRING_CUSTOM_DAMAGEONSKULL_DESC"] = "顯示被骷髏標記的目標的傷害量。"
 L["STRING_CUSTOM_DESCRIPTION"] = "說明:"
-L["STRING_CUSTOM_DESCRIPTION_DESC"] = "關於此視窗是做什麼的說明。"
-L["STRING_CUSTOM_DONE"] = "完成"
-L["STRING_CUSTOM_DTBS"] = "承受的法術傷害"
-L["STRING_CUSTOM_DTBS_DESC"] = "顯示敵方技能對你的隊伍所造成的傷害。"
+L["STRING_CUSTOM_DESCRIPTION_DESC"] = "視窗描述"
+L["STRING_CUSTOM_DONE"] = "完畢"
+L["STRING_CUSTOM_DTBS"] = "承受到的技能傷害"
+L["STRING_CUSTOM_DTBS_DESC"] = "顯示敵方對你隊伍造成的技能傷害。"
 L["STRING_CUSTOM_DYNAMICOVERAL"] = "動態整體傷害"
 L["STRING_CUSTOM_EDIT"] = "編輯"
-L["STRING_CUSTOM_EDIT_SEARCH_CODE"] = "編輯搜尋程式碼"
-L["STRING_CUSTOM_EDIT_TOOLTIP_CODE"] = "編輯滑鼠提示程式碼"
-L["STRING_CUSTOM_EDITCODE_DESC"] = "這是進階功能，讓使用者可以建立自己的視窗程式碼。"
-L["STRING_CUSTOM_EDITTOOLTIP_DESC"] = "這是當使用者用滑鼠指向計量條時會執行的滑鼠提示程式碼。"
+L["STRING_CUSTOM_EDIT_SEARCH_CODE"] = "編輯搜尋代碼"
+L["STRING_CUSTOM_EDIT_TOOLTIP_CODE"] = "編輯提示代碼"
+L["STRING_CUSTOM_EDITCODE_DESC"] = "這是個進階功能，其中用戶可以創建自己的顯示用代碼。"
+L["STRING_CUSTOM_EDITTOOLTIP_DESC"] = "這是提示代碼，運作在使用者懸停在計量條上。"
 L["STRING_CUSTOM_ENEMY_DT"] = "承受傷害"
 L["STRING_CUSTOM_EXPORT"] = "匯出"
-L["STRING_CUSTOM_FUNC_INVALID"] = "無效的自訂程式碼，無法重新整理視窗。"
-L["STRING_CUSTOM_HEALTHSTONE_DEFAULT"] = "治療藥水 & 治療石"
-L["STRING_CUSTOM_HEALTHSTONE_DEFAULT_DESC"] = " 顯示團隊內誰使用了治療藥水或治療石。"
+L["STRING_CUSTOM_FUNC_INVALID"] = "無效的自訂腳本並無法刷新視窗。"
+L["STRING_CUSTOM_HEALTHSTONE_DEFAULT"] = "治療藥水與治療石"
+L["STRING_CUSTOM_HEALTHSTONE_DEFAULT_DESC"] = "顯示誰在你的團隊中使用了治療石或治療藥水。"
 L["STRING_CUSTOM_ICON"] = "圖示:"
 L["STRING_CUSTOM_IMPORT"] = "匯入"
-L["STRING_CUSTOM_IMPORT_ALERT"] = "已載入視窗，請按下匯入來確認。"
+L["STRING_CUSTOM_IMPORT_ALERT"] = "視窗已載入，點擊匯入來確認。"
 L["STRING_CUSTOM_IMPORT_BUTTON"] = "匯入"
 L["STRING_CUSTOM_IMPORT_ERROR"] = "匯入失敗，無效的字串。"
-L["STRING_CUSTOM_IMPORTED"] = "已成功匯入視窗。"
-L["STRING_CUSTOM_LONGNAME"] = "名稱過長，最多只能使用 32 個字元 (16 個中文字)。"
-L["STRING_CUSTOM_MYSPELLS"] = "我的法術"
-L["STRING_CUSTOM_MYSPELLS_DESC"] = "在視窗中顯示你的法術。"
+L["STRING_CUSTOM_IMPORTED"] = "此視窗已成功匯入。"
+L["STRING_CUSTOM_LONGNAME"] = "名稱太長，最大允許32字元(換算中文16字元)。"
+L["STRING_CUSTOM_MYSPELLS"] = "我的技能"
+L["STRING_CUSTOM_MYSPELLS_DESC"] = "在視窗中顯示你的技能。"
 L["STRING_CUSTOM_NAME"] = "名稱:"
-L["STRING_CUSTOM_NAME_DESC"] = "輸入新自訂視窗的名稱。"
+L["STRING_CUSTOM_NAME_DESC"] = "在你新的自訂視窗中插入名稱。"
 L["STRING_CUSTOM_NEW"] = "管理自訂視窗"
-L["STRING_CUSTOM_PASTE"] = "在這裡貼上:"
-L["STRING_CUSTOM_POT_DEFAULT"] = "使用藥水"
-L["STRING_CUSTOM_POT_DEFAULT_DESC"] = "顯示團隊內誰在首領戰中使用了藥水。"
+L["STRING_CUSTOM_PASTE"] = "這裡貼上:"
+L["STRING_CUSTOM_POT_DEFAULT"] = "有使用藥水"
+L["STRING_CUSTOM_POT_DEFAULT_DESC"] = "顯示在你的團隊中誰在戰鬥中使用了藥水。"
 L["STRING_CUSTOM_REMOVE"] = "移除"
 L["STRING_CUSTOM_REPORT"] = "(自訂)"
 L["STRING_CUSTOM_SAVE"] = "儲存變更"
-L["STRING_CUSTOM_SAVED"] = "已儲存視窗。"
-L["STRING_CUSTOM_SHORTNAME"] = "名稱最少要 5 個字元。"
+L["STRING_CUSTOM_SAVED"] = "此視窗已被儲存。"
+L["STRING_CUSTOM_SHORTNAME"] = "名稱需要至少5個字元。"
 L["STRING_CUSTOM_SKIN_TEXTURE"] = "自訂外觀檔"
-L["STRING_CUSTOM_SKIN_TEXTURE_DESC"] = [=[副檔名為 .tga 的檔案。
+L["STRING_CUSTOM_SKIN_TEXTURE_DESC"] = [=[副檔名為.tga。
 
-必須放在這個資料夾內:
+檔案必須置放在資料夾:
 
-|cFFFFFF00World of Warcraft/_retail_/Interface|r
+|cFFFFFF00WoW/Interface/|r
 
-|cFFFFFF00重要:|r 放置檔案之前，請先結束遊戲程式。之後輸入 /reload 便會套用新儲存的材質檔案。]=]
+|cFFFFFF00重要:|r 在建立此檔之前。關閉你的遊戲。之後，使用/reload指令會套用已儲存的材質檔。]=]
 L["STRING_CUSTOM_SOURCE"] = "來源:"
-L["STRING_CUSTOM_SOURCE_DESC"] = [=[是誰觸發效果。
-
-右側按鈕會列出團隊首領戰的 NPC。]=]
-L["STRING_CUSTOM_SPELLID"] = "法術 ID:"
-L["STRING_CUSTOM_SPELLID_DESC"] = [=[選擇性使用，施法者對目標施放效果的法術。
-
-右側按鈕會列出團隊首領戰的法術。
-]=]
+L["STRING_CUSTOM_SOURCE_DESC"] = [=[是誰觸發的效果。
+在右側的按鈕顯示團隊會遭遇的NPC名單。]=]
+L["STRING_CUSTOM_SPELLID"] = "技能id:"
+L["STRING_CUSTOM_SPELLID_DESC"] = [=[選用，是由來源在目標上應用效果使用的技能。
+在右側的按鈕顯示團隊中的技能名單。]=]
 L["STRING_CUSTOM_TARGET"] = "目標:"
-L["STRING_CUSTOM_TARGET_DESC"] = [=[這是施法者的目標。
-
-右側按鈕會列出團隊首領戰的 NPC。]=]
-L["STRING_CUSTOM_TEMPORARILY"] = " (|cFFFFC000暫時|r)"
+L["STRING_CUSTOM_TARGET_DESC"] = [=[這是來源的目標。
+右側的按鈕顯示團隊會遭遇的NPC名單。]=]
+L["STRING_CUSTOM_TEMPORARILY"] = "(|cFFFFC000暫時|r)"
 L["STRING_DAMAGE"] = "傷害"
-L["STRING_DAMAGE_DPS_IN"] = "受到 DPS 來自"
-L["STRING_DAMAGE_FROM"] = "受到傷害來自"
+L["STRING_DAMAGE_DPS_IN"] = "接收的DPS來自"
+L["STRING_DAMAGE_FROM"] = "取得傷害來自"
 L["STRING_DAMAGE_TAKEN_FROM"] = "承受傷害來自"
 L["STRING_DAMAGE_TAKEN_FROM2"] = "施加傷害在"
 L["STRING_DEFENSES"] = "防禦"
 L["STRING_DESCENDING"] = "遞減"
 L["STRING_DETACH_DESC"] = "分離視窗群組"
-L["STRING_DISCARD"] = "捨棄"
 L["STRING_DISPELLED"] = "移除的增益/減益"
 L["STRING_DODGE"] = "閃避"
 L["STRING_DOT"] = "(DoT)"
-L["STRING_DPS"] = "每秒傷害 (DPS)"
-L["STRING_EMPTY_SEGMENT"] = "空的片段"
-L["STRING_ENABLED"] = "已啟用"
-L["STRING_ENVIRONMENTAL_DROWNING"] = "環境 (溺水)"
-L["STRING_ENVIRONMENTAL_FALLING"] = "環境 (掉落)"
-L["STRING_ENVIRONMENTAL_FATIGUE"] = "環境 (疲勞)"
-L["STRING_ENVIRONMENTAL_FIRE"] = "環境 (著火)"
-L["STRING_ENVIRONMENTAL_LAVA"] = "環境 (岩漿)"
-L["STRING_ENVIRONMENTAL_SLIME"] = "環境 (黏液)"
-L["STRING_EQUILIZING"] = "分享首領戰資料"
+L["STRING_DPS"] = "每秒傷害"
+L["STRING_EMPTY_SEGMENT"] = "空白片段"
+L["STRING_ENABLED"] = "啟用"
+L["STRING_ENVIRONMENTAL_DROWNING"] = "環境(溺水)"
+L["STRING_ENVIRONMENTAL_FALLING"] = "環境(掉落)"
+L["STRING_ENVIRONMENTAL_FATIGUE"] = "環境(疲勞)"
+L["STRING_ENVIRONMENTAL_FIRE"] = "環境(火焰)"
+L["STRING_ENVIRONMENTAL_LAVA"] = "環境(岩漿)"
+L["STRING_ENVIRONMENTAL_SLIME"] = "環境(史萊姆)"
+L["STRING_EQUILIZING"] = "分享首領戰數據"
 L["STRING_ERASE"] = "刪除"
-L["STRING_ERASE_DATA"] = "重置所有資料"
-L["STRING_ERASE_DATA_OVERALL"] = "重置整體資料"
-L["STRING_ERASE_IN_COMBAT"] = "目前戰鬥結束後定期清空整體資料。"
-L["STRING_EXAMPLE"] = "範例"
+L["STRING_ERASE_DATA"] = "重置所有記錄(包括整體)"
+L["STRING_ERASE_DATA_OVERALL"] = "僅重置整體數據"
+L["STRING_ERASE_IN_COMBAT"] = "當前戰鬥結束後重置數據"
+L["STRING_EXAMPLE"] = "舉例"
 L["STRING_EXPLOSION"] = "爆炸"
-L["STRING_FAIL_ATTACKS"] = "攻擊無效"
-L["STRING_FEEDBACK_CURSE_DESC"] = "在 Details! 的網頁回報問題或留言。"
-L["STRING_FEEDBACK_MMOC_DESC"] = "在 mmo-champion 討論區，我們的討論串中發文。"
-L["STRING_FEEDBACK_PREFERED_SITE"] = "選擇你喜愛的社群網站:"
-L["STRING_FEEDBACK_SEND_FEEDBACK"] = "傳送回饋"
-L["STRING_FEEDBACK_WOWI_DESC"] = "在 Details! 的專案頁面留下評論。"
+L["STRING_FAIL_ATTACKS"] = "攻擊失敗"
+L["STRING_FEEDBACK_CURSE_DESC"] = "在Details!的網頁回報問題或是留下訊息。"
+L["STRING_FEEDBACK_MMOC_DESC"] = "發布在我們在mmo-champion論壇上的討論文章。"
+L["STRING_FEEDBACK_PREFERED_SITE"] = "選擇你比較喜歡的社群網站:"
+L["STRING_FEEDBACK_SEND_FEEDBACK"] = "送出回饋"
+L["STRING_FEEDBACK_WOWI_DESC"] = "在Details!的專案頁面留下一個感想。"
 L["STRING_FIGHTNUMBER"] = "戰鬥 #"
-L["STRING_FORGE_BUTTON_ALLSPELLS"] = "所有法術"
-L["STRING_FORGE_BUTTON_ALLSPELLS_DESC"] = "列出來自玩家和 NPC 的所有法術。"
-L["STRING_FORGE_BUTTON_BWTIMERS"] = "BigWigs 計時條"
-L["STRING_FORGE_BUTTON_BWTIMERS_DESC"] = "列出來自 BigWigs 的計時器。"
-L["STRING_FORGE_BUTTON_DBMTIMERS"] = "DBM 計時條"
-L["STRING_FORGE_BUTTON_DBMTIMERS_DESC"] = "列出來自 Deadly Boss Mods 的計時器。"
-L["STRING_FORGE_BUTTON_ENCOUNTERSPELLS"] = "首領法術"
-L["STRING_FORGE_BUTTON_ENCOUNTERSPELLS_DESC"] = "只列出來自團隊和地城首領戰的法術。"
+L["STRING_FORGE_BUTTON_ALLSPELLS"] = "所有技能"
+L["STRING_FORGE_BUTTON_ALLSPELLS_DESC"] = "列出所有玩家和NPC的技能"
+L["STRING_FORGE_BUTTON_BWTIMERS"] = "BigWigs時間條"
+L["STRING_FORGE_BUTTON_BWTIMERS_DESC"] = "列出BigWigs的時間條"
+L["STRING_FORGE_BUTTON_DBMTIMERS"] = "DBM時間條"
+L["STRING_FORGE_BUTTON_DBMTIMERS_DESC"] = "列出DBM的時間條"
+L["STRING_FORGE_BUTTON_ENCOUNTERSPELLS"] = "首領技能"
+L["STRING_FORGE_BUTTON_ENCOUNTERSPELLS_DESC"] = "只有列出在團隊或是副本的技能"
 L["STRING_FORGE_BUTTON_ENEMIES"] = "敵人"
-L["STRING_FORGE_BUTTON_ENEMIES_DESC"] = "列出目前這場戰鬥的敵人。"
+L["STRING_FORGE_BUTTON_ENEMIES_DESC"] = "列出目前戰鬥的敵人"
 L["STRING_FORGE_BUTTON_PETS"] = "寵物"
-L["STRING_FORGE_BUTTON_PETS_DESC"] = "列出目前這場戰鬥的寵物。"
+L["STRING_FORGE_BUTTON_PETS_DESC"] = "列出目前戰鬥的寵物"
 L["STRING_FORGE_BUTTON_PLAYERS"] = "玩家"
-L["STRING_FORGE_BUTTON_PLAYERS_DESC"] = "列出目前這場戰鬥的玩家。"
-L["STRING_FORGE_ENABLEPLUGINS"] = "請在 Esc > 插件，載入 Details! 的相關模組。例如 Details: Tomb of Sargeras。"
+L["STRING_FORGE_BUTTON_PLAYERS_DESC"] = "列出目前戰鬥的玩家"
+L["STRING_FORGE_ENABLEPLUGINS"] = "請從遊戲選單>插件啟用Details!的團隊副本插件，比如: Details: Tomb of Sargeras。"
 L["STRING_FORGE_FILTER_BARTEXT"] = "計量條名稱"
-L["STRING_FORGE_FILTER_CASTERNAME"] = "施法者名字"
-L["STRING_FORGE_FILTER_ENCOUNTERNAME"] = "首領戰名稱"
-L["STRING_FORGE_FILTER_ENEMYNAME"] = "敵人名字"
-L["STRING_FORGE_FILTER_OWNERNAME"] = "擁有者名字"
-L["STRING_FORGE_FILTER_PETNAME"] = "寵物名字"
-L["STRING_FORGE_FILTER_PLAYERNAME"] = "玩家名字"
-L["STRING_FORGE_FILTER_SPELLNAME"] = "法術名稱"
+L["STRING_FORGE_FILTER_CASTERNAME"] = "施放者名稱"
+L["STRING_FORGE_FILTER_ENCOUNTERNAME"] = "首領戰鬥名稱"
+L["STRING_FORGE_FILTER_ENEMYNAME"] = "敵人名稱"
+L["STRING_FORGE_FILTER_OWNERNAME"] = "擁有者名稱"
+L["STRING_FORGE_FILTER_PETNAME"] = "寵物名稱"
+L["STRING_FORGE_FILTER_PLAYERNAME"] = "玩家名稱"
+L["STRING_FORGE_FILTER_SPELLNAME"] = "技能名稱"
 L["STRING_FORGE_HEADER_BARTEXT"] = "計量條文字"
-L["STRING_FORGE_HEADER_CASTER"] = "施法者"
+L["STRING_FORGE_HEADER_CASTER"] = "施放者"
 L["STRING_FORGE_HEADER_CLASS"] = "職業"
-L["STRING_FORGE_HEADER_CREATEAURA"] = "建立提醒效果"
-L["STRING_FORGE_HEADER_ENCOUNTERID"] = "首領戰 ID"
-L["STRING_FORGE_HEADER_ENCOUNTERNAME"] = "首領戰名稱"
+L["STRING_FORGE_HEADER_CREATEAURA"] = "創建光環監控"
+L["STRING_FORGE_HEADER_ENCOUNTERID"] = "首領戰鬥ID"
+L["STRING_FORGE_HEADER_ENCOUNTERNAME"] = "首領戰鬥名稱"
 L["STRING_FORGE_HEADER_EVENT"] = "事件"
-L["STRING_FORGE_HEADER_FLAG"] = "旗幟"
+L["STRING_FORGE_HEADER_FLAG"] = "Flag"
 L["STRING_FORGE_HEADER_GUID"] = "GUID"
 L["STRING_FORGE_HEADER_ICON"] = "圖示"
 L["STRING_FORGE_HEADER_ID"] = "ID"
-L["STRING_FORGE_HEADER_INDEX"] = "索引編號"
+L["STRING_FORGE_HEADER_INDEX"] = "編號"
 L["STRING_FORGE_HEADER_NAME"] = "名稱"
-L["STRING_FORGE_HEADER_NPCID"] = "NPC ID"
+L["STRING_FORGE_HEADER_NPCID"] = "NpcID"
 L["STRING_FORGE_HEADER_OWNER"] = "擁有者"
 L["STRING_FORGE_HEADER_SCHOOL"] = "屬性"
-L["STRING_FORGE_HEADER_SPELLID"] = "法術 ID"
-L["STRING_FORGE_HEADER_TIMER"] = "計時器"
-L["STRING_FORGE_TUTORIAL_DESC"] = "按下 '|cFFFFFF00建立提醒效果|r' 來瀏覽法術和首領技能警報插件的計時器，以便建立提醒效果。"
-L["STRING_FORGE_TUTORIAL_TITLE"] = "歡迎使用 Details! Forge"
-L["STRING_FORGE_TUTORIAL_VIDEO"] = "使用首領技能警報插件計時器的提醒效果範例:"
-L["STRING_FREEZE"] = "此時無法取得這個分段"
-L["STRING_FROM"] = "來自"
+L["STRING_FORGE_HEADER_SPELLID"] = "技能ID"
+L["STRING_FORGE_HEADER_TIMER"] = "時間條"
+L["STRING_FORGE_TUTORIAL_DESC"] = "按下“|cFFFFFF00創建光環|r”，瀏覽法術及首領對戰模組計時器來創建光環。"
+L["STRING_FORGE_TUTORIAL_TITLE"] = "歡迎使用 Details! Forge(建立)"
+L["STRING_FORGE_TUTORIAL_VIDEO"] = "使用首領模組計時器的光環示例:"
+L["STRING_FREEZE"] = "這個階段此片段不可用"
+L["STRING_FROM"] = "從"
 L["STRING_GERAL"] = "一般"
 L["STRING_GLANCING"] = "擦過"
 L["STRING_GUILDDAMAGERANK_BOSS"] = "首領"
-L["STRING_GUILDDAMAGERANK_DATABASEERROR"] = "無法開啟 '|cFFFFFF00Details! Storage|r'，請檢查看看該插件是否被停用?"
+L["STRING_GUILDDAMAGERANK_DATABASEERROR"] = "無法打開 '|cFFFFFF00Details! Storage|r'，也許該部份插件被禁用？"
 L["STRING_GUILDDAMAGERANK_DIFF"] = "難度"
 L["STRING_GUILDDAMAGERANK_GUILD"] = "公會"
-L["STRING_GUILDDAMAGERANK_PLAYERBASE"] = "玩家數量"
+L["STRING_GUILDDAMAGERANK_PLAYERBASE"] = "玩家分類"
 L["STRING_GUILDDAMAGERANK_PLAYERBASE_INDIVIDUAL"] = "個人"
 L["STRING_GUILDDAMAGERANK_PLAYERBASE_PLAYER"] = "玩家"
 L["STRING_GUILDDAMAGERANK_PLAYERBASE_RAID"] = "所有玩家"
-L["STRING_GUILDDAMAGERANK_RAID"] = "團隊"
-L["STRING_GUILDDAMAGERANK_ROLE"] = "角色"
-L["STRING_GUILDDAMAGERANK_SHOWHISTORY"] = "顯示歷史記錄"
-L["STRING_GUILDDAMAGERANK_SHOWRANK"] = "顯示公會排名"
-L["STRING_GUILDDAMAGERANK_SYNCBUTTONTEXT"] = "與公會同步資料"
-L["STRING_GUILDDAMAGERANK_TUTORIAL_DESC"] = "Details! 會儲存你和你的公會在每次首領戰輸出的傷害和治療。\\n\\n勾選 '|cFFFFFF00顯示歷史記錄|r' 可以瀏覽記錄，所有戰鬥的結果都會顯示出來。\\n勾選 '|cFFFFFF00顯示公會排名|r' 會秀出所選首領的最高分數。\\n\\n如果你是第一次使用這個工具，或是請假沒有出團，可以按下 '|cFFFFFF00與公會同步資料|r' 按鈕。"
-L["STRING_GUILDDAMAGERANK_WINDOWALERT"] = "已擊殺首領! 顯示排名"
+L["STRING_GUILDDAMAGERANK_RAID"] = "團副"
+L["STRING_GUILDDAMAGERANK_ROLE"] = "作用"
+L["STRING_GUILDDAMAGERANK_SHOWHISTORY"] = "顯示記錄"
+L["STRING_GUILDDAMAGERANK_SHOWRANK"] = "顯示公會得分"
+L["STRING_GUILDDAMAGERANK_SYNCBUTTONTEXT"] = "與公會同步"
+L["STRING_GUILDDAMAGERANK_TUTORIAL_DESC"] = "Details! 會保存你與公會在首領戰中造成的傷害和治療記錄。\\n\\n利用選擇框來瀏覽記錄 '|cFFFFFF00顯示記錄|r'，顯示戰鬥中所有有記錄。\\n 通過選擇 '|cFFFFFF00顯示公會得分|r'，顯示所選首領的最高分數。\\n\\n 如果你是第一次使用這個工具，或者如果你失去了一天的團副進度，點擊 '|cFFFFFF00與公會同步|r' 按鈕。"
+L["STRING_GUILDDAMAGERANK_WINDOWALERT"] = "首領已擊敗！ 顯示排名"
 L["STRING_HEAL"] = "治療"
-L["STRING_HEAL_ABSORBED"] = "吸收治療"
-L["STRING_HEAL_CRIT"] = "爆擊治療"
+L["STRING_HEAL_ABSORBED"] = "吸收"
+L["STRING_HEAL_CRIT"] = "治療暴擊"
 L["STRING_HEALING_FROM"] = "受到治療來自"
-L["STRING_HEALING_HPS_FROM"] = "每秒受到治療 (HPS) 來自"
+L["STRING_HEALING_HPS_FROM"] = "每秒治療來自"
 L["STRING_HITS"] = "命中"
-L["STRING_HPS"] = "每秒治療 (HPS)"
-L["STRING_IMAGEEDIT_ALPHA"] = "透明"
-L["STRING_IMAGEEDIT_CROPBOTTOM"] = "裁切下方"
-L["STRING_IMAGEEDIT_CROPLEFT"] = "裁切左側"
-L["STRING_IMAGEEDIT_CROPRIGHT"] = "裁切右側"
-L["STRING_IMAGEEDIT_CROPTOP"] = "裁切上方"
+L["STRING_HPS"] = "每秒治療量"
+L["STRING_IMAGEEDIT_ALPHA"] = "透明度"
+L["STRING_IMAGEEDIT_CROPBOTTOM"] = "修剪底部"
+L["STRING_IMAGEEDIT_CROPLEFT"] = "修剪左邊"
+L["STRING_IMAGEEDIT_CROPRIGHT"] = "修剪右邊"
+L["STRING_IMAGEEDIT_CROPTOP"] = "修剪頂部"
 L["STRING_IMAGEEDIT_DONE"] = "完成"
 L["STRING_IMAGEEDIT_FLIPH"] = "水平翻轉"
 L["STRING_IMAGEEDIT_FLIPV"] = "垂直翻轉"
-L["STRING_INFO_TAB_AVOIDANCE"] = "迴避"
+L["STRING_INFO_TAB_AVOIDANCE"] = "閃避"
 L["STRING_INFO_TAB_COMPARISON"] = "比較"
 L["STRING_INFO_TAB_SUMMARY"] = "總結"
-L["STRING_INFO_TUTORIAL_COMPARISON1"] = "點一下 |cFFFFDD00比較|r 標籤頁面查看相同職業玩家之間的比較。"
+L["STRING_INFO_TUTORIAL_COMPARISON1"] = "點擊|cFFFFDD00比較|r標籤同職業的玩家來對照。"
 L["STRING_INSTANCE_CHAT"] = "副本頻道"
-L["STRING_INSTANCE_LIMIT"] = "已達視窗數量的上限，可以在選項設定中更改上限，也可以從 (#) 視窗選項重新開啟已關閉的視窗。"
-L["STRING_INTERFACE_OPENOPTIONS"] = "開啟設定選項"
-L["STRING_ISA_PET"] = "這是寵物"
-L["STRING_KEYBIND_BOOKMARK"] = "書籤"
-L["STRING_KEYBIND_BOOKMARK_NUMBER"] = "書籤 #%s"
-L["STRING_KEYBIND_RESET_SEGMENTS"] = "重置片段"
-L["STRING_KEYBIND_SCROLL_DOWN"] = "向下捲動所有視窗"
-L["STRING_KEYBIND_SCROLL_UP"] = "向上捲動所有視窗"
-L["STRING_KEYBIND_SCROLLING"] = "捲動"
-L["STRING_KEYBIND_SEGMENTCONTROL"] = "片段"
-L["STRING_KEYBIND_TOGGLE_WINDOW"] = "切換顯示視窗 #%s"
-L["STRING_KEYBIND_TOGGLE_WINDOWS"] = "切換顯示全部"
+L["STRING_INSTANCE_LIMIT"] = "已達視窗數量上限，你可以在選單修改上限數量或重啟視窗選單"
+L["STRING_INTERFACE_OPENOPTIONS"] = "打開選項面板"
+L["STRING_ISA_PET"] = "這是一隻寵物"
+L["STRING_KEYBIND_BOOKMARK"] = "加到書籤"
+L["STRING_KEYBIND_BOOKMARK_NUMBER"] = "書籤#%s"
+L["STRING_KEYBIND_RESET_SEGMENTS"] = "重置片段(記錄)"
+L["STRING_KEYBIND_SCROLL_DOWN"] = "向下滾動所有視窗"
+L["STRING_KEYBIND_SCROLL_UP"] = "向上滾動所有視窗"
+L["STRING_KEYBIND_SCROLLING"] = "滾動"
+L["STRING_KEYBIND_SEGMENTCONTROL"] = "片段(記錄)"
+L["STRING_KEYBIND_TOGGLE_WINDOW"] = "切換視窗#%s"
+L["STRING_KEYBIND_TOGGLE_WINDOWS"] = "切換全部"
 L["STRING_KEYBIND_WINDOW_CONTROL"] = "視窗"
-L["STRING_KEYBIND_WINDOW_REPORT"] = "報告顯示在視窗 #%s 的資料。"
-L["STRING_KEYBIND_WINDOW_REPORT_HEADER"] = "報告資料"
+L["STRING_KEYBIND_WINDOW_REPORT"] = "報告顯示在視窗 #%s 的數據。"
+L["STRING_KEYBIND_WINDOW_REPORT_HEADER"] = "報告數據"
 L["STRING_KILLED"] = "擊殺"
-L["STRING_LAST_COOLDOWN"] = "最後的冷卻時間"
+L["STRING_LAST_COOLDOWN"] = "最後使用的冷卻技能"
 L["STRING_LEFT"] = "左"
-L["STRING_LEFT_CLICK_SHARE"] = "點一下左鍵來報告。"
-L["STRING_LEFT_TO_RIGHT"] = "由左到右"
+L["STRING_LEFT_CLICK_SHARE"] = "左鍵點擊報告"
+L["STRING_LEFT_TO_RIGHT"] = "左到右"
 L["STRING_LOCK_DESC"] = "鎖定或解鎖視窗"
 L["STRING_LOCK_WINDOW"] = "鎖定"
 L["STRING_MASTERY"] = "精通"
@@ -315,80 +310,79 @@ L["STRING_MAXIMUM"] = "最大化"
 L["STRING_MAXIMUM_SHORT"] = "最大"
 L["STRING_MEDIA"] = "媒體"
 L["STRING_MELEE"] = "近戰"
-L["STRING_MEMORY_ALERT_BUTTON"] = "我知道了"
-L["STRING_MEMORY_ALERT_TEXT1"] = "Details! 會使用大量的記憶體，|cFFFF8800但是與常見的說法相反|r，插件的記憶體使用量|cFFFF8800不會影響|r遊戲效能或 FPS。"
-L["STRING_MEMORY_ALERT_TEXT2"] = "所以，當你看到 Details! 使用了大量的記憶體，請不要緊張 :D |cFFFF8800沒事的!|r 部分的記憶體甚至是用來快取資料，讓插件執行更快速。"
-L["STRING_MEMORY_ALERT_TEXT3"] = "然而，如果你想要知道|cFFFF8800哪個插件 '較吃效能'|r 或者會降低 FPS，可以安裝插件: '|cFFFFFF00AddOns Cpu Usage|r'。"
-L["STRING_MEMORY_ALERT_TITLE"] = "請仔細閱讀!"
+L["STRING_MEMORY_ALERT_BUTTON"] = "我了解"
+L["STRING_MEMORY_ALERT_TEXT1"] = "Details!使用了大量的記憶體，|cFFFF8800但是與常見的說法相反|r，插件記憶體使用率|cFFFF8800不影響|r遊戲的效能或是FPS。。"
+L["STRING_MEMORY_ALERT_TEXT2"] = "所以，如果你看到 Details!使用大量記憶體，不要緊張！|cFFFF8800這是正常的|r，甚至這種記憶體的一部分|cFFFF8800是用來當作快取|r使插件變得更快。"
+L["STRING_MEMORY_ALERT_TEXT3"] = "然而，如果你想知道|cFFFF8800什麼插件使用更多的記憶體|r或是什麼插件導致FPS降低，安裝插件：“|cFFFFFF00AddOns Cpu Usage|r”。"
+L["STRING_MEMORY_ALERT_TITLE"] = "請仔細閱讀！"
 L["STRING_MENU_CLOSE_INSTANCE"] = "關閉這個視窗"
-L["STRING_MENU_CLOSE_INSTANCE_DESC"] = "被關閉的視窗只是閒置，隨時都可以使用視窗控制選單重新開啟。"
-L["STRING_MENU_CLOSE_INSTANCE_DESC2"] = "要永久刪除視窗，請看設定選項中的其他部分。"
+L["STRING_MENU_CLOSE_INSTANCE_DESC"] = "關閉視窗只是被當作閒置，可以隨時從控制選單重開。"
+L["STRING_MENU_CLOSE_INSTANCE_DESC2"] = "想完全刪除視窗，尋找選單內的雜項設定。"
 L["STRING_MENU_INSTANCE_CONTROL"] = "視窗控制"
-L["STRING_MINIMAP_TOOLTIP1"] = "|cFFCFCFCF左鍵|r: 開啟設定選項"
-L["STRING_MINIMAP_TOOLTIP11"] = "|cFFCFCFCF左鍵|r: 清空所有片段"
-L["STRING_MINIMAP_TOOLTIP12"] = "|cFFCFCFCF左鍵|r: 顯示/隱藏視窗"
-L["STRING_MINIMAP_TOOLTIP2"] = "|cFFCFCFCF右鍵|r: 快速選單"
-L["STRING_MINIMAPMENU_CLOSEALL"] = "全部關閉"
-L["STRING_MINIMAPMENU_HIDEICON"] = "隱藏小地圖按鈕"
+L["STRING_MINIMAP_TOOLTIP1"] = "|cFFCFCFCF左鍵點擊|r: 打開選單面板"
+L["STRING_MINIMAP_TOOLTIP11"] = "|cFFCFCFCF左鍵點擊|r: 清除所有階段資料"
+L["STRING_MINIMAP_TOOLTIP12"] = "|cFFCFCFCF左鍵點擊|r: 顯示/隱藏視窗"
+L["STRING_MINIMAP_TOOLTIP2"] = "|cFFCFCFCF左鍵點擊|r: 快速選單"
+L["STRING_MINIMAPMENU_CLOSEALL"] = "關閉全部"
+L["STRING_MINIMAPMENU_HIDEICON"] = "隱藏小地圖圖示"
 L["STRING_MINIMAPMENU_LOCK"] = "鎖定"
 L["STRING_MINIMAPMENU_NEWWINDOW"] = "新增視窗"
 L["STRING_MINIMAPMENU_REOPENALL"] = "全部重開"
 L["STRING_MINIMAPMENU_UNLOCK"] = "解鎖"
 L["STRING_MINIMUM"] = "最小化"
 L["STRING_MINIMUM_SHORT"] = "最小"
-L["STRING_MINITUTORIAL_BOOKMARK1"] = "右鍵點擊視窗中的任何區域打開書籤!"
-L["STRING_MINITUTORIAL_BOOKMARK2"] = "書籤可以快速顯示最愛的視窗。"
+L["STRING_MINITUTORIAL_BOOKMARK1"] = "右鍵點擊視窗任何區域中打開書籤！"
+L["STRING_MINITUTORIAL_BOOKMARK2"] = "書籤是快速訪問最喜歡頁面的捷徑。"
 L["STRING_MINITUTORIAL_BOOKMARK3"] = "右鍵點擊關閉書籤面板。"
 L["STRING_MINITUTORIAL_BOOKMARK4"] = "不再顯示"
-L["STRING_MINITUTORIAL_CLOSECTRL1"] = "|cFFFFFF00Ctrl + 右鍵點擊|r 關閉視窗!"
-L["STRING_MINITUTORIAL_CLOSECTRL2"] = "要重新打開視窗，請到 模式選單 -> 視窗控制 或 選項面板。"
-L["STRING_MINITUTORIAL_OPTIONS_PANEL1"] = "正在編輯哪個視窗。"
-L["STRING_MINITUTORIAL_OPTIONS_PANEL2"] = "勾選時，群組中的所有視窗都會跟著變更。"
-L["STRING_MINITUTORIAL_OPTIONS_PANEL3"] = [=[要建立群組，請將 視窗 #2 拖曳到 視窗 #1 旁。
+L["STRING_MINITUTORIAL_CLOSECTRL1"] = "|cFFFFFF00Ctrl + 右鍵點擊|r 關閉視窗！"
+L["STRING_MINITUTORIAL_CLOSECTRL2"] = "如果你想重新打開它，去模式選單->視窗控制或選項面板。\""
+L["STRING_MINITUTORIAL_OPTIONS_PANEL1"] = "哪個視窗正在編輯。"
+L["STRING_MINITUTORIAL_OPTIONS_PANEL2"] = "勾選後，該組中的所有視窗也將改變。"
+L["STRING_MINITUTORIAL_OPTIONS_PANEL3"] = [=[要創建一個群組，拖動視窗＃2到視窗＃1附近。
 
-要解散群組，請按下 |cFFFFFF00取消群組|r 按鈕。]=]
-L["STRING_MINITUTORIAL_OPTIONS_PANEL4"] = "建立測試條來測試設定。"
-L["STRING_MINITUTORIAL_OPTIONS_PANEL5"] = "啟用編輯群組時，群組中的所有視窗都會變更。"
-L["STRING_MINITUTORIAL_OPTIONS_PANEL6"] = "在此選擇來改變視窗外觀。"
-L["STRING_MINITUTORIAL_WINDOWS1"] = [=[你剛建立了視窗群組。
-
-點一下小鎖圖示來取消群組。]=]
+點擊 |cFFFFFF00取消|r 按钮拆分群组]=]
+L["STRING_MINITUTORIAL_OPTIONS_PANEL4"] = "創建測試計量條來測試你的配置。"
+L["STRING_MINITUTORIAL_OPTIONS_PANEL5"] = "當編輯組啟用時，群組中的所有視窗都改變了。"
+L["STRING_MINITUTORIAL_OPTIONS_PANEL6"] = "在此選擇你想改變哪個視窗的外觀。"
+L["STRING_MINITUTORIAL_WINDOWS1"] = [=[你剛建立了一組視窗群組。
+點擊鎖頭圖示去分開它。]=]
 L["STRING_MINITUTORIAL_WINDOWS2"] = [=[視窗已被鎖定。
 
-拖曳標題列可以上下拉伸。]=]
+點擊標題列去向上拖拉。]=]
 L["STRING_MIRROR_IMAGE"] = "鏡像"
 L["STRING_MISS"] = "未命中"
 L["STRING_MODE_ALL"] = "所有的"
-L["STRING_MODE_GROUP"] = "標準"
-L["STRING_MODE_OPENFORGE"] = "光環清單"
-L["STRING_MODE_PLUGINS"] = "外掛套件"
-L["STRING_MODE_RAID"] = "外掛套件: 團隊"
-L["STRING_MODE_SELF"] = "外掛套件: 單人"
-L["STRING_MORE_INFO"] = "查看右邊的方框來獲得更多資訊。"
+L["STRING_MODE_GROUP"] = "一般"
+L["STRING_MODE_OPENFORGE"] = "光環監控"
+L["STRING_MODE_PLUGINS"] = "插件"
+L["STRING_MODE_RAID"] = "插件: 團隊"
+L["STRING_MODE_SELF"] = "插件: 單人"
+L["STRING_MORE_INFO"] = "查看右邊方框檢視更多資訊"
 L["STRING_MULTISTRIKE"] = "雙擊"
 L["STRING_MULTISTRIKE_HITS"] = "雙擊命中"
-L["STRING_MUSIC_DETAILS_ROBERTOCARLOS"] = [=[無法忘記的
-你和我的點點滴滴
-Details]=]
+L["STRING_MUSIC_DETAILS_ROBERTOCARLOS"] = [=[你無法試著遺忘
+我將與你同在
+Details只是渺小的我們]=]
 L["STRING_NEWROW"] = "正在等待更新..."
-L["STRING_NEWS_REINSTALL"] = "更新後有問題嗎? 請試試輸入指令 /details reinstall"
-L["STRING_NEWS_TITLE"] = "更新資訊"
+L["STRING_NEWS_REINSTALL"] = "在更新之後發現問題。試著輸入'/details reinstall'指令"
+L["STRING_NEWS_TITLE"] = "此版更新事項"
 L["STRING_NO"] = "沒有"
-L["STRING_NO_DATA"] = "資料已被清空"
-L["STRING_NO_SPELL"] = "沒有已使用的法術"
-L["STRING_NO_TARGET"] = "沒有找到目標。"
+L["STRING_NO_DATA"] = "數據已被清除"
+L["STRING_NO_SPELL"] = "沒有已使用的技能"
+L["STRING_NO_TARGET"] = "沒有發現目標"
 L["STRING_NO_TARGET_BOX"] = "沒有可用目標"
-L["STRING_NOCLOSED_INSTANCES"] = [=[沒有已關閉的視窗，
-點一下建立新視窗。]=]
-L["STRING_NOLAST_COOLDOWN"] = "沒有已使用的冷卻"
-L["STRING_NOMORE_INSTANCES"] = [=[已達最多視窗數量的上限。
-請在選項面板中更改限制。]=]
-L["STRING_NORMAL_HITS"] = "一般命中"
-L["STRING_NUMERALSYSTEM"] = "數字系統"
-L["STRING_NUMERALSYSTEM_ARABIC_MYRIAD_EASTASIA"] = "用於東方亞洲國家，分成千和萬。"
+L["STRING_NOCLOSED_INSTANCES"] = [=[沒有可關閉視窗，
+請建立一個新視窗。]=]
+L["STRING_NOLAST_COOLDOWN"] = "沒有使用冷卻技能"
+L["STRING_NOMORE_INSTANCES"] = [=[已達最大視窗上限。
+在選項面板改變上限。]=]
+L["STRING_NORMAL_HITS"] = "普攻命中"
+L["STRING_NUMERALSYSTEM"] = "數字縮寫制度"
+L["STRING_NUMERALSYSTEM_ARABIC_MYRIAD_EASTASIA"] = "使用在東方亞洲國家，分成千和萬。"
 L["STRING_NUMERALSYSTEM_ARABIC_WESTERN"] = "西方"
-L["STRING_NUMERALSYSTEM_ARABIC_WESTERN_DESC"] = "最常用的方式，分成千和百萬。"
-L["STRING_NUMERALSYSTEM_DESC"] = [=[選擇要使用的數字縮寫系統
+L["STRING_NUMERALSYSTEM_ARABIC_WESTERN_DESC"] = "常見的系統，分成千和百萬。"
+L["STRING_NUMERALSYSTEM_DESC"] = [=[選擇使用那種數字縮寫制度
 ]=]
 L["STRING_NUMERALSYSTEM_MYRIAD_EASTASIA"] = "東方亞洲"
 L["STRING_OFFHAND_HITS"] = "副手"
@@ -496,13 +490,13 @@ Example:
 
 |cFFFFFF00Escape Sequences|r: 用它來改變顏色或加入材質。搜尋“UI跳脫序列”('UI escape sequences')以獲取更多資訊。
 指令必是英文Lua語法,如套用{資料1},UI是看不明,必須使用{data1},請參考文字列編緝器格式]=]
-L["STRING_OPTIONS_BARS"] = "計量條一般設定"
+L["STRING_OPTIONS_BARS"] = "計量列表一般設定"
 L["STRING_OPTIONS_BARS_CUSTOM_TEXTURE"] = "自訂材質檔案"
 L["STRING_OPTIONS_BARS_CUSTOM_TEXTURE_DESC"] = [=[
 |cFFFFFF00重要|r： 圖片必須為256x32像素。]=]
 L["STRING_OPTIONS_BARS_DESC"] = "這些選項設定計量條外觀"
-L["STRING_OPTIONS_BARSORT"] = "計量條排序"
-L["STRING_OPTIONS_BARSORT_DESC"] = "遞增或是遞減計量條排序。"
+L["STRING_OPTIONS_BARSORT"] = "計量列表排序"
+L["STRING_OPTIONS_BARSORT_DESC"] = "遞增或是遞減計量列表排序。"
 L["STRING_OPTIONS_BARSTART"] = "計量條在圖示之後"
 L["STRING_OPTIONS_BARSTART_DESC"] = [=[讓頂部材質一開始出現在圖標的左邊而不是右邊
 使用帶有透明區域的圖標集時，這是非常有用的]=]
@@ -512,10 +506,8 @@ L["STRING_OPTIONS_BG_ALL_ALLY"] = "顯示全部"
 L["STRING_OPTIONS_BG_ALL_ALLY_DESC"] = [=[當啟用時，敵方玩家也會顯示在隊伍模式中。
 |cFFFFFF00重要|r: 改變會在下次進入戰鬥時套用。]=]
 L["STRING_OPTIONS_BG_ANCHOR"] = "戰場:"
---[[Translation missing --]]
---[[ L["STRING_OPTIONS_BG_UNIQUE_SEGMENT"] = ""--]] 
---[[Translation missing --]]
---[[ L["STRING_OPTIONS_BG_UNIQUE_SEGMENT_DESC"] = ""--]] 
+L["STRING_OPTIONS_BG_REMOTE_PARSER"] = "智慧計分"
+L["STRING_OPTIONS_BG_REMOTE_PARSER_DESC"] = "當啟用時，傷害和治療會同步在計分板。"
 L["STRING_OPTIONS_CAURAS"] = "獲得光環"
 L["STRING_OPTIONS_CAURAS_DESC"] = [=[啟用獲得:
 
@@ -539,8 +531,6 @@ L["STRING_OPTIONS_CENERGY_DESC"] = [=[啟用獲得:
 - |cFFFFFF00符文能量生成|r]=]
 L["STRING_OPTIONS_CHANGE_CLASSCOLORS"] = "修改職業顏色"
 L["STRING_OPTIONS_CHANGE_CLASSCOLORS_DESC"] = "選擇職業的新顏色。"
---[[Translation missing --]]
---[[ L["STRING_OPTIONS_CHANGECOLOR"] = ""--]] 
 L["STRING_OPTIONS_CHANGELOG"] = "版本註釋"
 L["STRING_OPTIONS_CHART_ADD"] = "增加數據"
 L["STRING_OPTIONS_CHART_ADD2"] = "增加"
@@ -659,7 +649,7 @@ L["STRING_OPTIONS_DEATHLIMIT_DESC"] = [=[設定死亡顯示的事件數量。
 L["STRING_OPTIONS_DEATHLOG_MINHEALING"] = "死亡日誌最小治療"
 L["STRING_OPTIONS_DEATHLOG_MINHEALING_DESC"] = [=[死亡日誌在這個閾值下不會顯示治療。
 
-|cFFFFFF00提示|r：按右鍵可手動輸入此值。]=]
+|cFFFFFF00提示|r:按右鍵可手動輸入值。]=]
 L["STRING_OPTIONS_DESATURATE_MENU"] = "降低飽和度"
 L["STRING_OPTIONS_DESATURATE_MENU_DESC"] = "啟用這個選項，所有工具列上的選單圖標會變成黑跟白"
 L["STRING_OPTIONS_DISABLE_ALLDISPLAYSWINDOW"] = "禁用'全部顯示'選單"
@@ -967,11 +957,10 @@ L["STRING_OPTIONS_PS_ABBREVIATE_NONE"] = "沒有"
 --[[ L["STRING_OPTIONS_PS_ABBREVIATE_TOKMIN"] = ""--]] 
 L["STRING_OPTIONS_PVPFRAGS"] = "僅 PvP 蓄意傷害"
 L["STRING_OPTIONS_PVPFRAGS_DESC"] = "當啟用, 只有殺死敵對玩家計數時從 |cFFFFFF00傷害 > 蓄意傷害|r 顯示。"
-L["STRING_OPTIONS_REALMNAME"] = "移除伺服器名"
-L["STRING_OPTIONS_REALMNAME_DESC"] = [=[如果開啟，將不會顯示角色的伺服器名。
-
-|cFFFFFF00關閉|r: Charles-Netherwing
-|cFFFFFF00開啟|r: Charles]=]
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_REALMNAME"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_REALMNAME_DESC"] = ""--]] 
 L["STRING_OPTIONS_REPORT_ANCHOR"] = "報告"
 L["STRING_OPTIONS_REPORT_HEALLINKS"] = "有用的法術連結"
 L["STRING_OPTIONS_REPORT_HEALLINKS_DESC"] = [=[發送報告並啟用此選項時,|cFF55FF55有幫助|r法術是用法術鏈結來報告的，而不是它的名字。
@@ -1083,7 +1072,8 @@ L["STRING_OPTIONS_SEGMENTSSAVE_DESC"] = [=[要在遊戲期間保存多少段(記
 L["STRING_OPTIONS_SENDFEEDBACK"] = "回饋"
 L["STRING_OPTIONS_SHOW_SIDEBARS"] = "顯示邊框"
 L["STRING_OPTIONS_SHOW_SIDEBARS_DESC"] = "顯示或隱藏視窗邊框。"
-L["STRING_OPTIONS_SHOW_STATUSBAR"] = "顯示狀態條"
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_SHOW_STATUSBAR"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["STRING_OPTIONS_SHOW_STATUSBAR_DESC"] = ""--]] 
 --[[Translation missing --]]
@@ -1114,13 +1104,13 @@ L["STRING_OPTIONS_SKIN_ELVUI_BUTTON3_DESC"] = [=[修改工具提示:
 L["STRING_OPTIONS_SKIN_EXTRA_OPTIONS_ANCHOR"] = "外觀選項:"
 L["STRING_OPTIONS_SKIN_LOADED"] = "外觀成功加載。"
 L["STRING_OPTIONS_SKIN_PRESETS_ANCHOR"] = "保存外觀:"
-L["STRING_OPTIONS_SKIN_PRESETSCONFIG_ANCHOR"] = "管理已保存的皮膚:"
 L["STRING_OPTIONS_SKIN_REMOVED"] = "刪除外觀"
 L["STRING_OPTIONS_SKIN_RESET_TOOLTIP"] = "重置提示邊框"
 L["STRING_OPTIONS_SKIN_RESET_TOOLTIP_DESC"] = "將提示邊框顏色和紋理設置為默認值。"
 L["STRING_OPTIONS_SKIN_SELECT"] = "選擇一個外觀"
 L["STRING_OPTIONS_SKIN_SELECT_ANCHOR"] = "外觀選擇:"
-L["STRING_OPTIONS_SOCIAL"] = "社交"
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_SOCIAL"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["STRING_OPTIONS_SOCIAL_DESC"] = ""--]] 
 L["STRING_OPTIONS_SPELL_ADD"] = "添加"
@@ -1141,6 +1131,12 @@ L["STRING_OPTIONS_SPELL_NAME"] = "名稱"
 L["STRING_OPTIONS_SPELL_REMOVE"] = "移除"
 L["STRING_OPTIONS_SPELL_RESET"] = "重置"
 L["STRING_OPTIONS_SPELL_SPELLID"] = "法術ID"
+L["STRING_OPTIONS_SPELL_SPELLID_DESC"] = [=[所謂 ID 是一個"魔獸世界"內法術的唯一識別碼。有很多方法可以獲得這個數字:
+
+-在玩家詳細信息窗口上, 按住 shift 並停留在法術欄上。
+-在 法術ID(Spell Id) 欄位中鍵入法術名稱, 用建議的法術顯示工具提示。
+-社區網站, 大多數都有 spellid 的位址連結。例:wowhead
+-瀏覽下面的法術緩存:]=]
 --[[Translation missing --]]
 --[[ L["STRING_OPTIONS_STRETCH"] = ""--]] 
 --[[Translation missing --]]
@@ -1312,35 +1308,22 @@ L["STRING_OPTIONS_WALLPAPER_GREEN"] = "綠色:"
 --[[ L["STRING_OPTIONS_WALLPAPER_LOAD"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["STRING_OPTIONS_WALLPAPER_LOAD_DESC"] = ""--]] 
-L["STRING_OPTIONS_WALLPAPER_LOAD_EXCLAMATION"] = [=[圖片需要：
-
-
-
--採用Truevision TGA格式（.tga副檔名）
-
--在WOW / Interface / root資料夾中
-
--大小必須為256 x 256點數
-
--在粘貼檔案之前必須關閉遊戲]=]
-L["STRING_OPTIONS_WALLPAPER_LOAD_FILENAME"] = "檔案名稱："
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_WALLPAPER_LOAD_EXCLAMATION"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_WALLPAPER_LOAD_FILENAME"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["STRING_OPTIONS_WALLPAPER_LOAD_FILENAME_DESC"] = ""--]] 
-L["STRING_OPTIONS_WALLPAPER_LOAD_OKEY"] = "加載"
-L["STRING_OPTIONS_WALLPAPER_LOAD_TITLE"] = "從電腦："
-L["STRING_OPTIONS_WALLPAPER_LOAD_TROUBLESHOOT"] = "排查"
-L["STRING_OPTIONS_WALLPAPER_LOAD_TROUBLESHOOT_TEXT"] = [=[如果桌面得到了全綠色：
-
-
-
--重啓了魔獸用戶端
-
--確保影像寬度為256，高度為256
-
--檢查影像是否為.TGA格式，並確保以32比特/點數保存
-
--在Interface資料夾中，例如：C:/Program Files/World of Warcraft/Interface/]=]
-L["STRING_OPTIONS_WALLPAPER_RED"] = "红:"
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_WALLPAPER_LOAD_OKEY"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_WALLPAPER_LOAD_TITLE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_WALLPAPER_LOAD_TROUBLESHOOT"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_WALLPAPER_LOAD_TROUBLESHOOT_TEXT"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONS_WALLPAPER_RED"] = ""--]] 
 L["STRING_OPTIONS_WC_ANCHOR"] = "快速視窗控制 (#%s):"
 L["STRING_OPTIONS_WC_BOOKMARK"] = "管理書簽"
 L["STRING_OPTIONS_WC_BOOKMARK_DESC"] = "打開編緝書簽的配置介面(標籤自定捷徑,右鍵計量條切換書簽頁)"
@@ -1416,7 +1399,8 @@ L["STRING_OPTIONSMENU_PERFORMANCE"] = "性能調整"
 L["STRING_OPTIONSMENU_PLUGINS"] = "擴充插件管理"
 L["STRING_OPTIONSMENU_PROFILES"] = "配置檔"
 L["STRING_OPTIONSMENU_RAIDTOOLS"] = "團隊工具"
-L["STRING_OPTIONSMENU_RIGHTMENU"] = "-- x -- x --"
+--[[Translation missing --]]
+--[[ L["STRING_OPTIONSMENU_RIGHTMENU"] = ""--]] 
 L["STRING_OPTIONSMENU_ROWMODELS"] = "計量列表:高階"
 L["STRING_OPTIONSMENU_ROWSETTINGS"] = "計量列表:一般"
 L["STRING_OPTIONSMENU_ROWTEXTS"] = "計量列表:文本"
@@ -1535,12 +1519,12 @@ L["STRING_SEGMENT_TRASH"] = "垃圾清理"
 L["STRING_SEGMENTS"] = "片段(記錄)"
 L["STRING_SEGMENTS_LIST_BOSS"] = "首領戰"
 L["STRING_SEGMENTS_LIST_COMBATTIME"] = "戰鬥時間"
-L["STRING_SEGMENTS_LIST_OVERALL"] = "整體"
+L["STRING_SEGMENTS_LIST_OVERALL"] = [=[整體
+
+]=]
 L["STRING_SEGMENTS_LIST_TIMEINCOMBAT"] = "戰鬥時間"
 L["STRING_SEGMENTS_LIST_TOTALTIME"] = "總時間"
 L["STRING_SEGMENTS_LIST_TRASH"] = "垃圾"
---[[Translation missing --]]
---[[ L["STRING_SEGMENTS_LIST_WASTED_TIME"] = ""--]] 
 L["STRING_SHIELD_HEAL"] = "阻止"
 L["STRING_SHIELD_OVERHEAL"] = "浪費"
 L["STRING_SHORTCUT_RIGHTCLICK"] = "按右鍵可關閉"
@@ -1609,7 +1593,6 @@ L["STRING_UNLOCK"] = [=[在這按鈕上
 ]=]
 L["STRING_UNLOCK_WINDOW"] = "解鎖"
 L["STRING_UPTADING"] = "更新"
-L["STRING_VERSION_AVAILABLE"] = "有新版本可用，請從Twitch或Curse上下載。"
 L["STRING_VERSION_UPDATE"] = "新版本:有什麼改變了？點擊這裡"
 L["STRING_VOIDZONE_TOOLTIP"] = "傷害&時間"
 L["STRING_WAITPLUGIN"] = [=[等待
@@ -1705,13 +1688,6 @@ L["STRING_WELCOME_7"] = "用於排名，這個方式會使用已經產生的數�
 L["STRING_WELCOME_70"] = "標題條設定"
 L["STRING_WELCOME_71"] = "列表設定"
 L["STRING_WELCOME_72"] = "視窗設定"
-L["STRING_WELCOME_73"] = "選擇字母表或伺服器："
-L["STRING_WELCOME_74"] = "拉丁字母表"
-L["STRING_WELCOME_75"] = "西瑞爾字母表"
-L["STRING_WELCOME_76"] = "中國"
-L["STRING_WELCOME_77"] = "韓國"
-L["STRING_WELCOME_78"] = "台灣"
-L["STRING_WELCOME_79"] = "創建第二個視窗"
 L["STRING_WINDOW_NOTFOUND"] = "沒有找到視窗。"
 L["STRING_WINDOW_NUMBER"] = "視窗數"
 L["STRING_WINDOW1ATACH_DESC"] = "要創建窗口組，請拖拽窗口 #2 到窗口 #1 旁"

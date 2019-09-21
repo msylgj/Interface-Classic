@@ -1834,7 +1834,7 @@
 			--title
 			f.Title = f.TitleBar:CreateFontString ("$parentTitle", "overlay", "GameFontNormal")
 			f.Title:SetPoint ("center", f.TitleBar, "center")
-			f.Title:SetText ("Details! Create Aura")
+			f.Title:SetText ("Details! 创建光环")
 
 			local fw = _detalhes:GetFramework()
 			
@@ -1845,7 +1845,7 @@
 			local button_template = fw:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE")
 			
 			--aura name
-			local name_label = fw:CreateLabel (f, "Aura Name: ", nil, nil, "GameFontNormal")
+			local name_label = fw:CreateLabel (f, "光环名字: ", nil, nil, "GameFontNormal")
 			local name_textentry = fw:CreateTextEntry (f, _detalhes.empty_function, 150, 20, "AuraName", "$parentAuraName")
 			name_textentry:SetTemplate (slider_template)
 			name_textentry:SetPoint ("left", name_label, "right", 2, 0)
@@ -1858,15 +1858,15 @@
 				end
 			end
 			local aura_type_table = {
-				{label = "Icon", value = "icon", onclick = on_select_aura_type}, --, icon = aura_on_icon
-				{label = "Text", value = "text", onclick = on_select_aura_type},
-				{label = "Progress Bar", value = "aurabar", onclick = on_select_aura_type},
+				{label = "图标", value = "icon", onclick = on_select_aura_type}, --, icon = aura_on_icon
+				{label = "文本", value = "text", onclick = on_select_aura_type},
+				{label = "进度条", value = "aurabar", onclick = on_select_aura_type},
 			}
 			local aura_type_options = function()
 				return aura_type_table
 			end
 			local aura_type = fw:CreateDropDown (f, aura_type_options, 1, 150, 20, "AuraTypeDropdown", "$parentAuraTypeDropdown")
-			local aura_type_label = fw:CreateLabel (f, "Aura Type: ", nil, nil, "GameFontNormal")
+			local aura_type_label = fw:CreateLabel (f, "光环类型: ", nil, nil, "GameFontNormal")
 			aura_type:SetPoint ("left", aura_type_label, "right", 2, 0)
 			aura_type:Hide()
 			
@@ -1957,44 +1957,44 @@
 			
 			local aura_on_icon = [[Interface\Buttons\UI-GroupLoot-DE-Down]]
 			local aura_on_table = {
-				{label = "Debuff on You", value = 1, icon = aura_on_icon, onclick = on_select_aura_trigger},
-				{label = "Debuff on Target", value = 2, icon = aura_on_icon, onclick = on_select_aura_trigger},
-				{label = "Debuff on Focus", value = 3, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "你的Debuff", value = 1, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "目标的Debuff", value = 2, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "焦点的Debuff", value = 3, icon = aura_on_icon, onclick = on_select_aura_trigger},
 				
-				{label = "Buff on You", value = 11, icon = aura_on_icon, onclick = on_select_aura_trigger},
-				{label = "Buff on Target", value = 12, icon = aura_on_icon, onclick = on_select_aura_trigger},
-				{label = "Buff on Focus", value = 13, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "你的Buff", value = 11, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "目标的Buff", value = 12, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "焦点的Buff", value = 13, icon = aura_on_icon, onclick = on_select_aura_trigger},
 				
-				{label = "Spell Cast Started", value = 21, icon = aura_on_icon, onclick = on_select_aura_trigger},
-				{label = "Spell Cast Successful", value = 22, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "开始施法", value = 21, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "施法成功", value = 22, icon = aura_on_icon, onclick = on_select_aura_trigger},
 				
-				{label = "DBM Time Bar", value = 31, icon = aura_on_icon, onclick = on_select_aura_trigger},
-				{label = "BigWigs Time Bar", value = 32, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "DBM计时条", value = 31, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "BigWigs计时条", value = 32, icon = aura_on_icon, onclick = on_select_aura_trigger},
 				
-				{label = "Spell Interrupt", value = 41, icon = aura_on_icon, onclick = on_select_aura_trigger},
-				{label = "Spell Dispell", value = 42, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "打断施法", value = 41, icon = aura_on_icon, onclick = on_select_aura_trigger},
+				{label = "驱散施法", value = 42, icon = aura_on_icon, onclick = on_select_aura_trigger},
 			}
 			local aura_on_options = function()
 				return aura_on_table
 			end
 			local aura_on = fw:CreateDropDown (f, aura_on_options, 1, 150, 20, "AuraOnDropdown", "$parentAuraOnDropdown")
-			local aura_on_label = fw:CreateLabel (f, "Trigger On: ", nil, nil, "GameFontNormal")
+			local aura_on_label = fw:CreateLabel (f, "触发开启: ", nil, nil, "GameFontNormal")
 			aura_on:SetPoint ("left", aura_on_label, "right", 2, 0)
 			aura_on:Hide()
 			
 			local triggerList = {
-				{name = "Debuff on You", value = 1},
-				{name = "Debuff on Target", value = 2}, --2
-				{name = "Debuff on Focus", value = 3},
-				{name = "Buff on You", value = 11}, --4
-				{name = "Buff on Target", value = 12},
-				{name = "Buff on Focus", value = 13},
-				{name = "Spell Cast Started", value = 21}, --7
-				{name = "Spell Cast Successful", value = 22},
-				{name = "DBM Time Bar", value = 31},
-				{name = "BigWigs Time Bar", value = 32},
-				{name = "Spell Interrupt", value = 41},
-				{name = "Spell Dispell", value = 42},
+				{name = "你的Debuff", value = 1},
+				{name = "目标的Debuff", value = 2}, --2
+				{name = "焦点的Debuff", value = 3},
+				{name = "你的Buff", value = 11}, --4
+				{name = "目标的Buff", value = 12},
+				{name = "焦点的Buff", value = 13},
+				{name = "开始施法", value = 21}, --7
+				{name = "施法成功", value = 22},
+				{name = "DBM计时条", value = 31},
+				{name = "BigWigs计时条", value = 32},
+				{name = "打断施法", value = 41},
+				{name = "驱散施法", value = 42},
 			}
 			
 			local SetTriggerState = function (triggerID)
@@ -2036,39 +2036,39 @@
 			
 			
 			--spellname
-			local spellname_label = fw:CreateLabel (f, "Spell Name: ", nil, nil, "GameFontNormal")
+			local spellname_label = fw:CreateLabel (f, "法术名称: ", nil, nil, "GameFontNormal")
 			local spellname_textentry = fw:CreateTextEntry (f, _detalhes.empty_function, 150, 20, "SpellName", "$parentSpellName")
 			spellname_textentry:SetTemplate (slider_template)
 			spellname_textentry:SetPoint ("left", spellname_label, "right", 2, 0)
 			f.spellname = spellname_textentry
-			spellname_textentry.tooltip = "Spell/Debuff/Buff to be tracked."
+			spellname_textentry.tooltip = "要跟踪的法术 / Debuff / Buff."
 			
 			--spellid
-			local auraid_label = fw:CreateLabel (f, "Spell Id: ", nil, nil, "GameFontNormal")
+			local auraid_label = fw:CreateLabel (f, "法术 Id: ", nil, nil, "GameFontNormal")
 			local auraid_textentry = fw:CreateTextEntry (f, _detalhes.empty_function, 150, 20, "AuraSpellId", "$parentAuraSpellId")
 			auraid_textentry:SetTemplate (slider_template)
 			auraid_textentry:Disable()
 			auraid_textentry:SetPoint ("left", auraid_label, "right", 2, 0)
 			
 			--use spellid
-			local usespellid_label = fw:CreateLabel (f, "Use SpellId: ", nil, nil, "GameFontNormal")
+			local usespellid_label = fw:CreateLabel (f, "使用法术Id: ", nil, nil, "GameFontNormal")
 			local aura_use_spellid = fw:CreateSwitch (f, function(_, _, state) if (state) then auraid_textentry:Enable() else auraid_textentry:Disable() end end, false, nil, nil, nil, nil, "UseSpellId")
 			aura_use_spellid:SetTemplate (fw:GetTemplate ("switch", "OPTIONS_CHECKBOX_TEMPLATE"))
 			aura_use_spellid:SetAsCheckBox()			
 			
 			aura_use_spellid:SetPoint ("left", usespellid_label, "right", 2, 0)
-			aura_use_spellid.tooltip = "Use the spell id instead of the spell name, for advanced users."
+			aura_use_spellid.tooltip = "对于高级用户，请使用法术ID替代法术名称."
 			
 			--in combat only
-			local incombat_label = fw:CreateLabel (f, "Only in Combat: ", nil, nil, "GameFontNormal")
+			local incombat_label = fw:CreateLabel (f, "只在战斗中: ", nil, nil, "GameFontNormal")
 			local aura_incombat = fw:CreateSwitch (f, function(_, _, state) end, true, nil, nil, nil, nil, "UseInCombat")
 			aura_incombat:SetTemplate (fw:GetTemplate ("switch", "OPTIONS_CHECKBOX_TEMPLATE"))
 			aura_incombat:SetAsCheckBox()			
 			aura_incombat:SetPoint ("left", incombat_label, "right", 2, 0)
-			aura_incombat.tooltip = "Only active when in combat."
+			aura_incombat.tooltip = "只在战斗中激活."
 
 			--aura icon
-			local icon_label = fw:CreateLabel (f, "Icon: ", nil, nil, "GameFontNormal")
+			local icon_label = fw:CreateLabel (f, "图标: ", nil, nil, "GameFontNormal")
 			local icon_button_func = function (texture)
 				f.IconButton.icon.texture = texture
 			end
@@ -2082,20 +2082,20 @@
 			f.icon = icon_button_icon
 			
 			--is cooldown
-			local iscooldown_label = fw:CreateLabel (f, "Cooldown Animation: ", nil, nil, "GameFontNormal")
+			local iscooldown_label = fw:CreateLabel (f, "CD动画: ", nil, nil, "GameFontNormal")
 			local aura_iscooldown = fw:CreateSwitch (f, function(_, _, state) end, true, nil, nil, nil, nil, "IsCooldown")
 			aura_iscooldown:SetTemplate (fw:GetTemplate ("switch", "OPTIONS_CHECKBOX_TEMPLATE"))
 			aura_iscooldown:SetAsCheckBox()			
 			aura_iscooldown:SetPoint ("left", iscooldown_label, "right", 2, 0)
-			aura_iscooldown.tooltip = "Only active when in combat."
+			aura_iscooldown.tooltip = "只有在战斗中才有效."
 			
 			--stack
 			local stack_slider = fw:NewSlider (f, f, "$parentStackSlider", "StackSlider", 150, 20, 0, 30, 1, 0, true)
 			stack_slider.useDecimals = true
 			stack_slider:SetTemplate (slider_template)
-			local stack_label = fw:CreateLabel (f, "Trigger Stack Size: ", nil, nil, "GameFontNormal")
+			local stack_label = fw:CreateLabel (f, "触发堆叠量: ", nil, nil, "GameFontNormal")
 			stack_slider:SetPoint ("left", stack_label, "right", 2, 0)
-			stack_slider.tooltip = "Minimum amount of stacks to trigger the aura."
+			stack_slider.tooltip = "触发光环的最小堆叠量."
 			
 			--sound effect
 			local play_sound = function (self, fixedParam, file)
@@ -2146,7 +2146,7 @@
 			}
 			
 			local sound_options = function()
-				local t = {{label = "No Sound", value = "", icon = [[Interface\Buttons\UI-GuildButton-MOTD-Disabled]], iconsize = iconsize}}
+				local t = {{label = "没有声音", value = "", icon = [[Interface\Buttons\UI-GuildButton-MOTD-Disabled]], iconsize = iconsize}}
 				
 				local sounds = {}
 				local already_added = {}
@@ -2191,26 +2191,26 @@
 			end
 			local sound_effect = fw:CreateDropDown (f, sound_options, 1, 150, 20, "SoundEffectDropdown", "$parentSoundEffectDropdown")
 			sound_effect:SetTemplate (slider_template)
-			local sound_effect_label = fw:CreateLabel (f, "Play Sound: ", nil, nil, "GameFontNormal")
+			local sound_effect_label = fw:CreateLabel (f, "播放声音: ", nil, nil, "GameFontNormal")
 			sound_effect:SetPoint ("left", sound_effect_label, "right", 2, 0)
-			sound_effect.tooltip = "Sound played when the aura triggers."
+			sound_effect.tooltip = "光环触发时播放的声音."
 			
 			--say something
-			local say_something_label = fw:CreateLabel (f, "/Say on Trigger: ", nil, nil, "GameFontNormal")
+			local say_something_label = fw:CreateLabel (f, "/Say 触发: ", nil, nil, "GameFontNormal")
 			local say_something = fw:CreateTextEntry (f, _detalhes.empty_function, 150, 20, "SaySomething", "$parentSaySomething")
 			say_something:SetTemplate (slider_template)
 			say_something:SetPoint ("left", say_something_label, "right", 2, 0)
-			say_something.tooltip = "Your character /say this phrase when the aura triggers."
+			say_something.tooltip = "当光环触发时，你的角色/Say发言."
 			
 			--aura text
-			local aura_text_label = fw:CreateLabel (f, "Aura Text: ", nil, nil, "GameFontNormal")
+			local aura_text_label = fw:CreateLabel (f, "光环文字: ", nil, nil, "GameFontNormal")
 			local aura_text = fw:CreateTextEntry (f, _detalhes.empty_function, 150, 20, "AuraText", "$parentAuraText")
 			aura_text:SetTemplate (slider_template)
 			aura_text:SetPoint ("left", aura_text_label, "right", 2, 0)
-			aura_text.tooltip = "Text shown at aura's icon right side."
+			aura_text.tooltip = "文字显示在光环图标右侧."
 			
 			--apply glow
-			local useglow_label = fw:CreateLabel (f, "Glow Effect: ", nil, nil, "GameFontNormal")
+			local useglow_label = fw:CreateLabel (f, "发光效果: ", nil, nil, "GameFontNormal")
 			local useglow = fw:CreateSwitch (f, function(self, _, state) 
 				if (state and self.glow_test) then  
 					self.glow_test:Show()
@@ -2226,7 +2226,7 @@
 			useglow:SetAsCheckBox()			
 			
 			useglow:SetPoint ("left", useglow_label, "right", 2, 0)
-			useglow.tooltip = "Do not rename the aura on WeakAuras options panel or the glow effect may not work."
+			useglow.tooltip = "不要在WeakAuras选项面板上重命名光环，否则发光效果可能无效."
 			
 			useglow.glow_test = CreateFrame ("frame", "DetailsAuraTextGlowTest", useglow.widget, "ActionBarButtonSpellActivationAlert")
 			useglow.glow_test:SetPoint ("topleft", useglow.widget, "topleft", -20, 2)
@@ -2234,18 +2234,18 @@
 			useglow.glow_test:Hide()
 
 			--encounter id
-			local encounterid_label = fw:CreateLabel (f, "Encounter ID: ", nil, nil, "GameFontNormal")
+			local encounterid_label = fw:CreateLabel (f, "战斗 ID: ", nil, nil, "GameFontNormal")
 			local encounterid = fw:CreateTextEntry (f, _detalhes.empty_function, 150, 20, "EncounterIdText", "$parentEncounterIdText")
 			encounterid:SetTemplate (slider_template)
 			encounterid:SetPoint ("left", encounterid_label, "right", 2, 0)
-			encounterid.tooltip = "Only load this aura for this raid encounter."
+			encounterid.tooltip = "只为这次团本战斗加载此光环."
 			
 			--size
 			local icon_size_slider = fw:NewSlider (f, f, "$parentIconSizeSlider", "IconSizeSlider", 150, 20, 8, 256, 1, 64)
-			local icon_size_label = fw:CreateLabel (f, "Size: ", nil, nil, "GameFontNormal")
+			local icon_size_label = fw:CreateLabel (f, "大小: ", nil, nil, "GameFontNormal")
 			icon_size_slider:SetTemplate (slider_template)
 			icon_size_slider:SetPoint ("left", icon_size_label, "right", 2, 0)
-			icon_size_slider.tooltip = "Icon size, width and height."
+			icon_size_slider.tooltip = "图标大小，宽度和高度."
 			
 			--aura addon
 			local addon_options = function()
@@ -2257,7 +2257,7 @@
 			end
 			local aura_addon = fw:CreateDropDown (f, addon_options, 1, 150, 20, "AuraAddonDropdown", "$parentAuraAddonDropdown")
 			aura_addon:SetTemplate (slider_template)
-			local aura_addon_label = fw:CreateLabel (f, "Addon: ", nil, nil, "GameFontNormal")
+			local aura_addon_label = fw:CreateLabel (f, "插件: ", nil, nil, "GameFontNormal")
 			aura_addon:SetPoint ("left", aura_addon_label, "right", 2, 0)
 			
 			--weakauras - group
@@ -2278,11 +2278,11 @@
 					end
 				end
 				table.sort (t, sort_func)
-				tinsert (t, 1, {label = "No Group", value = false, icon = folder_icon, texcoord = folder_texcoord, iconcolor = {0.8, 0.2, 0.2}, iconsize = folder_iconsize})
+				tinsert (t, 1, {label = "没有组", value = false, icon = folder_icon, texcoord = folder_texcoord, iconcolor = {0.8, 0.2, 0.2}, iconsize = folder_iconsize})
 				return t
 			end
 			
-			local weakauras_folder_label = fw:CreateLabel (f, "WeakAuras Group: ", nil, nil, "GameFontNormal")
+			local weakauras_folder_label = fw:CreateLabel (f, "WeakAuras组: ", nil, nil, "GameFontNormal")
 			local weakauras_folder = fw:CreateDropDown (f, weakauras_folder_options, 1, 150, 20, "WeakaurasFolderDropdown", "$parentWeakaurasFolder")
 			weakauras_folder:SetTemplate (slider_template)
 			weakauras_folder:SetPoint ("left", weakauras_folder_label, "right", 2, 0)
@@ -2293,19 +2293,19 @@
 				local weakauras_newgroup_textentry = f.NewWeakaurasGroupTextEntry
 			
 				if (not WeakAurasSaved or not WeakAurasSaved.displays) then
-					print ("nop, weakauras not found")
+					print ("weakauras没找到")
 					return
 				end
 			
 				local groupName = weakauras_newgroup_textentry.text
 				
 				if (string.len (groupName) == 0) then
-					print ("nop, group name is too small")
+					print ("组名太小了")
 					return
 				end
 				
 				if (WeakAurasSaved.displays [groupName]) then
-					print ("nop, group already exists")
+					print ("组已经存在")
 					return
 				end
 				
@@ -2329,14 +2329,14 @@
 				weakauras_folder:Select (groupName)
 			end			
 			
-			local weakauras_newgroup_label = fw:CreateLabel (f, "New WeakAuras Group: ", nil, nil, "GameFontNormal")
+			local weakauras_newgroup_label = fw:CreateLabel (f, "新WeakAuras组: ", nil, nil, "GameFontNormal")
 			local weakauras_newgroup_textentry = fw:CreateTextEntry (f, create_wa_group, 150, 20, "NewWeakaurasGroupTextEntry", "$parentNewWeakaurasGroup")
 			weakauras_newgroup_textentry:SetTemplate (slider_template)
 			weakauras_newgroup_textentry:SetPoint ("left", weakauras_newgroup_label, "right", 2, 0)
 			f.weakauras_newgroup = weakauras_newgroup_textentry
-			weakauras_newgroup_textentry.tooltip = "Enter the name of the new group"
+			weakauras_newgroup_textentry.tooltip = "输入新组的名称"
 			
-			local weakauras_newgroup_button = fw:CreateButton (f, create_wa_group, 106, 20, "Create Group")
+			local weakauras_newgroup_button = fw:CreateButton (f, create_wa_group, 106, 20, "创建组")
 			weakauras_newgroup_button:SetTemplate (slider_template)
 			weakauras_newgroup_button:SetTemplate (_detalhes.gump:GetTemplate ("button", "DETAILS_PLUGIN_BUTTON_TEMPLATE"))
 			weakauras_newgroup_button:SetWidth (100)
@@ -2373,7 +2373,7 @@
 				if (addon == "WA") then
 					_detalhes:CreateWeakAura (aura_type_value, spellid, use_spellId, spellname, name, icon, target, stacksize, sound, chat, icon_text, icon_glow, eid, folder, iconsize, f.other_values, incombat, iscooldown)
 				else
-					_detalhes:Msg ("No Aura Addon selected. Addons currently supported: WeakAuras 2.")
+					_detalhes:Msg ("没有选择光环插件。 目前支持的插件：WeakAuras 2.")
 				end
 				
 				f:Hide()
@@ -2384,7 +2384,7 @@
 			create_button:SetTemplate (_detalhes.gump:GetTemplate ("button", "DETAILS_PLUGIN_BUTTON_TEMPLATE"))
 			create_button:SetWidth (160)
 			
-			local cancel_button = fw:CreateButton (f, function() name_textentry:ClearFocus(); f:Hide() end, 106, 20, "Cancel")
+			local cancel_button = fw:CreateButton (f, function() name_textentry:ClearFocus(); f:Hide() end, 106, 20, "取消")
 			cancel_button:SetTemplate (_detalhes.gump:GetTemplate ("button", "DETAILS_PLUGIN_BUTTON_TEMPLATE"))
 			cancel_button:SetWidth (160)
 			
@@ -2434,7 +2434,7 @@
 				local trigger = f.AuraOnDropdown.value
 				
 				f.StackSlider:Enable()
-				f.StackSlider.tooltip = "Minimum amount of stacks to trigger the aura."
+				f.StackSlider.tooltip = "触发光环的最小堆叠量."
 				f.StackSlider:SetValue (0)
 				f.SpellName:Enable()
 				f.UseSpellId:Enable()
@@ -2448,39 +2448,39 @@
 				f.AuraOnDropdown:Enable()
 				f.AuraText:Enable()
 				f.AuraText:SetText ("")
-				aura_text_label.text = "Aura Text: "
+				aura_text_label.text = "光环文字: "
 				f.UseGlow:Enable()
 				f.IsCooldown:Enable()
 				
 				if (aura_type == "icon") then
-					aura_text_label:SetText ("Icon Text: ")
-					icon_size_label:SetText ("Width/Height: ")
+					aura_text_label:SetText ("图标文字: ")
+					icon_size_label:SetText ("宽/高: ")
 					f.IconSizeSlider:SetValue (64)
 					
 				elseif (aura_type == "text") then
-					aura_text_label:SetText ("Text: ")
-					icon_size_label:SetText ("Font Size: ")
+					aura_text_label:SetText ("文字: ")
+					icon_size_label:SetText ("文字大小: ")
 					f.IconSizeSlider:SetValue (12)
 					f.IsCooldown:Disable()
 					
 				elseif (aura_type == "aurabar") then
-					aura_text_label:SetText ("Left Text: ")
-					icon_size_label:SetText ("Bar Width: ")
+					aura_text_label:SetText ("左文字: ")
+					icon_size_label:SetText ("条宽: ")
 					f.IconSizeSlider:SetValue (250)
 					f.IsCooldown:Disable()
 				end
 
 				if (trigger >= 1 and trigger <= 19) then --buff and debuff
-					stack_label:SetText ("Trigger Stack Size: ")
+					stack_label:SetText ("触发堆叠量: ")
 				
 				elseif (trigger >= 20 and trigger <= 29) then --cast end cast start
-					stack_label:SetText ("Cast Duration: ")
+					stack_label:SetText ("施法持续时间: ")
 					f.StackSlider:SetValue (2)
 				
 				elseif (trigger >= 30 and trigger <= 39) then --boss mods
-					stack_label:SetText ("Trigger Remaining Time:")
+					stack_label:SetText ("触发剩余时间:")
 					f.StackSlider:SetValue (4)
-					f.StackSlider.tooltip = "Will trigger when the bar remaining time reach this value."
+					f.StackSlider.tooltip = "当计量条剩余时间达到此值时将触发."
 					f.IconSizeSlider:SetValue (64)
 					f.SpellName:Disable()
 					f.UseSpellId:Disable()
@@ -2497,14 +2497,14 @@
 					f.SaySomething:Disable()
 					f.IconButton:Disable()
 					f.UseGlow:Disable()
-					icon_size_label:SetText ("Text Size: ")
+					icon_size_label:SetText ("字体大小: ")
 					f.IconSizeSlider:SetValue (11)
 					if (trigger == 41) then
-						f.AuraText:SetText ("=Not Interrupted!=")
-						aura_text_label.text = "Not Interrupted: "
+						f.AuraText:SetText ("=没有打断!=")
+						aura_text_label.text = "没有打断: "
 					elseif (trigger == 42) then
-						f.AuraText:SetText (DetailsAuraPanel.name.text:gsub ("%(d!%)", "") .. "Dispells")
-						aura_text_label.text = "Title Text: "
+						f.AuraText:SetText (DetailsAuraPanel.name.text:gsub ("%(d!%)", "") .. "驱散")
+						aura_text_label.text = "标题文字: "
 					end
 				end
 				
@@ -2921,7 +2921,7 @@
 		
 		--already exists
 		if (aura_container [name]) then
-			_detalhes:Msg ("Aura name already exists.")
+			_detalhes:Msg ("光环名称已经存在.")
 			return
 		end
 		
@@ -3608,7 +3608,7 @@
 			
 			local npc_ids_module = {
 				name = "Npc IDs",
-				desc = "Show a list of known npc IDs",
+				desc = "显示已知的npc ID列表",
 				filters_widgets = function()
 					if (not DetailsForgeEncounterNpcIDsFilterPanel) then
 					
@@ -3617,7 +3617,7 @@
 						w:SetPoint ("topleft", f, "topleft", 164, -40)
 						--npc name filter
 						local label = w:CreateFontString (nil, "overlay", "GameFontHighlightSmall")
-						label:SetText ("Npc Name" .. ": ")
+						label:SetText ("Npc名字" .. ": ")
 						label:SetPoint ("left", w, "left", 5, 0)
 						local entry = fw:CreateTextEntry (w, nil, 120, 20, "entry", "DetailsForgeEncounterNpcIDsFilter")
 						entry:SetHook ("OnTextChanged", function() f:refresh() end)
@@ -3656,7 +3656,7 @@
 				header = {
 					{name = L["STRING_FORGE_HEADER_INDEX"], width = 40, type = "text", func = no_func},
 					{name = "NpcID", width = 100, type = "entry", func = no_func},
-					{name = "Npc Name", width = 400, type = "entry", func = no_func},
+					{name = "Npc名字", width = 400, type = "entry", func = no_func},
 				},
 				
 				fill_panel = false,
@@ -4338,7 +4338,7 @@ function _detalhes.OpenDetailsDeathRecap (segment, RecapID, fromChat)
 			Details.DeathRecap = CreateFrame ("frame", "DetailsDeathRecap", DeathRecapFrame)
 			Details.DeathRecap:SetAllPoints()
 			
-			DeathRecapFrame.Title:SetText (DeathRecapFrame.Title:GetText() .. " (by Details!)")
+			DeathRecapFrame.Title:SetText (DeathRecapFrame.Title:GetText() .. " (通过Details!)")
 			
 			--lines
 			Details.DeathRecap.Lines = {}
@@ -4880,7 +4880,7 @@ DetailsFramework:ApplyStandardBackdrop (detailsOnDeathMenu)
 detailsOnDeathMenu:SetAlpha (0.75)
 
 --disable text
-detailsOnDeathMenu.disableLabel = _detalhes.gump:CreateLabel (detailsOnDeathMenu, "you can disable this at /details > Raid Tools", 9)
+detailsOnDeathMenu.disableLabel = _detalhes.gump:CreateLabel (detailsOnDeathMenu, "可以在/details>团队工具禁用此功能", 9)
 
 detailsOnDeathMenu.warningLabel = _detalhes.gump:CreateLabel (detailsOnDeathMenu, "", 11)
 detailsOnDeathMenu.warningLabel.textcolor = "red"
@@ -4895,7 +4895,7 @@ end)
 
 function detailsOnDeathMenu.OpenEncounterBreakdown()
 	if (not _detalhes:GetPlugin ("DETAILS_PLUGIN_ENCOUNTER_DETAILS")) then
-		detailsOnDeathMenu.warningLabel.text = "Encounter Breakdown plugin is disabled! Please enable it in the Addon Control Panel."
+		detailsOnDeathMenu.warningLabel.text = "战斗日志插件被禁用！请在加载项控制面板中启用它."
 		detailsOnDeathMenu.warningLabel:Show()
 		C_Timer.After (5, function()
 			detailsOnDeathMenu.warningLabel:Hide()
@@ -4909,7 +4909,7 @@ end
 
 function detailsOnDeathMenu.OpenPlayerEndurance()
 	if (not _detalhes:GetPlugin ("DETAILS_PLUGIN_DEATH_GRAPHICS")) then
-		detailsOnDeathMenu.warningLabel.text = "Advanced Death Logs plugin is disabled! Please enable it (or download) in the Addon Control Panel."
+		detailsOnDeathMenu.warningLabel.text = "高级死亡日志插件已禁用！请在加载项控制面板中启用（或下载）"
 		detailsOnDeathMenu.warningLabel:Show()
 		C_Timer.After (5, function()
 			detailsOnDeathMenu.warningLabel:Hide()
@@ -4971,7 +4971,7 @@ function detailsOnDeathMenu.OpenPlayerSpells()
 end
 
 --encounter breakdown button
-detailsOnDeathMenu.breakdownButton = _detalhes.gump:CreateButton (detailsOnDeathMenu, detailsOnDeathMenu.OpenEncounterBreakdown, 120, 20, "Encounter Breakdown", "breakdownButton")
+detailsOnDeathMenu.breakdownButton = _detalhes.gump:CreateButton (detailsOnDeathMenu, detailsOnDeathMenu.OpenEncounterBreakdown, 120, 20, "战斗日志", "breakdownButton")
 detailsOnDeathMenu.breakdownButton:SetTemplate (_detalhes.gump:GetTemplate ("button", "DETAILS_PLUGINPANEL_BUTTON_TEMPLATE"))
 detailsOnDeathMenu.breakdownButton:SetPoint ("topleft", detailsOnDeathMenu, "topleft", 5, -5)
 detailsOnDeathMenu.breakdownButton:Hide()
@@ -4980,18 +4980,18 @@ detailsOnDeathMenu.breakdownButton.CoolTip = {
 	Type = "tooltip",
 	BuildFunc = function()
 		GameCooltip2:Preset (2)
-		GameCooltip2:AddLine ("Show a panel with:")
-		GameCooltip2:AddLine ("- Player Damage Taken")
-		GameCooltip2:AddLine ("- Damage Taken by Spell")
-		GameCooltip2:AddLine ("- Enemy Damage Taken")
-		GameCooltip2:AddLine ("- Player Deaths")
-		GameCooltip2:AddLine ("- Interrupts and Dispells")
-		GameCooltip2:AddLine ("- Damage Done Chart")
-		GameCooltip2:AddLine ("- Damage Per Phase")
-		GameCooltip2:AddLine ("- Weakauras Tool")
+		GameCooltip2:AddLine ("显示一个面板:")
+		GameCooltip2:AddLine ("- 玩家伤害")
+		GameCooltip2:AddLine ("- 法术伤害")
+		GameCooltip2:AddLine ("- 受到伤害")
+		GameCooltip2:AddLine ("- 玩家死亡")
+		GameCooltip2:AddLine ("- 打断和驱散")
+		GameCooltip2:AddLine ("- 伤害图表")
+		GameCooltip2:AddLine ("- 每段伤害")
+		GameCooltip2:AddLine ("- Weakauras工具")
 		
 		if (not _detalhes:GetPlugin ("DETAILS_PLUGIN_ENCOUNTER_DETAILS")) then
-			GameCooltip2:AddLine ("Encounter Breakdown plugin is disabled in the Addon Control Panel.", "", 1, "red")
+			GameCooltip2:AddLine ("在插件控制面板中禁用了战斗回放插件.", "", 1, "red")
 		end
 		
 	end, --> called when user mouse over the frame
@@ -5015,7 +5015,7 @@ detailsOnDeathMenu.breakdownButton.CoolTip = {
 GameCooltip2:CoolTipInject (detailsOnDeathMenu.breakdownButton)
 
 --player endurance button
-detailsOnDeathMenu.enduranceButton = _detalhes.gump:CreateButton (detailsOnDeathMenu, detailsOnDeathMenu.OpenPlayerEndurance, 120, 20, "Player Endurance", "enduranceButton")
+detailsOnDeathMenu.enduranceButton = _detalhes.gump:CreateButton (detailsOnDeathMenu, detailsOnDeathMenu.OpenPlayerEndurance, 120, 20, "玩家续航", "enduranceButton")
 detailsOnDeathMenu.enduranceButton:SetTemplate (_detalhes.gump:GetTemplate ("button", "DETAILS_PLUGINPANEL_BUTTON_TEMPLATE"))
 detailsOnDeathMenu.enduranceButton:SetPoint ("topleft", detailsOnDeathMenu.breakdownButton, "topright", 2, 0)
 detailsOnDeathMenu.enduranceButton:Hide()
@@ -5024,15 +5024,15 @@ detailsOnDeathMenu.enduranceButton.CoolTip = {
 	Type = "tooltip",
 	BuildFunc = function()
 		GameCooltip2:Preset (2)
-		GameCooltip2:AddLine ("Open Player Endurance Breakdown")
+		GameCooltip2:AddLine ("打开玩家战斗日志")
 		GameCooltip2:AddLine ("")
-		GameCooltip2:AddLine ("Player endurance is calculated using the amount of player deaths.")
-		GameCooltip2:AddLine ("By default the plugin register the three first player deaths on each encounter to calculate who is under performing.")
+		GameCooltip2:AddLine ("玩家战斗是根据球员死亡人数计算的.")
+		GameCooltip2:AddLine ("默认情况下，插件会记录每次战斗的三个玩家死亡人数，以计算谁正在执行.")
 		
 		--GameCooltip2:AddLine (" ")
 		
 		if (not _detalhes:GetPlugin ("DETAILS_PLUGIN_DEATH_GRAPHICS")) then
-			GameCooltip2:AddLine ("Advanced Death Logs plugin is disabled or not installed, check the Addon Control Panel or download it from the Twitch APP.", "", 1, "red")
+			GameCooltip2:AddLine ("高级死亡日志插件已禁用或未安装，请检查插件控制面板或从Twitch APP下载.", "", 1, "red")
 		end
 
 	end, --> called when user mouse over the frame
@@ -5056,7 +5056,7 @@ detailsOnDeathMenu.enduranceButton.CoolTip = {
 GameCooltip2:CoolTipInject (detailsOnDeathMenu.enduranceButton)
 
 --spells
-detailsOnDeathMenu.spellsButton = _detalhes.gump:CreateButton (detailsOnDeathMenu, detailsOnDeathMenu.OpenPlayerSpells, 48, 20, "Spells", "SpellsButton")
+detailsOnDeathMenu.spellsButton = _detalhes.gump:CreateButton (detailsOnDeathMenu, detailsOnDeathMenu.OpenPlayerSpells, 48, 20, "法术", "SpellsButton")
 detailsOnDeathMenu.spellsButton:SetTemplate (_detalhes.gump:GetTemplate ("button", "DETAILS_PLUGINPANEL_BUTTON_TEMPLATE"))
 detailsOnDeathMenu.spellsButton:SetPoint ("topleft", detailsOnDeathMenu.enduranceButton, "topright", 2, 0)
 detailsOnDeathMenu.spellsButton:Hide()
@@ -5065,7 +5065,7 @@ detailsOnDeathMenu.spellsButton.CoolTip = {
 	Type = "tooltip",
 	BuildFunc = function()
 		GameCooltip2:Preset (2)
-		GameCooltip2:AddLine ("Open your player Details! breakdown.")
+		GameCooltip2:AddLine ("打开Details!日志.")
 		
 	end, --> called when user mouse over the frame
 	OnEnterFunc = function (self) 

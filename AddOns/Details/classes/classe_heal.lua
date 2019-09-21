@@ -1122,7 +1122,7 @@ function atributo_heal:ToolTip_HealingDenied (instancia, numero, barra, keydown)
 		
 	--healers denied
 	
-		_detalhes:AddTooltipSpellHeaderText ("Healers", headerColor, #spellsSorted, [[Interface\TUTORIALFRAME\UI-TutorialFrame-LevelUp]], 0.10546875, 0.89453125, 0.05859375, 0.6796875)
+		_detalhes:AddTooltipSpellHeaderText ("治疗者", headerColor, #spellsSorted, [[Interface\TUTORIALFRAME\UI-TutorialFrame-LevelUp]], 0.10546875, 0.89453125, 0.05859375, 0.6796875)
 		_detalhes:AddTooltipHeaderStatusbar (r, g, b, barAlha)
 	
 		local healersSorted = {}

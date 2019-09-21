@@ -301,7 +301,7 @@ function mythicDungeonCharts.ShowReadyPanel()
 		f:SetBackdropColor (0, 0, 0, 0.9)
 		f:SetBackdropBorderColor (0, 0, 0, 1)
 		DetailsFramework:ApplyStandardBackdrop (f)
-		DetailsFramework:CreateTitleBar (f, "Details! Dungeon Chart is Ready!")
+		DetailsFramework:CreateTitleBar (f, "Details! 地下城图表准备好了!")
 		
 		--register to libwindow
 		local LibWindow = LibStub ("LibWindow-1.1")
@@ -391,7 +391,7 @@ function mythicDungeonCharts.ShowChart()
 			titlebarMinimized:SetBackdropBorderColor (0, 0, 0, 1)
 			
 			--> title
-			local titleLabelMinimized = _detalhes.gump:NewLabel (titlebarMinimized, titlebarMinimized, nil, "titulo", "Dungeon Run Chart", "GameFontHighlightLeft", 10, {227/255, 186/255, 4/255})
+			local titleLabelMinimized = _detalhes.gump:NewLabel (titlebarMinimized, titlebarMinimized, nil, "titulo", "地下城运行图表", "GameFontHighlightLeft", 10, {227/255, 186/255, 4/255})
 			titleLabelMinimized:SetPoint ("left", titlebarMinimized , "left", 4, 0)
 			--titleLabelMinimized:SetPoint ("top", titlebarMinimized , "top", 0, -5)
 			f.TitleTextMinimized = titleLabelMinimized
@@ -528,9 +528,9 @@ function mythicDungeonCharts.ShowChart()
 		local on_switch_enable = function (_, _, state)
 			_detalhes.mythic_plus.show_damage_graphic = state
 		end
-		local enabledSwitch, enabledLabel = Details.gump:CreateSwitch (f, on_switch_enable, _detalhes.mythic_plus.show_damage_graphic, _, _, _, _, _, _, _, _, _, "Enabled", Details.gump:GetTemplate ("switch", "OPTIONS_CHECKBOX_BRIGHT_TEMPLATE"), "GameFontHighlightLeft")
+		local enabledSwitch, enabledLabel = Details.gump:CreateSwitch (f, on_switch_enable, _detalhes.mythic_plus.show_damage_graphic, _, _, _, _, _, _, _, _, _, "启用", Details.gump:GetTemplate ("switch", "OPTIONS_CHECKBOX_BRIGHT_TEMPLATE"), "GameFontHighlightLeft")
 		enabledSwitch:SetAsCheckBox()
-		enabledSwitch.tooltip = "Show this chart at the end of a mythic dungeon run.\n\nIf disabled, you can reactivate it again at the options panel > streamer settings."
+		enabledSwitch.tooltip = "在一个史诗地下城运行结束时显示这个图表.\n\n如果禁用，则可以在“选项”面板>“拖缆设置”中再次重新激活它."
 		enabledLabel:SetPoint ("right", minimizeButton, "left", -22, 0)
 		enabledSwitch:SetSize (16, 16)
 		Details.gump:SetFontColor (enabledLabel, "gray")
@@ -703,10 +703,10 @@ function mythicDungeonCharts.ShowChart()
 		tinsert (bossTimeTable, bossTable[1] - combatTime)
 	end
 	
-	mythicDungeonCharts.Frame.ChartFrame:AddOverlay (bossTimeTable, {1, 1, 1, 0.05}, "Show Boss", "")
+	mythicDungeonCharts.Frame.ChartFrame:AddOverlay (bossTimeTable, {1, 1, 1, 0.05}, "显示BOSS", "")
 	
 	--local phrase = " Average Dps (under development)\npress Escape to hide, Details! Alpha Build." .. _detalhes.build_counter .. "." .. _detalhes.realversion
-	local phrase = "Details!: Average Dps for "
+	local phrase = "Details!: 平均Dps "
 	
 	mythicDungeonCharts.Frame.ChartFrame:SetTitle ("")
 	Details:GetFramework():SetFontSize (mythicDungeonCharts.Frame.ChartFrame.chart_title, 14)

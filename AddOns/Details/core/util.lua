@@ -426,7 +426,7 @@
 			language = "auto"
 		end
 		_detalhes.numerical_system_symbols = language
-		_detalhes:Msg ("NumSystem override is now:", language)
+		_detalhes:Msg ("NumSystem现在是覆盖:", language)
 		
 		_detalhes:SelectNumericalSystem()
 	end
@@ -536,7 +536,7 @@
 	
 		local okey, value = _pcall (func, parameters_cache [1], parameters_cache [2], parameters_cache [3], parameters_cache [4])
 		if (not okey) then
-			_detalhes:Msg ("|cFFFF9900error on custom text|r:", value)
+			_detalhes:Msg ("|cFFFF9900自定义文本错误|r:", value)
 			return 0
 		end
 		return value or 0
@@ -989,7 +989,7 @@ end
 						if (ThisGradient.Func) then
 							local okey, errortext = _pcall (ThisGradient.Func, ThisGradient.FuncParam)
 							if (not okey) then
-								_detalhes:Msg ("GradientEffect() end function error:", errortext)
+								_detalhes:Msg ("GradientEffect() end 函数错误:", errortext)
 							end
 						end
 					

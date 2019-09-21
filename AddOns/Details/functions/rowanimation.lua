@@ -63,7 +63,7 @@
 				_detalhes.gump:Fade (row, "in")
 			end
 		end
-		local fade_desc = "Default animation, makes the bar fade in or fade out when showing or hiding in the window"
+		local fade_desc = "默认动画，当显示或隐藏在窗口中时，计量条会淡入或淡出"
 		_detalhes:InstallRowAnimation ("Fade", fade_desc , fade_func, nil)
 		
 		_detalhes:SelectRowAnimation ("Fade")

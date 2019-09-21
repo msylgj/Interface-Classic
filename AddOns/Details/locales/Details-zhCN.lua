@@ -1,7 +1,9 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("Details", "zhCN") 
 if not L then return end 
 
-L["ABILITY_ID"] = "技能 ID"
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+L["ABILITY_ID"] = "技能 id"
 L["STRING_"] = ""
 L["STRING_ABSORBED"] = "吸收"
 L["STRING_ACTORFRAME_NOTHING"] = "没有报告"
@@ -173,7 +175,7 @@ L["STRING_DAMAGE_TAKEN_FROM2"] = "施加伤害在"
 L["STRING_DEFENSES"] = "防御"
 L["STRING_DESCENDING"] = "降序"
 L["STRING_DETACH_DESC"] = "分离窗口组群"
-L["STRING_DISCARD"] = "忽略"
+L["STRING_DISCARD"] = "Discard"
 L["STRING_DISPELLED"] = "增益/减益 移除"
 L["STRING_DODGE"] = "闪避"
 L["STRING_DOT"] = " (DoT)"
@@ -354,7 +356,7 @@ L["STRING_MINITUTORIAL_WINDOWS2"] = [=[窗口已被锁定。
 L["STRING_MIRROR_IMAGE"] = "镜像"
 L["STRING_MISS"] = "未命中"
 L["STRING_MODE_ALL"] = "所有的"
-L["STRING_MODE_GROUP"] = "标准"
+L["STRING_MODE_GROUP"] = "队伍 & 团队"
 L["STRING_MODE_OPENFORGE"] = "监控生成"
 L["STRING_MODE_PLUGINS"] = "插件"
 L["STRING_MODE_RAID"] = "插件: 团队"
@@ -362,9 +364,9 @@ L["STRING_MODE_SELF"] = "插件: 单刷"
 L["STRING_MORE_INFO"] = "详情请见右箱。"
 L["STRING_MULTISTRIKE"] = "溅射"
 L["STRING_MULTISTRIKE_HITS"] = "溅射命中"
-L["STRING_MUSIC_DETAILS_ROBERTOCARLOS"] = [=[There's no use trying to forget
-For a long time in your life I will live
-Details as small of us]=]
+L["STRING_MUSIC_DETAILS_ROBERTOCARLOS"] = [=[尝试遗忘是徒劳的
+我会存在于你的大部分生命里
+Details是我们的一小部分]=]
 L["STRING_NEWROW"] = "等待刷新..."
 L["STRING_NEWS_REINSTALL"] = "更新后发现问题? 尝试 '/details reinstall' 命令."
 L["STRING_NEWS_TITLE"] = "最近更新"
@@ -425,7 +427,7 @@ L["STRING_OPTIONS_AUTO_SWITCH_WIPE"] = "清除后"
 L["STRING_OPTIONS_AUTO_SWITCH_WIPE_DESC"] = "在尝试击败团队首领失败后，此窗口自动显示该属性。"
 L["STRING_OPTIONS_AVATAR"] = "选择头像"
 L["STRING_OPTIONS_AVATAR_ANCHOR"] = "身份:"
-L["STRING_OPTIONS_AVATAR_DESC"] = "头像也被送到公会成员，并显示在工具提示的顶部和玩家的详细信息窗口。"
+L["STRING_OPTIONS_AVATAR_DESC"] = "头像也被送到公会成员，并显示在提示的顶部和玩家的详细信息窗口。"
 L["STRING_OPTIONS_BAR_BACKDROP_ANCHOR"] = "边框:"
 L["STRING_OPTIONS_BAR_BACKDROP_COLOR_DESC"] = "改变边框颜色。"
 L["STRING_OPTIONS_BAR_BACKDROP_ENABLED_DESC"] = "启用或禁用行边框。"
@@ -506,7 +508,7 @@ L["STRING_OPTIONS_BARUR_DESC"] = "当启用时，DPS和HPS值的更新只比平�
 L["STRING_OPTIONS_BG_ALL_ALLY"] = "全部显示"
 L["STRING_OPTIONS_BG_ALL_ALLY_DESC"] = [=[启用时，在分组模式下敌对玩家的数据也会显示。
 
-cFFFFFF00注意|r：下次进入战斗时此改动才会生效。]=]
+|cFFFFFF00注意|r：下次进入战斗时此改动才会生效。]=]
 L["STRING_OPTIONS_BG_ANCHOR"] = "战场："
 L["STRING_OPTIONS_BG_UNIQUE_SEGMENT"] = "独立分段"
 L["STRING_OPTIONS_BG_UNIQUE_SEGMENT_DESC"] = "每个分段都是截取的每次战斗的数据。"
@@ -674,7 +676,7 @@ L["STRING_OPTIONS_ED_DESC"] = [=[|cFFFFFF00手动|r: 用户需要点击复位按
 
 |cFFFFFF00提示|r: 在新的副本询问是否重置
 
-|cFFFFFF00Auto|r: 进入新的副本后自动清除数据]=]
+|cFFFFFF00自动|r: 进入新的副本后自动清除数据]=]
 L["STRING_OPTIONS_ED1"] = "手动"
 L["STRING_OPTIONS_ED2"] = "提示"
 L["STRING_OPTIONS_ED3"] = "自动"
@@ -932,7 +934,7 @@ L["STRING_OPTIONS_PS_ABBREVIATE_DESC"] = [=[选择缩写方法。
 520600 = 520K
 19530000 = 19.53M
 
-|cFFFFFF00To精确到KM I|r:
+|cFFFFFF00精确到M I|r:
 520600 = 520.6K
 19530000 = 19M
 
@@ -1081,7 +1083,7 @@ L["STRING_OPTIONS_SKIN_A"] = "皮肤设置"
 L["STRING_OPTIONS_SKIN_A_DESC"] = "这些选项允许你改变皮肤。"
 L["STRING_OPTIONS_SKIN_ELVUI_BUTTON1"] = "对齐在右聊天"
 L["STRING_OPTIONS_SKIN_ELVUI_BUTTON1_DESC"] = "移动调整窗口 |cFFFFFF00#1|r 和 |cFFFFFF00#2|r 放在在右侧的聊天窗口的上面"
-L["STRING_OPTIONS_SKIN_ELVUI_BUTTON2"] = "设置工具提示边框为黑色"
+L["STRING_OPTIONS_SKIN_ELVUI_BUTTON2"] = "设置提示边框为黑色"
 L["STRING_OPTIONS_SKIN_ELVUI_BUTTON2_DESC"] = [=[修改 tooltip's:
 
 边框颜色：|cFFFFFF00黑色|r.
@@ -1555,7 +1557,7 @@ L["STRING_UNLOCK"] = [=[取消组合窗口
 在这个按钮]=]
 L["STRING_UNLOCK_WINDOW"] = "解锁"
 L["STRING_UPTADING"] = "更新中"
-L["STRING_VERSION_AVAILABLE"] = "有新版本可用，请从 Twitch 或 Curse 上下载。"
+L["STRING_VERSION_AVAILABLE"] = "有新版本，可从Twitch App或Curse网站下载."
 L["STRING_VERSION_UPDATE"] = "新版本：有什么改变？ 点击这里"
 L["STRING_VOIDZONE_TOOLTIP"] = "伤害和时间:"
 L["STRING_WAITPLUGIN"] = [=[等待
@@ -1638,13 +1640,13 @@ L["STRING_WELCOME_7"] = "用于排名，这种方法使用经过实战的时间�
 L["STRING_WELCOME_70"] = "标题栏设置"
 L["STRING_WELCOME_71"] = "条列设置"
 L["STRING_WELCOME_72"] = "视窗设置"
-L["STRING_WELCOME_73"] = "选择字母表序或服务器："
-L["STRING_WELCOME_74"] = "拉丁字母表序"
-L["STRING_WELCOME_75"] = "西里尔字母表序"
-L["STRING_WELCOME_76"] = "中国"
-L["STRING_WELCOME_77"] = "韩国"
+L["STRING_WELCOME_73"] = "选择字母或区域:"
+L["STRING_WELCOME_74"] = "拉丁字母"
+L["STRING_WELCOME_75"] = "西里尔字母"
+L["STRING_WELCOME_76"] = "中文"
+L["STRING_WELCOME_77"] = "韩文"
 L["STRING_WELCOME_78"] = "台湾"
-L["STRING_WELCOME_79"] = "创建第二个窗口"
+L["STRING_WELCOME_79"] = "创建第二个窗体"
 L["STRING_WINDOW_NOTFOUND"] = "找不到窗口。"
 L["STRING_WINDOW_NUMBER"] = "窗口数字"
 L["STRING_WINDOW1ATACH_DESC"] = "创建一个群组窗口, 拖动 #2 到 窗口 #1 附近。"
