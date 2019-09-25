@@ -24,7 +24,6 @@
 |RealMobHealth|怪物血量模拟|esc-界面设置-插件|
 |WhatsTraining|技能学习提示|无|
 |WhisperPop|密语记录|esc-界面设置-插件|
-|WhoWhisperedMe|密语对象信息自动查询|/wwm|
 
 # 下载
 
