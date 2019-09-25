@@ -4,8 +4,8 @@
 		_ = nil
 		_detalhes = LibStub("AceAddon-3.0"):NewAddon("_detalhes", "AceTimer-3.0", "AceComm-3.0", "AceSerializer-3.0", "NickTag-1.0")
 		
-		_detalhes.build_counter = 158
-		_detalhes.alpha_build_counter = 158 --if this is higher than the regular counter, use it instead
+		_detalhes.build_counter = 160
+		_detalhes.alpha_build_counter = 160 --if this is higher than the regular counter, use it instead
 		_detalhes.game_version = "v1.13.2"
 		_detalhes.userversion = "v1.13.2." .. _detalhes.build_counter
 		_detalhes.realversion = 140 --core version, this is used to check API version for scripts and plugins (see alias below)
@@ -54,7 +54,7 @@ do
 		end
 	end
 
-	function Details.GetSpellInfoC  (spell)
+	function Details.GetSpellInfoC (spell)
 		local spellName, _, spellIcon
 
 		if (spell == 0) then

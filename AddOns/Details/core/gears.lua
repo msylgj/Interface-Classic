@@ -2313,7 +2313,7 @@ function Details:SendPlayerClassicInformation()
 				if (talentIndex <= numTalents) then
 					local name, iconTexture, tier, column, rank, maxRank, isExceptional, available = GetTalentInfo (i, talentIndex)
 					if (name and rank and type (rank) == "number") then
-						tinsert (talentsSelected, {iconTexture, rank, tier, column})
+						tinsert (talentsSelected, {iconTexture, rank, tier, column, i, fileName, maxRank})
 					end
 				end
 			end
@@ -2496,6 +2496,265 @@ end
 function Details.GetClassicSpecByTalentTexture (talentTexture)
 	return Details.textureToSpec [talentTexture] or 0
 end
+
+--[=[
+		<Scripts>
+			<OnLoad>
+				self:RegisterEvent("CHARACTER_POINTS_CHANGED");
+			</OnLoad>
+			<OnEvent>
+				TalentFrameTalent_OnEvent(self);
+			</OnEvent>
+			<OnEnter>
+				TalentFrameTalent_OnEnter(self);
+			</OnEnter>
+			<OnLeave>
+				TalentFrameTalent_OnLeave(self);
+			</OnLeave>
+			<OnClick function="TalentFrameTalent_OnClick"/>
+		</Scripts>
+	</Button>
+]]=]
+
+
+
+local CONST_ICON_WIDTH_SPACE_REQUIRED = 10
+local MAX_NUM_TALENT_TIERS = 8
+local NUM_TALENT_COLUMNS = 4
+local CONST_ICON_SIZE = 32
+local CONST_TALENTFRAME_WIDTH = 184
+
+--cache the original function since other addons are replacing it
+local tooltipSetTalent = GameTooltip.SetTalent
+
+local talentButtonOnEnter = function (self)
+	--GameTooltip:SetOwner (self, "ANCHOR_RIGHT")
+	--tooltipSetTalent (GameTooltip, PanelTemplates_GetSelectedTab (self:GetParent()), self:GetID())
+	--GameTooltip:Show()
+
+	--self.UpdateTooltip = TalentFrameTalent_OnEnter
+end
+
+local createTalentButton = function (parent, tier, column)
+	local button = CreateFrame ("button", "$parentTalent_T" .. tier .. "C" .. column, parent)
+	button:SetScript ("OnEnter", talentButtonOnEnter)
+	button:SetHighlightTexture ([[Interface\Buttons\ButtonHilight-Square]])
+
+	local talentIcon = DetailsFramework:CreateImage (button, [[Interface\Buttons\UI-EmptySlot-White]], CONST_ICON_SIZE, CONST_ICON_SIZE, "background", {0, 1, 0, 1}, "talentIcon", "$parentTalentIcon")
+	button.talentIcon:SetPoint ("topleft", -1, 1)
+	button.talentIcon:SetPoint ("bottomright", 1, -1)
+
+	DetailsFramework:CreateImage (button, [[Interface\TalentFrame\TalentFrame-RankBorder]], 32, 32, "overlay", {0, 1, 0, 1}, "rankBorder", "$parentRankBorder")
+	button.rankBorder:SetPoint ("center", button, "bottomright", 0, 0)
+
+	DetailsFramework:CreateLabel (button, "", 10, "white", "GameFontNormalSmall", "rankText", "$parentRankText", "overlay")
+	button.rankText:SetPoint ("center", button.rankBorder, "center", 0, 0)
+
+	local offset = 14
+	DetailsFramework:CreateImage (button, [[Interface\Buttons\UI-Quickslot2]], 32, 32, "artwork", {0, 1, 0, 1}, "border", "$parentBorder")
+	button.border:SetPoint ("topleft", -offset, offset - 1)
+	button.border:SetPoint ("bottomright", offset, -offset - 1)
+	
+	return button
+end
+
+C_Timer.After (1, function()
+	hooksecurefunc ("InspectFrame_LoadUI", function()
+
+			hooksecurefunc ("InspectPaperDollFrame_UpdateButtons", function()
+
+			--build the frame to show icons
+			if (not DetailsTalentFrame) then
+				local talentsFrame = CreateFrame ("frame", "DetailsTalentFrame", InspectFrame)
+				talentsFrame:SetPoint ("topleft", InspectFrame, "topright", -20, -14)
+				talentsFrame:SetPoint ("bottomleft", InspectFrame, "bottomright", -20, 74)
+				
+				talentsFrame:SetWidth (CONST_TALENTFRAME_WIDTH)
+				talentsFrame.tabFrames = {}
+				--table to be used to sort the frames
+				talentsFrame.tabFramesSort = {}
+				DetailsFramework:ApplyStandardBackdrop (talentsFrame)
+
+				--build 3 frames within the talent frame
+				for talentTabIndex = 1, 3 do
+					local talentTab = CreateFrame ("frame", "$parentTab" .. talentTabIndex, talentsFrame)
+					talentTab.backgroundTexture = talentTab:CreateTexture (nil, "background")
+					talentTab.backgroundTexture:SetAllPoints()
+					talentTab:SetWidth (CONST_TALENTFRAME_WIDTH)
+					tinsert (talentsFrame.tabFrames, talentTab)
+					tinsert (talentsFrame.tabFramesSort, talentTab)
+
+					talentTab.selectedTab = talentTabIndex
+
+					talentTab.allButtons = {}
+
+					local idCounter = 1
+					for i = 1, MAX_NUM_TALENT_TIERS do
+						tinsert (talentTab.allButtons, {})
+						for o = 1, NUM_TALENT_COLUMNS do
+							local talentButton = createTalentButton (talentTab, i, o)
+
+							talentButton:SetSize (CONST_ICON_SIZE, CONST_ICON_SIZE)
+
+							tinsert (talentTab.allButtons [#talentTab.allButtons], talentButton)
+							--CONST_ICON_WIDTH_SPACE_REQUIRED is the space required due to the border size being bigger than the button it self
+							talentButton:SetPoint ("topleft", talentTab, "topleft", ((o - 1) * CONST_ICON_SIZE) + (CONST_ICON_WIDTH_SPACE_REQUIRED * o), (-(i - 1) * CONST_ICON_SIZE) + (-i * CONST_ICON_WIDTH_SPACE_REQUIRED))
+							talentButton:SetID (idCounter)
+							idCounter = idCounter + 1
+						end
+					end
+				end
+			end
+
+			--reset all talent tabs
+			for talentTabIndex = 1, 3 do
+				local talentTab = DetailsTalentFrame.tabFrames [talentTabIndex]
+				talentTab.numTalents = talentTabIndex / 1000
+				talentTab.maxTier = 0
+				talentTab:ClearAllPoints()
+				talentTab.backgroundTexture:SetTexture (nil)
+				for i = 1, MAX_NUM_TALENT_TIERS do
+					local columnTalents = talentTab.allButtons [i]
+					for o = 1, NUM_TALENT_COLUMNS do
+						local button = columnTalents [o]
+						button:Hide()
+						button.talentIcon:SetDesaturated (false)
+						button.rankBorder:Show()
+						button.rankText:Show()
+						button.tabIndex = 0
+					end
+				end
+			end
+
+			--reset talent frame height
+			DetailsTalentFrame:SetPoint ("bottomleft", InspectFrame, "bottomright", -20, 74)
+			local talentsSpent = 17
+
+			--local playerTalents = _detalhes.cached_talents [UnitGUID ("player")] --
+			local playerTalents = _detalhes.cached_talents [UnitGUID (InspectFrame.unit)]
+			if (playerTalents) then
+
+				local unusedButtonsByTier = {}
+				local tiersWithRanks = {}
+				for i = 1, #playerTalents do
+
+					local iconTexture, rank, tier, column, tabIndex, tabTexture, maxRank = unpack (playerTalents [i])
+
+					if (not tabTexture or not maxRank) then
+						DetailsTalentFrame:Hide()
+						return
+					end
+
+					DetailsTalentFrame:Show()
+
+					local talentTab = DetailsTalentFrame.tabFrames [tabIndex]
+					talentTab.backgroundTexture:SetTexture ("Interface\\TALENTFRAME\\" .. tabTexture .. "-TopLeft")
+					--add the amount of talents spent on this tab
+					talentTab.numTalents = talentTab.numTalents + (rank or 0)
+					--set the max tier of the talent tree
+
+					if (rank > 0) then
+						talentTab.maxTier = max (talentTab.maxTier, tier)
+
+						--setup the talent button
+						local tierTable = talentTab.allButtons [tier]
+						local button = tierTable [column]
+						button:Show()
+
+						button.rankText.text = rank
+						button.talentIcon.texture = iconTexture
+
+						if (rank == maxRank) then
+							button.border.vertexcolor = "yellow"
+							button.rankText.color = "yellow"
+
+						else
+							button.border.vertexcolor = "limegreen"
+							button.rankText.color = "limegreen"
+						end
+
+						tiersWithRanks [tabTexture] = tiersWithRanks [tabTexture] or {}
+						tiersWithRanks [tabTexture] [tier] = tiersWithRanks [tabTexture] [tier] or {}
+						tiersWithRanks [tabTexture] [tier] = true
+
+						button.tabIndex = tabIndex
+					else
+						--if the talent has zero ranks
+						
+						local tierTable = talentTab.allButtons [tier]
+						local button = tierTable [column]
+						--button:Show() do not show yet
+
+						unusedButtonsByTier [tabTexture] = unusedButtonsByTier [tabTexture] or {}
+						unusedButtonsByTier [tabTexture] [tier] = unusedButtonsByTier [tabTexture] [tier] or {}
+						tinsert (unusedButtonsByTier [tabTexture] [tier], button)
+
+						button.talentIcon.texture = iconTexture
+
+						--set as no rank spent on this talent
+						button.talentIcon.blackwhite = true
+						button.rankBorder:Hide()
+						button.rankText:Hide()
+					end
+				end
+
+				for tabTexture, tabTextureTable in pairs (unusedButtonsByTier) do
+					for tierIndex, tierTable in pairs (tabTextureTable) do
+						for buttonIndex, button in ipairs (tierTable) do
+							if (tiersWithRanks [tabTexture] and tiersWithRanks [tabTexture] [tierIndex]) then
+								button:Show()
+							end
+						end
+					end
+				end
+
+			else
+				DetailsTalentFrame:Hide()
+				return
+			end
+
+			table.sort (DetailsTalentFrame.tabFramesSort, function (frame1, frame2)
+				return frame1.numTalents > frame2.numTalents
+			end)
+
+			--organize talent tabs
+			local heightUsed = 0
+			local heightAvailable = DetailsTalentFrame:GetHeight()
+
+			for talentTabIndex = 1, 3 do
+				local talentTab = DetailsTalentFrame.tabFramesSort [talentTabIndex]
+
+				if (talentTab.maxTier > 0) then
+					local height = max (min (130, heightAvailable), ((talentTab.maxTier) * CONST_ICON_SIZE) + (talentTab.maxTier * CONST_ICON_WIDTH_SPACE_REQUIRED) + 10)
+					heightAvailable = heightAvailable - height
+					heightUsed = heightUsed + height
+
+					talentTab:SetHeight (height)
+
+					if (talentTabIndex == 1) then
+						talentTab:SetPoint ("topleft", DetailsTalentFrame, "topleft", 1, -1)
+						talentTab:SetPoint ("topright", DetailsTalentFrame, "topright", -1, -1)
+
+					else
+						talentTab:SetPoint ("topleft", DetailsTalentFrame.tabFramesSort [talentTabIndex - 1], "bottomleft", 0, 0)
+						talentTab:SetPoint ("topright", DetailsTalentFrame.tabFramesSort [talentTabIndex - 1], "bottomright", 0, 0)
+					end
+
+					talentTab:Show()
+				end
+			end
+
+			if (heightAvailable > 0) then
+				local talentTab = DetailsTalentFrame.tabFramesSort [1]
+				talentTab:SetHeight (talentTab:GetHeight() + heightAvailable)
+			else
+				DetailsTalentFrame:SetPoint ("bottomleft", InspectFrame, "bottomright", -20, 74 + heightAvailable - 2)
+			end
+
+		end)
+
+	end)
+end)
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 --compress data

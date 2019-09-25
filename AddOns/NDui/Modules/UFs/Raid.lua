@@ -30,11 +30,6 @@ function UF:CreateRaidIcons(self)
 	role:SetSize(12, 12)
 	role:SetPoint("TOPLEFT", 12, 8)
 	self.RaidRoleIndicator = role
---[[
-	local summon = parent:CreateTexture(nil, "OVERLAY")
-	summon:SetSize(32, 32)
-	summon:SetPoint("CENTER", parent)
-	self.SummonIndicator = summon]]
 end
 
 function UF:UpdateTargetBorder()
@@ -80,19 +75,19 @@ end
 local debuffList = {}
 function UF:UpdateRaidDebuffs()
 	wipe(debuffList)
-	for instName, value in pairs(C.RaidDebuffs) do
-		for spell, priority in pairs(value) do
-			if not (NDuiADB["RaidDebuffs"][instName] and NDuiADB["RaidDebuffs"][instName][spell]) then
-				if not debuffList[instName] then debuffList[instName] = {} end
-				debuffList[instName][spell] = priority
+	for instType, value in pairs(C.RaidDebuffs) do
+		for spellID, priority in pairs(value) do
+			if not (NDuiADB["RaidDebuffs"][instType] and NDuiADB["RaidDebuffs"][instType][spellID]) then
+				if not debuffList[instType] then debuffList[instType] = {} end
+				debuffList[instType][spellID] = priority
 			end
 		end
 	end
-	for instName, value in pairs(NDuiADB["RaidDebuffs"]) do
-		for spell, priority in pairs(value) do
+	for instType, value in pairs(NDuiADB["RaidDebuffs"]) do
+		for spellID, priority in pairs(value) do
 			if priority > 0 then
-				if not debuffList[instName] then debuffList[instName] = {} end
-				debuffList[instName][spell] = priority
+				if not debuffList[instType] then debuffList[instType] = {} end
+				debuffList[instType][spellID] = priority
 			end
 		end
 	end
@@ -132,10 +127,10 @@ function UF:CreateRaidDebuffs(self)
 	bu.ShowDispellableDebuff = true
 	bu.ShowDebuffBorder = true
 	bu.FilterDispellableDebuff = true
-	--if NDuiDB["UFs"]["InstanceAuras"] then
-	--	if not next(debuffList) then UF:UpdateRaidDebuffs() end
-	--	bu.Debuffs = debuffList
-	--end
+	if NDuiDB["UFs"]["InstanceAuras"] then
+		if not next(debuffList) then UF:UpdateRaidDebuffs() end
+		bu.Debuffs = debuffList
+	end
 	self.RaidDebuffs = bu
 end
 

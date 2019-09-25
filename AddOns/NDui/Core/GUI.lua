@@ -79,7 +79,7 @@ local defaultSettings = {
 		NumGroups = 6,
 		SimpleMode = false,
 		SimpleModeSortByRole = true,
-		--InstanceAuras = true,
+		InstanceAuras = true,
 		SpecRaidPos = false,
 		RaidClassColor = false,
 		HorizonRaid = false,
@@ -146,7 +146,7 @@ local defaultSettings = {
 		ShowRecycleBin = true,
 		WhoPings = true,
 		MapReveal = true,
-		MapFader = false,
+		MapFader = true,
 	},
 	Nameplate = {
 		Enable = true,
@@ -247,6 +247,7 @@ local defaultSettings = {
 
 local accountSettings = {
 	ChatFilterList = "%*",
+	ChatFilterWhiteList = "",
 	Timestamp = true,
 	NameplateFilter = {[1]={}, [2]={}},
 	RaidDebuffs = {},
@@ -375,6 +376,10 @@ end
 
 local function updateFilterList()
 	B:GetModule("Chat"):UpdateFilterList()
+end
+
+local function updateFilterWhiteList()
+	B:GetModule("Chat"):UpdateFilterWhiteList()
 end
 
 local function updateChatSize()
@@ -535,10 +540,10 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{3, "UFs", "PartyHeight", L["PartyFrame Height"].."*(32)", true, {25, 60, 0}, updatePartySize},
 		{},--blank
 		{1, "UFs", "RaidBuffIndicator", "|cff00cc4c"..L["RaidBuffIndicator"], nil, setupBuffIndicator},
-		{1, "UFs", "RaidClickSets", "|cff00cc4c"..L["Enable ClickSets"], true, setupClickCast},
 		{3, "UFs", "BI_IconSize", L["BI_IconSize"], nil, {10, 18, 0}},
 		{4, "UFs", "BuffIndicatorType", L["BuffIndicatorType"], true, {L["BI_Blocks"], L["BI_Icons"], L["BI_Numbers"]}},
-		--{1, "UFs", "InstanceAuras", "|cff00cc4c"..L["Instance Auras"], nil, setupRaidDebuffs},
+		{1, "UFs", "InstanceAuras", "|cff00cc4c"..L["Instance Auras"], nil, setupRaidDebuffs},
+		{1, "UFs", "RaidClickSets", "|cff00cc4c"..L["Enable ClickSets"], true, setupClickCast},
 		{1, "UFs", "AurasClickThrough", L["RaidAuras ClickThrough"]},
 		{1, "UFs", "AutoRes", L["UFs AutoRes"], true},
 		{},--blank
@@ -646,9 +651,10 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "Chat", "ChatItemLevel", "|cff00cc4c"..L["ShowChatItemLevel"]},
 		{},--blank
 		{1, "Chat", "EnableFilter", "|cff00cc4c"..L["Enable Chatfilter"]},
-		{1, "Chat", "BlockAddonAlert", L["Block Addon Alert"], true},
-		{3, "Chat", "Matches", L["Keyword Match"].."*", false, {1, 3, 0}},
-		{2, "ACCOUNT", "ChatFilterList", L["Filter List"].."*", true, nil, updateFilterList},
+		{1, "Chat", "BlockAddonAlert", L["Block Addon Alert"]},
+		{2, "ACCOUNT", "ChatFilterWhiteList", "|cff00cc4c"..L["ChatFilterWhiteList"].."*", true, nil, updateFilterWhiteList, L["ChatFilterWhiteListTip"]},
+		{3, "Chat", "Matches", L["Keyword Match"].."*", nil, {1, 3, 0}},
+		{2, "ACCOUNT", "ChatFilterList", L["Filter List"].."*", true, nil, updateFilterList, L["FilterListTip"]},
 		{},--blank
 		{1, "Chat", "Invite", "|cff00cc4c"..L["Whisper Invite"]},
 		{1, "Chat", "GuildInvite", L["Guild Invite Only"].."*"},
@@ -830,7 +836,9 @@ local function CreateOption(i)
 				if callback then callback() end
 			end)
 			eb.title = L["Tips"]
-			B.AddTooltip(eb, "ANCHOR_RIGHT", L["EdieBox Tip"], "info")
+			local tip = L["EdieBox Tip"]
+			if tooltip then tip = tooltip.."|n"..tip end
+			B.AddTooltip(eb, "ANCHOR_RIGHT", tip, "info")
 
 			B.CreateFS(eb, 14, name, "system", "CENTER", 0, 25)
 		-- Slider
