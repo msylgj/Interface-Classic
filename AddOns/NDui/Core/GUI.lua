@@ -60,7 +60,7 @@ local defaultSettings = {
 		DebuffsPerRow = 16,
 	},
 	AuraWatch = {
-		Enable = true,
+		Enable = false,
 		ClickThrough = false,
 		IconScale = 1,
 		WatchSpellRank = true,
@@ -218,6 +218,7 @@ local defaultSettings = {
 		HideRealm = false,
 		HideTitle = false,
 		HideJunkGuild = true,
+		HideAllID = false,
 	},
 	Misc = {
 		Mail = true,
@@ -704,6 +705,7 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "Tooltip", "HideRealm", L["Hide Realm"].."*"},
 		{1, "Tooltip", "SpecLevelByShift", L["Show SpecLevelByShift"].."*", true},
 		{1, "Tooltip", "TargetBy", L["Show TargetedBy"].."*"},
+		{1, "Tooltip", "HideAllID", "|cff00cc4c"..L["HideAllID"], true},
 	},
 	[12] = {
 		{1, "Misc", "ItemLevel", "|cff00cc4c"..L["Show ItemLevel"]},
@@ -851,7 +853,7 @@ local function CreateOption(i)
 				x, y = 40, -offset - 30
 				offset = offset + 70
 			end
-			local s = B.CreateSlider(parent, name, min, max, x, y, width)
+			local s = B.CreateSlider(parent, name, min, max, x, y)
 			s:SetValue(NDUI_VARIABLE(key, value))
 			s:SetScript("OnValueChanged", function(_, v)
 				local current = tonumber(format("%."..step.."f", v))

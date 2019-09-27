@@ -271,7 +271,7 @@
 
 -- 高亮字体，下拉功能表选项，已选择的面板标签，角色属性、技能的数位、声望条目（角色资讯面板），天赋点数（天赋面板），角色等级、职业等资讯、公会资讯（社交面板），
 -- 详细荣誉点、竞技场比分（PvP面板），时间资讯，系统功能表子专案
-	if (CanSetFont(GameFontHighlightSmall)) then 		GameFontHighlightSmall:SetFont(CLEAR_FONT, 12 * CF_SCALE); end	-- 预设值：15
+	if (CanSetFont(GameFontHighlightSmall)) then 		GameFontHighlightSmall:SetFont(CLEAR_FONT, 14 * CF_SCALE); end	-- 预设值：15
 	if (CanSetFont(GameFontHighlightSmallOutline)) then	GameFontHighlightSmallOutline:SetFont(CLEAR_FONT, 12 * CF_SCALE, "OUTLINE"); end
 
 -- PvP面板描述，团队面板按钮等

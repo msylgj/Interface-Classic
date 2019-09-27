@@ -8,9 +8,11 @@
 |!BaudErrorFrame|错误收集|无|
 | aMini|小插件合集|无|
 |Atlas/Atlas_*/AtlasQuest|副本地图和任务|小地图按钮|
+|AtlasLootClassic*|副本掉落查询|小地图按钮|
 |AuroraClassic|透明美化|esc-界面设置-插件|
 |CChatNotifier|搜索聊天关键字|/ccn|
 |CharacterStatsClassic|人物面板属性增强|无|
+|DBM-*|团队报警|/dbm|
 |QuestLogEx|任务面板增强|无|
 |dct/dct_damage/dct_options|战斗信息|/dct|
 |Details|伤害统计|esc-界面设置-插件|

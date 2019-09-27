@@ -32,6 +32,19 @@ local function AfterSettingsChange()
     end
 end
 
+--- Extract color code
+local function extractColors(format, text)
+    local i = string.find(format, text)
+    if i and i > 7 and string.sub(format, i-1, i-1) == ">" then
+        if string.sub(format, i-2, i-2) =="<" then
+            return "|r"
+        else
+            return "|cff" .. string.sub(format, i-7, i-2)
+        end
+    end
+    return "|r"
+end
+
 --- Setup SV tables, check settings and setup settings menu
 function _addon:SetupSettings()
 	if CChatNotifier_data == nil then
@@ -90,6 +103,12 @@ function _addon:SetupSettings()
         local preview = _addon:FormNotifyMsg("mankrik", "1. General", GetUnitName("player"), "LFM mankriks wife exploration team!", 5, 11);
         prevString:SetText(preview);
         CChatNotifier_settings.outputFormat = oldFormat;
+---- { for multi-keys coloring purpose
+        CChatNotifier_settings.mscolor = extractColors(CChatNotifier_settings.outputFormat, "{MS}")
+        CChatNotifier_settings.mfcolor = extractColors(CChatNotifier_settings.outputFormat, "{MF}")
+        CChatNotifier_settings.mecolor = extractColors(CChatNotifier_settings.outputFormat, "{ME}")
+        CChatNotifier_settings.sendercolor = extractColors(CChatNotifier_settings.outputFormat, "%[{P}%]")
+---- hk }
     end);
 
     local antispam = settings:MakeSliderOption("antiSpamWindow",L["Antispam Window"],L["Set the time window for blocking spam message.(seconds)"], 0, 60, 1)
@@ -98,6 +117,12 @@ function _addon:SetupSettings()
         local oldSound = CChatNotifier_settings.soundId;
         local oldFormat = CChatNotifier_settings.outputFormat;
         CChatNotifier_settings.outputFormat = formatEdit:GetText();
+        ---- { for multi-keys coloring purpose
+        CChatNotifier_settings.mscolor = extractColors(CChatNotifier_settings.outputFormat, "{MS}")
+        CChatNotifier_settings.mfcolor = extractColors(CChatNotifier_settings.outputFormat, "{MF}")
+        CChatNotifier_settings.mecolor = extractColors(CChatNotifier_settings.outputFormat, "{ME}")
+        CChatNotifier_settings.sendercolor = extractColors(CChatNotifier_settings.outputFormat, "%[{P}%]")
+---- hk }
         if settings:GetTempSettings().soundId then
             CChatNotifier_settings.soundId = settings:GetTempSettings().soundId;
         end
@@ -105,6 +130,10 @@ function _addon:SetupSettings()
             "LFM mankriks wife exploration team!", 5, 11), settings:GetTempSettings().chatFrame or CChatNotifier_settings.chatFrame);
         CChatNotifier_settings.soundId = oldSound;
         CChatNotifier_settings.outputFormat = oldFormat;
+        CChatNotifier_settings.mscolor = extractColors(CChatNotifier_settings.outputFormat, "{MS}")
+        CChatNotifier_settings.mfcolor = extractColors(CChatNotifier_settings.outputFormat, "{MF}")
+        CChatNotifier_settings.mecolor = extractColors(CChatNotifier_settings.outputFormat, "{ME}")
+        CChatNotifier_settings.sendercolor = extractColors(CChatNotifier_settings.outputFormat, "%[{P}%]")
     end, row);
 
     settings:MakeButton(L["SETTINGS_FORMAT_RESET"], function() 

@@ -257,23 +257,11 @@ for i = 1, MAX_ITEMS, 1 do
     item.searchString:SetPoint("RIGHT", -70, 0);
     item.searchString:SetHeight(10);
     item.searchString:SetJustifyH("LEFT");
-
-    item.edit = CreateFrame("Button", nil, item)
-    item.edit:SetWidth(12);
-    item.edit:SetHeight(12);
-    item.edit:SetPoint("RIGHT", item, "RIGHT", -10, 0)
-    item.edit:SetNormalTexture([[Interface\AddOns\CChatNotifier\img\Copy.tga]])
-    item.edit:SetHighlightTexture([[Interface\AddOns\CChatNotifier\img\Copy.tga]])
-    item.edit:SetScript("OnClick", function(self)
-        frame.editFrame.searchEdit:SetText(item.searchString:GetText())
-        frame:ShowContent("EDIT")
-    end)
-
     
 	item.delb = CreateFrame("Button", nil, item);
 	item.delb:SetWidth(12);
 	item.delb:SetHeight(12);
-	item.delb:SetPoint("RIGHT", item.edit, "LEFT", -10, 0);
+	item.delb:SetPoint("RIGHT", item, "RIGHT", -10, 0);
 	item.delb:SetNormalTexture([[Interface\AddOns\CChatNotifier\img\iclose]]);
 	item.delb:SetHighlightTexture([[Interface\AddOns\CChatNotifier\img\iclose]]);
     item.delb:SetScript("OnClick", RemoveItem);
@@ -285,6 +273,19 @@ for i = 1, MAX_ITEMS, 1 do
 	item.disb:SetNormalTexture([[Interface\AddOns\CChatNotifier\img\on]]);
 	item.disb:SetHighlightTexture([[Interface\AddOns\CChatNotifier\img\on]]);
     item.disb:SetScript("OnClick", ToggleItem);
+
+---- { Add search item edit button
+    item.edit = CreateFrame("Button", nil, item)
+    item.edit:SetWidth(15);
+    item.edit:SetHeight(15);
+    item.edit:SetPoint("RIGHT", item.disb, "LEFT", -10, 0)
+    item.edit:SetNormalTexture([[Interface\AddOns\CChatNotifier\img\pencil.tga]])
+    item.edit:SetHighlightTexture([[Interface\AddOns\CChatNotifier\img\pencil.tga]])
+    item.edit:SetScript("OnClick", function(self)
+        frame.editFrame.searchEdit:SetText(item.searchString:GetText())
+        frame:ShowContent("EDIT")
+    end)
+---- hk }
     
 	frame.scrollFrame.items[i] = item;
 end

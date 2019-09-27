@@ -276,7 +276,6 @@ end);
 --- Create a list element
 -- @param pos The position to create it for
 local function CreateListElement(pos)
-    print("created item")
     if listElements[pos] ~= nil then 
         return; 
     end
@@ -291,12 +290,7 @@ local function CreateListElement(pos)
 		item:SetPoint("TOPLEFT", listElements[pos-1], "BOTTOMLEFT", 0, 0);
 		item:SetPoint("TOPRIGHT", listElements[pos-1], "BOTTOMRIGHT", 0, 0);
     end
-    
-    item.edit = CreateFrame("Button", nil, item);
-    item.edit:SetWidth(12);
-    item.edit:SetHeight(12);
-    item.edit:SetPoint("RIGHT", item, "RIGHT", -24, 0);
-    item.edit:SetText("E");
+
 
     item:SetBackdrop({bgFile = [[Interface\AddOns\CChatNotifier\img\bar]]});
     item:SetBackdropColor(0.2,0.2,0.2,0.8);
