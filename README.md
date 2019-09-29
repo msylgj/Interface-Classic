@@ -10,7 +10,6 @@
 |Atlas/Atlas_*/AtlasQuest|副本地图和任务|小地图按钮|
 |AtlasLootClassic*|副本掉落查询|小地图按钮|
 |AuroraClassic|透明美化|esc-界面设置-插件|
-|CChatNotifier|搜索聊天关键字|/ccn|
 |CharacterStatsClassic|人物面板属性增强|无|
 |DBM-*|团队报警|/dbm|
 |QuestLogEx|任务面板增强|无|
@@ -18,7 +17,6 @@
 |Details|伤害统计|esc-界面设置-插件|
 |Details_TinyThreat|仇恨统计插件|面板上设置|
 |Doom_CooldownPulse|冷却中央提示|/dcp|
-|EnhancedChatFilter|刷屏过滤|esc-界面设置-插件|
 |Leatrix_Map|大地图增强|/ltm|
 |MonkeyBuddy/MonkeyLibrary/MonkeyQuest|猴子任务追踪|任务追踪栏数字那里右键|
 |NDui|NDui核心插件包|esc-NDui控制台(界面元素移动:/mm)|
