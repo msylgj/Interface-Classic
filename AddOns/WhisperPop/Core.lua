@@ -51,7 +51,7 @@ addon.MAX_MESSAGES = 500 -- Maximum messages stored for each conversation
 -- Message are saved in format of: [1/0][hh:mm:ss][contents]
 -- The first char is 1 if this message is inform, 0 otherwise
 function addon:EncodeMessage(text, inform)
-	local timeStamp = strsub(date(), 10, 17)
+	local timeStamp = "["..date("%m/%d %H:%M:%S").."]"
 	return (inform and "1" or "0")..timeStamp..(text or ""), timeStamp
 end
 
@@ -65,8 +65,8 @@ function addon:DecodeMessage(line)
 		inform = 1
 	end
 
-	local timeStamp = strsub(line, 2, 9)
-	local text = strsub(line, 10)
+	local timeStamp = strsub(line, 2, 17)
+	local text = strsub(line, 18)
 	return text, inform, timeStamp
 end
 

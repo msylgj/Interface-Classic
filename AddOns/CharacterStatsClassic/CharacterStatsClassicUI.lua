@@ -3,7 +3,6 @@ local F, C = nil,nil
 if IsAddOnLoaded("AuroraClassic") then
     F, C = unpack(AuroraClassic)
 end
-
 -- Namespaces
 -- core - table (namespace) shared between every lua file
 local addonName, core = ...;
@@ -176,7 +175,8 @@ function UIConfig:SetupDropdown()
     UIDropDownMenu_SetSelectedID(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, UISettingsCharacter.selectedRightStatsCategory);
     UIDropDownMenu_SetWidth(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, 99);
     UIDropDownMenu_JustifyText(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, "LEFT");
-        --AuroraClassic
+
+    --AuroraClassic
     if F and F.ReskinDropDown then
         F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.leftStatsDropDown)
         F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown)
