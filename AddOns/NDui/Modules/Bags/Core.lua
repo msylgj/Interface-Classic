@@ -286,8 +286,6 @@ local freeSlotContainer = {
 }
 
 function module:CreateFreeSlots()
-	if not NDuiDB["Bags"]["GatherEmpty"] then return end
-
 	local name = self.name
 	if not freeSlotContainer[name] then return end
 
@@ -404,7 +402,7 @@ function module:OnLogin()
 		self.Count:SetFont(unpack(DB.Font))
 
 		self.BG = B.CreateBG(self)
-		B.CreateBD(self.BG, .3)
+		B.CreateBD(self.BG, .25)
 
 		self.junkIcon = self:CreateTexture(nil, "ARTWORK")
 		self.junkIcon:SetAtlas("bags-junkcoin")
@@ -434,6 +432,14 @@ function module:OnLogin()
 			C_NewItems_RemoveNewItem(self.bagID, self.slotID)
 		end
 	end
+
+	local bagTypeColor = {
+		[-1] = {.67, .83, .45, .25},
+		[0] = {0, 0, 0, .25},
+		[1] = {.53, .53, .93, .25},
+		[2] = {0, .5, 0, .25},
+		[3] = {0, .5, .8, .25},
+	}
 
 	function MyButton:OnUpdate(item)
 		if MerchantFrame:IsShown() then
@@ -475,6 +481,14 @@ function module:OnLogin()
 				B.HideOverlayGlow(self.glowFrame)
 			end
 		end
+
+		if NDuiDB["Bags"]["SpecialBagsColor"] then
+			local bagType = module.BagsType[item.bagID]
+			local color = bagTypeColor[bagType] or bagTypeColor[0]
+			self.BG:SetBackdropColor(unpack(color))
+		else
+			self.BG:SetBackdropColor(0, 0, 0, .25)
+		end
 	end
 
 	function MyButton:OnUpdateQuest(item)
@@ -502,20 +516,25 @@ function module:OnLogin()
 		local yOffset = -offset + spacing
 		local width, height = self:LayoutButtons("grid", columns, spacing, xOffset, yOffset)
 		if self.freeSlot then
-			local numSlots = #self.buttons + 1
-			local row = ceil(numSlots / columns)
-			local col = numSlots % columns
-			if col == 0 then col = columns end
-			local xPos = (col-1) * (iconSize + spacing)
-			local yPos = -1 * (row-1) * (iconSize + spacing)
+			if NDuiDB["Bags"]["GatherEmpty"] then
+				local numSlots = #self.buttons + 1
+				local row = ceil(numSlots / columns)
+				local col = numSlots % columns
+				if col == 0 then col = columns end
+				local xPos = (col-1) * (iconSize + spacing)
+				local yPos = -1 * (row-1) * (iconSize + spacing)
 
-			self.freeSlot:ClearAllPoints()
-			self.freeSlot:SetPoint("TOPLEFT", self, "TOPLEFT", xPos+xOffset, yPos+yOffset)
+				self.freeSlot:ClearAllPoints()
+				self.freeSlot:SetPoint("TOPLEFT", self, "TOPLEFT", xPos+xOffset, yPos+yOffset)
+				self.freeSlot:Show()
 
-			if height < 0 then
-				width, height = columns * (iconSize+spacing)-spacing, iconSize
-			elseif col == 1 then
-				height = height + iconSize + spacing
+				if height < 0 then
+					width, height = columns * (iconSize+spacing)-spacing, iconSize
+				elseif col == 1 then
+					height = height + iconSize + spacing
+				end
+			else
+				self.freeSlot:Hide()
 			end
 		end
 		self:SetSize(width + xOffset*2, height + offset)

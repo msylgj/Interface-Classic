@@ -46,6 +46,7 @@ local defaultSettings = {
 		DeleteButton = true,
 		FavouriteItems = {},
 		GatherEmpty = false,
+		SpecialBagsColor = true,
 	},
 	Auras = {
 		Reminder = true,
@@ -204,6 +205,7 @@ local defaultSettings = {
 		QuestLogEx = true,
 		QuestTracker = true,
 		Recount = true,
+		ResetRecount = true,
 	},
 	Tooltip = {
 		CombatHide = false,
@@ -274,7 +276,6 @@ local accountSettings = {
 	SystemInfoType = 0,
 	DisableInfobars = false,
 	ClassColorChat = true,
-	ResetRecount = true,
 }
 
 -- Initial settings
@@ -517,11 +518,12 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "Bags", "Enable", "|cff00cc4c"..L["Enable Bags"]},
 		--{1, "Bags", "ItemSetFilter", L["Use ItemSetFilter"], true},
 		{},--blank
-		{1, "Bags", "ItemFilter", L["Bags ItemFilter"]},
-		{1, "Bags", "GatherEmpty", "|cff00cc4c"..L["Bags GatherEmpty"], true},
+		{1, "Bags", "ItemFilter", L["Bags ItemFilter"].."*"},
+		{1, "Bags", "GatherEmpty", L["Bags GatherEmpty"].."*", true},
+		{1, "Bags", "SpecialBagsColor", L["SpecialBagsColor"].."*", nil, nil, nil, L["SpecialBagsColorTip"]},
+		{1, "Bags", "ReverseSort", L["Bags ReverseSort"].."*", true, nil, updateBagSortOrder},
 		{1, "Bags", "BagsiLvl", L["Bags Itemlevel"]},
 		{1, "Bags", "DeleteButton", L["Bags DeleteButton"], true},
-		{1, "Bags", "ReverseSort", L["Bags ReverseSort"].."*", nil, nil, updateBagSortOrder},
 		{},--blank
 		{3, "Bags", "BagsScale", L["Bags Scale"], false, {.5, 1.5, 1}},
 		{3, "Bags", "IconSize", L["Bags IconSize"], true, {30, 42, 0}},

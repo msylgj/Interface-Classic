@@ -363,6 +363,7 @@ local function YesTutor()
 			NDuiADB["BWRequest"] = true
 			ForceAddonSkins()
 			NDuiADB["ResetDetails"] = true
+			NDuiDB["Skins"]["ResetRecount"] = true
 			UIErrorsFrame:AddMessage(DB.InfoColor..L["Tutorial Complete"])
 			pass:Hide()
 		elseif currentPage == 5 then
