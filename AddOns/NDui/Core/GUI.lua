@@ -155,7 +155,6 @@ local defaultSettings = {
 		HostileCC = true,
 		TankMode = false,
 		TargetIndicator = 5,
-		InsideView = true,
 		Distance = 42,
 		PlateWidth = 135,
 		PlateHeight = 5,
@@ -393,10 +392,6 @@ local function updateChatSize()
 	B:GetModule("Chat"):UpdateChatSize()
 end
 
-local function updatePlateInsideView()
-	B:GetModule("UnitFrames"):PlateInsideView()
-end
-
 local function updatePlateSpacing()
 	B:GetModule("UnitFrames"):UpdatePlateSpacing()
 end
@@ -588,13 +583,12 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{4, "Nameplate", "TargetIndicator", L["TargetIndicator"].."*", true, {DISABLE, L["TopArrow"], L["RightArrow"], L["TargetGlow"], L["TopNGlow"], L["RightNGlow"]}, refreshNameplates},
 		{1, "Nameplate", "FullHealth", L["Show FullHealth"].."*", nil, nil, refreshNameplates},
 		{1, "Nameplate", "ColorBorder", L["ColorBorder"].."*", true, nil, refreshNameplates},
-		{1, "Nameplate", "InsideView", L["Nameplate InsideView"].."*", nil, nil, updatePlateInsideView},
-		{1, "Nameplate", "QuestIndicator", L["QuestIndicator"], true, nil, nil, L["QuestIndicatorAddOns"]},
+		{1, "Nameplate", "QuestIndicator", L["QuestIndicator"], nil, nil, nil, L["QuestIndicatorAddOns"]},
 		{},--blank
 		{1, "Nameplate", "CustomUnitColor", "|cff00cc4c"..L["CustomUnitColor"].."*", nil, nil, updateCustomUnitList},
 		{5, "Nameplate", "CustomColor", L["Custom Color"].."*", 2},
-		{2, "Nameplate", "UnitList", L["UnitColor List"].."*", nil, nil, updateCustomUnitList},
-		{2, "Nameplate", "ShowPowerList", L["ShowPowerList"].."*", true, nil, updatePowerUnitList},
+		{2, "Nameplate", "UnitList", L["UnitColor List"].."*", nil, nil, updateCustomUnitList, L["CustomUnitTips"]},
+		{2, "Nameplate", "ShowPowerList", L["ShowPowerList"].."*", true, nil, updatePowerUnitList, L["CustomUnitTips"]},
 		{1, "Nameplate", "TankMode", "|cff00cc4c"..L["Tank Mode"].."*"},
 		{5, "Nameplate", "SecureColor", L["Secure Color"].."*", 2},
 		--{1, "Nameplate", "DPSRevertThreat", L["DPS Revert Threat"].."*", true},
@@ -741,7 +735,7 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 	},
 	[13] = {
 		{1, "ACCOUNT", "VersionCheck", L["Version Check"]},
-		{1, "ACCOUNT", "DisableInfobars", L["DisableInfobars"]},
+		{1, "ACCOUNT", "DisableInfobars", L["DisableInfobars"], true},
 		{},--blank
 		{3, "ACCOUNT", "UIScale", L["Setup UIScale"], false, {.4, 1.15, 2}},
 		{1, "ACCOUNT", "LockUIScale", "|cff00cc4c"..L["Lock UIScale"], true},
