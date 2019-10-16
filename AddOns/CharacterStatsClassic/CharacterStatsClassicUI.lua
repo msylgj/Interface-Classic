@@ -1,8 +1,3 @@
--- AuroraClassic
-local F, C = nil,nil
-if IsAddOnLoaded("AuroraClassic") then
-    F, C = unpack(AuroraClassic)
-end
 -- Namespaces
 -- core - table (namespace) shared between every lua file
 local addonName, core = ...;
@@ -46,12 +41,12 @@ end
 function UIConfig:InitializeStatsFrames(leftParentFrame, rightParentFrame)
     local offsetStepY = 15;
     local accumulatedOffsetY = 0;
-
+    
     for i = 1, NUM_STATS_TO_SHOW do
         accumulatedOffsetY = accumulatedOffsetY + offsetStepY;
         local actualOffset = accumulatedOffsetY;
-
-        if i == 1 then
+        
+        if i == 1 then 
             actualOffset = 32;
             accumulatedOffsetY = 32;
         end
@@ -174,12 +169,6 @@ function UIConfig:SetupDropdown()
     UIDropDownMenu_SetSelectedID(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, UISettingsCharacter.selectedRightStatsCategory);
     UIDropDownMenu_SetWidth(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, 99);
     UIDropDownMenu_JustifyText(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown, "LEFT");
-
-    --AuroraClassic
-    if F and F.ReskinDropDown then
-        F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.leftStatsDropDown)
-        F.ReskinDropDown(CSC_UIFrame.CharacterStatsPanel.rightStatsDropDown)
-    end
 end
 
 -- Extend the functionality of the default CharacterFrameTab
@@ -233,7 +222,7 @@ function dbLoader:OnEvent(event, arg1)
         else
             UISettingsGlobal = CharacterStatsClassicDB;
         end
-
+        
         -- Character DB
         if (CharacterStatsClassicCharacterDB == nil) then
             CharacterStatsClassicCharacterDB = UISettingsCharacter;
