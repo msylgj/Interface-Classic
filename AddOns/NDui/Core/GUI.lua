@@ -240,6 +240,7 @@ local defaultSettings = {
 		PlacedItemAlert = false,
 		EnhancedMenu = true,
 		AutoDismount = true,
+		TradeTabs = true,
 	},
 	Tutorial = {
 		Complete = false,
@@ -722,9 +723,9 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "Tooltip", "HideAllID", "|cff00cc4c"..L["HideAllID"], true},
 	},
 	[12] = {
-		{1, "Misc", "ItemLevel", "|cff00cc4c"..L["Show ItemLevel"]},
-		{1, "Misc", "GemNEnchant", L["Show GemNEnchant"].."*", true},
-		{1, "Misc", "ShowItemLevel", L["Show ItemLevel"].."*"},
+		{1, "Misc", "ItemLevel", "|cff00cc4c"..L["Show ItemQuality"]},
+		{1, "Misc", "GemNEnchant", L["Show GemNEnchant"].."*"},
+		{1, "Misc", "ShowItemLevel", L["Show ItemLevel"].."*", true},
 		{},--blank
 		{1, "Misc", "FasterLoot", L["Faster Loot"].."*", nil, nil, updateFasterLoot},
 		{1, "Misc", "HideErrors", L["Hide Error"].."*", true, nil, updateErrorBlocker},
@@ -732,6 +733,7 @@ local optionList = { -- type, key, value, name, horizon, doubleline
 		{1, "ACCOUNT", "AutoBubbles", L["AutoBubbles"], true},
 		{1, "Misc", "EnhancedMenu", L["TargetEnhancedMenu"], nil, nil, nil, L["MenuEnhancedTips"]},
 		{1, "Misc", "AutoDismount", L["AutoDismount"], true},
+		{1, "Misc", "TradeTabs", L["TradeTabs"], nil, nil, nil, L["TradeTabsTips"]},
 	},
 	[13] = {
 		{1, "ACCOUNT", "VersionCheck", L["Version Check"]},

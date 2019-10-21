@@ -244,8 +244,9 @@ function module:ButtonOnClick(btn)
 end
 
 function module:GetContainerEmptySlot(bagID)
+	local bagType = module.BagsType[bagID]
 	for slotID = 1, GetContainerNumSlots(bagID) do
-		if not GetContainerItemID(bagID, slotID) then
+		if not GetContainerItemID(bagID, slotID) and bagType == 0 then
 			return slotID
 		end
 	end
@@ -378,8 +379,14 @@ function module:OnLogin()
 		f.bankConsumble:SetFilter(bankConsumble, true)
 	end
 
+	local initBagType
 	function Backpack:OnBankOpened()
 		self:GetContainer("Bank"):Show()
+
+		if not initBagType then
+			NDui_Backpack:BAG_UPDATE() -- Initialize bagType
+			initBagType = true
+		end
 	end
 
 	function Backpack:OnBankClosed()
